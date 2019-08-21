@@ -13,4 +13,5 @@ This project is built like the URIs of the Vulture Web UI.
 ##### Example:
 The documentation file for the applications/backend view in the WebUI must be placed like this
 > /vulture-doc/applications/backend/README.md
+
 This way, the WebUI will be able to display it.
