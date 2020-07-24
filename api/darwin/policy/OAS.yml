@@ -351,6 +351,7 @@ definitions:
 paths:
   /darwin/policy:
     get:
+      summary: "List policies"
       responses:
         200:
           description: The list of all policies
@@ -362,6 +363,7 @@ paths:
                 items:
                   $ref:  "#/definitions/DarwinPolicy"
     post:
+      summary: "Create policy"
       parameters:
         - in: body
           name: policy
@@ -387,6 +389,7 @@ paths:
         minimum: 1
         description: the id of the policy
     get:
+      summary: "Get Policy"
       responses:
         200:
           description: A specific policy
@@ -397,6 +400,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     put:
+      summary: "Update policy"
       description: verb to create or update a specific policy based on its ID
       responses:
         201:
@@ -408,6 +412,7 @@ paths:
           schema:
             $ref:  "#/definitions/ErrorResponse"
     delete:
+      summary: "Delete policy"
       description: Delete a policy based on its ID
       responses:
         200:
@@ -442,6 +447,7 @@ paths:
         description: the action to execute on this policy (currently none)
         enum: [""]
     post:
+      summary: "Action on policy"
       responses:
         401:
           description: ID is missing in query
