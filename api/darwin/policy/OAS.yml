@@ -28,6 +28,14 @@ definitions:
           id:
             type: integer
             example: 42
+          status:
+            type: object
+            description: the state of the filter on each node of the cluster
+            example: {"vulture1": "RUNNING", "vulture2": "DOWN"}
+          is_internal:
+            type: boolean
+            description: defines a system filter
+            default: false
       - $ref:  "#/definitions/DarwinFilterBaseCreate"
 
   DarwinFilterBaseCreate:
@@ -80,14 +88,6 @@ definitions:
           minimum: 0.0
           description: __Currently has no effect__ the weight to take into account when calculating a global certitude
           default: 1.0
-      is_internal:
-        type: boolean
-        description: defines a system filter
-        default: false
-      status:
-        type: object
-        description: the state of the filter on each node of the cluster
-        example: {"vulture1": "RUNNING", "vulture2": "DOWN"}
       cache_size:
         type: integer
         description: the number entries the filter is able to cache_size
