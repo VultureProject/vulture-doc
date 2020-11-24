@@ -1,0 +1,597 @@
+swagger: '2.0'
+info:
+  title: Vulturer4 API
+  version: '1.0'
+basePath: /api/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+securityDefinitions:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: CLUSTER-API-KEY
+
+security:
+- APIKeyHeader: []
+
+definitions:
+  DarwinFilter:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+            description: the id of the object
+          name:
+            type: string
+            example: unad
+            description: the quadrigram defining the filter
+          longname:
+            type: string
+            example: UNsupervised Anomaly Detection
+            description: a more complete name, mostly detailling the quadrigram
+          description:
+            type: string
+            example: Detects abnormal variations in network traffic, it scans batches of 5 minutes of network data to discover abnormalities
+            description: a complete description of the filter
+          is_internal:
+            type: boolean
+            example: false
+            description: whether this filter type is an internal type or not (should be shown in GUI or not)
+          is_launchable:
+            type: boolean
+            example: true
+            description: whether the filter can be launched/used on the system
+          can_be_buffered:
+            type: boolean
+            example: true
+            description: whether this filter can be used with timed buffering
+
+  DarwinBuffering:
+    properties:
+      interval:
+        type: integer
+        example: 300
+        minimum: 1
+        description: the duration of buffering between 2 scans
+      required_log_lines:
+        type: integer
+        example: 10
+        minimum: 0
+        description: the minimal number of entries to have to start a scan affter the elapsed caching duration
+
+  DarwinPolicyFilterBase:
+    allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            example: 42
+          status:
+            type: object
+            description: the state of the filter on each node of the cluster
+            example: {"vulture1": "RUNNING", "vulture2": "DOWN"}
+      - $ref:  "#/definitions/DarwinPolicyFilterBaseCreate"
+
+  DarwinPolicyFilterBaseCreate:
+    properties:
+      filter_type:
+        type: integer
+        description: the id of a valid DarwinFilter object
+        example: 5
+      policy:
+        type: integer
+        description: the id of a valid DarwinPolicy object
+        example: 24
+      enabled:
+        type: boolean
+        example: true
+        default: false
+        description: whether the filter is enabled
+      nb_thread:
+        type: integer
+        example: 5
+        default: 5
+        description: the number of concurrent threads to start with this filter instance
+      log_level:
+        type: string
+        enum:
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+        default: ERROR
+        description: the log level of the filter (application logs)
+      threshold:
+        type: integer
+        minimum: 0
+        maximum: 100
+        default: 80
+        description: the score above which to trigger an alert, this threshold makes sense mainly for filters with a notion of progressive score
+      mmdarwin_enabled:
+        type: boolean
+        description: activates custom calls to darwin from rsyslog, with fields defined in mmdarwin_parameters
+        default: false
+        example: false
+      mmdarwin_parameters:
+        type: array
+        description: a list of custom fields to take in a call to darwin from rsyslog
+        example: ["$!impcap!net_src_ip", "$.parsed!domain"]
+        default: []
+      enrichment_tags:
+        type: array
+        description: a list of additional tags to put in enrichment in case of match
+        example: ["command and control", "T1483"]
+        default: []
+      weight:
+          type: integer
+          minimum: 0.0
+          example: 4.2
+          default: 1.0
+          description: __Currently has no effect__ the weight to take into account when calculating a global certitude
+      cache_size:
+        type: integer
+        description: the number of entries the filter is able to cache for faster scoring
+        example: 1337
+        default: 0
+      output:
+        type: string
+        enum:
+          - NONE
+          - LOG
+          - RAW
+          - PARSED
+        default: NONE
+        example: NONE
+        description: __obsolete__ the type of output to give to the next filter, as defined by the *next_filter* parameter
+      next_filter:
+        type: integer
+        description: __obsolete__ the id of the next filter
+        default: null
+        example: null
+      config:
+        type: object
+        description: The filter's specific parameter(s)
+      buffering:
+        type: object
+        $ref: "#/definitions/DarwinBuffering"
+    required:
+      - filter_type
+      - policy
+
+  conn:
+    allOf:
+      - $ref: "#/definitions/DarwinPolicyFilterBase"
+      - type: object
+        properties:
+          config:
+            type: object
+            properties:
+              redis_expire:
+                type: integer
+                description: "Number of seconds to cache connection, after this delay the connection will be considered new again"
+                default: 300
+                example: 50
+
+  content_inspection:
+    allOf:
+      - $ref: "#/definitions/DarwinPolicyFilterBase"
+      - type: object
+        properties:
+          config:
+            type: object
+            properties:
+              yara_scan_type:
+                type: string
+                description: "Either 'packet' (scan data in packet without stream recomposition), or 'stream' (recompose TCP stream, then scan the recomposition)"
+                enum:
+                  - packet
+                  - stream
+              yara_policy_id:
+                type: integer
+                description: "The ID of a yara policy object"
+                example: 1
+              yara_scan_max_size:
+                type: integer
+                description: "The maximum number of bytes to scan, is especially usefull when yaraScanType is set to stream (will define the maximum size of the recomposed stream to scan)"
+                example: 8092
+              max_connections:
+                type: integer
+                description: "The maximum number of connections to folow (is only relevant when yaraScantype is set to 'stream')"
+                example: 4096
+              max_memory_usage:
+                type: integer
+                description: "Rough upper limit for the memory usage (in MB) of the filter, could be usefull when dealing with high traffic to prevent RAM overflow. Be warry that this only takes into account the data kept from connections, and the filter might take a bit more RAM"
+                example: 120
+            required:
+              - yara_scan_type
+              - yara_policy_id
+
+  dgad:
+    allOf:
+      - $ref: "#/definitions/DarwinPolicyFilterBase"
+      - type: object
+        properties:
+          config:
+            type: object
+            properties:
+              max_tokens:
+                type: integer
+                description: "The maximum number of tokens from domain to take into account during calculation"
+                example: 75
+
+  lkup:
+    allOf:
+      - $ref: "#/definitions/DarwinPolicyFilterBase"
+      - type: object
+        properties:
+          config:
+            type: object
+            properties:
+              reputation_ctx_id:
+                type: integer
+                description: "The ID of a reputation_ctx, representing a database to use when performing lookups"
+                example: 12
+        required:
+          - reputation_ctx_id
+
+  yara:
+    allOf:
+      - $ref: "#/definitions/DarwinPolicyFilterBase"
+      - type: object
+        properties:
+          config:
+            type: object
+            properties:
+              fastmode:
+                type: boolean
+                description: "Keep searching for a rule once it has already matched"
+                example: true
+              timeout:
+                type: integer
+                description: "Maximum number of seconds to wait for the scan to finish (zero means wait until scan is finished)"
+                example: 4
+              yara_policies_id:
+                type: array
+                description: "The list of yara policies to use during scans"
+                items:
+                  type: integer
+                  description: The Id of a yara policy
+        required:
+          - yara_policies_id
+
+  unad:
+    $ref: "#/definitions/DarwinPolicyFilterBase"
+
+  sofa:
+    $ref: "#/definitions/DarwinPolicyFilterBase"
+
+  DarwinPolicy:
+    properties:
+      id:
+        type: integer
+        example: 12
+      name:
+        type: string
+        example: Custom Policy
+        description: the friendly name of the policy (should be unique among policies)
+      description:
+        type: string
+        example: This is the description of your policy
+        description: a description of the policy
+      is_internal:
+        type: boolean
+        example: false
+        default: false
+        description: whether this policy is an internal policy (not shown in GUI, not created by the user)
+      filters:
+        type: array
+        description: the list of filters in the policy
+        items:
+          $ref: "#/definitions/DarwinPolicyFilterBase"
+
+  DarwinPolicyCreate:
+    properties:
+      name:
+        type: string
+        example: Custom Policy
+      description:
+        type: string
+        example: This is the description of your policy
+      is_internal:
+        type: boolean
+        example: false
+        default: false
+        description: whether this policy is an internal policy (not shown in GUI, not created by the user)
+      filters:
+        type: array
+        items:
+          $ref: "#/definitions/DarwinPolicyFilterBaseCreate"
+
+  CreatedResponse:
+    properties:
+      id:
+        type: string
+        example: "42"
+      links:
+        type: object
+        properties:
+          get:
+            type: object
+            properties:
+              rel:
+                type: string
+                enum:
+                - self
+              type:
+                type: string
+                enum:
+                  - GET
+              href:
+                type: string
+                example: /api/path/object_id
+            required:
+              - rel
+              - type
+              - href
+          put:
+            type: object
+            properties:
+              rel:
+                type: string
+                enum:
+                - self
+              type:
+                type: string
+                enum:
+                  - PUT
+              href:
+                type: string
+                example: /api/path/object_id
+            required:
+              - rel
+              - type
+              - href
+          delete:
+            type: object
+            properties:
+              rel:
+                type: string
+                enum:
+                - self
+              type:
+                type: string
+                enum:
+                  - PUT
+              href:
+                type: string
+                example: /api/path/object_id
+            required:
+              - rel
+              - type
+              - href
+        required:
+          - get
+          - put
+          - delete
+    required:
+      - links
+      - id
+
+  ErrorResponse:
+    description: An error occured while launching a query
+    properties:
+      error:
+        type: string
+        description: The description of the error(s)
+
+  OKResponse:
+    description: The command succeeded
+    properties:
+      status:
+        type: boolean
+        enum:
+          - true
+
+paths:
+  /darwin/filter:
+    get:
+      summary: "List filter instances"
+      responses:
+        200:
+          description: The list of all filter instances
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/DarwinPolicyFilterBase"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /darwin/filter/{object_id}:
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        type: integer
+        description: the id of a filter instance
+    get:
+      summary: "Get specific filter instance"
+      responses:
+        200:
+          description: A specific filter instance
+          schema:
+            $ref:  "#/definitions/DarwinPolicyFilterBase"
+        404:
+          description: The object does not exist
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /darwin/filter/types:
+    get:
+      summary: "List filter types"
+      responses:
+        200:
+          description: The list of all filter types
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/DarwinFilter"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
+  /darwin/policy:
+    get:
+      summary: "List policies"
+      responses:
+        200:
+          description: The list of all policies
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref:  "#/definitions/DarwinPolicy"
+        404:
+          description: The object does not exist
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      summary: "Create policy"
+      parameters:
+        - in: body
+          name: policy
+          schema:
+            $ref: "#/definitions/DarwinPolicyCreate"
+      responses:
+        201:
+          description: The policy was successfuly created
+          schema:
+            $ref: "#/definitions/CreatedResponse"
+        400:
+          description: The policy could not be created
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
+  /darwin/policy/{object_id}:
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        type: integer
+        minimum: 1
+        description: the id of the policy
+    get:
+      summary: "Get Policy"
+      responses:
+        200:
+          description: A specific policy
+          schema:
+            $ref:  "#/definitions/DarwinPolicy"
+        404:
+          description: The object does not exist
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      parameters:
+        - in: body
+          name: policy
+          schema:
+            $ref: "#/definitions/DarwinPolicyCreate"
+      summary: "Update policy"
+      description: verb to create or update a specific policy based on its ID
+      responses:
+        201:
+          description: The object was created or updated
+          schema:
+            $ref:  "#/definitions/CreatedResponse"
+        400:
+          description: An error occured while creating/modifying the object
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+        500:
+          description: An internal server error occured
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      summary: "Delete policy"
+      description: Delete a policy based on its ID
+      responses:
+        200:
+          description: The object was successfuly deleted
+          schema:
+            $ref:  "#/definitions/OKResponse"
+        400:
+          description: The query contains an error (no object_id provided)
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+        404:
+          description: There is no object with this ID
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+        409:
+          description: The object is used in a relation with another object, it cannot be deleted
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+
+  /darwin/policy/{object_id}/{action}:
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        type: integer
+        minimum: 1
+        description: the id of the policy
+      - in: path
+        name: action
+        required: true
+        type: string
+        description: the action to execute on this policy (currently none)
+        enum: [""]
+    post:
+      summary: "Action on policy"
+      responses:
+        401:
+          description: ID is missing in query
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
+        403:
+          description: The action is not allowed
+          schema:
+            $ref:  "#/definitions/ErrorResponse"
