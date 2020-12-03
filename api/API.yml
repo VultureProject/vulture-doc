@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  title: Vulture 4 API
+  version: "1.0"
+basePath: /api/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+tags: 
+  - name: Darwin
+
+paths:
+  /darwin/filter:
+    $ref: './darwin/policy/filter.yml#/all'
+  
+  /darwin/filter/{object_id}:
+    $ref: './darwin/policy/filter.yml#/one'
+  
+  /darwin/filter/types:
+    $ref: './darwin/policy/filter.yml#/types'
+
+  /darwin/policy:
+    $ref: './darwin/policy/policy.yml#/all'
+
+  /darwin/policy/{object_id}:
+    $ref: './darwin/policy/policy.yml#/one'
+
+  /darwin/policy/{object_id}/action:
+    $ref: './darwin/policy/policy.yml#/action'

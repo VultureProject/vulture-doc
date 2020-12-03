@@ -1,0 +1,11 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          max_tokens:
+            type: integer
+            description: "The maximum number of tokens from domain to take into account during calculation"
+            example: 75

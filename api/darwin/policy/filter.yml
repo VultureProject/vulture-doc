@@ -1,0 +1,56 @@
+all:
+  get:
+    tags:
+      - Darwin
+    summary: "List filter instances"
+    responses:
+      200:
+        description: The list of all filter instances
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: "./definitions/DarwinPolicyFilterBase.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+one:
+  parameters:
+    - in: path
+      name: object_id
+      required: true
+      type: integer
+      description: the id of a filter instance
+  get:
+    tags:
+      - Darwin
+    summary: "Get specific filter instance"
+    responses:
+      200:
+        description: A specific filter instance
+        schema:
+          $ref:  "./definitions/DarwinPolicyFilterBase.yml"
+      404:
+        $ref: "../../global/definitions/notfound.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+types:
+  get:
+    tags:
+      - Darwin
+    summary: "List filter types"
+    responses:
+      200:
+        description: The list of all filter types
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: "./definitions/DarwinFilter.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"

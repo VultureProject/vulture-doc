@@ -1,0 +1,23 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          fastmode:
+            type: boolean
+            description: "Keep searching for a rule once it has already matched"
+            example: true
+          timeout:
+            type: integer
+            description: "Maximum number of seconds to wait for the scan to finish (zero means wait until scan is finished)"
+            example: 4
+          yara_policies_id:
+            type: array
+            description: "The list of yara policies to use during scans"
+            items:
+              type: integer
+              description: The Id of a yara policy
+    required:
+      - yara_policies_id

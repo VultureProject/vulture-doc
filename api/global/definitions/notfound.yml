@@ -1,0 +1,7 @@
+description: Object not found
+schema:
+  type: object
+  properties:
+    error:
+      type: string
+      description: The description of the error(s)

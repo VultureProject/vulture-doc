@@ -1,0 +1,86 @@
+properties:
+  filter_type:
+    type: integer
+    description: the id of a valid DarwinFilter object
+    example: 5
+  policy:
+    type: integer
+    description: the id of a valid DarwinPolicy object
+    example: 24
+  enabled:
+    type: boolean
+    example: true
+    default: false
+    description: whether the filter is enabled
+  nb_thread:
+    type: integer
+    example: 5
+    default: 5
+    description: the number of concurrent threads to start with this filter instance
+  log_level:
+    type: string
+    enum:
+      - DEBUG
+      - INFO
+      - NOTICE
+      - WARNING
+      - ERROR
+      - CRITICAL
+    default: ERROR
+    description: the log level of the filter (application logs)
+  threshold:
+    type: integer
+    minimum: 0
+    maximum: 100
+    default: 80
+    description: the score above which to trigger an alert, this threshold makes sense mainly for filters with a notion of progressive score
+  mmdarwin_enabled:
+    type: boolean
+    description: activates custom calls to darwin from rsyslog, with fields defined in mmdarwin_parameters
+    default: false
+    example: false
+  mmdarwin_parameters:
+    type: array
+    description: a list of custom fields to take in a call to darwin from rsyslog
+    example: ["$!impcap!net_src_ip", "$.parsed!domain"]
+    default: []
+  enrichment_tags:
+    type: array
+    description: a list of additional tags to put in enrichment in case of match
+    example: ["command and control", "T1483"]
+    default: []
+  weight:
+      type: integer
+      minimum: 0.0
+      example: 4.2
+      default: 1.0
+      description: __Currently has no effect__ the weight to take into account when calculating a global certitude
+  cache_size:
+    type: integer
+    description: the number of entries the filter is able to cache for faster scoring
+    example: 1337
+    default: 0
+  output:
+    type: string
+    enum:
+      - NONE
+      - LOG
+      - RAW
+      - PARSED
+    default: NONE
+    example: NONE
+    description: __obsolete__ the type of output to give to the next filter, as defined by the *next_filter* parameter
+  next_filter:
+    type: integer
+    description: __obsolete__ the id of the next filter
+    default: null
+    example: null
+  config:
+    type: object
+    description: The filter's specific parameter(s)
+  buffering:
+    type: object
+    $ref: "./DarwinBuffering.yml"
+required:
+  - filter_type
+  - policy

@@ -1,0 +1,11 @@
+allOf:
+  - type: object
+    properties:
+      id:
+        type: integer
+        example: 42
+      status:
+        type: object
+        description: the state of the filter on each node of the cluster
+        example: {"vulture1": "RUNNING", "vulture2": "DOWN"}
+  - $ref:  "./DarwinPolicyFilterBaseCreate.yml"

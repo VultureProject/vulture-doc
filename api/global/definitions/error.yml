@@ -1,0 +1,7 @@
+description: An error occured while launching a query
+schema:
+  type: object
+  properties:
+    error:
+      type: string
+      description: The description of the error(s)
