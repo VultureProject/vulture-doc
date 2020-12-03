@@ -26,7 +26,7 @@ jobs:
       
       - name: Compile API Documentation
         uses: actions/setup-node@v1
-      - run: npm install multi-file-swagger
+      - run: npm install -g multi-file-swagger
       - run: multi-file-swagger -o yaml api/API.yml > api/compiled.yml
       
       - name: Build Redoc
