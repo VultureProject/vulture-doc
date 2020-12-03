@@ -24,7 +24,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
       
+      - name: Compile API Documentation
+        uses: actions/setup-node@v1
+      - run: npm install multi-file-swagger
+      - run: multi-file-swagger -o yaml api/API.yml > api/compiled.yml
+      
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: bundle ./api/darwin/policy/OAS.yml -o ./api/darwin/policy/OAS-redoc.yml
+          args: bundle ./api/compiled.yml -o ./api/OAS-redoc.yml
