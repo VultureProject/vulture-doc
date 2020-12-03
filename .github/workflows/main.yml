@@ -32,7 +32,7 @@ jobs:
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: bundle ./api/darwin/policy/OAS.yml 
+          args: bundle ./api/darwin/policy/OAS.yml -o ./api/darwin/policy/OAS-redoc.yml
 
       - name: test
         run: |
