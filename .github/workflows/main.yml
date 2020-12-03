@@ -35,7 +35,9 @@ jobs:
           args: bundle ./api/compiled.yml -o ./api/redoc.yml
 
       - name: ZIP project
-        run: zip release .
+        run: |
+          ls -la
+          zip release *
 
   release:
     runs-on: ubuntu-latest
