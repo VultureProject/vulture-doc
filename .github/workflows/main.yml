@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        uses: actions/checkout@v2
+        uses: actions/checkout@dev
       
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
