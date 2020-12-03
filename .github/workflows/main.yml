@@ -4,7 +4,7 @@ name: CI
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events
   push:
     branches: [ Start-Actions-for-API-Doc-Build ]
 
@@ -22,9 +22,9 @@ jobs:
     steps:
       - name: Checkout
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        uses: actions/checkout@dev
+        uses: actions/checkout@v2
       
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: bundle api/darwin/policy/oas.yml 
+          args: bundle $GITHUB_WORKSPACE/api/darwin/policy/oas.yml 
