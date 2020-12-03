@@ -24,10 +24,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
       
-      - name: test
-        run: ls -la .
-      
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: bundle $GITHUB_WORKSPACE/api/darwin/policy/oas.yml 
+          args: bundle ./api/darwin/policy/OAS.yml 
+
+      - name: test
+        run: |
+          ls -la .
+          ls -la ./api/darwin/policy/
+      
