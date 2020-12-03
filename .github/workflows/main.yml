@@ -24,6 +24,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
       
+      - name: echo
+        run: |
+          ls -la .
+          ls -la ./api/darwin/policy/
+      
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
