@@ -43,7 +43,7 @@ jobs:
       - name: Unzip
         run: |
           mkdir test
-          unzip release.zip test/
+          unzip release.zip -d test/
           ls -la .
           ls -la api/
 
