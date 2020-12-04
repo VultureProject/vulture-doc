@@ -56,7 +56,8 @@ jobs:
         run: |
           ls -la .
           unzip release.zip
-          tree .
+          ls -la .
+          ls -la api/
       # - name: Create Release
       #   id: create_release
       #   uses: actions/create-release@v1
