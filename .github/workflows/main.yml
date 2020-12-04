@@ -32,7 +32,7 @@ jobs:
       - name: Build Redoc
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: bundle ./api/compiled.yml -o ./api/redoc.yml
+          args: bundle ./api/compiled.yml -o ./api/redoc.html
 
       - name: ZIP project
         run: |
