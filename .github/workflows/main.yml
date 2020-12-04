@@ -55,7 +55,7 @@ jobs:
       - name: Test
         run: |
           ls -la .
-          unzip -d release.zip
+          unzip release.zip
           tree .
       # - name: Create Release
       #   id: create_release
