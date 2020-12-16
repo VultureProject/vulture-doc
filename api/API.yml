@@ -1,33 +1,60 @@
-swagger: "2.0"
+openapi: "3.0.0"
 info:
   title: Vulture 4 API
   version: "1.0"
-basePath: /api/v1
-schemes:
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
+servers:
+  - url: https://vulture.example:8000/api/v1
 
 tags: 
+  - name: Node
+  - name: Cluster
+  - name: Config
   - name: Darwin
+  - name: NetworkAddressCards
+  - name: NetworkAddress
 
 paths:
-  /darwin/filter:
+  /darwin/filter/:
     $ref: './darwin/policy/filter.yml#/all'
   
-  /darwin/filter/{object_id}:
+  /darwin/filter/{object_id}/:
     $ref: './darwin/policy/filter.yml#/one'
   
-  /darwin/filter/types:
+  /darwin/filter/types/:
     $ref: './darwin/policy/filter.yml#/types'
 
-  /darwin/policy:
+  /darwin/policy/:
     $ref: './darwin/policy/policy.yml#/all'
 
-  /darwin/policy/{object_id}:
+  /darwin/policy/{object_id}/:
     $ref: './darwin/policy/policy.yml#/one'
 
-  /darwin/policy/{object_id}/action:
+  /darwin/policy/{object_id}/{action}/:
     $ref: './darwin/policy/policy.yml#/action'
+
+  /system/config/:
+    $ref: './system/config/config.yml#/all'
+
+  /system/config/{list_type}/:
+    $ref: './system/config/config.yml#/wlbl'
+
+  /system/node/:
+    $ref: './system/cluster/node.yml#/all'
+  
+  /system/node/{object_id}/:
+    $ref: './system/cluster/node.yml#/one'
+
+  /system/cluster/:
+    $ref: './system/cluster/cluster.yml'
+
+  /system/netif/:
+    $ref: './system/cluster/network_cards.yml#/all'
+
+  /system/netif/refresh/:
+    $ref: './system/cluster/network_cards.yml#/refresh'
+  
+  /system/netaddr/:
+    $ref: './system/cluster/network_address.yml#/all'
+
+  /system/netaddr/{object_id}/:
+    $ref: './system/cluster/network_address.yml#/one'

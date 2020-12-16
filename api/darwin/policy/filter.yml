@@ -6,23 +6,27 @@ all:
     responses:
       200:
         description: The list of all filter instances
-        schema:
-          type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: "./definitions/DarwinPolicyFilterBase.yml"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/DarwinPolicyFilterBase.yml"
       500:
         $ref: "../../global/definitions/error.yml"
 
 one:
   parameters:
-    - in: path
-      name: object_id
+    - name: object_id
+      in: path
       required: true
-      type: integer
       description: the id of a filter instance
+      schema:
+        type: integer
+        minimum: 1
   get:
     tags:
       - Darwin
@@ -30,8 +34,10 @@ one:
     responses:
       200:
         description: A specific filter instance
-        schema:
-          $ref:  "./definitions/DarwinPolicyFilterBase.yml"
+        content:
+          application/json:
+            schema:
+              $ref:  "./definitions/DarwinPolicyFilterBase.yml"
       404:
         $ref: "../../global/definitions/notfound.yml"
       500:
@@ -45,12 +51,14 @@ types:
     responses:
       200:
         description: The list of all filter types
-        schema:
-          type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: "./definitions/DarwinFilter.yml"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/DarwinFilter.yml"
       500:
         $ref: "../../global/definitions/error.yml"

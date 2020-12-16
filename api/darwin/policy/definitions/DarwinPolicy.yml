@@ -1,22 +1,24 @@
-properties:
-  id:
-    type: integer
-    example: 12
-  name:
-    type: string
-    example: Custom Policy
-    description: the friendly name of the policy (should be unique among policies)
-  description:
-    type: string
-    example: This is the description of your policy
-    description: a description of the policy
-  is_internal:
-    type: boolean
-    example: false
-    default: false
-    description: whether this policy is an internal policy (not shown in GUI, not created by the user)
-  filters:
-    type: array
-    description: the list of filters in the policy
-    items:
-      $ref: "./DarwinPolicyFilterBase.yml"
+allOf:
+  - type: object
+    properties:
+      id:
+        type: integer
+        example: 12
+      name:
+        type: string
+        example: Custom Policy
+        description: the friendly name of the policy (should be unique among policies)
+      description:
+        type: string
+        example: This is the description of your policy
+        description: a description of the policy
+      is_internal:
+        type: boolean
+        example: false
+        default: false
+        description: whether this policy is an internal policy (not shown in GUI, not created by the user)
+      filters:
+        type: array
+        description: the list of filters in the policy
+        items:
+          $ref: "./DarwinPolicyFilterBase.yml"
