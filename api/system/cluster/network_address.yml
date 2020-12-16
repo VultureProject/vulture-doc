@@ -1,0 +1,30 @@
+all:
+  get:
+    tags:
+      - NetworkAddress
+    summary: List of all network address
+    responses:
+      200:
+        description: List of all network address
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/network_address.yml"
+
+one:
+  get:
+    tags:
+      - NetworkAddress
+    summary: Get one network address
+    responses:
+      200:
+        description: List of all network addresses
+        content:
+          application/json:
+            schema:
+              $ref: "./definitions/network_address.yml"

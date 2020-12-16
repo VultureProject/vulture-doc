@@ -1,0 +1,24 @@
+properties:
+  name:
+    type: string
+  x509_certificate:
+    $ref: "./x509.yml"
+  compatibility:
+    type: string
+  protocols:
+    type: string
+    enum: [tlsv13, tlsv12, tlsv11, tlsv10, sslv3]
+  cipher_suite:
+    type: string
+  alpn:
+    type: array
+    items:
+      oneof:
+        - h2
+        - http/1.1
+        - http/1.0
+  verify_client:
+    type: string
+    enum: [none, optional, required]
+  ca_cert:
+    $ref: './x509.yml'

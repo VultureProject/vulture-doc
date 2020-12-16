@@ -1,0 +1,61 @@
+all:
+  get:
+    tags:
+      - Config
+    summary: "Get Cluster configuration"
+
+    responses:
+      200:
+        description: "Get Cluster configuration"
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/config.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+  put:
+    tags:
+      - Config
+    summary: "Edit Config"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/config.yml"
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+wlbl:
+  post:
+    tags:
+      - Config
+    summary: "Define Packet Filter Whitelist or Blacklist"
+    parameters:
+      - in: path
+        name: list_type
+        required: true
+        description: Whitelist or Blacklist
+        schema:
+          type: string
+          enum: [whitelist, blacklist]
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ip_address:
+                type: string
+                example: "192.168.1.254"
+    
+    responses:
+      200:
+        $ref: "../../global/definitions/ok.yml"

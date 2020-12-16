@@ -1,0 +1,13 @@
+properties:
+  node:
+    $ref: ../../cluster/definitions/node.yml
+  name:
+    type: string
+  used:
+    type: string
+  avail:
+    type: string
+  refer:
+    type: string
+  mount:
+    type: string
