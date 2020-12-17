@@ -17,74 +17,74 @@ tags:
   - name: NetworkAddress
 
 paths:
-  # /darwin/filter/:
-  #   $ref: './darwin/policy/filter.yml#/all'
+  /darwin/filter/:
+    $ref: './darwin/policy/filter.yml#/all'
   
-  # /darwin/filter/{object_id}/:
-  #   $ref: './darwin/policy/filter.yml#/one'
+  /darwin/filter/{object_id}/:
+    $ref: './darwin/policy/filter.yml#/one'
   
-  # /darwin/filter/types/:
-  #   $ref: './darwin/policy/filter.yml#/types'
+  /darwin/filter/types/:
+    $ref: './darwin/policy/filter.yml#/types'
 
-  # /darwin/policy/:
-  #   $ref: './darwin/policy/policy.yml#/all'
+  /darwin/policy/:
+    $ref: './darwin/policy/policy.yml#/all'
 
-  # /darwin/policy/{object_id}/:
-  #   $ref: './darwin/policy/policy.yml#/one'
+  /darwin/policy/{object_id}/:
+    $ref: './darwin/policy/policy.yml#/one'
 
-  # /darwin/policy/{object_id}/{action}/:
-  #   $ref: './darwin/policy/policy.yml#/action'
+  /darwin/policy/{object_id}/{action}/:
+    $ref: './darwin/policy/policy.yml#/action'
 
-  # /system/config/:
-  #   $ref: './system/config/config.yml#/all'
+  /system/config/:
+    $ref: './system/config/config.yml#/all'
 
-  # /system/config/{list_type}/:
-  #   $ref: './system/config/config.yml#/wlbl'
+  /system/config/{list_type}/:
+    $ref: './system/config/config.yml#/wlbl'
 
-  # /system/node/:
-  #   $ref: './system/cluster/node.yml#/all'
+  /system/node/:
+    $ref: './system/cluster/node.yml#/all'
   
-  # /system/node/{object_id}/:
-  #   $ref: './system/cluster/node.yml#/one'
+  /system/node/{object_id}/:
+    $ref: './system/cluster/node.yml#/one'
 
-  # /system/cluster/:
-  #   $ref: './system/cluster/cluster.yml'
+  /system/cluster/:
+    $ref: './system/cluster/cluster.yml'
 
-  # /system/netif/:
-  #   $ref: './system/cluster/network_cards.yml#/all'
+  /system/netif/:
+    $ref: './system/cluster/network_cards.yml#/all'
 
-  # /system/netif/refresh/:
-  #   $ref: './system/cluster/network_cards.yml#/refresh'
+  /system/netif/refresh/:
+    $ref: './system/cluster/network_cards.yml#/refresh'
   
-  # /system/netaddr/:
-  #   $ref: './system/cluster/network_address.yml#/all'
+  /system/netaddr/:
+    $ref: './system/cluster/network_address.yml#/all'
 
-  # /system/netaddr/{object_id}/:
-  #   $ref: './system/cluster/network_address.yml#/one'
+  /system/netaddr/{object_id}/:
+    $ref: './system/cluster/network_address.yml#/one'
 
-  # /system/pki/get_ca:
-  #   $ref: './system/pki/pki.yml#/ca'
+  /system/pki/get_ca:
+    $ref: './system/pki/pki.yml#/ca'
 
-  # /system/pki/get_cert:
-  #   $ref: './system/pki/pki.yml#/cert'
+  /system/pki/get_cert:
+    $ref: './system/pki/pki.yml#/cert'
 
-    # /system/tenants:
-    #   $ref: './system/tenants/tenants.yml#/all'
+  /system/tenants:
+    $ref: './system/tenants/tenants.yml#/all'
 
-    # /system/tenants/{object_id}:
-    #   $ref: './system/tenants/tenants.yml#/one'
+  /system/tenants/{object_id}:
+    $ref: './system/tenants/tenants.yml#/one'
 
-    # /system/vm/:
-    #   $ref: './system/vm/vm.yml#/all'
-    
-    # /system/vm/{object_id}:
-    #   $ref: './system/vm/vm.yml#/one'
+  /system/vm/:
+    $ref: './system/vm/vm.yml#/all'
+  
+  /system/vm/{object_id}:
+    $ref: './system/vm/vm.yml#/one'
 
-    /system/zfs/:
-      $ref: './system/zfs/zfs.yml#/all'
-    
-    /system/zfs/{object_id}:
-      $ref: './system/zfs/zfs.yml#/one'
+  /system/zfs/:
+    $ref: './system/zfs/zfs.yml#/all'
+  
+  /system/zfs/{object_id}:
+    $ref: './system/zfs/zfs.yml#/one'
 
-    /system/zfs/{object_id}/{action}:
-      $ref: './system/zfs/zfs.yml#/action'
+  /system/zfs/{object_id}/{action}:
+    $ref: './system/zfs/zfs.yml#/action'
