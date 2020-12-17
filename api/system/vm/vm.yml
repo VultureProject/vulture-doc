@@ -1,0 +1,39 @@
+all:
+  get:
+    tags:
+      - VirtualMachine
+    summary: Virtual Machines
+
+    responses:
+      200:
+        description: List of Virtual Machines
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                $ref: "./definitions/vm.yml"
+
+one:
+  get:
+    tags:
+      - VirtualMachine
+    summary: Virtual Machine
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the virtual machine
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      200:
+        description: Virtual Machine
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/vm.yml"

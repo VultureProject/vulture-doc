@@ -8,6 +8,7 @@ servers:
 tags: 
   - name: PKI
   - name: Node
+  - name: VirtualMachine
   - name: Cluster
   - name: Config
   - name: Darwin
@@ -66,8 +67,14 @@ paths:
   # /system/pki/get_cert:
   #   $ref: './system/pki/pki.yml#/cert'
 
-    /system/tenants:
-      $ref: './system/tenants/tenants.yml#/all'
+    # /system/tenants:
+    #   $ref: './system/tenants/tenants.yml#/all'
 
-    /system/tenants/{object_id}:
-      $ref: './system/tenants/tenants.yml#/one'
+    # /system/tenants/{object_id}:
+    #   $ref: './system/tenants/tenants.yml#/one'
+
+    /system/vm/:
+      $ref: './system/vm/vm.yml#/all'
+    
+    /system/vm/{object_id}:
+      $ref: './system/vm/vm.yml#/one'
