@@ -10,6 +10,7 @@ tags:
   - name: ZFS
   - name: Node
   - name: Workflow
+  - name: AccessControl
   - name: VirtualMachine
   - name: Cluster
   - name: Config
@@ -95,3 +96,9 @@ paths:
   
   /workflow/{object_id}:
     $ref: "./workflow/workflow.yml#/one"
+
+  /darwin/acl/:
+    $ref: "./darwin/acl/acl.yml#/all"
+  
+  /darwin/acl/{object_id}:
+    $ref: "./darwin/acl/acl.yml#/one"
