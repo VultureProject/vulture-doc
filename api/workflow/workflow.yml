@@ -1,102 +1,105 @@
 all:
   get:
     tags:
-      - Tenant
-    summary: Multi tenants
+      - Workflow
+    summary: List of Workflow
 
     responses:
       200:
-        description: List of tenants
+        description: List of Workflow
         content:
           application/json:
             schema:
               type: array
               items:
                 type: object
-                $ref: "./definitions/tenants.yml"
-  
+                $ref: "./definitions/workflow.yml"
+    
   post:
     tags:
-      - Tenant
-    summary: Create a tenant
+      - Workflow
+    summary: Create a workflow
     requestBody:
       content:
         application/json:
           schema:
             type: object
-            $ref: "./definitions/tenants.yml"
+            $ref: "./definitions/workflow.yml"
+    
     responses:
       201:
-        $ref: "../../global/definitions/created.yml"
+        $ref: "../global/definitions/created.yml"
       400:
-        $ref: "../../global/definitions/error.yml"
+        $ref: "../global/definitions/error.yml"
       500:
-        $ref: "../../global/definitions/error.yml"
-
+        $ref: "../global/definitions/error.yml"
+      
 one:
   get:
     tags:
-      - Tenant
-    summary: Multi tenants
+      - Workflow
+    summary: Get a workflow configuration
     parameters:
       - in: path
         name: object_id
         required: true
-        description: ID of the tenant
+        description: ID of the worfklow
         schema:
-          type: integer
-          minimum: 1
+          type: string
+    
     responses:
       200:
-        description: Tenant object
+        description: Workflow object
         content:
           application/json:
             schema:
               type: object
-              $ref: "./definitions/tenants.yml"
-      404:
-        $ref: "../../global/definitions/notfound.yml"
-      500:
-        $ref: "../../global/definitions/error.yml"
+              $ref: "./definitions/workflow.yml"
 
-  put:
+      404:
+        $ref: "../global/definitions/notfound.yml"
+      500:
+        $ref: "../global/definitions/error.yml"
+
+  post:
     tags:
-      - Tenant
-    summary: Update a tenant
+      - Workflow
+    summary: Edit a workflow
     parameters:
       - in: path
         name: object_id
         required: true
-        description: ID of the tenant
+        description: ID of the workflow
         schema:
-          type: integer
-          minimum: 1
+          type: string
+    
     requestBody:
       content:
         application/json:
           schema:
             type: object
-            $ref: "./definitions/tenants.yml"
+            $ref: "./definitions/workflow.yml"
+    
     responses:
       201:
-        $ref: "../../global/definitions/created.yml"
+        $ref: "../global/definitions/created.yml"
       400:
-        $ref: "../../global/definitions/error.yml"
+        $ref: "../global/definitions/error.yml"
       500:
-        $ref: "../../global/definitions/error.yml"
+        $ref: "../global/definitions/error.yml"
 
   delete:
     tags:
-      - Tenant
-    summary: Delete a tenant
+      - Workflow
+    summary: Delete a workflow
     parameters:
       - in: path
         name: object_id
         required: true
-        description: ID of the tenant
+        description: ID of the workflow
         schema:
-          type: integer
-          minimum: 1
+          type: string
+    
     responses:
       200:
         $ref:  "../../global/definitions/ok.yml"

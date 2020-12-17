@@ -9,6 +9,7 @@ tags:
   - name: PKI
   - name: ZFS
   - name: Node
+  - name: Workflow
   - name: VirtualMachine
   - name: Cluster
   - name: Config
@@ -88,3 +89,9 @@ paths:
 
   /system/zfs/{object_id}/{action}:
     $ref: './system/zfs/zfs.yml#/action'
+
+  /workflow/:
+    $ref: "./workflow/workflow.yml#/all"
+  
+  /workflow/{object_id}:
+    $ref: "./workflow/workflow.yml#/one"
