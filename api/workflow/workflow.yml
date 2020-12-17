@@ -102,10 +102,10 @@ one:
     
     responses:
       200:
-        $ref:  "../../global/definitions/ok.yml"
+        $ref:  "../global/definitions/ok.yml"
       400:
-        $ref:  "../../global/definitions/error.yml"
+        $ref:  "../global/definitions/error.yml"
       404:
-        $ref:  "../../global/definitions/error.yml"
+        $ref:  "../global/definitions/error.yml"
       409:
-        $ref:  "../../global/definitions/error.yml"
+        $ref:  "../global/definitions/error.yml"
