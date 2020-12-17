@@ -1,0 +1,108 @@
+all:
+  get:
+    tags:
+      - Tenant
+    summary: Multi tenants
+
+    responses:
+      200:
+        description: List of tenants
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                $ref: "./definitions/tenants.yml"
+  
+  post:
+    tags:
+      - Tenant
+    summary: Create a tenant
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/tenants.yml"
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+one:
+  get:
+    tags:
+      - Tenant
+    summary: Multi tenants
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the tenant
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      200:
+        description: Tenant object
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/tenants.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+  put:
+    tags:
+      - Tenant
+    summary: Update a tenant
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the tenant
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/tenants.yml"
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+  delete:
+    tags:
+      - Tenant
+    summary: Delete a tenant
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the tenant
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      200:
+        $ref:  "../../global/definitions/ok.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      409:
+        $ref:  "../../global/definitions/error.yml"
