@@ -73,8 +73,17 @@ paths:
     # /system/tenants/{object_id}:
     #   $ref: './system/tenants/tenants.yml#/one'
 
-    /system/vm/:
-      $ref: './system/vm/vm.yml#/all'
+    # /system/vm/:
+    #   $ref: './system/vm/vm.yml#/all'
     
-    /system/vm/{object_id}:
-      $ref: './system/vm/vm.yml#/one'
+    # /system/vm/{object_id}:
+    #   $ref: './system/vm/vm.yml#/one'
+
+    /system/zfs/:
+      $ref: './system/zfs/zfs.yml#/all'
+    
+    /system/zfs/{object_id}:
+      $ref: './system/zfs/zfs.yml#/one'
+
+    /system/zfs/{object_id}/{action}:
+      $ref: './system/zfs/zfs.yml#/action'
