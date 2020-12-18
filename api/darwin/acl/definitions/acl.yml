@@ -54,4 +54,5 @@ properties:
             - gt
             - le
             - lt
-        
+        pattern:
+          type: string        
