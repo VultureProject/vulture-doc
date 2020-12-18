@@ -55,6 +55,11 @@ wlbl:
               ip_address:
                 type: string
                 example: "192.168.1.254"
+              action:
+                type: string
+                enum:
+                  - add
+                  - del
     
     responses:
       200:
