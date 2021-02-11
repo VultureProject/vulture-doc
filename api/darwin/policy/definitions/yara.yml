@@ -19,5 +19,5 @@ allOf:
             items:
               type: integer
               description: The Id of a yara policy
-    required:
-      - yara_policies_id
+        required:
+          - yara_policies_id

@@ -1,0 +1,44 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          model:
+            type: string
+            description: "the name of the ML model to use with the filter"
+            example: "model-2020_02_11"
+          holidays_file:
+            type: string
+            description: "the name of the ML holidays_file to use with the filter, should match the name of the model by default"
+            example: "model-2020_02_11"
+          percent_more_alert:
+            type: number
+            description: "Relative difference giving the upper alert threshold computed as prediction * (1 + percent_more_alert). For instance, for a prediction of 100, setting percent_more_alert to 0.2 will raise an alert if the observation >= 120"
+            example: 0.2
+          percent_less_alert:
+            type: number
+            description: "Relative difference giving the lower alert threshold computed as prediction * (1 - percent_less_alert). For instance, for a prediction of 100, setting percent_less_alert to 0.2 will raise an alert if observation <= 80"
+            example: 0.2
+          percent_more_warning:
+            type: number
+            description: "Relative difference giving the upper alert threshold computed as prediction * (1 + percent_more_warning). For instance, for a prediction of 100, setting percent_more_warning to 0.1 will raise a warning if the observation >= 110"
+            example: 0.1
+          percent_less_warning:
+            type: number
+            description: "Relative difference giving the upper alert threshold computed as prediction * (1 - percent_less_warning). For instance, for a prediction of 100, setting percent_less_warning to 0.1 will raise a warning if the observation <= 90"
+            example: 0.1
+          minimal_variation:
+            type: number
+            description: "Defines a minimal absolute upper and lower variation around predictions between which no warnings nor alerts will be raised. For instance, for a prediction of 100, setting minimal_variation to 10 would lead to not raising warnings nor alerts if observations lie between 90 and 110 regardless of the computed warnings and alerts thresholds. This parameter is especially useful when encountering small scale variations where relative difference is meaningless"
+            example: 10
+          lower_absolute:
+            type: number
+            description: "Constant absolute lower threshold under which an observation raises an alert. Setting the lower_absolute overrides the lower alerts threshold"
+            example: 10
+        required:
+          - model
+          - holidays_file
+          - percent_more_alert
+          - percent_less_alert

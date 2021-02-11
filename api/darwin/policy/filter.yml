@@ -37,7 +37,11 @@ one:
         content:
           application/json:
             schema:
-              $ref:  "./definitions/DarwinPolicyFilterBase.yml"
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref:  "./definitions/DarwinPolicyFilterBase.yml"
       404:
         $ref: "../../global/definitions/notfound.yml"
       500:
@@ -60,5 +64,48 @@ types:
                   type: array
                   items:
                     $ref: "./definitions/DarwinFilter.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+ressources:
+  parameters:
+    - name: filter_type
+      in: path
+      required: true
+      description: the name of the filter_type to get available ressources from
+      schema:
+        type: string
+        enum:
+          - "vast"
+          - "vaml"
+        example: "vast"
+    - name: ressource
+      in: path
+      required: true
+      description: the ressource to get from the filter_type
+      schema:
+        type: string
+        enum:
+          - "model"
+        example: "model"
+  get:
+    tags:
+      - Darwin
+    summary: "List available ressources for a specific filter type"
+    responses:
+      200:
+        description: A list of available specific ressources for a specific filter type 
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                    example: "model-2020_02_11"
+      404:
+        $ref: "../../global/definitions/notfound.yml"
       500:
         $ref: "../../global/definitions/error.yml"

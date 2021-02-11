@@ -19,6 +19,12 @@ tags:
   - name: NetworkAddress
 
 paths:
+  /darwin/acl/:
+    $ref: "./darwin/acl/acl.yml#/all"
+  
+  /darwin/acl/{object_id}:
+    $ref: "./darwin/acl/acl.yml#/one"
+
   /darwin/filter/:
     $ref: './darwin/policy/filter.yml#/all'
   
@@ -27,6 +33,9 @@ paths:
   
   /darwin/filter/types/:
     $ref: './darwin/policy/filter.yml#/types'
+  
+  /darwin/filter/{filter_type}/{resssource}:
+    $ref: './darwin/policy/filter.yml#/ressources'
 
   /darwin/policy/:
     $ref: './darwin/policy/policy.yml#/all'
@@ -97,8 +106,27 @@ paths:
   /workflow/{object_id}:
     $ref: "./workflow/workflow.yml#/one"
 
-  /darwin/acl/:
-    $ref: "./darwin/acl/acl.yml#/all"
-  
-  /darwin/acl/{object_id}:
-    $ref: "./darwin/acl/acl.yml#/one"
+components:
+  schemas:
+    DarwinPolicy:
+      $ref: "./darwin/policy/definitions/DarwinPolicy.yml"
+    DarwinPolicyCreate:
+      $ref: "./darwin/policy/definitions/DarwinPolicyCreate.yml"
+    DarwinPolicyFilterBase:
+      $ref: "./darwin/policy/definitions/DarwinPolicyFilterBase.yml"
+    DarwinPolicyFilterBaseCreate:
+      $ref: "./darwin/policy/definitions/DarwinPolicyFilterBaseCreate.yml"
+    DarwinFilterCONN:
+      $ref: "./darwin/policy/definitions/conn.yml"
+    DarwinFilterContentInspection:
+      $ref: "./darwin/policy/definitions/content_inspection.yml"
+    DarwinFilterDGAD:
+      $ref: "./darwin/policy/definitions/dgad.yml"
+    DarwinFilterLKUP:
+      $ref: "./darwin/policy/definitions/lkup.yml"
+    DarwinFilterVAST:
+      $ref: "./darwin/policy/definitions/vast.yml"
+    DarwinFilterVAML:
+      $ref: "./darwin/policy/definitions/vaml.yml"
+    DarwinFilterYARA:
+      $ref: "./darwin/policy/definitions/yara.yml"
