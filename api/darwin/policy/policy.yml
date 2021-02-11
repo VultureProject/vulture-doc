@@ -54,8 +54,14 @@ one:
     summary: "Get Policy"
     responses:
       200:
-        description: Darwin Policy
-        $ref:  "./definitions/DarwinPolicy.yml"
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref:  "./definitions/DarwinPolicy.yml"
       404:
         $ref: "../../global/definitions/error.yml"
       500:

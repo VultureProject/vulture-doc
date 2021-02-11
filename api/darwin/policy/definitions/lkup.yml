@@ -9,5 +9,5 @@ allOf:
             type: integer
             description: "The ID of a reputation_ctx, representing a database to use when performing lookups"
             example: 12
-    required:
-      - reputation_ctx_id
+        required:
+          - reputation_ctx_id

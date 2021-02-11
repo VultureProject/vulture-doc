@@ -1,3 +1,14 @@
+type: object
+discriminator:
+  propertyName: filter_type
+  mapping:
+    conn: "#/components/schemas/DarwinFilterCONN"
+    content_inspection: "#/components/schemas/DarwinFilterContentInspection"
+    dgad: "#/components/schemas/DarwinFilterDGAD"
+    lkup: "#/components/schemas/DarwinFilterLKUP"
+    vast: "#/components/schemas/DarwinFilterVAST"
+    vaml: "#/components/schemas/DarwinFilterVAML"
+    yara: "#/components/schemas/DarwinFilterYARA"
 properties:
   filter_type:
     type: integer
