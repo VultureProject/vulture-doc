@@ -130,3 +130,4 @@ components:
       $ref: "./darwin/policy/definitions/vaml.yml"
     DarwinFilterYARA:
       $ref: "./darwin/policy/definitions/yara.yml"
+
