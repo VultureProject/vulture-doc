@@ -1,0 +1,175 @@
+list:
+  get:
+    tags:
+      - Authentication
+    summary: List Groups or Users
+    parameters:
+      - in: path
+        name: object_type
+        required: true
+        schema:
+          type: string
+          enum:
+            - users
+            - groups
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: group_name
+        description: "Groupe name to query. Required only if object_type is 'users'"
+        schema:
+          type: string
+
+    responses:
+      200:
+        description: List of groups or users
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      500:
+        $ref:  "../../global/definitions/error.yml"
+
+user:
+  post:
+    tags:
+      - Authentication
+    summary: Create an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: User name
+                required: true
+              email:
+                type: string
+                description: User email 
+                required: true
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              group:
+                type: string
+                description: User group
+                required: true
+              userPassword:
+                type: string
+                description: User password
+                required: false
+    responses:
+      201:
+        $ref:  "../../global/definitions/ok.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      500:
+        $ref:  "../../global/definitions/error.yml"
+  put:
+    tags:
+      - Authentication
+    summary: Edit an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: User Name (will be used to find the user to edit)
+                required: true
+              email:
+                type: string
+                description: User email
+                required: true
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              group:
+                type: string
+                description: User group
+                required: true
+              userPassword:
+                type: string
+                description: User password
+                required: false
+    responses:
+      200:
+        $ref:  "../../global/definitions/ok.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      500:
+        $ref:  "../../global/definitions/error.yml"
+  delete:
+    tags:
+      - Authentication
+    summary: Delete an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: User Name to delete
+              group:
+                type: string
+                description: User group
+    responses:
+      200:
+        $ref:  "../../global/definitions/ok.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      500:
+        $ref:  "../../global/definitions/error.yml"
