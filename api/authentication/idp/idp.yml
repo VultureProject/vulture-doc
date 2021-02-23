@@ -84,6 +84,10 @@ user:
                 type: string
                 description: User password
                 required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
+                required: false
     responses:
       201:
         $ref:  "../../global/definitions/ok.yml"
@@ -130,6 +134,10 @@ user:
               userPassword:
                 type: string
                 description: User password
+                required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
                 required: false
     responses:
       200:
