@@ -17,6 +17,7 @@ tags:
   - name: Darwin
   - name: NetworkAddressCards
   - name: NetworkAddress
+  - name: Authentication
 
 paths:
   /darwin/acl/:
@@ -106,28 +107,34 @@ paths:
   /workflow/{object_id}:
     $ref: "./workflow/workflow.yml#/one"
 
-components:
-  schemas:
-    DarwinPolicy:
-      $ref: "./darwin/policy/definitions/DarwinPolicy.yml"
-    DarwinPolicyCreate:
-      $ref: "./darwin/policy/definitions/DarwinPolicyCreate.yml"
-    DarwinPolicyFilterBase:
-      $ref: "./darwin/policy/definitions/DarwinPolicyFilterBase.yml"
-    DarwinPolicyFilterBaseCreate:
-      $ref: "./darwin/policy/definitions/DarwinPolicyFilterBaseCreate.yml"
-    DarwinFilterCONN:
-      $ref: "./darwin/policy/definitions/conn.yml"
-    DarwinFilterContentInspection:
-      $ref: "./darwin/policy/definitions/content_inspection.yml"
-    DarwinFilterDGAD:
-      $ref: "./darwin/policy/definitions/dgad.yml"
-    DarwinFilterLKUP:
-      $ref: "./darwin/policy/definitions/lkup.yml"
-    DarwinFilterVAST:
-      $ref: "./darwin/policy/definitions/vast.yml"
-    DarwinFilterVAML:
-      $ref: "./darwin/policy/definitions/vaml.yml"
-    DarwinFilterYARA:
-      $ref: "./darwin/policy/definitions/yara.yml"
+  /authentication/idp/{object_type}/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/list"
+
+  /authentication/idp/user/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/user"
+
+# components:
+#   schemas:
+#     DarwinPolicy:
+#       $ref: "./darwin/policy/definitions/DarwinPolicy.yml"
+#     DarwinPolicyCreate:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyCreate.yml"
+#     DarwinPolicyFilterBase:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyFilterBase.yml"
+#     DarwinPolicyFilterBaseCreate:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyFilterBaseCreate.yml"
+#     DarwinFilterCONN:
+#       $ref: "./darwin/policy/definitions/conn.yml"
+#     DarwinFilterContentInspection:
+#       $ref: "./darwin/policy/definitions/content_inspection.yml"
+#     DarwinFilterDGAD:
+#       $ref: "./darwin/policy/definitions/dgad.yml"
+#     DarwinFilterLKUP:
+#       $ref: "./darwin/policy/definitions/lkup.yml"
+#     DarwinFilterVAST:
+#       $ref: "./darwin/policy/definitions/vast.yml"
+#     DarwinFilterVAML:
+#       $ref: "./darwin/policy/definitions/vaml.yml"
+#     DarwinFilterYARA:
+#       $ref: "./darwin/policy/definitions/yara.yml"
 
