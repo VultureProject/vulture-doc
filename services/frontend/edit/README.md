@@ -24,7 +24,7 @@ Here you can specify a friendly name for your listener. You cannot have multiple
 
 #### Listeners
 
-> This parameter is not used in IMPCAP mode or in LOG mode, with listening mode Kafka or File.
+> This parameter is not used in IMPCAP mode or in LOG mode, with listening mode Kafka, Redis or File.
 
 Here you can configure, as table, the listening, by configuring for each row the following parameters :
  - Listen address : Select the [IP address](/system/netif/) you want to listen on
@@ -117,6 +117,7 @@ Here you chose a listening mode for your input :
  - FILE (listen logs with Rsyslog imfile module)
  - API CLIENT (retrieve logs from external API events collect)
  - KAFKA (collect logs from a kafka server, with Rsyslog imkafka module)
+ - REDIS (collect logs from a redis server, with Rsyslog imhiredis module)
 
 Depending on which listening mode you chose, configuration settings differs.
 
@@ -145,7 +146,7 @@ Set the maximum inactivity time on the client side.
 
 #### Node
 
-Configure the node on which you want to listen on file.
+Configure the node on which you want to listen on file (or kafka or redis)
 
 #### File path
 
@@ -168,6 +169,48 @@ Configure kafka topic to poll logs from
 #### Kafka consumer group
 
 Optional, configure the kafka consumer group to use to poll logs from
+
+
+### REDIS listening mode specific parameters
+
+This listener relies on rsyslog / imhiredis, and has two modes of operation:
+
+#### "Queue Mode, using push/pop"
+
+The queue mode will LPOP or RPOP your message from a redis list.
+Following parameters are required:
+ - Redis consumer mode: Set mode to "queue" to enable the queue mode
+ - Redis key: The key to xPOP on
+ - Redis server: The name or IP address of the redis server (Vulture's Internal redis is 127.0.0.3)
+ - Redis port: The redis listening port (default is 6379)
+
+Following parameters are optional:
+ - Redis password: If set, the plugin will issue an "AUTH" command before calling xPOP
+ - Use LPOP: If set to "on", LPOP will be used instead of default RPOP
+
+Redis pipelining is used inside the workerthread, with a hardcoded batch size of #10.
+
+Imhiredis will query Redis every second to see if entries are in the list, if that's the case they will be dequeued
+continuously by batches of 10 until none remains.
+
+Due to its balance between polling interval and pipelining and its use of lists, this mode is quite performant and reliable.
+However, due to the 1 second polling frequency, one may consider using the `subscribe` mode instead if very low latency is required.
+
+#### "Chanel Mode, using pub/sub" 
+
+The channel mode will SUBSCRIBE to a redis channel. 
+The "key" parameter is required and will be used for the subscribe channel.
+
+Following parameters are required:
+ - Redis consumer mode: Set mode to "subscribe" to enable the subscribe mode
+ - Redis key: The key to subscribe to (aka the "channel")
+ - Redis server: The name or IP address of the redis server
+ - Redis port: The redis listening port
+
+Following parameters are optional:
+ - password: If set, the plugin will issue an "AUTH" command before listening to a channel
+ - uselpop: Useless in channel mode
+
 
 ### API CLIENT listening mode specific parameters
 
