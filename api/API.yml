@@ -110,8 +110,11 @@ paths:
   /authentication/idp/{object_type}/{object_id}:
     $ref: "./authentication/idp/idp.yml#/list"
 
-  /authentication/idp/user/{object_id}:
+  /authentication/idp/users/{object_id}:
     $ref: "./authentication/idp/idp.yml#/user"
+
+  /authentication/idp/groups/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/group"
 
 # components:
 #   schemas:

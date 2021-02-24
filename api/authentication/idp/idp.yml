@@ -2,7 +2,7 @@ list:
   get:
     tags:
       - Authentication
-    summary: List Groups or Users
+    summary: List Groups/Users or Search Users
     parameters:
       - in: path
         name: object_type
@@ -12,6 +12,7 @@ list:
           enum:
             - users
             - groups
+            - search
       - in: path
         name: object_id
         description: ID of the Portal
@@ -22,6 +23,11 @@ list:
       - in: query
         name: group_name
         description: "Groupe name to query. Required only if object_type is 'users'"
+        schema:
+          type: string
+      - in: query
+        name: search
+        description: "Search string: Required only if object_type is search"
         schema:
           type: string
 
@@ -44,6 +50,35 @@ list:
       500:
         $ref:  "../../global/definitions/error.yml"
 
+group:
+  post:
+    tags:
+      - Authentication
+    summary: Create a group
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              group_name:
+                type: string
+                description: Group Name
+                required: true
+              member:
+                description: Members
+                required: true
+                type: array
+                items:
+                  type: string
 user:
   post:
     tags:
