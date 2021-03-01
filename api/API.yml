@@ -107,7 +107,7 @@ paths:
   /workflow/{object_id}:
     $ref: "./workflow/workflow.yml#/one"
 
-  /authentication/idp/{object_type}/{object_id}:
+  /authentication/idp/{object_id}:
     $ref: "./authentication/idp/idp.yml#/list"
 
   /authentication/idp/users/{object_id}:
