@@ -1,0 +1,87 @@
+all:
+  get:
+    tags:
+      - AccessControl
+    summary: List of Access Control
+    responses:
+      200:
+        description: List of Access Control
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                $ref: "./definitions/acl.yml"
+  
+  post:
+    tags:
+      - AccessControl
+    summary: Create an Access Control
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/acl.yml"
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+one:
+  get:
+    tags:
+      - AccessControl
+    summary: Access Control
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the Access Control object
+        schema:
+          type: string
+    
+    responses:
+      200:
+        description: Access Control Object
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/acl.yml"
+      
+      404:
+        $ref: "../../global/definitions/notfound.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+  
+  put:
+    tags:
+      - AccessControl
+    summary: Edit an Access Control
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the Access Control object
+        schema:
+          type: string
+    
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/acl.yml"
+    
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"

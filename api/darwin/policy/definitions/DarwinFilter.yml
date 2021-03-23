@@ -1,0 +1,31 @@
+allOf:
+  - type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+        description: the id of the object
+      name:
+        type: string
+        example: unad
+        description: the quadrigram defining the filter
+      longname:
+        type: string
+        example: UNsupervised Anomaly Detection
+        description: a more complete name, mostly detailling the quadrigram
+      description:
+        type: string
+        example: Detects abnormal variations in network traffic, it scans batches of 5 minutes of network data to discover abnormalities
+        description: a complete description of the filter
+      is_internal:
+        type: boolean
+        example: false
+        description: whether this filter type is an internal type or not (should be shown in GUI or not)
+      is_launchable:
+        type: boolean
+        example: true
+        description: whether the filter can be launched/used on the system
+      can_be_buffered:
+        type: boolean
+        example: true
+        description: whether this filter can be used with timed buffering

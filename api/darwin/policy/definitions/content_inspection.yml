@@ -1,0 +1,32 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          yara_scan_type:
+            type: string
+            description: "Either 'packet' (scan data in packet without stream recomposition), or 'stream' (recompose TCP stream, then scan the recomposition)"
+            enum:
+              - packet
+              - stream
+          yara_policy_id:
+            type: integer
+            description: "The ID of a yara policy object"
+            example: 1
+          yara_scan_max_size:
+            type: integer
+            description: "The maximum number of bytes to scan, is especially usefull when yaraScanType is set to stream (will define the maximum size of the recomposed stream to scan)"
+            example: 8092
+          max_connections:
+            type: integer
+            description: "The maximum number of connections to folow (is only relevant when yaraScantype is set to 'stream')"
+            example: 4096
+          max_memory_usage:
+            type: integer
+            description: "Rough upper limit for the memory usage (in MB) of the filter, could be usefull when dealing with high traffic to prevent RAM overflow. Be warry that this only takes into account the data kept from connections, and the filter might take a bit more RAM"
+            example: 120
+        required:
+          - yara_scan_type
+          - yara_policy_id

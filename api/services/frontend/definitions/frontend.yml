@@ -1,0 +1,37 @@
+properties:
+  enabled:
+    type: boolean
+    description: Frontend is enabled or not
+  name:
+    type: string
+    example: Frontend Name
+    description: Friendly name
+  tags:
+    type: array
+    items:
+      type: string
+    description: Tags for the Frontend
+  mode:
+    type: string
+    oneOf:
+      - tcp
+      - http
+      - log
+      - impcap
+  timeout_connect:
+    type: integer
+    example: 5000
+    description: HTTP request timeout
+  timeout_client:
+    type: integer
+    example: 60
+    description: HTTP request timeout
+  timeout_keep_elive:
+    type: integer
+    example: 500,
+    description: HTTP Keep-Alive timeout
+  https_redirect:
+    type: boolean
+    description: Redirect HTTP requests to HTTPS, if available
+  impcap_intf:
+    type: 

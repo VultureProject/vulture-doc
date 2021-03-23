@@ -1,0 +1,6 @@
+properties:
+  dev:
+    type: string
+  node:
+    type: integer
+    description: ObjectId of the node

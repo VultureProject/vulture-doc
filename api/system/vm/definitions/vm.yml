@@ -1,0 +1,19 @@
+properties:
+  node:
+    $ref: ../../cluster/definitions/node.yml
+  name:
+    type: string
+  datastore:
+    type: string
+  loader:
+    type: string
+  cpu:
+    type: string
+  ram:
+    type: string
+  vnc:
+    type: string
+  autostart:
+    type: string
+  status:
+    type: string

@@ -1,0 +1,75 @@
+all:
+  get:
+    tags:
+      - ZFS
+    summary: ZFS list
+
+    responses:
+      200:
+        description: List of ZFS
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                $ref: "./definitions/zfs.yml"
+
+one:
+  get:
+    tags:
+      - ZFS
+    summary: ZFS
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the zfs
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      200:
+        description: ZFS
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/zfs.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+action:
+  post:
+    tags:
+      - ZFS
+    summary: Create ZFS
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the zfs
+        schema:
+          type: integer
+          minimum: 1
+      - in: path
+        name: action
+        required: true
+        description: Action to execute
+        schema:
+          type: string
+          enum:
+            - snapshot
+            - restore
+            - refresh
+    
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"

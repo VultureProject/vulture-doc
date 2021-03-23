@@ -1,0 +1,16 @@
+properties:
+  name:
+    type: string
+    example: Custom Policy
+  description:
+    type: string
+    example: This is the description of your policy
+  is_internal:
+    type: boolean
+    example: false
+    default: false
+    description: whether this policy is an internal policy (not shown in GUI, not created by the user)
+  filters:
+    type: array
+    items:
+      $ref: "./DarwinPolicyFilterBaseCreate.yml"

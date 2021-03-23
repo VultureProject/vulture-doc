@@ -1,0 +1,85 @@
+properties:
+  name:
+    type: string
+  enabled:
+    type: boolean
+  frontend:
+    type: integer
+    description: ID of the frontend
+  backend:
+    type: integer
+    description: ID of the backend
+  fqdn:
+    type: string
+    description: FQDN. Only if the frontend is in HTTP Mode
+  public_dir:
+    type: string
+    description: Public Directory. Only if the frontend is in HTTP Mode
+  authentication:
+    type: integer
+    description: ID of the authentication portal
+  defender_policy:
+    type: integer
+    description: ID of the Defender Policy
+  acl_frontend:
+    description: ACL before Defender Policy
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Access Control
+        action_satisfy:
+          type: integer
+          description: Action to execute if the ACL satisfy
+          enum:
+            - 200
+            - 403
+            - 301
+            - 302
+        action_not_satisfy:
+          type: integer
+          description: Action to execute if the ACL don't satisfy
+          enum:
+            - 200
+            - 403
+            - 301
+            - 302
+        redirect_url_satisfy:
+          type: string
+          description: URL to redirect to if action_satisfy in (301, 302)
+        redirect_url_not_satisfy:
+          type: string
+          description: URL to redirect to if action_not_satisfy in (301, 302)
+  acl_backend:
+    description: ACL after Defender Policy
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Access Control
+        action_satisfy:
+          type: integer
+          description: Action to execute if the ACL satisfy
+          enum:
+            - 200
+            - 403
+            - 301
+            - 302
+        action_not_satisfy:
+          type: integer
+          description: Action to execute if the ACL don't satisfy
+          enum:
+            - 200
+            - 403
+            - 301
+            - 302
+        redirect_url_satisfy:
+          type: string
+          description: URL to redirect to if action_satisfy in (301, 302)
+        redirect_url_not_satisfy:
+          type: string
+          description: URL to redirect to if action_not_satisfy in (301, 302)

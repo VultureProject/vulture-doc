@@ -1,0 +1,9 @@
+properties:
+  name:
+    type: string
+  predator_api_key:
+    type: string
+  shodan_apikey:
+    type: string
+  chameleon_apikey:
+    type: string

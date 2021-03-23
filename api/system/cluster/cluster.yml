@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Cluster
+  summary: Cluster list
+  responses:
+    200:
+      description: "Cluster information"
+      content:
+        application/json:
+          schema:
+            $ref: "./definitions/cluster.yml"
+    500:
+      $ref: "../../global/definitions/error.yml"

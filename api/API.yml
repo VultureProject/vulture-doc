@@ -1,0 +1,143 @@
+openapi: "3.0.0"
+info:
+  title: Vulture 4 API
+  version: "1.0"
+servers:
+  - url: https://vulture.example:8000/api/v1
+
+tags: 
+  - name: PKI
+  - name: ZFS
+  - name: Node
+  - name: Workflow
+  - name: AccessControl
+  - name: VirtualMachine
+  - name: Cluster
+  - name: Config
+  - name: Darwin
+  - name: NetworkAddressCards
+  - name: NetworkAddress
+  - name: Authentication
+
+paths:
+  /darwin/acl/:
+    $ref: "./darwin/acl/acl.yml#/all"
+  
+  /darwin/acl/{object_id}:
+    $ref: "./darwin/acl/acl.yml#/one"
+
+  /darwin/filter/:
+    $ref: './darwin/policy/filter.yml#/all'
+  
+  /darwin/filter/{object_id}/:
+    $ref: './darwin/policy/filter.yml#/one'
+  
+  /darwin/filter/types/:
+    $ref: './darwin/policy/filter.yml#/types'
+  
+  /darwin/filter/{filter_type}/{resssource}:
+    $ref: './darwin/policy/filter.yml#/ressources'
+
+  /darwin/policy/:
+    $ref: './darwin/policy/policy.yml#/all'
+
+  /darwin/policy/{object_id}/:
+    $ref: './darwin/policy/policy.yml#/one'
+
+  /darwin/policy/{object_id}/{action}/:
+    $ref: './darwin/policy/policy.yml#/action'
+
+  /system/config/:
+    $ref: './system/config/config.yml#/all'
+
+  /system/config/{list_type}/:
+    $ref: './system/config/config.yml#/wlbl'
+
+  /system/node/:
+    $ref: './system/cluster/node.yml#/all'
+  
+  /system/node/{object_id}/:
+    $ref: './system/cluster/node.yml#/one'
+
+  /system/cluster/:
+    $ref: './system/cluster/cluster.yml'
+
+  /system/netif/:
+    $ref: './system/cluster/network_cards.yml#/all'
+
+  /system/netif/refresh/:
+    $ref: './system/cluster/network_cards.yml#/refresh'
+  
+  /system/netaddr/:
+    $ref: './system/cluster/network_address.yml#/all'
+
+  /system/netaddr/{object_id}/:
+    $ref: './system/cluster/network_address.yml#/one'
+
+  /system/pki/get_ca:
+    $ref: './system/pki/pki.yml#/ca'
+
+  /system/pki/get_cert:
+    $ref: './system/pki/pki.yml#/cert'
+
+  /system/tenants:
+    $ref: './system/tenants/tenants.yml#/all'
+
+  /system/tenants/{object_id}:
+    $ref: './system/tenants/tenants.yml#/one'
+
+  /system/vm/:
+    $ref: './system/vm/vm.yml#/all'
+  
+  /system/vm/{object_id}:
+    $ref: './system/vm/vm.yml#/one'
+
+  /system/zfs/:
+    $ref: './system/zfs/zfs.yml#/all'
+  
+  /system/zfs/{object_id}:
+    $ref: './system/zfs/zfs.yml#/one'
+
+  /system/zfs/{object_id}/{action}:
+    $ref: './system/zfs/zfs.yml#/action'
+
+  /workflow/:
+    $ref: "./workflow/workflow.yml#/all"
+  
+  /workflow/{object_id}:
+    $ref: "./workflow/workflow.yml#/one"
+
+  /authentication/idp/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/list"
+
+  /authentication/idp/users/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/user"
+
+  /authentication/idp/groups/{object_id}:
+    $ref: "./authentication/idp/idp.yml#/group"
+
+# components:
+#   schemas:
+#     DarwinPolicy:
+#       $ref: "./darwin/policy/definitions/DarwinPolicy.yml"
+#     DarwinPolicyCreate:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyCreate.yml"
+#     DarwinPolicyFilterBase:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyFilterBase.yml"
+#     DarwinPolicyFilterBaseCreate:
+#       $ref: "./darwin/policy/definitions/DarwinPolicyFilterBaseCreate.yml"
+#     DarwinFilterCONN:
+#       $ref: "./darwin/policy/definitions/conn.yml"
+#     DarwinFilterContentInspection:
+#       $ref: "./darwin/policy/definitions/content_inspection.yml"
+#     DarwinFilterDGAD:
+#       $ref: "./darwin/policy/definitions/dgad.yml"
+#     DarwinFilterLKUP:
+#       $ref: "./darwin/policy/definitions/lkup.yml"
+#     DarwinFilterVAST:
+#       $ref: "./darwin/policy/definitions/vast.yml"
+#     DarwinFilterVAML:
+#       $ref: "./darwin/policy/definitions/vaml.yml"
+#     DarwinFilterYARA:
+#       $ref: "./darwin/policy/definitions/yara.yml"
+

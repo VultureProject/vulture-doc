@@ -38,4 +38,3 @@ The possible actions are:
 At least one action must be a **CONTINUE** response.
 
 When you select the **301** or **302** action, you'll need to fullfill the **URL to redirect to**.
-

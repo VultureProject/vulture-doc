@@ -1,0 +1,13 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          model:
+            type: string
+            description: "the name of the ML model to use with the filter"
+            example: "model-2020_02_11"
+        required:
+          - model

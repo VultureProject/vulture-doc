@@ -1,17 +1,22 @@
-# Vulture 4 Documentation
+# Vulture 4 HOME
 
-This is the official Vulture 4 documentation.
-The documentation is directly included in the Web UI of Vulture.
+On this page you have a global overview of the Vulture cluster.
 
-## Contribute
-If you want to contribute to this project
-Follow this procedure: https://github.com/firstcontributions/first-contributions
+For each member of the cluster, the status of critical services is displayed: If **green** everything os OK, if **red**: an error has occured and action is required to solve it.
 
-## How to
-This project is built like the URIs of the Vulture Web UI.
+* Frontend: 
+    - This status is related to the TCP and HTTP listeners, managed by **haproxy**
+* AI Framework:
+    - This status is related to the **darwin** process, in charge of Artificial Intelligence / Machine learning for anomaly detection
+* Packet Filter:
+    - This status is related to the network firewall, **pf**
+* IPSEC:
+    - This status is related to the **strongswan** service.
+    - If unused, the button color will be **gray**
+* VPN SSL:
+    - This status is related to the **openvpn** service.
+    - If unused, the button color will be **gray**
+* Logging:
+    - This status is related to **rsyslog** services, in charge of incoming logs
 
-##### Example:
-The documentation file for the applications/backend view in the WebUI must be placed like this
-> /vulture-doc/applications/backend/README.md
 
-This way, the WebUI will be able to display it.

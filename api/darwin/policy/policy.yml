@@ -1,0 +1,126 @@
+all:
+  get:
+    tags:
+      - Darwin
+    summary: "List policies"
+    responses:
+      200:
+        description: The list of all policies
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  description: List of policies
+                  items:
+                    $ref: "./definitions/DarwinPolicy.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+    
+  post:
+    tags:
+      - Darwin
+    summary: "Create policy"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/DarwinPolicyCreate.yml"
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+one:
+  parameters:
+    - in: path
+      name: object_id
+      required: true
+      description: ID of the policy
+      schema:
+        type: integer
+        minimum: 1
+  get:
+    tags:
+      - Darwin
+    summary: "Get Policy"
+    responses:
+      200:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref:  "./definitions/DarwinPolicy.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+  put:
+    tags:
+      - Darwin
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/DarwinPolicyCreate.yml"
+    summary: "Update policy"
+    description: verb to create or update a specific policy based on its ID
+    responses:
+      201:
+        $ref:  "../../global/definitions/created.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+  delete:
+    tags:
+      - Darwin
+    summary: "Delete policy"
+    description: Delete a policy based on its ID
+    responses:
+      200:
+        $ref:  "../../global/definitions/ok.yml"
+      400:
+        $ref:  "../../global/definitions/error.yml"
+      404:
+        $ref:  "../../global/definitions/error.yml"
+      409:
+        $ref:  "../../global/definitions/error.yml"
+
+action:
+  parameters:
+    - in: path
+      name: object_id
+      required: true
+      description: the id of the policy
+      schema:
+        type: integer
+        minimum: 1
+    - in: path
+      name: action
+      required: true
+      description: the action to execute on this policy (currently none)
+      schema:
+        type: string
+        enum: [""]
+  post:
+    tags:
+      - Darwin
+    summary: "Action on policy"
+    responses:
+      401:
+        $ref:  "../../global/definitions/error.yml"
+      403:
+        $ref:  "../../global/definitions/error.yml"

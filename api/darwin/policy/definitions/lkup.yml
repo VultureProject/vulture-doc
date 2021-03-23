@@ -1,0 +1,13 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          reputation_ctx_id:
+            type: integer
+            description: "The ID of a reputation_ctx, representing a database to use when performing lookups"
+            example: 12
+        required:
+          - reputation_ctx_id

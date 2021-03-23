@@ -1,0 +1,29 @@
+ca:
+  get:
+    tags:
+      - PKI
+    summary: "Get CA certificate"
+
+    responses:
+      200:
+        description: CA Certificate
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/x509.yml"
+
+cert:
+  get:
+    tags:
+      - PKI
+    summary: "Get certificate"
+
+    responses:
+      200:
+        description: Certificate
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/x509.yml"

@@ -1,0 +1,11 @@
+properties:
+  interval:
+    type: integer
+    example: 300
+    minimum: 1
+    description: the duration of buffering between 2 scans
+  required_log_lines:
+    type: integer
+    example: 10
+    minimum: 0
+    description: the minimal number of entries to have to start a scan affter the elapsed caching duration

@@ -1,0 +1,12 @@
+allOf:
+  - $ref: "./DarwinPolicyFilterBase.yml"
+  - type: object
+    properties:
+      config:
+        type: object
+        properties:
+          redis_expire:
+            type: integer
+            description: "Number of seconds to cache connection, after this delay the connection will be considered new again"
+            default: 300
+            example: 50

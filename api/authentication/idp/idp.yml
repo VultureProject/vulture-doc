@@ -1,0 +1,243 @@
+list:
+  get:
+    tags:
+      - Authentication
+    summary: List Groups/Users or Search Users
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: object_type
+        required: true
+        schema:
+          type: string
+          enum:
+            - users
+            - groups
+            - search
+      - in: query
+        name: group_name
+        description: "Groupe name to query. Required only if object_type is 'users'"
+        schema:
+          type: string
+      - in: query
+        name: search
+        description: "Search string: Required only if object_type is search"
+        schema:
+          type: string
+
+    responses:
+      200:
+        description: List of groups or users
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+      400:
+        $ref: "../../global/definitions/error.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+group:
+  post:
+    tags:
+      - Authentication
+    summary: Create a group
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              group_name:
+                type: string
+                description: Group Name
+                required: true
+              member:
+                description: Members
+                required: true
+                type: array
+                items:
+                  type: string
+user:
+  post:
+    tags:
+      - Authentication
+    summary: Create an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: User name
+                required: true
+              email:
+                type: string
+                description: User email
+                required: true
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              group:
+                type: string
+                description: User group
+                required: true
+              userPassword:
+                type: string
+                description: User password
+                required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
+                required: false
+    responses:
+      201:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+  put:
+    tags:
+      - Authentication
+    summary: Edit an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the Portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User ID (will be used to find the user to edit)
+                required: true
+              username:
+                type: string
+                description: User Name
+                required: true
+              email:
+                type: string
+                description: User email
+                required: true
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              group:
+                type: string
+                description: User group
+                required: true
+              userPassword:
+                type: string
+                description: User password
+                required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
+                required: false
+    responses:
+      200:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+  delete:
+    tags:
+      - Authentication
+    summary: Delete an user
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the portal
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: string
+                description: User ID to delete
+    responses:
+      200:
+        $ref: "../../global/definitions/ok.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      404:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
