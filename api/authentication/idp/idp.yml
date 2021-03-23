@@ -44,11 +44,11 @@ list:
                   items:
                     type: string
       400:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       404:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       500:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
 
 group:
   post:
@@ -92,7 +92,7 @@ user:
         schema:
           type: integer
           minimum: 1
-    
+
     requestBody:
       content:
         application/json:
@@ -105,7 +105,7 @@ user:
                 required: true
               email:
                 type: string
-                description: User email 
+                description: User email
                 required: true
               mobile:
                 type: string
@@ -125,13 +125,25 @@ user:
                 required: false
     responses:
       201:
-        $ref:  "../../global/definitions/ok.yml"
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
       400:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       404:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       500:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
   put:
     tags:
       - Authentication
@@ -150,9 +162,13 @@ user:
           schema:
             type: object
             properties:
+              id:
+                type: string
+                description: User ID (will be used to find the user to edit)
+                required: true
               username:
                 type: string
-                description: User Name (will be used to find the user to edit)
+                description: User Name
                 required: true
               email:
                 type: string
@@ -176,13 +192,25 @@ user:
                 required: false
     responses:
       200:
-        $ref:  "../../global/definitions/ok.yml"
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
       400:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       404:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       500:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
   delete:
     tags:
       - Authentication
@@ -201,18 +229,15 @@ user:
           schema:
             type: object
             properties:
-              username:
+              user_id:
                 type: string
-                description: User Name to delete
-              group:
-                type: string
-                description: User group
+                description: User ID to delete
     responses:
       200:
-        $ref:  "../../global/definitions/ok.yml"
+        $ref: "../../global/definitions/ok.yml"
       400:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       404:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
       500:
-        $ref:  "../../global/definitions/error.yml"
+        $ref: "../../global/definitions/error.yml"
