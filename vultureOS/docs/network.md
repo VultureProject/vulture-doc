@@ -2,9 +2,9 @@
 
 Here you can manage all the network interface cards and IP addresses available in the Cluster.
 
-Behind a single IP address, you may have several nodes / NICs. Indeed, Vulture supports the CARP protocol: it allow you to have a Virtual IP addresses associated with several NICs. Whenever the active NIC became unavailable, another backup CARP NIC will be ellected as active and handle the IP address.
+Behind a single IP address, you may have several nodes / NICs. Indeed, Vulture supports the CARP protocol : it allow you to have a Virtual IP addresses associated with several NICs. Whenever the active NIC became unavailable, another backup CARP NIC will be ellected as active and handle the IP address.
 
-Thus, a Vulture network interface is defined by:
+Thus, a Vulture network interface is defined by :
 * 1 or more NICs (Network Card), that may be hosted on 1 or more nodes
 * A unique IP Address
 
@@ -12,7 +12,7 @@ Thus, a Vulture network interface is defined by:
 
 It displays the list of available network card / IP address within the Vulture cluster. Click on a line to edit the configuration of a given interface and click on *Add an entry* to create a new one.
 
-`Name` : This is the friendly name of the network interface
+`Name` : This is the friendly name of the network interface.
 
 `Type` : Vulture considers 2 types of network card.
 
@@ -22,7 +22,7 @@ It displays the list of available network card / IP address within the Vulture c
 
     So you cannot add "additional" network configuration in this file.
 
-    If you want to add custom network configuration, use the */usr/local/etc/custom.intf* file: Its content will be merged by Vulture in the **/etc/rc.conf.d/network** file.
+    If you want to add custom network configuration, use the */usr/local/etc/custom.intf* file : Its content will be merged by Vulture in the **/etc/rc.conf.d/network** file.
 
     For example, if you want to configure an LACP trunk using bge0 and bge1 NIC, you will add the folowing configuration into **/usr/local/etc/custom.intf** :
 
@@ -51,11 +51,11 @@ It displays the list of available network card / IP address within the Vulture c
 `Action` : Here you can delete a Vulture network interface, only if it is an alias interface.
 
 
-## Add / Modify a network card 
+## Add / Modify a network card
 
-`Name` : This is the friendly name of the network interface
+`Name` : This is the friendly name of the network interface.
 
-`Network Interface Cards`: Select the NIC to use for the new interface. If you want to create a CARP IP address, you can select multiple NIS here. Then you will have to configure the CARP priority for each NIC within the CARP group.
+`Network Interface Cards` : Select the NIC to use for the new interface. If you want to create a CARP IP address, you can select multiple NIS here. Then you will have to configure the CARP priority for each NIC within the CARP group.
 
 `IP Address` : This is the IP address associated to the Vulture network interface.
 

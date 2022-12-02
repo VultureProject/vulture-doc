@@ -12,7 +12,7 @@ With VultureOS we are able to do all the following things :
 - Create a cluster of **load-balanced TCP services** with CARP and centralized management
 - Deploy HAPROXY listeners to **reverse-proxify trafic** to TCP services or HTTP services
 - Deploy RSYSLOG collectors to **collect logs over UDP and TCP**
-    - Apply **enrichment features** on top of collected logs: Contextual tagging and Cyber Threat Intelligence
+    - Apply **enrichment features** on top of collected logs : Contextual tagging and Cyber Threat Intelligence
     - Normalize logs into a **normalized JSON model** with your own rules
     - Pass logs through a machine learning pipeline to **detect anomalies and security issues**
 - **Collect Logs via REST API** from many vendors and process them via the rsyslog stack
