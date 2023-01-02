@@ -11,11 +11,11 @@ From the **Add an entry** menu you may :
 
 ## List of registered certificates
 
-- `Type` : Here you have the certificate type:
+- `Type` : Here you have the certificate type :
 
     - **Vulture CA** : This is the internal CA certificate
     - **Internal** : This is a certificate that has been signed by the Vulture internal CA (eg: A node certificate)
-    - **Trusted CA** : This is a external CA certificate, that Vulture should trust in a TLS listener 
+    - **Trusted CA** : This is a external CA certificate, that Vulture should trust in a TLS listener
     - **External** : This is a certificate signed by an external CA, that Vulture may use in a TLS listener or TLS client
 
 - `Status` : Indicates if the certificate is valid or not (expired / revoked).
@@ -24,9 +24,9 @@ From the **Add an entry** menu you may :
 - `Issuer` : This is the full DN string of the issuer certificate
 - `Valid From` : This is the validity start date of the certificate
 - `Valid Till` : This is the validity end date of the certificate
-- `Action` : 
+- `Action` :
     - **Download Cert** : This allows you to download the PEM certificate file
-    - **Download bundle** : This allows you to download the certificate chain as well as the private key (if available) of the certificate:
+    - **Download bundle** : This allows you to download the certificate chain as well as the private key (if available) of the certificate :
 
         - The PEM certificate
         - The PEM key
@@ -48,12 +48,12 @@ Here you can create or import new certificates :
 ### Generate a internaly-signed certificate
 
 - `Friendly name` : This is the friendly name associated to the certificate. Vulture will reference the certificate using this name in the Web GUI.
-- `Common name`: This corresponds to the "CN" field of the certificate you want to create. Other attributes (OU, O, C....) are copied from the Vulture internal CA and cannot be modified
+- `Common name` : This corresponds to the "CN" field of the certificate you want to create. Other attributes (OU, O, C....) are copied from the Vulture internal CA and cannot be modified
 
 ### Generate a Let's encrypt certificate
 
 - `Friendly name` : This is the friendly name associated to the certificate. Vulture will reference the certificate using this name in the Web GUI.
-- `Common name`: This corresponds to the "CN" field of the certificate you want to create. Other attributes are provided automaticaly by Let's encrypt, typically: C=US, O=Let's Encrypt
+- `Common name` : This corresponds to the "CN" field of the certificate you want to create. Other attributes are provided automaticaly by Let's encrypt, typically : C=US, O=Let's Encrypt
 
 ### Import an external certificate
 

@@ -6,7 +6,7 @@ Cluster-wide parameters are managed from the [Cluster Config](cluster.md) menu.
 
 ## List of nodes
 
-The table show all the nodes, with their main characteristics. Just **click on the node** to enter into edition mode. 
+The table show all the nodes, with their main characteristics. Just **click on the node** to enter into edition mode.
 
 `Name` : This is the friendly name of the node
 
@@ -25,7 +25,10 @@ To **add a node**, please install another Vulture server, bootstrap it and run /
 
 ## Node Settings
 
-`Hostname` : This is the hostname of the node. **You cannot modify the hostname from here**. Hostname modification must be done at the system level via the admin tool: /home/vlt-adm/admin.sh
+`Hostname` : This is the hostname of the node. **You cannot modify the hostname from here**. Hostname modification must be done at the system level via the admin tool :
+```
+/home/vlt-adm/admin.sh
+```
 
 Indeed, changing the hostname have several consequences :
 
@@ -33,7 +36,7 @@ Indeed, changing the hostname have several consequences :
 - The vultured daemon will be restarted on the modified node
 - Node certificate will be re-issued with the new hostname
 - Apache will be restarted on the node, for Web UI and Web Portal
-- The node name will be updated within the MongoDB replicaset 
+- The node name will be updated within the MongoDB replicaset
 - Apache will be restarted on all nodes, for Web GUI
 - rsyslog configuration will be re-generated on all nodes
 
@@ -47,13 +50,13 @@ Example :
 ```
 
 You can define additional log forwarders from the [Logs Forwarders](/apps/logfwd/) menu.
-Supported log forwarder are: File, REDIS, SYSLOG (TCP/UDP/RELP), Elasticsearch and MongoDB
+Supported log forwarder are : File, REDIS, SYSLOG (TCP/UDP/RELP), Elasticsearch and MongoDB.
 
 ### Network
 
 From this tab you can modify IP address and network topology for the node, such as routing table, masquerading IPs...
 
-`Internet IP Address` : When Vulture has to communicate with remote servers, it will be NAT-ed behind this IP Address. 
+`Internet IP Address` : When Vulture has to communicate with remote servers, it will be NAT-ed behind this IP Address.
 
 By default, here are the network connexions that are using this IP address :
 
@@ -74,17 +77,17 @@ By default, here are the network connexions that are using this IP address :
 
 `Backends outgoing IP Address masquerading` : Network traffic from haproxy to a remote TCP or HTTP backend is NAT-ed behind this IP address.
 
-`Log forwarders IP Address masquerading`: Network traffic from rsyslog to a remote log repository is NAT-ed behind this IP address.
+`Log forwarders IP Address masquerading` : Network traffic from rsyslog to a remote log repository is NAT-ed behind this IP address.
 
-`Default router` : Define here the default IPv4 network gateway of the system
+`Default router` : Define here the default IPv4 network gateway of the system.
 
-`Default IPV6 router` : Define here the default IPv6 network gateway of the system
+`Default IPV6 router` : Define here the default IPv6 network gateway of the system.
 
 `Static network routes` : Here you can define the routing table of the node. You have to use the FreeBSD syntax, as the content here will be used into the system file */etc/rc.conf.d/routing*. Have a look at [FreeBSD Gateways and Routes](https://www.freebsd.org/doc/handbook/network-routing.html) if needed.
 
-**Note**: Vulture allows by default 2 fib (2 routing tables). If needed you can increase the number of routing tables by overriding the *net.fibs* settings defined in /boot/loader.conf. To to that, override the value in */boot/loader.conf.local*
+**Note :** Vulture allows by default 2 fib (2 routing tables). If needed you can increase the number of routing tables by overriding the *net.fibs* settings defined in /boot/loader.conf. To to that, override the value in */boot/loader.conf.local*
 
-Here is a rather complex example of a Vulture routing table using 2 differents FIB, one per VLAN plus a specific route to access a VPN gateway:
+Here is a rather complex example of a Vulture routing table using 2 differents FIB, one per VLAN plus a specific route to access a VPN gateway :
 
 ```
 > static_routes="internal vlan101 vlan102 vpn"
@@ -97,12 +100,12 @@ Here is a rather complex example of a Vulture routing table using 2 differents F
 ### Firewall
 
 From this tab you can define pf Firewall's internal limits and add custom firewall rules.
-This correspond to the first line of Vulture's PF configuration file (/usr/local/etc/pf.conf):
+This correspond to the first line of Vulture's PF configuration file (/usr/local/etc/pf.conf) :
 set limit { states {{node.pf_limit_states}}, frags {{node.pf_limit_frags}}, src-nodes {{node.pf_limit_src}} }
 
 Please remind that Vulture's pf configuration file is generated automaticaly based on Vulture configuration. Any manual change to this file will be lost. The vultured daemon is in charge of managing the pf configuration file.
 
-`Max. entries for PF state table` : Maximum number of entries in the memory pool used for state table entries (filter rules that specify keep state). Default is 500000. 
+`Max. entries for PF state table` : Maximum number of entries in the memory pool used for state table entries (filter rules that specify keep state). Default is 500000.
 
 `Max. entries for PF packet reassembly` : Maximum number of entries in the memory pool used for packet reassembly (scrub rules). Default is 25000.
 
@@ -130,4 +133,4 @@ Here is the global structure of pf configuration file :
 > Incoming traffic to haproxy and rsyslog frontends
 ```
 
-**WARNING**: The Custom PF Configuration is *AFTER* 'nat' and 'rdr' rules, in the "filter section". So you can't use any 'nat' or 'rdr' directive in the Custom PF Configuration*. Please contact us if you are facing an issue to configure a proper firewall configuration in your environment.
+**WARNING** : The Custom PF Configuration is *AFTER* 'nat' and 'rdr' rules, in the "filter section". So you can't use any 'nat' or 'rdr' directive in the Custom PF Configuration*. Please contact us if you are facing an issue to configure a proper firewall configuration in your environment.

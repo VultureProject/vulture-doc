@@ -8,19 +8,19 @@
 
 ### Installation on virtual machine
 
-You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/)
+You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/).
 
 Once you have downloaded the appropriate disk image you need to create a Virtual Machine using this disk. Feel free to increase the disk size as the default may not suits your needs. Once started, Vulture will automatically launch growfs to extend the filesystem to the new disk size.
 
 ### Installation on physical server
 
-**Note:** VultureOS requires a ZFS root volume. The zpool is supposed to be named 'zroot'.
+**Note :** VultureOS requires a ZFS root volume. The zpool is supposed to be named 'zroot'.
 
 `Fixme`
 
 ## Automatic - Configuration and bootstraping via Cloud Init
 
-Vulture may be started and automatically configured via Cloud Init. 
+Vulture may be started and automatically configured via Cloud Init.
 
 `Fixme`
 
@@ -54,7 +54,7 @@ Once done, Vulture's internal database will be ready and the required processes 
 
 ## Manual - Bootstraping
 
-Depending on what you want do to, you have 2 scripts available : 
+Depending on what you want do to, you have 2 scripts available :
  - `/home/vlt-adm/gui/cluster_create.sh` : To create a new **Master** node
  - `/home/vlt-adm/gui/cluster_join.sh` : To create a **Slave** node and join an existing cluster
 
@@ -64,20 +64,20 @@ Depending on what you want do to, you have 2 scripts available :
 sudo /home/vlt-adm/gui/cluster_create.sh <admin_user> <admin_password>
 sudo service vultured start
 ```
-`admin_user` will be the login required to access the web GUI
-`admin_password` will be the password required to access the web GUI
+`admin_user` will be the login required to access the web GUI.
+`admin_password` will be the password required to access the web GUI.
 
 
 ### If you want to add a new node to an existing Vulture cluster
 
-Before 
+Before
 
 ```
 sudo  /home/vlt-adm/gui/cluster_join.sh <master_hostname> <master_ip> <secret_key>
 sudo service vultured start
 ```
-`master_hostname` is the name of the Vulture's master node
-`master_ip`  is the IP address of the Vulture's master node
-`secret_key` is the secret key of the node
+`master_hostname` is the name of the Vulture's master node.
+`master_ip`  is the IP address of the Vulture's master node.
+`secret_key` is the secret key of the node.
 
 
