@@ -8,7 +8,7 @@ Vulture and all its features are fully working on arm64 but we do not provide im
 
 ## Virtual images - amd64
 
-You can download **amd64** Vulture's virtual images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/).
+You can download **amd64** Vulture's virtual images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/).
 
 Following disk images are provided :
 
@@ -37,7 +37,7 @@ In progress
 
 ## HardenedBSD Installers - amd64
 
-We provide a non-modified version of HardeneBSD from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/). Servers are located in France and we have very good throughput !
+We provide a non-modified version of HardeneBSD from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/). Servers are located in France and we have very good throughput !
 
 Feel free to download and let us know if you encounter any issue.
 
