@@ -1,0 +1,19 @@
+site_name: VultureOS Documentation
+site_url: https://www.vultureproject.org
+theme: readthedocs
+nav:
+    - Home: index.md
+    - Overview:
+      - Packaging: packaging.md
+      - Deployment: deploy.md
+    - WebGUI - Global Config: 
+      - Status Page: stats.md
+      - Cluster settings: cluster.md
+      - Nodes: node.md
+      - Network Topology: network.md
+      - TLS Settings: tls.md
+      - PKI: pki.md
+    - WebGUI - Reverse Proxy:
+      - Frontend listeners: listener.md
+      - Backend objects: backend.md
+
