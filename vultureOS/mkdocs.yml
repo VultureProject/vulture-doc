@@ -1,5 +1,5 @@
 site_name: VultureOS Documentation
-site_url: https://www.vultureproject.org
+site_url: https://www.vultureproject.org/doc/
 theme: readthedocs
 nav:
     - Home: index.md
