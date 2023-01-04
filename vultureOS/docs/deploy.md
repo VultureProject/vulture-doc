@@ -8,7 +8,7 @@
 
 ### Installation on virtual machine
 
-You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/).
+You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/).
 
 Once you have downloaded the appropriate disk image you need to create a Virtual Machine using this disk. Feel free to increase the disk size as the default may not suits your needs. Once started, Vulture will automatically launch growfs to extend the filesystem to the new disk size.
 
@@ -16,15 +16,60 @@ Once you have downloaded the appropriate disk image you need to create a Virtual
 
 **Note :** VultureOS requires a ZFS root volume. The zpool is supposed to be named 'zroot'.
 
-`Fixme`
+#### Prerequisites
+
+You need a working HardenedBSD installed **on top of a ZFS filesystem**.
+
+Please download one of the HardenedBSD installers from the VultureProject Mirror:
+
+ - [Vulture-bootonly.iso](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/Vulture-bootonly.iso)
+ - [Vulture-disc1.iso](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/Vulture-disc1.iso)
+ - [Vulture-memstick.img](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/Vulture-memstick.img)
+ - [Vulture-mini-memstick.img](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/Vulture-mini-memstick.img)
+
+You will also need git (can be removed after) to clone the "vulture-from-scratch" installation scripts :
+```
+pkg install git
+```
+
+#### Step 1 : Base system configuration
+
+Assuming ZFS pool name is "zroot", please execute the following commands as root :
+```
+git clone https://github.com/VultureProject/vulture-from-scratch.git
+cd vulture-from-scratch
+./install-1.sh ./config.txt zroot
+```
+
+**Note :** Cloud-init is disabled by default in config.txt, set it to "YES" if needed
+
+After the script completion, ** you need to reboot the system **
+
+#### Step 2 : Jails setup (without Cloud-init)
+
+**Note :** root password has been scrambled after step 1, you need to login as `vlt-adm` with the `vlt-adm` password, to be changed asap.
+
+Once logged as vlt-adm, you may become root with the command `sudo su`
+
+Assuming ZFS pool name is "zroot", please execute the following commands as root :
+```
+sudo su
+cd vulture-from-scratch
+./install-2.sh ./config.txt zroot
+```
+
+After the script completion, ** you need to reboot the system **
+
+At this point, Vulture should be fully installed and ready for bootstrap (See below).
+
 
 ## Automatic - Configuration and bootstraping via Cloud Init
 
 Vulture may be started and automatically configured via Cloud Init.
+Vulture virtual machine have Cloud-init enabled by default. For physical installation, it is disabled by default and can be enable by modifying config.txt (see above).
 
-`Fixme`
 
-## Manual - Initial Configuration
+## Vulture bootstrap - Initial Configuration
 
 Once installed, Vulture needs to be bootstraped.
 
@@ -48,7 +93,7 @@ One logged as `vlt-adm`, you can type the `admin` command to access the followin
 
 1. Adjust `Time`
 2. Set `Management IP`
-3. Set the `Hostname`
+3. Set `Hostname`
 
 Once done, Vulture's internal database will be ready and the required processes will be started.
 

@@ -6,7 +6,16 @@ Supported architecture are **amd64** and **arm64**.
 
 Vulture and all its features are fully working on arm64 but we do not provide image for the moment.
 
-## Virtual images - amd64
+## HardenedBSD Installers - amd64
+
+We provide a non-modified version of HardeneBSD from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/). Servers are located in France and we have very good throughput !
+
+Feel free to download and let us know if you encounter any issue.
+
+**Note :** The update frequency is left to the discretion of the Vulture Team. Nightly builds are beeing tested but not deployed yet. If you need up-to-date HardenedBSD installers and kernels, please go to the official HardenedBSD mirrors.
+
+
+## Virtual images for VultureOS - amd64
 
 You can download **amd64** Vulture's virtual images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/).
 
@@ -33,12 +42,7 @@ Please refer to [Deployment guidelines](deploy.md)
 
 ## Cloud
 
-In progress
+Virtual images for VultureOS rely on cloud-init. 
+You should be able to install Vulture via Cloud-Init using the available images.
 
-## HardenedBSD Installers - amd64
-
-We provide a non-modified version of HardeneBSD from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/). Servers are located in France and we have very good throughput !
-
-Feel free to download and let us know if you encounter any issue.
-
-**Note :** The update frequency is left to the discretion of the Vulture Team. Nightly builds are beeing tested but not deployed yet. If you need up-to-date HardenedBSD installers and kernels, please go to the official HardenedBSD mirrors.
+AMI support is in progress
