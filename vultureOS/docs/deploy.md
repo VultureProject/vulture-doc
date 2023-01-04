@@ -8,7 +8,7 @@
 
 ### Installation on virtual machine
 
-You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/BUILD-LATEST/).
+You can download **amd64** Vulture's disk images from [The VultureProject Mirror](http://hbsd.vultureproject.org/13-stable/amd64/amd64/BUILD-LATEST/).
 
 Once you have downloaded the appropriate disk image you need to create a Virtual Machine using this disk. Feel free to increase the disk size as the default may not suits your needs. Once started, Vulture will automatically launch growfs to extend the filesystem to the new disk size.
 
