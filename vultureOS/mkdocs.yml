@@ -1,6 +1,8 @@
 site_name: VultureOS Documentation
 site_url: https://www.vultureproject.org/doc/
 theme: readthedocs
+plugins:
+    - swagger-ui-tag
 nav:
     - Home: index.md
     - Overview:
