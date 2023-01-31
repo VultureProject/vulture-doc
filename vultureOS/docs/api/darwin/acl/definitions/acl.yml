@@ -1,0 +1,58 @@
+properties:
+  name:
+    type: string
+  enabled:
+    type: boolean
+  rules:
+    type: array
+    items:
+      type: object
+      properties:
+        criterion:
+          type: string
+          enum:
+            - src
+            - base
+            - hdr
+            - shdr
+            - http_auth_group
+            - method
+            - path
+            - url
+            - urlp
+            - path
+            - cook
+            - scook
+            - rdp_cookie
+        criterion_name:
+          type: string
+        converter:
+          type: string
+          enum:
+            - beg
+            - dir
+            - dom
+            - end
+            - hex
+            - int
+            - ip
+            - len
+            - reg
+            - str
+            - sub
+            - found
+        flags:
+          type: string
+          enum:
+            - -i
+            - -n
+        operator:
+          type: string
+          enum:
+            - eq
+            - ge
+            - gt
+            - le
+            - lt
+        pattern:
+          type: string

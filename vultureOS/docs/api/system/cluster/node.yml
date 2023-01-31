@@ -1,0 +1,105 @@
+all:
+  get:
+    tags:
+      - Node
+    summary: "Get all nodes"
+
+    responses:
+      200:
+        description: This list of all nodes
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/node.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+
+one:
+  parameters:
+    - in: path
+      name: object_id
+      required: true
+      description: ID of the node
+      schema:
+        type: integer
+        minimum: 1
+  get:
+    tags:
+      - Node
+    summary: Get one node
+    responses:
+      200:
+        description: Node object
+        content:
+          application/json:
+            schema:
+              $ref: "./definitions/node.yml"
+
+  post:
+    tags:
+      - Node
+    summary: Update a node
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              node:
+                type: integer
+                description: Object Id of the node to update
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+  put:
+    tags:
+      - Node
+    summary: Update a node
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              node:
+                type: integer
+                description: Object Id of the node to update
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"
+
+  patch:
+    tags:
+      - Node
+    summary: Update a node
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              node:
+                type: integer
+                description: Object Id of the node to update
+    responses:
+      201:
+        $ref: "../../global/definitions/created.yml"
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"

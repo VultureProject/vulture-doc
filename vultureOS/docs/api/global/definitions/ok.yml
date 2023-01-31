@@ -1,0 +1,11 @@
+description: The command succeeded
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: boolean
+          enum:
+            - true
+            - false

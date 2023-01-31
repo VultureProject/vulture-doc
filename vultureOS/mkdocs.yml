@@ -20,4 +20,6 @@ nav:
     - WebGUI - Reverse Proxy:
       - Frontend listeners: listener.md
       - Backend objects: backend.md
+    - API:
+      - Swagger: api.md
 
