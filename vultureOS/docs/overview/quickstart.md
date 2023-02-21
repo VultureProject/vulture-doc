@@ -24,7 +24,7 @@ These features are provided by HAProxy, it is one of the most important componen
  - Frontend are the public listerners that will accept incoming trafic
  - Backend are the application servers that are "behind" the reverse-proxy
 
-In Vulture, Frontends are manager through the listeners in [Services/Listeners](../services/listener.md)
+In Vulture, Frontends are manager through the listeners in [Services/Listeners](../../services/listener.md)
  - Vulture handles "TCP" and "HTTP" listener, as HAProxy does
  - It also handles special "LOG" listeners : These listeners are able to process log streams, either via RSYSLOG or Filebeat (these components are both embedded into Vulture)
 
@@ -39,12 +39,12 @@ Where you create a "LOG" listener in Vulture, the incoming data flow is :
   - PF -> HAPROXY -> RSYSLOG / Filebeat if incoming protocol is TCP
   - PF -> RSYSLOG / Filebeat if incoming protocol is UDP
 
-See [Available LOG Modes](../services/listener/#specific-settings-for-rsyslog-listening-modes)
+See [Available LOG Modes](../../services/listener/#specific-settings-for-rsyslog-listening-modes)
 
 ### RSYSLOG Capabilities
 
 Vulture can process incoming logs with the following protocols: UDP, TCP, TCP&UDP, RELP, FILE, KAFKA, REDIS... 
 
-See available [Vendor API Listeners](../services/listener/#vendor-log-api-listening-mode-specific-parameters)
+See available [Vendor API Listeners](../../services/listener/#vendor-log-api-listening-mode-specific-parameters)
 
 ### Filebeat Capabilities
