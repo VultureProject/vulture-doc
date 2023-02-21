@@ -24,7 +24,7 @@ Here you can configure the listening, by configuring for each row the following 
 
 - **Listen address** : Select the IP address you want to listen on
 - **Port** : Configure the port you want to listen on
-- **TLS Profile** : Not supported for now in LOG mode, here you can select a [TLS Profile](../global_config/tls.md)
+- **TLS Profile** : Not supported for now in LOG mode, here you can select a [TLS Profile](global_config/tls.md)
 - **Allow from** : "Any" by default, configure a comma separated list of allowed IP addresses to connect from
 - **Max src** : Configure a max number of source IP addresses allowed to connect
 - **Max rate** : Configure a max rate

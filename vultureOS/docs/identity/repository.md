@@ -1,6 +1,6 @@
 # WebGUI - Menu "Identity Providers"
 
-From this menu you can manage IDentity Providers (IDP) for Vulture. Identity providers are used by Vulture's [Authentication Portals](portal.md) to authenticate users.
+From this menu you can manage IDentity Providers (IDP) for Vulture. Identity providers are used by Vulture's [Authentication Portals](../portal/portal.md) to authenticate users.
 
 Vulture supports the following identity providers :
 
