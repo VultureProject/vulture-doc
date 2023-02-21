@@ -26,7 +26,7 @@ With VultureOS we are able to do all the following things :
 VultureOS is Open Source, except on the following sub-components :
 
 - Rsyslog rulebases for log normaliation
-- Detection algorithms based on Artificial Intelligence or Machine Learning
+- Detection algorithms using Artificial Intelligence or Machine Learning
 
 You may still use these components with VultureOS, but you will have to implement your own rules and algorithms. If you need professional support and access to our log parsers and algorithm, please contact us.
 

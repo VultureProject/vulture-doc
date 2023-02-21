@@ -10,6 +10,7 @@ nav:
     - Overview:
       - Packaging: overview/packaging.md
       - Deployment: overview/deploy.md
+      - Quick start: overview/quickstart.md
     - Global Config: 
       - Status Page: global_config/stats.md
       - Cluster settings: global_config/cluster.md
@@ -18,7 +19,7 @@ nav:
       - TLS Settings: global_config/tls.md
       - PKI: global_config/pki.md
     - Services:
-      - Frontend listeners: listener.md
+      - Frontend listeners: services/listener.md
     - Identity Providers: 
       - The repository concept: identity/repository.md
       - LDAP: identity/ldap.md

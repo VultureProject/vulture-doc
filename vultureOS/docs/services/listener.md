@@ -1,114 +1,127 @@
 # WebGUI - Menu "Services / Listener settings"
 
-From this view you can edit the settings of a specific listener.
+From this view you can edit the settings of a specific frontend listener.
 
 Multiple modes are available when creating a listener :
 
- - **LOG** : To collect logs with Rsyslog
  - **TCP** : Create a TCP HAProxy frontend
  - **HTTP** : Create an HTTP HAProxy frontend
-
-Depending on which mode you chose, configuration parameters differ.
+ - **LOG(Rsyslog)** : Create a TCP (Haproxy->Rsyslog) or a UDP (Rsyslog) or a Vendor Cloud API frontend LOG Listener
+ - **LOG(Filebeat)** : Create a TCP (Haproxy->Filebeat) or a UDP (Filebeat) LOG Listener
+ 
+Depending on which mode you chose, configuration settings differ.
 
 ## Global parameters
 
 Some of the following configuration parameters are not used in some specific cases, mentionned for each of them.
 
-`Enabled` : You can here enable or disable your listener.
+`Enable listener` : You can enable or disable your listener.
 
-`Name` : Here you can specify a friendly name for your listener. You cannot have multiple listeners with the same name.
-
-`Listeners` : This parameter is not used in LOG mode with listening mode Kafka, Redis or File.
-
-Here you can configure the listening, by configuring for each row the following parameters :
-
-- **Listen address** : Select the IP address you want to listen on
-- **Port** : Configure the port you want to listen on
-- **TLS Profile** : Not supported for now in LOG mode, here you can select a [TLS Profile](global_config/tls.md)
-- **Allow from** : "Any" by default, configure a comma separated list of allowed IP addresses to connect from
-- **Max src** : Configure a max number of source IP addresses allowed to connect
-- **Max rate** : Configure a max rate
+`Friendly Name` : Here you can specify a friendly name for your listener. You cannot have multiple listeners with the same name.
 
 `Enable logging` : This parameter is implicitly enabled in LOG mode.
 
-You can here enable or disable events forwarding. Mandatory if you want to select a [Log forwarder](logfwd.md).
+You can enable or disable events forwarding. Mandatory if you want to select a [Logs Forwarder](../applications/logs_forwarder.md).
 
-`Log forwarders` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-You can here select Log forwarder(s).
-
-If events are correctly parsed by Rsyslog, depending on which ruleset is configured.
-
-`Log forwarders parse failure` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-You can here select Log forwarder(s).
-
-If events are not parsed by Rsyslog, depending on which ruleset is configured.
-
-`Log condition (advanced)` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-You can here configure an Rsyslog custom configuration bloc. Only use this parameter if you know what your doing.
-
-`Tenants config` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can select a [Multi-tenants configuration](tenant.md), that will be used to enrich logs and select enrichment databases.
-
-`Enable reputation logging` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can enable or disable logs enrichment with Rsyslog, by configuring parameters below.
-
-`Reputation database IPv4` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can select an [IPv4 MMDB database](reputation.md) to enrich logs with source and destination IPv4 addresses informations (ex: reputation).
-
-`Reputation database IPv6` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can select an [IPv6 MMDB database](reputation.md) to enrich logs with source and destination IPv6 addresses informations (ex: reputation).
-
-`GeoIP database (IPv4)` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can select an [GeoIP MMDB database](reputation.md) to enrich logs with public source and destination IP addresses localization.
-
-`Reputation contexts` : This parameter is useless if you select a mode different of LOG and you disable logging.
-
-Here you can configure more specificly the enrichment of logs by selecting and configuring 3 fields by row :
-
- - **Enabled** : Enable of disable the row
- - **IOC database** : Select the [reputation context](reputation.md) to use
- - **Input field name** : Configure the field name to send to database
- - **Destination field name** : Configure the field name you want to stock the result into
-
-
-## LOG mode
-
-Here is the list of LOG mode configuration parameters.
-
-`Listening mode` : Here you chose a listening mode for your input :
+`Rsyslog Listening mode` : Here you chose a listening mode for your input :
 
  - **UDP** (listen logs with the Rsyslog imudp module)
  - **TCP** (listen logs with the Rsyslog imtcp module)
  - **TCP & UDP** (listen logs with Rsyslog imudp and imtcp module)
  - **RELP** (listen logs with Rsyslog imrelp module)
  - **FILE** (listen logs with Rsyslog imfile module)
- - **API CLIENT** (retrieve logs from external API events collect)
+ - **Vendor Specific API** (retrieve logs from external API events collect) 
  - **KAFKA** (collect logs from a kafka server, with Rsyslog imkafka module)
  - **REDIS** (collect logs from a redis server, with Rsyslog imhiredis module)
 
 Depending on which listening mode you chose, configuration settings differs.
+**See below for the specific configuration settings**
 
-`Ruleset (input logs type)` : Here you can select the format of input logs, for example :
+`Input logs type` : Here you can select the format of input logs, for example :
 
  - **generic_json** (json formatted logs)
  - **raw_to_json** (no specific format, but convert logs to json)
 
+`Parser tag`: #Fixme
 
-### TCP listening mode specific parameters
+`Tags`: #Fixme
+
+`Darwin policies`: #Fixme
 
 `Disable Octet Counting Framing` : Here you specify the Rsyslog imtcp option "SupportOctetCountedFraming", this is an advanced option, enable the option only if you know what you are doing.
+
+`rate-limiting interval`: #Fixme
+
+`rate-limiting burst`: #Fixme
+
+## Listeners
+
+Listeners are not shown in LOG mode with listening mode Kafka, Redis or File. Indeed, there is no need to accept incoming trafic. Instead, Vulture will initiate a connection to the remote Databroker or read a local File to retrieve logs.
+
+Here you can configure the listening, by configuring for each row the following parameters :
+
+- **Listen address** : Select the IP address you want to listen on
+- **Port** : Configure the port you want to listen on
+- **TLS Profile** : Not supported for now in LOG mode, here you can select a [TLS Profile](../global_config/tls.md)
+- **Allow from** : "Any" by default, configure a comma separated list of allowed IP addresses to connect from
+- **Max src** : Configure a max number of source IP addresses allowed to connect
+- **Max rate** : Configure a max rate
 
 `Timeout connect` : Configure the allowed connect timeout (in ms) after which HAProxy will end new connection.
 
 `Timeout client` : Set the maximum inactivity time on the client side.
+
+
+## Logs Enrichment
+
+`Tenants config` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can select a [Multi-tenants configuration](../global_config/tenant.md), that will be used to enrich logs and select enrichment databases.
+
+`Enable reputation logging` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can enable or disable logs enrichment with Rsyslog, by configuring parameters below.
+
+`Reputation database IPv4` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can select an [IPv4 MMDB database](../applications/cti_lookup.md) to enrich logs with source and destination IPv4 addresses informations (ex: reputation).
+
+`Reputation database IPv6` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can select an [IPv6 MMDB database](../applications/cti_lookup.md) to enrich logs with source and destination IPv6 addresses informations (ex: reputation).
+
+`GeoIP database (IPv4)` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can select an [GeoIP MMDB database](../applications/cti_lookup.md) to enrich logs with public source and destination IP addresses localization.
+
+`Reputation contexts` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+Here you can configure more specificly the enrichment of logs by selecting and configuring 4 fields by row :
+
+ - **Enabled** : Enable of disable the row
+ - **IOC database** : Select the [reputation context](../applications/cti_lookup.md) to use
+ - **Input field name** : Configure the field name to send to database
+ - **Destination field name** : Configure the field name you want to stock the result into
+
+
+## Logs Forwarder
+
+This section is useless if you select a mode different of LOG or if you disable logging. You can here select Log forwarder(s).
+If events are correctly parsed, depending on which ruleset is configured, they will be sent to this remote log forwarder.
+
+See [Logs Forwarder](../applications/logs_forwarder.md) to define remote log repositories.
+
+
+`Log condition (advanced)` : This parameter is useless if you select a mode different of LOG or if you disable logging.
+
+You can here configure an Rsyslog custom configuration bloc. Only use this parameter if you know what your doing.
+Using this interface you can rename parsed JSON field or add rsyslog's rainer script conditions on the log pipeline.
+
+## Custom configuration
+
+Via this tab, you may declare custom HAProxy directives. These directives will be placed within the [Frontend] section of HAProxy configuration file related to the current Listener.
+
+## Specific settings for Rsyslog Listening Modes
 
 ### FILE listening mode specific parameters
 
@@ -168,28 +181,47 @@ Following parameters are optional :
  - **uselpop** : Useless in channel mode
 
 
-### API CLIENT listening mode specific parameters
+### Vendor Log API listening mode specific parameters
 
 `API Parser Type` : Here you can chose the technology of events you want to retrieve api events from.
 
 The following endpoints are supported :
+ - FORCEPOINT
+ - AWS BUCKET
+ - OFFICE 365
+ - SYMANTEC
+ - IMPERVA
+ - AKAMAI
+ - REACHFIVE
+ - MONGODB
+ - DEFENDER ATP
+ - CORTEX XDR
+ - CISCO MERAKI
+ - CYBEREASON
+ - PROOFPOINT TAP
+ - SENTINEL ONE
+ - CARBON BLACK
+ - NETSKOPE
+ - RAPID7 IDR
+ - HARFANGLAB
+ - VADESECURE
+ - DEFENDER
+ - CROWDSTRIKE
+ - VADESECURE O365
+ - NOZOMI PROBE
+ - BLACKBERRY CYLANCE
+ - MS SENTINEL
+ - PROOFPOINT POD
+ - WAF CLOUDFLARE
+ - GSUITE ALERTCENTER
+ - SOPHOS CLOUD
+ - TRENDMICRO WORRYFREE
+ - SAFENET
+ - PROOFPOINT CASB
+ - PROOFPOINT TRAP
+ - WAF CLOUD PROTECTOR
 
- - forcepoint
- - elasticsearch
- - symantec
- - aws_bucket
- - akamai
- - office_365
- - imperva
- - reachfive
- - mongodb
- - defender_atp
- - cortex_xdr
- - cybereason
- - cisco_meraki
- - proofpoint_tap
-
-### API CLIENT Forcepoint specific parameters
+### Vendor Log API Forcepoint specific parameters
 
 `Forcepoint host` : Beginning url of the forcepoint endpoint to retrieve events from. Logs will be collected from {forcepoint_host}/siem/logs.
 
@@ -197,7 +229,7 @@ The following endpoints are supported :
 
 `Forcepoint password` : Password to use to authenticate to Forcepoint API.
 
-### API CLIENT Elaticsearch specific parameters
+### Vendor Log API Elaticsearch specific parameters
 
 `Elasticsearch host` : Comma separated list of Elasticsearch host(s) to retrieve events from.
 
@@ -213,13 +245,13 @@ The following endpoints are supported :
 
 `Elasticsearch index` : Elasticsearch index to retrieve logs from.
 
-### API CLIENT Symantec specific parameters
+### Vendor Log API Symantec specific parameters
 
 `Symantec username` : Username to use to authenticate on Symantec API endpoint.
 
 `Symantec password` : Password to use to authenticate on Symantec API endpoint.
 
-### API CLIENT AWS bucket specific parameters
+### Vendor Log API AWS bucket specific parameters
 
 `AWS Access Key Id` : Key ID to use to authenticate on AWS API endpoint.
 
@@ -227,7 +259,7 @@ The following endpoints are supported :
 
 `AWS Bucket Name` : Bucket name to retrieve events from.
 
-### API CLIENT Akamai specific parameters
+### Vendor Log API Akamai specific parameters
 
 `Akamai Host` : Akamai domaine name to collect events from.
 
@@ -239,7 +271,7 @@ The following endpoints are supported :
 
 `Akamai Config ID` : Config ID to use to retrieve events from Akamai API endpoint.
 
-### API CLIENT Office365 specific parameters
+### Vendor Log API Office365 specific parameters
 
 `Office365 Tenant ID` : Tenant to use to collect events from Office365 API endpoint.
 
@@ -247,7 +279,7 @@ The following endpoints are supported :
 
 `Office365 Client Secret` : Client secret to use to authenticate on Akamai API endpoint.
 
-### API CLIENT Imperva specific parameters
+### Vendor Log API Imperva specific parameters
 
 `Imperva Base Url` : Base URL to use to collect events from. It should ends with a /.
 
@@ -257,7 +289,7 @@ The following endpoints are supported :
 
 `Imperva Private Key` : Private Key to use to decrypt collected events from Imperva API endpoint.
 
-### API CLIENT ReachFive specific parameters
+### Vendor Log API ReachFive specific parameters
 
 `ReachFive Host` : Host name to use to retrieve events from. Ex: reachfive.domain.com.
 
@@ -265,7 +297,7 @@ The following endpoints are supported :
 
 `ReachFive Client Secret` : Client Secret to use to authenticate on ReachFive API endpoint.
 
-### API CLIENT MongoDB (Atlas) specific parameters
+### Vendor Log API MongoDB (Atlas) specific parameters
 
 `Mongodb API User` : User to use to authenticate on MongoDB API endpoint.
 
@@ -273,7 +305,7 @@ The following endpoints are supported :
 
 `MongoDB API Group ID` : Group ID to use to retrieve events from MongoDB API endpoint.
 
-### API CLIENT Defender ATP specific parameters
+### Vendor Log API Defender ATP specific parameters
 
 `MDATP API Tenant` : Tenant ID to use to retrieve events from Defender ATP API endpoint.
 
@@ -281,7 +313,7 @@ The following endpoints are supported :
 
 `MDATP API Secret` : Secret to use to authenticate on Defender ATP API endpoint.
 
-### API CLIENT Cortex XDR specific parameters
+### Vendor Log API Cortex XDR specific parameters
 
 `Cortex XDR Host` : Host name to use to retrieve events from API endpoint.
 
@@ -291,7 +323,7 @@ The following endpoints are supported :
 
 `Cortex XDR API Key` : API Key to use to authenticate on API endpoint.
 
-### API CLIENT Cybereason specific parameters
+### Vendor Log API Cybereason specific parameters
 
 `Cybereason Host` : Base URL (with scheme) to use to retrieve events from Cybereason API endpoint.
 
@@ -299,11 +331,11 @@ The following endpoints are supported :
 
 `Cybereason Password` : Password to use to authenticate on Cybereason API endpoint.
 
-### API CLIENT Cisco Meraki specific parameters
+### Vendor Log API Cisco Meraki specific parameters
 
 `Cisco Meraki API Key` : API Key to use to authenticate on Cisco Meraki API endpoint.
 
-### API CLIENT Proofpoint TAP specific parameters
+### Vendor Log API Proofpoint TAP specific parameters
 
 `Proofpoint TAP Host` : Base URL to use to retrieve events from Proofpoint TAP API endpoint.
 
@@ -321,4 +353,15 @@ The following endpoints are supported :
 `Proofpoint TAP Principal` : Principal (username) to use to authenticate on Proofpoint API endpoint.
 
 `Proofpoint TAP Secret` : Secret (password) to use to authenticate on Proofpoint API endpoint.
+
+## Specific settings for Filebeat Listening Mode
+
+### Filebeat Module
+
+Fixme
+
+### Filebeat Configuration
+
+Fixme
+
 
