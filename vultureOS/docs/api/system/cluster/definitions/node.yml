@@ -1,0 +1,35 @@
+properties:
+  name:
+    type: string
+    description: Node name
+  pf_limit_states:
+    type: integer
+  pf_limit_frags:
+    type: integer
+  pf_limit_src:
+    type: integer
+  pf_custom_config:
+    type: string
+  gateway:
+    type: string
+  gateway_ipv6:
+    type: string
+  static_routes:
+    type: string
+  management_ip:
+    type: string
+  internet_ip:
+    type: string
+    description: IP used by jails to contact internet
+  backends_outgoing_ip:
+    type: string
+    description: IP used for masquerading backends packets
+  logom_outgoing_op:
+    type: string
+    description: IP used for masquerading log forwarders packets
+  scanner_ip:
+    type: integer
+    description: ObjectId of the Network Address
+  # pstats_forwarders:
+  #   type: array
+  #     items:

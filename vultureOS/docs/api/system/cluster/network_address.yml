@@ -1,0 +1,38 @@
+all:
+  get:
+    tags:
+      - NetworkAddress
+    summary: List of all network address
+    responses:
+      200:
+        description: List of all network address
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/network_address.yml"
+
+one:
+  get:
+    tags:
+      - NetworkAddress
+    summary: Get one network address
+    parameters:
+      - in: path
+        name: object_id
+        description: ID of the network address
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      200:
+        description: List of all network addresses
+        content:
+          application/json:
+            schema:
+              $ref: "./definitions/network_address.yml"

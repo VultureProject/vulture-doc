@@ -1,0 +1,111 @@
+all:
+  get:
+    tags:
+      - Workflow
+    summary: List of Workflow
+
+    responses:
+      200:
+        description: List of Workflow
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                $ref: "./definitions/workflow.yml"
+
+  post:
+    tags:
+      - Workflow
+    summary: Create a workflow
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/workflow.yml"
+
+    responses:
+      201:
+        $ref: "../global/definitions/created.yml"
+      400:
+        $ref: "../global/definitions/error.yml"
+      500:
+        $ref: "../global/definitions/error.yml"
+
+one:
+  get:
+    tags:
+      - Workflow
+    summary: Get a workflow configuration
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the worfklow
+        schema:
+          type: string
+
+    responses:
+      200:
+        description: Workflow object
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./definitions/workflow.yml"
+
+      404:
+        $ref: "../global/definitions/notfound.yml"
+      500:
+        $ref: "../global/definitions/error.yml"
+
+  post:
+    tags:
+      - Workflow
+    summary: Edit a workflow
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the workflow
+        schema:
+          type: string
+
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "./definitions/workflow.yml"
+
+    responses:
+      201:
+        $ref: "../global/definitions/created.yml"
+      400:
+        $ref: "../global/definitions/error.yml"
+      500:
+        $ref: "../global/definitions/error.yml"
+
+  delete:
+    tags:
+      - Workflow
+    summary: Delete a workflow
+    parameters:
+      - in: path
+        name: object_id
+        required: true
+        description: ID of the workflow
+        schema:
+          type: string
+
+    responses:
+      200:
+        $ref:  "../global/definitions/ok.yml"
+      400:
+        $ref:  "../global/definitions/error.yml"
+      404:
+        $ref:  "../global/definitions/error.yml"
+      409:
+        $ref:  "../global/definitions/error.yml"

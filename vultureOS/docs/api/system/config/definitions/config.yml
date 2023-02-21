@@ -1,0 +1,31 @@
+properties:
+  pf_ssh_restrict:
+    type: string
+  pf_admin_restrict:
+    type: string
+  cluster_api_key:
+    type: string
+  oauth2_header_name:
+    type: string
+  portal_cookie_name:
+    type: string
+  public_token:
+    type: string
+  # ldap_repository:
+  #   $ref: ""
+  branch:
+    type: string
+  smtp_server:
+    type: string
+  pf_whitelist:
+    type: string
+  pf_blacklist:
+    type: string
+  ssh_authorized_keys:
+    type: string
+  rsa_encryption_key:
+    type: string
+  logs_ttl:
+    type: integer
+  internal_tenants:
+    $ref: ../../tenants/definitions/tenants.yml

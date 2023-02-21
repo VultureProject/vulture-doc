@@ -1,0 +1,22 @@
+properties:
+  name:
+    type: string
+    description: Friendly name
+  nic:
+    type: integer
+    description: Object Id of the Network Card
+  ip:
+    type: string
+  prefix_or_netmask:
+    type: string
+  is_system:
+    type: boolean
+  carp_vhid:
+    type: integer
+  vlan:
+    type: integer
+  vlandev:
+    type: integer
+    description: Object Id of the Network Card
+  fib:
+    type: integer

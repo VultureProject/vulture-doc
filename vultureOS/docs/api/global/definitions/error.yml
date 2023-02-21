@@ -1,0 +1,40 @@
+400:
+  description: An error occured while launching a query
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: The description of the error(s)
+403:
+  description: Unauthorized
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: The reason
+404:
+  description: An error occured while launching a query
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: The description of the error(s)
+500:
+  description: An error occured while launching a query
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: The description of the error(s)

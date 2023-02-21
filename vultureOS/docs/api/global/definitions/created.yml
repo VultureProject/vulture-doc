@@ -1,0 +1,72 @@
+description: "Object created"
+content:
+  application/json:
+    schema:
+      properties:
+        id:
+          type: string
+          example: "42"
+        links:
+          type: object
+          properties:
+            get:
+              type: object
+              properties:
+                rel:
+                  type: string
+                  enum:
+                  - self
+                type:
+                  type: string
+                  enum:
+                    - GET
+                href:
+                  type: string
+                  example: /api/path/object_id
+              required:
+                - rel
+                - type
+                - href
+            put:
+              type: object
+              properties:
+                rel:
+                  type: string
+                  enum:
+                  - self
+                type:
+                  type: string
+                  enum:
+                    - PUT
+                href:
+                  type: string
+                  example: /api/path/object_id
+              required:
+                - rel
+                - type
+                - href
+            delete:
+              type: object
+              properties:
+                rel:
+                  type: string
+                  enum:
+                  - self
+                type:
+                  type: string
+                  enum:
+                    - PUT
+                href:
+                  type: string
+                  example: /api/path/object_id
+              required:
+                - rel
+                - type
+                - href
+          required:
+            - get
+            - put
+            - delete
+      required:
+        - links
+        - id
