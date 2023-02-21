@@ -39,11 +39,12 @@ Where you create a "LOG" listener in Vulture, the incoming data flow is :
   - PF -> HAPROXY -> RSYSLOG / Filebeat if incoming protocol is TCP
   - PF -> RSYSLOG / Filebeat if incoming protocol is UDP
 
-See [Available LOG Modes](../services/listener/#log-mode)
+See [Available LOG Modes](../services/listener/#specific-settings-for-rsyslog-listening-modes)
 
 ### RSYSLOG Capabilities
 
 Vulture can process incoming logs with the following protocols: UDP, TCP, TCP&UDP, RELP, FILE, KAFKA, REDIS... 
-See available [Vendor API Listeners](../services/listener/#vendor-api-listening-mode-specific-parameters)
+
+See available [Vendor API Listeners](../services/listener/#vendor-log-api-listening-mode-specific-parameters)
 
 ### Filebeat Capabilities
