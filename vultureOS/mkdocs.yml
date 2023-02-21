@@ -8,18 +8,30 @@ plugins:
 nav:
     - Home: index.md
     - Overview:
-      - Packaging: packaging.md
-      - Deployment: deploy.md
-    - WebGUI - Global Config: 
-      - Status Page: stats.md
-      - Cluster settings: cluster.md
-      - Nodes: node.md
-      - Network Topology: network.md
-      - TLS Settings: tls.md
-      - PKI: pki.md
-    - WebGUI - Reverse Proxy:
+      - Packaging: overview/packaging.md
+      - Deployment: overview/deploy.md
+    - Global Config: 
+      - Status Page: global_config/stats.md
+      - Cluster settings: global_config/cluster.md
+      - Nodes: global_config/node.md
+      - Network Topology: global_config/network.md
+      - TLS Settings: global_config/tls.md
+      - PKI: global_config/pki.md
+    - Services:
       - Frontend listeners: listener.md
-      - Backend objects: backend.md
+    - Identity Providers: 
+      - The repository concept: identity/repository.md
+      - LDAP: identity/ldap.md
+      - Kerberos: identity/kerberos.md
+      - Radius: identity/radius.md
+      - MFA & OTP: identity/mfa.md
+      - Time-based OTP Profiles: identity/totp.md
+      - OpenID Federation: identity/openid.md
+      - User's Scope: identity/scopes.md
+      - SSO Profiles: identity/sso_profiles.md
+    - Authentication Portal:
+      - Portal: portal/portal.md
+    - Applications :
+      - Applications: backend.md
     - API:
       - Swagger: api.md
-
