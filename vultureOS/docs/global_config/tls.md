@@ -3,7 +3,7 @@
 Whenever you want use TLS in vulture configuration, you will need a "TLS profile".
 TLS configuration may be use in TCP & HTTP listeners and in HTTP backend.
 
-From the [Add an entry](/system/tls_profile/edit/) menu you may create additional TLS profiles.
+From the **"Add an entry"** menu you may create additional TLS profiles.
 
 ## List of TLS Profiles
 

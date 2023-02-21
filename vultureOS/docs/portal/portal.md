@@ -23,7 +23,7 @@ From this tab you can manage global properties of the Portal.
 `Authentication repositories` : Here you associate one or more identify providers to the authentication portal. Vulture will verify user's identity against these repositories. Vulture will try all selected repositories and stop as soon as a valid authentication is performed
 
 `Authentication type`: Vulture supports 3 authentication method to authenticate users:
- - **HTML Form**: The user will be prompted for a login and a password via the help of an HTML form. You can configure the look and feel of this HTML form via a [HTML Template](template.md) containing your custom images, css, js....
+ - **HTML Form**: The user will be prompted for a login and a password via the help of an HTML form. You can configure the look and feel of this HTML form via a [HTML Template](templates.md) containing your custom images, css, js....
  - **Basic Authentication**: Vulture will send a 401 HTTP response expecting the client to authenticate via the appropriate "Authorization: basic" HTTP header
  - **Kerberos Authentication**: Same as basic Authentication, but using the autonegotiate kerberos protocol between the web browser and Vulture. Note that this mode requires specific configuration in your IT environment to work properly.
 
@@ -58,7 +58,7 @@ If a user disconnects itself from a backend application, the corresponding Vultu
 
 **Note**: When the user disconnects from the backend application, even if the Vulture's session is destroyed, he still can access the application because Vulture will trigger the SSO **thanks to the remaining portal session**. If you want to prevent SSO, please disable `Destroy portal session on disconnect` (see below). 
 
-`Display the disconnect message from template` : If enabled, Vulture will display an HTML page, defined from the selected [HTML Template](template.md) after the user's disconnection.
+`Display the disconnect message from template` : If enabled, Vulture will display an HTML page, defined from the selected [HTML Template](templates.md) after the user's disconnection.
 
 `Destroy portal session on disconnect` : If enabled, Vulture will destroy both the application session and the portal session after a disconection from the application
 
