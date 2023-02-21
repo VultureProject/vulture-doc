@@ -20,7 +20,7 @@ The table show all the nodes, with their main characteristics. Just **click on t
 
 ## Adding a new node into an existing cluster
 
-To **add a node**, please install another Vulture server, bootstrap it and run /home/vlt-adm/gui/cluster_join.sh to join the existing cluster. See the [Deployment Guide](deploy.md).
+To **add a node**, please install another Vulture server, bootstrap it and run /home/vlt-adm/gui/cluster_join.sh to join the existing cluster. See the [Deployment Guide](../overview/deploy.md).
 
 
 ## Node Settings

@@ -2,7 +2,7 @@
 
 From this view you can manage authentication portals on Vulture. An authentication portal is responsible of user authentication on Web sites protected by Vulture.
 
-Before creating an authentication portal you need to configure at least one [Authentication repository](repository.md)
+Before creating an authentication portal you need to configure at least one [Authentication repository](../identity/repository.md)
 
 ## Authentication portal / User Authentication
 
@@ -29,7 +29,7 @@ From this tab you can manage global properties of the Portal.
 
 `User's scope`: When a user authenticates, Vulture may associate "attributes" to the user and propagate them to the application backend for any useful purpose. 
 
- - When Vulture is configured to authenticate users against an **external OpenID provider**, these attributes, also named "scopes" are present within the authentication token created by the provider. If you choose the default "Retrieve all claims", Vulture will use the existing claims in the token. You may choose a custom policy, previously created from the [User's scope menu](repository.md). Thanks to this policy, Vulture will ADD/REMOVE/MODIFY the scopes associated to the token.
+ - When Vulture is configured to authenticate users against an **external OpenID provider**, these attributes, also named "scopes" are present within the authentication token created by the provider. If you choose the default "Retrieve all claims", Vulture will use the existing claims in the token. You may choose a custom policy, previously created from the [User's scope menu](../identity/scopes.md). Thanks to this policy, Vulture will ADD/REMOVE/MODIFY the scopes associated to the token.
  - When Vulture is configured to authenticate users against a classical identity provider, the default "Retrieve all claims" will do nothing. You may use a custom policy to create specific attributes based on user properties.
 
 `Disconnect timeout`: Vulture will destroy the user's session after the defined timeout. The user will have to re-authenticate to access backend applications. This setting allows to force user to be disconnected after an arbitraty period of time. Generally you don't want this behaviour, *so be sure to enable the following option*.
@@ -40,7 +40,7 @@ From this tab you can manage global properties of the Portal.
 
 ### OTP
 
-Here you may choose an optional [OPT configuration](repository.md) if you want to enable MFA for security enforcement. After the user has succesfully passed the authentication phase, he will have to succeed in the MFA challenge.
+Here you may choose an optional [OPT configuration](../identity/totp.md) if you want to enable MFA for security enforcement. After the user has succesfully passed the authentication phase, he will have to succeed in the MFA challenge.
 
 ### Disconnect
 
@@ -66,9 +66,9 @@ If a user disconnects itself from a backend application, the corresponding Vultu
 
 `Reminder` : When Vulture acts as an Identity provider, it must use LDAP repositories only !
 
-When Vulture is configured as an IDP Provider, it exposes REST API to manage LDAP users. See [Swagger API Documentation](api/authentication/idp/idp.yml) for details.
+When Vulture is configured as an IDP Provider, it exposes REST API to manage LDAP users. See [Swagger API Documentation](../api/authentication/idp/idp.yml) for details.
 
-From this menu, when a user is created on this IDP, it will be automatically added into the group defined in `Add users in group (ldap)`. Here you just have to define the name of the group (The group's DN must me properly defined in the [LDAP Repository](repository.md) settings). Vulture will add the group's DN to the "memberOf" attribute of the user.
+From this menu, when a user is created on this IDP, it will be automatically added into the group defined in `Add users in group (ldap)`. Here you just have to define the name of the group (The group's DN must me properly defined in the [LDAP Repository](../identity/ldap.md) settings). Vulture will add the group's DN to the "memberOf" attribute of the user.
 
 `Update group members (ldap)`: If checked, Vulture will also update the group defined before, by adding a new "member" entry that points to the User's DN.
 
