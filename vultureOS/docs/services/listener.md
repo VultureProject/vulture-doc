@@ -21,7 +21,7 @@ Some of the following configuration parameters are not used in some specific cas
 
 `Enable logging` : This parameter is implicitly enabled in LOG mode.
 
-You can enable or disable events forwarding. Mandatory if you want to select a [Logs Forwarder](../applications/logs_forwarder.md).
+You can enable or disable events forwarding. Mandatory if you want to select a [Logs Forwarder](../../applications/logs_forwarder.md).
 
 `Rsyslog Listening mode` : Here you chose a listening mode for your input :
 
@@ -186,6 +186,7 @@ Following parameters are optional :
 `API Parser Type` : Here you can chose the technology of events you want to retrieve api events from.
 
 The following endpoints are supported :
+
  - FORCEPOINT
  - AWS BUCKET
  - OFFICE 365

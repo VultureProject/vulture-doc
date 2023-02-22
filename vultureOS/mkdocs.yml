@@ -15,11 +15,15 @@ nav:
       - Status Page: global_config/stats.md
       - Cluster settings: global_config/cluster.md
       - Nodes: global_config/node.md
-      - Network Topology: global_config/network.md
-      - TLS Settings: global_config/tls.md
-      - PKI: global_config/pki.md
+      - Multi-Tenants: global_config/tenant.md
+      - Network Interfaces: global_config/network.md
+      - Users: global_config/users.md
+      - X509 Certificates: global_config/pki.md
+      - TLS Profiles: global_config/tls.md
     - Services:
       - Frontend listeners: services/listener.md
+      - IPSEC Client: services/ipsec_client.md
+      - VPNSSL Client: services/vpnssl_client.md
     - Identity Providers: 
       - The repository concept: identity/repository.md
       - LDAP: identity/ldap.md
