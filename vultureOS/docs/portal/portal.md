@@ -40,7 +40,7 @@ From this tab you can manage global properties of the Portal.
 
 ### OTP
 
-Here you may choose an optional [OPT configuration](../identity/totp.md) if you want to enable MFA for security enforcement. After the user has succesfully passed the authentication phase, he will have to succeed in the MFA challenge.
+Here you may choose an optional [MFA & OTP configuration](../identity/mfa.md) if you want to enable MFA for security enforcement. After the user has succesfully passed the authentication phase, he will have to succeed in the MFA challenge.
 
 ### Disconnect
 
