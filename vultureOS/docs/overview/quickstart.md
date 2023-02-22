@@ -24,7 +24,7 @@ These features are provided by HAProxy, it is one of the most important componen
  - Frontend are the public listerners that will accept incoming trafic
  - Backend are the application servers that are "behind" the reverse-proxy
 
-In Vulture, Frontends are manager through the listeners in [Services/Listeners](../../services/listener.md)
+In Vulture, Frontends are manager through the listeners in [Services/Listeners](../services/listener.md)
  - Vulture handles "TCP" and "HTTP" listener, as HAProxy does
  - It also handles special "LOG" listeners : These listeners are able to process log streams, either via RSYSLOG or Filebeat (these components are both embedded into Vulture)
 
