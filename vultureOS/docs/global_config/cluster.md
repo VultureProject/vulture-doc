@@ -47,7 +47,7 @@ sudo pfctl -t vulture_blacklist -T flush; sudo pfctl -t vulture_whitelist -T add
 ## REST API
 
 Vulture is fully manageable via REST API.
-Please have a look to the **SWAGGER DOCUMENTATION**.
+Please have a look at the [SWAGGER DOCUMENTATION](../api.md).
 
 Here you can defined the expected API Key to access REST Endpoint.
 Be sure to use something **robust** if you change it, by default Vulture will generate a 16 bytes ASCII random key.
