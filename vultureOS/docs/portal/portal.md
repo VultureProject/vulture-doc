@@ -64,7 +64,7 @@ If a user disconnects itself from a backend application, the corresponding Vultu
 
 ### Identity Provider
 
-`Reminder` : When Vulture acts as an Identity provider, it must use LDAP repositories only !
+**Note** : When Vulture acts as an Identity provider, it must use LDAP repositories only !
 
 When Vulture is configured as an IDP Provider, it exposes REST API to manage LDAP users. See [Swagger API Documentation](../api/authentication/idp/idp.yml) for details.
 
