@@ -222,6 +222,10 @@ The following endpoints are supported :
  - PROOFPOINT TRAP
  - WAF CLOUD PROTECTOR
 
+`Verify certificate` : Enable the verification of the certificate used by the API endpoint
+
+`Custom certificate` : Provide a custom certificate previously added in [X509 Certificates](../global_config/pki.md) menu
+
 ### Vendor Log API Forcepoint specific parameters
 
 `Forcepoint host` : Beginning url of the forcepoint endpoint to retrieve events from. Logs will be collected from {forcepoint_host}/siem/logs.
@@ -229,22 +233,6 @@ The following endpoints are supported :
 `Forcepoint username` : Username to use to authenticate to Forcepoint API.
 
 `Forcepoint password` : Password to use to authenticate to Forcepoint API.
-
-### Vendor Log API Elaticsearch specific parameters
-
-`Elasticsearch host` : Comma separated list of Elasticsearch host(s) to retrieve events from.
-
-    Example : http://192.168.1.1:9200,http://192.168.1.2:9200
-
-`Elasticsearch verify ssl` : Enable or disable the verification of Elasticsearch certificate.
-
-`Elasticsearch auth` : Enable or disable authentication to Elasticsearch host(s).
-
-`Elasticsearch username` : If "Elasticsearch auth" is enabled, username to use to authentication to Elasticsearch.
-
-`Elasticsearch password` : If "Elasticsearch auth" is enabled, password to use to authentication to Elasticsearch.
-
-`Elasticsearch index` : Elasticsearch index to retrieve logs from.
 
 ### Vendor Log API Symantec specific parameters
 
