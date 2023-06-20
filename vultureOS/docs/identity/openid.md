@@ -43,4 +43,4 @@ Settings are the same for any provider :
 
 This selector allows you to choose the way Vulture will extract and use/modify/delete the claims obtained from the OpenID provider. Vulture provides a default "Retrieve all claims" which will retrieve all existing claims obtained from the provider. You may define custom rules to alter these claims from the [User's Scope](scopes.md) settings.
 
-Note that in the [Portal Configuration](../portal/portal/#main-settings) you may use another User's Scope settings to alter claims a second time. This offers you a lots of possibility to alter claims that will be sent to application backends.
+Note that in the [Portal Configuration](../../portal/portal/#main-settings) you may use another User's Scope settings to alter claims a second time. This offers you a lots of possibility to alter claims that will be sent to application backends.
