@@ -80,20 +80,20 @@ One logged as `vlt-adm`, you can type the `admin` command to access the followin
  - `Password` : Change vlt-adm password,
  - `Geli Change` : Change the ZFS disk encryption password,
  - `Email` : Define the administration SMTP Email address,
- - `Netconfig` : Manage network configuration, like during installation of FreeBSD,
+ - `Network IPs` : Modify current management IP used to bind services,
  - `Proxy` : Configure proxy,
- - `Management` : Modify current management IP used to bind services,
+ - `Netconfig` : Manage network configuration, like during installation of FreeBSD,
  - `Hostname` : Configure hostname,
  - `Shell` : Launch a CSH shell as vlt-adm,
  - `RootShell` : Launch a CSH shell as root,
- - `Update OS` : Update system and jails, with pkg and freebsd-update,
+ - `Update` : Update system and jails, with pkg and hardenedbsd-update,
  - `Exit` : Exit admin menu.
 
 **Mandatory steps are :**
 
 1. Adjust `Time`
-2. Set `Management IP`
-3. Set `Hostname`
+2. Set `Network IPs`
+3. Set the `Hostname`
 
 Once done, Vulture's internal database will be ready and the required processes will be started.
 

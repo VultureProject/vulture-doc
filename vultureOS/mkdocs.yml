@@ -37,6 +37,6 @@ nav:
     - Authentication Portal:
       - Portal: portal/portal.md
     - Applications :
-      - Applications: backend.md
+      - Backend servers: applications/backend.md
     - API:
       - Swagger: api.md
