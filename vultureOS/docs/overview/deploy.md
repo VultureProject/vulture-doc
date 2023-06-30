@@ -86,7 +86,7 @@ One logged as `vlt-adm`, you can type the `admin` command to access the followin
  - `Hostname` : Configure hostname,
  - `Shell` : Launch a CSH shell as vlt-adm,
  - `RootShell` : Launch a CSH shell as root,
- - `Update` : Update system and jails, with pkg and freebsd-update,
+ - `Update` : Update system and jails, with pkg and hardenedbsd-update,
  - `Exit` : Exit admin menu.
 
 **Mandatory steps are :**

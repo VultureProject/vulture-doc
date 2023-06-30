@@ -7,7 +7,7 @@ Multiple modes are available when creating a backend :
  - **TCP** : Create a TCP HAProxy backend
  - **HTTP** : Create an HTTP HAProxy backend
  
-Depending on which mode you chose, configuration settings differ.
+Depending on which mode you choose, configuration settings differ.
 
 
 ## General parameters
@@ -16,14 +16,14 @@ Depending on which mode you chose, configuration settings differ.
 
 `Friendly name` : Here you can specify a friendly name for your backend. You cannot have multiple backends with the same name.
 
-`Mode` : Here you chose a mode for your backend :
+`Mode` : Here you choose a mode for your backend :
 
  - **TCP** (backend use TCP protocol)
  - **HTTP** (backend use HTTP protocol)
 
-`Timeout connect` : Configure the allowed connect timeout (in ms) after which HAProxy will end new connection.
+`Timeout connect` : Configure the allowed connect timeout (in ms) after which HAProxy will end new connections.
 
-`Timeout server` : Set the maximum inactivity time on the server side.
+`Timeout server` : Set the maximum inactivity time on the server side (in s).
 
 `Tags` : Friendly tags.
 
@@ -31,9 +31,9 @@ Depending on which mode you chose, configuration settings differ.
 ## Servers
 
 
-Here you can configure the servers.
+Here you can configure the servers used by your Backend.
 
-`Balancing mode` : 
+`Balancing mode`, you can choose between different balancing algorithms : 
 
 - **RoundRobin**
 - **Static RoundRobin**
@@ -47,14 +47,14 @@ Here you can configure the servers.
 
 `Servers directory` : Root of the url when forwarding to the servers
 
-For each row, you can configure the following parameters (depends on the protocol used) :
+For each row, you can configure the following parameters (depending on the protocol used) :
 
 - **Target address** : Select the IP address you want to point to.
 - **Port** : Configure the port you want to point to.
 - **Socket** : Select the UNIX socket you want to point to.
-- **TLS Profile** : Here you can select a [TLS Profile](../global_config/tls.md) for the server.
+- **TLS Profile** : Here you can select a [TLS Profile](../global_config/tls.md) to use with the server.
 - **Weight** : Set a weight parameter for the balancing method.
-- **Source** : Configure a source IP addresse.
+- **Source** : Configure a source IP address.
 
 
 ## Custom configuration
@@ -64,7 +64,7 @@ Via this tab, you may declare custom HAProxy directives. These directives will b
 
 ## Specific settings for HAProxy Server Modes
 
-Depending on which server mode you chose, configuration settings differs.
+Depending on which server mode you choose, configuration settings will differ.
 **See below for the specific configuration settings**
 
 ### TCP server mode specific parameters
@@ -75,11 +75,11 @@ Depending on which server mode you chose, configuration settings differs.
 
 `TCP health check` : Enable the health check for this backend.
 
-`Close the connection cleanly` : Allow HAProxy for sending a FIN packet instead of RST.
+`Close the connection cleanly` : [Health check] Allow HAProxy to send a FIN packet instead of RST.
 
-`Message to send` : String sent to the server after connection established.
+`Message to send` : [Health check] String sent to the server after connection was established.
 
-`TCP Health Check expected` : Expected string sent by the server, can be :
+`TCP Health Check expected` : [Health check] Expected string received from the server, can be one of :
 
  - **None**
  - **Response content contains**
@@ -91,11 +91,11 @@ Depending on which server mode you chose, configuration settings differs.
  - **Response binary does not contains**
  - **Response binary does not match regex**
 
-`TCP Health Check interval` : Time between each health check.
+`TCP Health Check interval` : [Health check] Time between each health check.
 
 ### HTTP server mode specific parameters
 
-`Accept invalid HTTP response` : Even malformed HTTP response will be handled.
+`Accept invalid HTTP response` : Even malformed HTTP responses will be handled.
 
 `Send source ip in` : Header name where source IP will be placed.
 
@@ -107,13 +107,13 @@ Depending on which server mode you chose, configuration settings differs.
 
 `HTTP health check` :  Enable the health check for this backend.
 
-`Header select` : Name of the inserted header.
+`Header select` : [Health check] Name of the inserted header.
 
-`Header value` : Value of the inserted header.
+`Header value` : [Health check] Value of the inserted header.
 
-`Close the connection cleanly` : Allow HAProxy for sending a FIN packet instead of RST.
+`Close the connection cleanly` : [Health check] Allow HAProxy to send a FIN packet instead of RST.
 
-`HTTP Health Check expected` : Expected answer sent by the server, can be :
+`HTTP Health Check expected` : [Health check] Expected answer sent by the server, can be :
 
  - **Status code is**
  - **Status code match regex**
@@ -124,4 +124,4 @@ Depending on which server mode you chose, configuration settings differs.
  - **Response content does not contain**
  - **Response content does not match regex**
 
-`HTTP Health Check interval` : Time between each health check.
+`HTTP Health Check interval` : [Health check] Time between each query.

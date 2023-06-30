@@ -34,7 +34,7 @@ Vulture IDP portals currently provide a subset of Grant Flows usually supported 
 
 - [Authorization Code Flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow): the most frequently used Grant Type, allows to connect regular server-side web apps
 - [Authorization Code Flow with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce): a variant of the `Authorization Code Flow` grant Type, allows to replace the insecure Implicit Grant FLow by securely connecting with client-side applications while keeping User's credentials secure
-- [Refresh Token](https://auth0.com/docs/secure/tokens/refresh-tokens): allows a backend to refresh his access-token and extends the authentication's duration
+- [Refresh Token](https://auth0.com/docs/secure/tokens/refresh-tokens): allows an application to refresh his access token and extend its session's duration
 
 Vulture does not currently support other Grant Types (such as *Client Credentials* or *Device Flows*), and won't support some of them (*Implicit Flow*) by choice.  
 Other features not available at the moment include:
@@ -154,11 +154,11 @@ From this menu, when a user is created on this IDP, it will be automatically add
 
 `OAuth2 tokens timeout` : This is the expiration time of the tokens created and associated with the authentication request. This timeout is static and non-updatable.
 
-`Enable OAuth2 refresh token` : This option enable the creation of a refresh token which can be used to renew an access_token without reauthentication.
+`Enable OAuth2 refresh token` : This option enables the creation of a refresh token which can be used to renew access tokens without reauthentication.
 
-`Enable refresh token rotation` : This option send another refresh token at each use of the currently valid refresh token. The predecessor is invalidated and cannot be reused. 
+`Enable refresh token rotation` : This option sends another refresh token after each use of the currently valid refresh token. The predecessor is invalidated and cannot be reused. 
 
-`History of expired tokens` : This is a parameter to extend the duration of a refresh token in Redis to remember an even older invalid refresh token to prevent a replay attack. If this is the case, all the refresh tokens and access tokens will be invalidated, especially the current ones.
+`History of expired tokens` : If this parameter is activated (>1), Vulture will remember the last N refresh tokens and will invalidate all refresh/access tokens if any old refresh token is reused, preventing replay attacks.
 
 ### SSO Forward
 

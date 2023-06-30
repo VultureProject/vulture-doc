@@ -222,9 +222,9 @@ The following endpoints are supported :
  - PROOFPOINT TRAP
  - WAF CLOUD PROTECTOR
 
-`Verify certificate` : Enable the verification of the certificate used by the API endpoint
+`Verify certificate` : Enable the verification of the certificates used by the API endpoint
 
-`Custom certificate` : Provide a custom certificate previously added in [X509 Certificates](../global_config/pki.md) menu
+`Custom certificate` : Provide a custom certificate previously added in the [X509 Certificates](../global_config/pki.md) menu
 
 ### Vendor Log API Forcepoint specific parameters
 
