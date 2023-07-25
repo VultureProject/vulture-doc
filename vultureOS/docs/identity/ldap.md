@@ -28,6 +28,8 @@ From this tab you will have to configure settings related to user authentication
 
 `User DN`: The starting point of your LDAP server to use when searching for users authentication (ex: OU=Users)
 
+`User Object classes`: The list of LDAP Object Classes (schemas) to assign to new User entries, when created through Vulture (leave defaults unless you know what you do)
+
 `User attribute`: The LDAP user's identifier. This attribute will be mapped to the Vulture's login on Authentication portal.
 
 `User search filter`: The LDAP filter to use when searching for a user in your LDAP directory
@@ -59,6 +61,8 @@ From this tab you will have to configure settings related to user groups. Basica
 `Group search scope`: The LDAP search scope to use when searching for a group (base, one level or all subtree) in your LDAP directory
 
 `Group DN`: The starting point of your LDAP server to use when searching for groups (ex: OU=Groups) in your LDAP directory
+
+`Group Object classes`: The list of LDAP Object Classes (schemas) to assign to new Group entries, when created through Vulture (leave defaults unless you know what you do)
 
 `Group attribute`: The LDAP group's identifier
 
