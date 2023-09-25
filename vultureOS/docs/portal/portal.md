@@ -10,7 +10,7 @@ Vulture Portals are divided into 2 different types, those types are explained be
 ### Authentication Portals
 Authentication portals allow the admin to assign authentication policies to **Workflows**, those policies allow to restrict from a single to multiple endpoints, by associating them to Workflows.  
 Those Portals are purely specific to Vulture and cannot be used outside of them, they simply define authentication rules to apply associated with specific Workflows/endpoints. They allow to define authentication repositories, session durations, access policies and user rights, Single Sign-On and much more.  
-Authenticated sessions are handled between Vulture and Users with a portal cookie, this cookie's name is defined in the [Global Cluster's Config](../../global_config/cluster/#sso) and can be changed. The cookie is mapped on the endpoint's **domain**, meaning that several workflows configured on the same domain or subdomain. For example, *www.app1.mydomain.com*, *www.app2.mydomain.com*, *test.mydomain.com* will all have the same portal cookie session with Vulture, mapped on `.mydomain.com`, . This *lax* mapping of cookie allows to profit from SSO and cross-Workflow authentication, meaning that a user authenticated through a specific repository allowed by an Authentication Portal A will be able to connect seamlessly to the Authentication Portal B provided the same Repository is also allowed by this Portal : Authentication B will be able to use the global session's cookie to get the User's authentication data and autimatically connect them to Workflow B without asking for their credentials again!  
+Authenticated sessions are handled between Vulture and Users with a portal cookie, this cookie's name is defined in the [Global Cluster's Config](../../global_config/cluster/#sso) and can be changed. The cookie is mapped on the endpoint's **domain**, meaning that several workflows configured on the same domain or subdomain. For example, *www.app1.mydomain.com*, *www.app2.mydomain.com*, *test.mydomain.com* will all have the same portal cookie session with Vulture, mapped on `.mydomain.com`, . This *lax* mapping of cookie allows to profit from SSO and cross-Workflow authentication, meaning that a user authenticated through a specific repository allowed by an Authentication Portal A will be able to connect seamlessly to the Authentication Portal B provided the same Repository is also allowed by this Portal : Authentication B will be able to use the global session's cookie to get the User's authentication data and automatically connect them to Workflow B without asking for their credentials again!  
 
 Authentication Portals are configurable to allow one or more [Authentication Repositories](../identity/repository.md), There are several configuration possibilities:
 
@@ -27,18 +27,19 @@ This kind of Portal is a little bit different, although being named a "Portal", 
 - They are **directly linked** to a **Vulture Listener** and a specific **FQDN**
 - They are always serving **OpenID Connect APIs** and conform with **OpenID authentication methods**
 - As they're valid [Oauth2 Authorization Servers](https://auth0.com/docs/authenticate/protocols/oauth), IDP Portals can be used with Vulture, but can also be used with external applications
+- They do not use the same session cookie name: its name is generated at random for each created IDP, and can be manually changed on the GUI (through the *Session cookie name* parameter)
 
 As you probably understood, IDP Portals define generic Oauth2 Authorization Servers, compatible with OpenID Connect. They can be used alongside Vulture Authentication Portals ([OpenID Connectors](../identity/openid.md) will be created for ease of use on Vulture every time a new ID is created) or can be used as regular Authorization Servers with your existing applications and stack.  
 Vulture IDP portals currently provide a subset of Grant Flows usually supported by Oauth2 Authorization Servers:
 
 - [Authorization Code Flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow): the most frequently used Grant Type, allows to connect regular server-side web apps
 - [Authorization Code Flow with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce): a variant of the `Authorization Code Flow` grant Type, allows to replace the insecure Implicit Grant FLow by securely connecting with client-side applications while keeping User's credentials secure
+- [Refresh Token](https://auth0.com/docs/secure/tokens/refresh-tokens): allows an application to refresh his access token and extend its session's duration
 
 Vulture does not currently support other Grant Types (such as *Client Credentials* or *Device Flows*), and won't support some of them (*Implicit Flow*) by choice.  
 Other features not available at the moment include:
 
 - **JWT Tokens**
-- **Refresh Tokens**
 
 Feel free to [open issues on our Github](https://github.com/VultureProject/vulture-gui/issues) if you'd like new features on IDP Portals.
 
@@ -95,6 +96,8 @@ From this tab you can manage global properties of the Portal.
  - When Vulture is configured to authenticate users against an **external OpenID provider**, these attributes, also named "scopes" and "claims" are present within the authentication token created by the provider. If you choose the default "Retrieve all claims", Vulture will pass the existing claims in the token. You may choose a custom policy, previously created from the [User's scope menu](../identity/scopes.md). Thanks to this policy, Vulture will ADD/REMOVE/MODIFY the scopes associated to the token.
  - When Vulture is configured to authenticate users against an internal repository, the default "Retrieve all claims" won't do anything. You may however use a custom policy to create specific attributes based on user properties, depending on your needs.
 
+`Session cookie name`: this parameter only appears for IDP portals and allows configuration of a specific session cookie name for every IDP portal, preventing session clashes between different IDPs and Application Portals (which would be detrimental to the use of IDPs, as opposed to Application Portals). Its value is not set by default, but will be assigned a random 8-character value for each new IDP portal if left empty.
+
 `Disconnect timeout`: Vulture holds a global session with the user, and will destroy it after the defined timeout. The user will have to re-authenticate to access backend applications again. This setting allows to force the user to be disconnected after an arbitraty period of time. Generally you don't want this behaviour, *so be sure to enable the next option*.
 
 If `Reset timeout after a request` is checked, Vulture will reset the timeout counter whenever it receives a request (the user navigates on the endpoint). So the user will never be disconnected as long as it send requests to Vulture. After an inactivity period (no request sent) greater than the configured Disconnect timeout (see above), the user will be disconnected. *This is the default behaviour*.
@@ -143,13 +146,19 @@ From this menu, when a user is created on this IDP, it will be automatically add
  - You **MAY** enable this feature for any authentication portal
  - The feature **is automatically enabled** if `Enable Identity Provider` is checked from the main settings (aka. enabled for IDP providers)
 
-`Application ID (client_id)`: This is the application ID (or client ID) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified.
+`Application ID (client_id)` : This is the application ID (or client ID) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified.
 
-`Secret (client_secret)`: This is the application secret (or client secret) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified. This information MUST stay confidential and staya between the IDP and connected external (backend) applications.
+`Secret (client_secret)` : This is the application secret (or client secret) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified. This information MUST stay confidential and staya between the IDP and connected external (backend) applications.
 
-`Redirect URI(s)`: This is an exhaustive list of allowed redirection URIs, this represents the allowed applications' URIs to redirect the authenticated user to once the authentication is finished and validated.
+`Redirect URI(s)` : This is an exhaustive list of allowed redirection URIs, this represents the allowed applications' URIs to redirect the authenticated user to once the authentication is finished and validated.
 
-`OAuth2 tokens timeout`: This is the expiration time of the tokens created and associated with the authentication request. This timeout is static and non-updatable.
+`OAuth2 tokens timeout` : This is the expiration time of the tokens created and associated with the authentication request. This timeout is static and non-updatable.
+
+`Enable OAuth2 refresh token` : This option enables the creation of a refresh token which can be used to renew access tokens without reauthentication.
+
+`Enable refresh token rotation` : This option sends another refresh token after each use of the currently valid refresh token. The predecessor is invalidated and cannot be reused. 
+
+`History of expired tokens` : If this parameter is activated (>1), Vulture will remember the last N refresh tokens and will invalidate all refresh/access tokens if any old refresh token is reused, preventing replay attacks.
 
 ### SSO Forward
 
