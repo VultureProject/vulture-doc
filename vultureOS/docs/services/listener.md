@@ -221,6 +221,15 @@ The following endpoints are supported :
  - PROOFPOINT CASB
  - PROOFPOINT TRAP
  - WAF CLOUD PROTECTOR
+ - TRENDMICRO VISIONONE
+ - CISCO DUO
+ - SENTINEL ONE MOBILE
+ - CSC_DOMAINMANAGER
+ - RETARUS
+
+`Use proxy` : Use proxy for requests (will use System Proxy if no `Custom Proxy` is configured)
+
+`Custom Proxy` : Url of the proxy used by the API collector (system proxy if not set)
 
 `Verify certificate` : Enable the verification of the certificates used by the API endpoint
 
