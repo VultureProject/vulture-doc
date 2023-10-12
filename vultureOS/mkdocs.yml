@@ -37,6 +37,7 @@ nav:
     - Authentication Portal:
       - Portal: portal/portal.md
     - Applications :
+      - Log Forwarders: applications/logs_forwarder.md
       - Backend servers: applications/backend.md
     - API:
       - Swagger: api.md
