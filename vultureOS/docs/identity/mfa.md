@@ -32,6 +32,6 @@ These OTP features are supported via an external 'Twilio / Authy' Cloud service.
 
 With this mode, Vulture will send the OTP via an email to the user. 
 
-`Mail service` : You can choose the mail service to use to end the email. For the moment only the "Vulture mail service" is available, the SMTP server relay may be configured from the [cluster settings](../../global_config/cluster/#network-services) administration menu.
+`Mail service` : You can choose the mail service to use to end the email. For the moment only the "Vulture mail service" is available, the SMTP server relay may be configured from the [cluster settings](../global_config/cluster.md/#network-services) administration menu.
 
 ### Specific settings for Time-based OTP

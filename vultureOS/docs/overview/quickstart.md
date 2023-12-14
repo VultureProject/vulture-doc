@@ -15,7 +15,7 @@ It is powered by a custom build of HardenedBSD and can be managed by a unified W
 
 Incoming and outgoing network trafic pass through the internal BSD Firewall "pf". This is a core feature of VultureOS than cannot be disabled. The firewall is automatically managed : Incoming trafic is blocked by default, except management ports. You do not have to worry about the firewall configuration, because Vulture will automatically open or block the ports whenever you publish a new service.
 
-Of course you can customize the firewall configuration to fit your needs if needed. See "Custom PF Configuration" in [Network firewall](../../global_config/node/#firewall).
+Of course you can customize the firewall configuration to fit your needs if needed. See "Custom PF Configuration" in [Network firewall](../global_config/node.md/#firewall).
 
 ## TCP/HTTP Load-balancing and reverse-proxy
 
@@ -39,12 +39,12 @@ Where you create a "LOG" listener in Vulture, the incoming data flow is :
   - PF -> HAPROXY -> RSYSLOG / Filebeat if incoming protocol is TCP
   - PF -> RSYSLOG / Filebeat if incoming protocol is UDP
 
-See [Available LOG Modes](../../services/listener/#specific-settings-for-rsyslog-listening-modes)
+See [Available LOG Modes](../services/listener.md/#specific-settings-for-rsyslog-listening-modes)
 
 ### RSYSLOG Capabilities
 
 Vulture can process incoming logs with the following protocols: UDP, TCP, TCP&UDP, RELP, FILE, KAFKA, REDIS... 
 
-See available [Vendor API Listeners](../../services/listener/#vendor-log-api-listening-mode-specific-parameters)
+See available [Vendor API Listeners](../services/listener.md/#vendor-log-api-listening-mode-specific-parameters)
 
 ### Filebeat Capabilities
