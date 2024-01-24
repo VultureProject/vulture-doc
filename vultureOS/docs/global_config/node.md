@@ -49,7 +49,7 @@ Example :
 > 2020-11-27T02:01:00.945119+00:00 rsyslog rsyslogd-pstats: { "name": "Internal_Dashboard_internal_pstats", "origin": "core.action", "processed": 58306, "failed": 0, "suspended": 0, "suspended.duration": 0, "resumed": 0 }
 ```
 
-You can define additional log forwarders from the [Logs Forwarders](/apps/logfwd/) menu.
+You can define additional log forwarders from the [Logs Forwarders](../applications/logs_forwarder.md) menu.
 Supported log forwarder are : File, REDIS, SYSLOG (TCP/UDP/RELP), Elasticsearch and MongoDB.
 
 ### Network

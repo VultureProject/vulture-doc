@@ -189,16 +189,16 @@ The following endpoints are supported :
 
  - FORCEPOINT
  - AWS BUCKET
- - OFFICE 365
  - SYMANTEC
- - IMPERVA
  - AKAMAI
+ - OFFICE 365
+ - IMPERVA
  - REACHFIVE
  - MONGODB
  - DEFENDER ATP
  - CORTEX XDR
- - CISCO MERAKI
  - CYBEREASON
+ - CISCO MERAKI
  - PROOFPOINT TAP
  - SENTINEL ONE
  - CARBON BLACK
@@ -226,6 +226,7 @@ The following endpoints are supported :
  - SENTINEL ONE MOBILE
  - CSC_DOMAINMANAGER
  - RETARUS
+ - VECTRA
 
 `Use proxy` : Use proxy for requests (will use System Proxy if no `Custom Proxy` is configured)
 
@@ -243,12 +244,6 @@ The following endpoints are supported :
 
 `Forcepoint password` : Password to use to authenticate to Forcepoint API.
 
-### Vendor Log API Symantec specific parameters
-
-`Symantec username` : Username to use to authenticate on Symantec API endpoint.
-
-`Symantec password` : Password to use to authenticate on Symantec API endpoint.
-
 ### Vendor Log API AWS bucket specific parameters
 
 `AWS Access Key Id` : Key ID to use to authenticate on AWS API endpoint.
@@ -256,6 +251,12 @@ The following endpoints are supported :
 `AWS Secret Access Key` : Secret key to use to authenticate on AWS API endpoint.
 
 `AWS Bucket Name` : Bucket name to retrieve events from.
+
+### Vendor Log API Symantec specific parameters
+
+`Symantec username` : Username to use to authenticate on Symantec API endpoint.
+
+`Symantec password` : Password to use to authenticate on Symantec API endpoint.
 
 ### Vendor Log API Akamai specific parameters
 
@@ -351,6 +352,218 @@ The following endpoints are supported :
 `Proofpoint TAP Principal` : Principal (username) to use to authenticate on Proofpoint API endpoint.
 
 `Proofpoint TAP Secret` : Secret (password) to use to authenticate on Proofpoint API endpoint.
+
+### Vendor Log API SentinelOne specific parameters
+
+`SentinelOne Host` : Hostname (without scheme or path) of the SentinelOne server.
+
+`Sentinel One API key` : API key used to retrieve logs - as configured in SentinelOne settings.
+
+`Sentinel One Account type` : Type of account : console or user service.
+
+### Vendor Log API CarbonBlack specific parameters
+
+`CarbonBlack Host` : Hostname (without scheme or path) of the CarbonBlack server.
+
+`CarbonBlack organisation name` : Organisation name.
+
+`CarbonBlack API key` : API key used to retrieve logs.
+
+### Vendor Log API Netskope specific parameters
+
+`Netskope Host` : Hostname (without scheme or path) of the Netskope server.
+
+`Netskope API token used to retrieve events` : Netskope API token.
+
+### Vendor Log API Rapid7 IDR specific parameters
+
+`rapid7 IDR Host` : Hostname (without scheme or path) of the Rapid7 server.
+
+`Rapid7 IDR API key` : API key used to retrieve logs.
+
+### Vendor Log API HarfangLab specific parameters
+
+`HarfangLab Host` : Hostname (without scheme or path) of the HarfangLab server.
+
+`HarfangLab API key` : API key to use to contact HarfangLab api.
+
+### Vendor Log API Vadesecure specific parameters
+
+`Vadesecure Host` : Hostname (without scheme or path) of the Vadesecure server.
+
+`Vadesecure login` : Login used to fetch the token for the Vadesecure API.
+
+`Vadesecure password` : Password used to fetch the token for the Vadesecure API.
+
+### Vendor Log API Defender specific parameters
+
+`Defender token endpoint` : Complete enpoint address to get an Oauth token before requesting Microsoft's APIs.
+
+`Defender OAuth client id` : Client id of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.
+
+`Defender OAuth client secret` : Client secret of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.
+
+### Vendor Log API CrowdStrike specific parameters
+
+`CrowdStrike Host` : Complete enpoint address.
+
+`CrowdStrike Username` : User's name.
+
+`CrowdStrike Client ID` : Client ID used for authentication.
+
+`CrowdStrike Client's Secret` : Client's secret used for authentication.
+
+### Vendor Log API Vadesecure 0365 specific parameters
+
+`Vadesecure O365 Host` : FQDN of the API endpoint.
+
+`Vadesecure O365 tenant` : Tenant.
+
+`Vadesecure O365 Client ID` : Client ID used for authentication.
+
+`Vadesecure O365 Client's Secret` : Client's secret used for authentication.
+
+### Vendor Log API Nozomi Probe specific parameters
+
+`Nozomi Probe Host` : Hostname (without scheme or path) of the Nozomi Probe.
+
+`Nozomi Probe User` : User to use to contact Nozomi probe api.
+
+`Nozomi Probe Password` : Password to use to contact Nozomi probe api.
+
+### Vendor Log API Blackberry Cylance specific parameters
+
+`Blackberry Cylance Host` : FQDN of the API endpoint.
+
+`Blackberry Cylance tenant` : Tenant.
+
+`Blackberry Cylance Application ID` : Client ID used for authentication.
+
+`Blackberry Cylance Application's Secret` : Client's secret used for authentication.
+
+### Vendor Log API Microsoft Sentinel specific parameters
+
+`Microsoft Sentinel Tenant ID` : Your Microsoft Tenant ID.
+
+`Microsoft Sentinel App ID` : Microsoft Sentinel Client ID.
+
+`Microsoft Sentinel App Secret` : Application Secret.
+
+`Microsoft Sentinel Subscription ID` : Subscription ID.
+
+`Microsoft Sentinel Resource Group` : Resource Group name.
+
+`Microsoft Sentinel Workspace` : Workspace name.
+
+### Vendor Log API Proofpoint PoD specific parameters
+
+`Proofpoint PoD URI` : Server URI.
+
+`Proofpoint PoD Cluster ID` : Cluster ID.
+
+`Proofpoint PoD Authentication token` : Authentication token.
+
+### Vendor Log API WAF Cloudflare specific parameters
+
+`WAF Cloudflare API token` : WAF Cloudflare  API token.
+
+`WAF Cloudflare zone ID` : WAF Cloudflare zone ID.
+
+### Vendor Log API Google worspace alertcenter specific parameters
+
+`Google Alertcenter JSON Conf` : Your JSON Conf from Google.
+
+`Google Alertcenter Admin email for delegated wrights` : Google Alertcenter Admin email.
+
+### Vendor Log API Sophos Cloud specific parameters
+
+`Sophos Cloud - Client ID` : Client ID.
+
+`Sophos Cloud - Client Secret` : Client Secret.
+
+`Sophos Cloud - Tenant ID` : Tenant ID.
+
+### Vendor Log API Trendmicro_worryfree specific parameters
+
+`Trendmicro Worryfree access token` : Trendmicro Worryfree access token.
+
+`Trendmicro Worryfree secret key` : Trendmicro Worryfree secret key.
+
+`Trendmicro Worryfree server name` : Trendmicro Worryfree server name.
+
+`Trendmicro Worryfree server port` : Trendmicro Worryfree server port.
+
+### Vendor Log API Safenet specific parameters
+
+`Safenet Tenant Code` : Your Safenet Tenant Code.
+
+`Safenet API Key` : Safenet Token API.
+
+### Vendor Log API Proofpoint CASB specific parameters
+
+`Proofpoint CASB API KEY` : Proofpoint CASB API KEY.
+
+`Proofpoint CASB Client ID` : Proofpoint CASB Client ID.
+
+`Proofpoint CASB Client Secret` : Proofpoint CASB Client Secret.
+
+### Vendor Log API Proofpoint TRAP specific parameters
+
+`ProofPoint TRAP host` : ProofPoint API root url.
+
+`ProofPoint TRAP API key` : ProofPoint TRAP API key.
+
+### Vendor Log API WAF Cloud Protector specific parameters
+
+`WAF CloudProtector host` : Hostname (without scheme or path) of the CloudProtector server.
+
+`WAF CloudProtector public key` : base64 encodid public key to contact CloudProtector API.
+
+`WAF CloudProtector private key` : base64 encodid private key to contact CloudProtector API.
+
+`WAF Cloud Protector provider` : Provider used to retrieve event from.
+
+`WAF Cloud Protector tenant` : Tenant used to retrieve event from.
+
+`WAF Cloud Protector servers` : Servers to for wich to retrieve traffic and alert events.
+
+### Vendor Log API Trendmicro visionone specific parameters
+
+`Trendmicro visionone token` : Trendmicro visionone token.
+
+### Vendor Log API Cisco Duo specific parameters
+
+`Cisco Duo API hostname` : Cisco Duo API hostname.
+
+`Cisco Duo API ikey` : Cisco Duo API integration key.
+
+`Cisco Duo API skey` : Cisco Duo API secret key.
+
+### Vendor Log API Sentinel One Mobile specific parameters
+
+`Sentinel One Mobile API hostname` : Sentinel One Mobile API hostname.
+
+`Sentinel One Mobile API ikey` : Sentinel One Mobile API integration key.
+
+### Vendor Log API CSC DomainManager specific parameters
+
+`CSC DomainManager API Key` : CSC DomainManager API Key.
+
+`CSC DomainManager Authorization` : CSC DomainManager Authorization HTTP Header token prefixed by Bearer, ex: Bearer xxxx-xxxx-xxxx-xxxx.
+
+### Vendor Log API Retarus specific parameters
+
+`Retarus token` : Retarus token.
+
+`Retarus channel` : Retarus channel.
+
+### Vendor Log API Vectra specific parameters
+
+`Vectra url` : Vectra url with scheme.
+
+`Vectra secret key` : Vectra secret key.
+
+`Vectra client id` : Vectra client id.
 
 ## Specific settings for Filebeat Listening Mode
 

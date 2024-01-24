@@ -13,6 +13,8 @@ This is useful, for example, in logs services : You will be able to add special 
 
 `vlt-adm SSH authorized_keys` : You can copy / paste the ssh-ed25519 public key of the vlt-adm account into this textarea. This allows you to log in on Vulture via SSH using an SSH key, previously generated via ssh-keygen -t ed25519.
 
+`Redis cluster password` : This field is used by the local Redis cluster to improve security and may be usefull in case of Redis exposition.
+
 ## Network services
 
 From this menu you can configure some global parameters related to network services.
