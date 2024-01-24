@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/identity/mfa/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>MFA &amp; OTP - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "MFA \u0026 OTP";
+        var mkdocs_page_input_path = "identity/mfa.md";
+        var mkdocs_page_url = "/doc/identity/mfa/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../radius/">Radius</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">MFA &amp; OTP</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#overall-operation">Overall operation</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#settings">Settings</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#specific-settings-for-phone-and-onetouch-mfa">Specific settings for Phone and OneTouch MFA</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specific-settings-for-email-mfa">Specific settings for Email MFA</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specific-settings-for-time-based-otp">Specific settings for Time-based OTP</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Identity Providers</li>
+<li class="breadcrumb-item active">MFA &amp; OTP</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="mfa-otp-multi-factor-authentication-and-one-time-password">MFA &amp; OTP - Multi-Factor Authentication and One Time Password</h1>
+<h2 id="overall-operation">Overall operation</h2>
+<p>After a succesful user authentication, Vulture may ask for an additional verification OTP code (One-time password). The OTP can be sent to the user via several channels :</p>
+<ul>
+<li>Phone (SMS or mobile application) : This service is managed by an external web service provided by Authy (see <a href="https://authy.com">Twilio Authy Website</a> to create a account).</li>
+<li>Email : This service is provided by Vulture. An email will be sent to the user with the expected OTP.</li>
+<li>Time-base OTP : This service is provided by Vulture, via the Python <strong>PyOTP</strong> package : "PyOTP is a Python library for generating and verifying one-time passwords. It can be used to implement two-factor (2FA) or multi-factor (MFA) authentication methods in web applications and in other systems that require users to log in." </li>
+</ul>
+<p>Note that these features require an access to user email and or telephone number. So, they are only compatible with LDAP repository and external IDP authentication repositories.</p>
+<h2 id="settings">Settings</h2>
+<p><code>Name</code>: A friendly name to identify the repository. It has to be unique.</p>
+<p><code>Authentication type</code> :</p>
+<ul>
+<li><strong>Phone</strong>: The OTP will be sent via the configured Phone service (see below).</li>
+<li><strong>OneTouch</strong>: The OTP will be sent via the configured Phone service (see below).</li>
+<li><strong>Email</strong>: The OTP will be sent via an email, sent by the configured Mail service (see below).</li>
+<li><strong>Time-based OTP</strong>: The OTP will be sent via Vulture, using the <strong>PyOTP</strong> package : A QRCode will be displayed in the portal at first authentication attempt and the user will be able to register the OTP service using its favorite app such as Google or Microsoft Authenticator (see below). </li>
+</ul>
+<h3 id="specific-settings-for-phone-and-onetouch-mfa">Specific settings for Phone and OneTouch MFA</h3>
+<p>These OTP features are supported via an external 'Twilio / Authy' Cloud service. You need to have an valid subscription on Twilio (see <a href="https://authy.com">Twilio Authy Website</a> to create a account).</p>
+<p><code>API Key</code>: One you have configured your Twilio/Authy services, you just have to copy/paste your API Key to benefits of the features in Vulture.</p>
+<h3 id="specific-settings-for-email-mfa">Specific settings for Email MFA</h3>
+<p>With this mode, Vulture will send the OTP via an email to the user. </p>
+<p><code>Mail service</code> : You can choose the mail service to use to end the email. For the moment only the "Vulture mail service" is available, the SMTP server relay may be configured from the <a href="../../global_config/cluster/#network-services">cluster settings</a> administration menu.</p>
+<h3 id="specific-settings-for-time-based-otp">Specific settings for Time-based OTP</h3>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../radius/" title="Radius"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../totp/" title="Time-based OTP Profiles">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../radius/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../totp/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

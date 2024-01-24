@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/applications/logs_forwarder/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Log Forwarders - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Log Forwarders";
+        var mkdocs_page_input_path = "applications/logs_forwarder.md";
+        var mkdocs_page_url = "/doc/applications/logs_forwarder/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Log Forwarders</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#global-parameters">Global parameters</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-global-parameters">Advanced global parameters</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file-parameters">File parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#relp-parameters">RELP parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#redis-parameters">Redis parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#syslog-parameters">Syslog parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#elasticsearchopensearch-parameters">Elasticsearch/Opensearch parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mongodb-parameters">MongoDB parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kafka-parameters">Kafka parameters</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Applications</li>
+<li class="breadcrumb-item active">Log Forwarders</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="logs-forwarder">Logs Forwarder</h1>
+<p>From this view, you'll be able to configure Log Forwarders.</p>
+<p>The Log Forwarders will make it possible to redirect generated and/or received logs from specific Listeners to numerous destinations and technologies.</p>
+<p>Those technologies are:</p>
+<ul>
+<li><strong>Internal files</strong></li>
+<li><strong>RELP protocol</strong></li>
+<li><strong>Redis</strong></li>
+<li><strong>Syslog protocol</strong></li>
+<li><strong>Elasticsearch/Opensearch</strong></li>
+<li><strong>MongoDB</strong></li>
+<li><strong>Kafka</strong></li>
+</ul>
+<p>For each type, you'll be able to configure both global and specific parameters.</p>
+<h2 id="global-parameters">Global parameters</h2>
+<p>When creating a new Log Forwarder, you'll be able to configure the following global parameters:</p>
+<p><code>Enable forwarder</code>: Simply Enable of disable the forwarder, disabling it will remove it from any effective Listener configuration.</p>
+<hr/>
+<p><code>Friendly name</code>: The front name of you Log Forwarder. Is simply used for ease-of-use and identification. It has to be unique, and any space will be replaced by a '_'.</p>
+<hr/>
+<p><code>Send as raw</code>: This option specifies if the Forwarder should use the appropriate template for each associated Listener, or a generic template that will send the message without any modification.</p>
+<pre><code>As stated, if the option is deactivated the output format will depend on each associated Listener: an HTTP Listener will have a format specific to Haproxy logs, a Log Listener will have a format depending on the types of received logs (defined through the `input logs type` parameter), etc...
+</code></pre>
+<h3 id="advanced-global-parameters">Advanced global parameters</h3>
+<p>By clicking the <strong>Advanced</strong> button on the lower right, the user will be able to further configure global (advanced) parameters for each Listener. Those options are better explained on <a href="https://www.rsyslog.com/doc/v8-stable/rainerscript/queue_parameters.html#queue-size">Rsyslog's documentation</a></p>
+<p><code>Size of the queue</code>: Maximum number of messages allowed in the action queue</p>
+<hr/>
+<p><code>Size of batch dequeue</code>: Maximum number of logs to use in a batch operation</p>
+<hr/>
+<p><code>Queue maximum workers</code>: Maximum number of workers to start for the action</p>
+<hr/>
+<p><code>Queue timeout shutdown (ms)</code>: Number of milliseconds to wait before droping the remaining logs to process on the action (default 10 ms)</p>
+<hr/>
+<p><code>Minimum messages to start a new worker</code>: Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...) (default is queue size / maximum number of workers)</p>
+<hr/>
+<p><code>Worker inactivity shutdown delay (ms)</code>: Number of milliseconds to wait before stopping a worker that didn't receive any log to process (default is 60000 ms = 1 min)</p>
+<hr/>
+<p><code>Enable retry on failure</code>: Detect action failures and keep involved logs in the action queue to "replay" the action at a later time</p>
+<hr/>
+<p><code>Enable disk queue on failure</code>: Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in action queue (in case of action failures mostly).</p>
+<pre><code>`Enable retry on failure` must be enabled
+</code></pre>
+<hr/>
+<p><code>High watermark target</code>: When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.</p>
+<pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+</code></pre>
+<hr/>
+<p><code>Low watermark target</code>: When writing to disk is triggered by the <code>High watermark target</code>, it will return to in-memory queueing when the amount of logs in it falls back under this value.</p>
+<pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+</code></pre>
+<hr/>
+<p><code>Max file size of the queue in MB</code>: Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.</p>
+<pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+</code></pre>
+<hr/>
+<p><code>Max disk space used by the queue in MB</code>: Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.</p>
+<pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+</code></pre>
+<h2 id="file-parameters"><code>File</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="relp-parameters"><code>RELP</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="redis-parameters"><code>Redis</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="syslog-parameters"><code>Syslog</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="elasticsearchopensearch-parameters"><code>Elasticsearch/Opensearch</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="mongodb-parameters"><code>MongoDB</code> parameters</h2>
+<p><em>Work in progress</em></p>
+<h2 id="kafka-parameters"><code>Kafka</code> parameters</h2>
+<p>This is a specific sectino to describe specific Kafka Log Forwarder configuration options.</p>
+<p><code>Broker</code>: A list representing the broker(s) to connect to. (example: <em>['1.2.3.4:9092]</em>)</p>
+<hr/>
+<p><code>Topic</code>: The Kafka Topic to use when inserting new logs.</p>
+<pre><code>When activating `Dynamic Topic`, the value in `Topic` will be processed as an [Rsyslog string template](https://www.rsyslog.com/doc/v8-stable/configuration/templates.html#string).
+</code></pre>
+<hr/>
+<p><code>Key</code>: The Kafka Key to use when inserting logs.</p>
+<pre><code>When activating `Dynamic Key`, the value in `Key` will be processed as an [Rsyslog string template](https://www.rsyslog.com/doc/v8-stable/configuration/templates.html#string).
+</code></pre>
+<hr/>
+<p><code>Partition to which data is produced</code>: If set, will use this fixed partition number when inserting new values.</p>
+<hr/>
+<p><code>Automatic partitioning</code>: If activated, will enable automatic handling of partitions with Kafka.</p>
+<pre><code>Activating this feature will render `Partition to which data is produced` useless, as no manual partition scheming will be possible.
+</code></pre>
+<hr/>
+<p><code>Kafka parameters</code>: A dynamic list of key-value parameters directly provided to the <a href="https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md">librdkafka library global configurations</a>.</p>
+<pre><code>The form will ensure basic key=value formatting, but user should ensure to always provide correct *key=value* format
+</code></pre>
+<hr/>
+<p><code>Kafka topic parameters</code>: A dynamic list of key-value parameters directly provided to the <a href="https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md#topic-configuration-properties">librdkafka library topic configurations</a>.</p>
+<pre><code>The form will ensure basic key=value formatting, but user should ensure to always provide correct *key=value* format
+</code></pre>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../../portal/portal/" title="Portal"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../backend/" title="Backend servers">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../../portal/portal/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../backend/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

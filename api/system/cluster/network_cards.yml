@@ -1,0 +1,37 @@
+all:
+  get:
+    tags:
+      - NetworkAddressCards
+    summary: List of all available network address cards
+    responses:
+      200:
+        description: List of all network address cards
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "./definitions/network_cards.yml"
+
+refresh:
+  post:
+    tags:
+      - NetworkAddressCards
+    summary: Refresh list of network cards
+    responses:
+      200:
+        description: Refresh started
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml"
+      500:
+        $ref: "../../global/definitions/error.yml"

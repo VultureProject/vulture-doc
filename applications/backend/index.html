@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/applications/backend/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Backend servers - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Backend servers";
+        var mkdocs_page_input_path = "applications/backend.md";
+        var mkdocs_page_url = "/doc/applications/backend/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Backend servers</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#general-parameters">General parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#servers">Servers</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-configuration">Custom configuration</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-haproxy-server-modes">Specific settings for HAProxy Server Modes</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#tcp-server-mode-specific-parameters">TCP server mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#http-server-mode-specific-parameters">HTTP server mode specific parameters</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Applications</li>
+<li class="breadcrumb-item active">Backend servers</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-applications-backend-settings">WebGUI - Menu "Applications / Backend settings"</h1>
+<p>From this view you can edit the settings of a specific backend server.</p>
+<p>Multiple modes are available when creating a backend :</p>
+<ul>
+<li><strong>TCP</strong> : Create a TCP HAProxy backend</li>
+<li><strong>HTTP</strong> : Create an HTTP HAProxy backend</li>
+</ul>
+<p>Depending on which mode you choose, configuration settings differ.</p>
+<h2 id="general-parameters">General parameters</h2>
+<p><code>Enable backend</code> : You can enable or disable your backend.</p>
+<p><code>Friendly name</code> : Here you can specify a friendly name for your backend. You cannot have multiple backends with the same name.</p>
+<p><code>Mode</code> : Here you choose a mode for your backend :</p>
+<ul>
+<li><strong>TCP</strong> (backend use TCP protocol)</li>
+<li><strong>HTTP</strong> (backend use HTTP protocol)</li>
+</ul>
+<p><code>Timeout connect</code> : Configure the allowed connect timeout (in ms) after which HAProxy will end new connections.</p>
+<p><code>Timeout server</code> : Set the maximum inactivity time on the server side (in s).</p>
+<p><code>Tags</code> : Friendly tags.</p>
+<h2 id="servers">Servers</h2>
+<p>Here you can configure the servers used by your Backend.</p>
+<p><code>Balancing mode</code>, you can choose between different balancing algorithms : </p>
+<ul>
+<li><strong>RoundRobin</strong></li>
+<li><strong>Static RoundRobin</strong></li>
+<li><strong>Least Conn</strong></li>
+<li><strong>First server</strong></li>
+<li><strong>Source IP based</strong></li>
+<li><strong>URI based</strong></li>
+<li><strong>URL param based</strong></li>
+<li><strong>Header based</strong></li>
+<li><strong>Cookie based</strong></li>
+</ul>
+<p><code>Servers directory</code> : Root of the url when forwarding to the servers</p>
+<p>For each row, you can configure the following parameters (depending on the protocol used) :</p>
+<ul>
+<li><strong>Target address</strong> : Select the IP address you want to point to.</li>
+<li><strong>Port</strong> : Configure the port you want to point to.</li>
+<li><strong>Socket</strong> : Select the UNIX socket you want to point to.</li>
+<li><strong>TLS Profile</strong> : Here you can select a <a href="../../global_config/tls/">TLS Profile</a> to use with the server.</li>
+<li><strong>Weight</strong> : Set a weight parameter for the balancing method.</li>
+<li><strong>Source</strong> : Configure a source IP address.</li>
+</ul>
+<h2 id="custom-configuration">Custom configuration</h2>
+<p>Via this tab, you may declare custom HAProxy directives. These directives will be placed within the [Backend] section of HAProxy configuration file related to the current Server.</p>
+<h2 id="specific-settings-for-haproxy-server-modes">Specific settings for HAProxy Server Modes</h2>
+<p>Depending on which server mode you choose, configuration settings will differ.
+<strong>See below for the specific configuration settings</strong></p>
+<h3 id="tcp-server-mode-specific-parameters">TCP server mode specific parameters</h3>
+<p><code>TCP Keep alive</code> : Activate the HAProxy's TCP keep alive option.</p>
+<p><code>Timeout</code> :  Time for HAProxy to keep the TCP tunnel open.</p>
+<p><code>TCP health check</code> : Enable the health check for this backend.</p>
+<p><code>Close the connection cleanly</code> : [Health check] Allow HAProxy to send a FIN packet instead of RST.</p>
+<p><code>Message to send</code> : [Health check] String sent to the server after connection was established.</p>
+<p><code>TCP Health Check expected</code> : [Health check] Expected string received from the server, can be one of :</p>
+<ul>
+<li><strong>None</strong></li>
+<li><strong>Response content contains</strong></li>
+<li><strong>Response content match regex</strong></li>
+<li><strong>Response binary contains</strong></li>
+<li><strong>Response binary match regex</strong></li>
+<li><strong>Response content does not contain</strong></li>
+<li><strong>Response content does not match regex</strong></li>
+<li><strong>Response binary does not contains</strong></li>
+<li><strong>Response binary does not match regex</strong></li>
+</ul>
+<p><code>TCP Health Check interval</code> : [Health check] Time between each health check.</p>
+<h3 id="http-server-mode-specific-parameters">HTTP server mode specific parameters</h3>
+<p><code>Accept invalid HTTP response</code> : Even malformed HTTP responses will be handled.</p>
+<p><code>Send source ip in</code> : Header name where source IP will be placed.</p>
+<p><code>Except for</code> : IP that will not be placed in the header mentionned above.</p>
+<p><code>HTTP Keep alive</code> : Activate the HAProxy's HTTP keep alive option.</p>
+<p><code>Timeout</code> :  Time for HAProxy to keep the HTTP connection open.</p>
+<p><code>HTTP health check</code> :  Enable the health check for this backend.</p>
+<p><code>Header select</code> : [Health check] Name of the inserted header.</p>
+<p><code>Header value</code> : [Health check] Value of the inserted header.</p>
+<p><code>Close the connection cleanly</code> : [Health check] Allow HAProxy to send a FIN packet instead of RST.</p>
+<p><code>HTTP Health Check expected</code> : [Health check] Expected answer sent by the server, can be :</p>
+<ul>
+<li><strong>Status code is</strong></li>
+<li><strong>Status code match regex</strong></li>
+<li><strong>Response content contains</strong></li>
+<li><strong>Response content match regex</strong></li>
+<li><strong>Status code different</strong></li>
+<li><strong>Status code does not match regex</strong></li>
+<li><strong>Response content does not contain</strong></li>
+<li><strong>Response content does not match regex</strong></li>
+</ul>
+<p><code>HTTP Health Check interval</code> : [Health check] Time between each query.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../logs_forwarder/" title="Log Forwarders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../api/" title="Swagger">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../logs_forwarder/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../api/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/global_config/cluster/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Cluster settings - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Cluster settings";
+        var mkdocs_page_input_path = "global_config/cluster.md";
+        var mkdocs_page_url = "/doc/global_config/cluster/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Cluster settings</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#general">General</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-services">Network services</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rest-api">REST API</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sso">SSO</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logs-settings">Logs settings</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Global Config</li>
+<li class="breadcrumb-item active">Cluster settings</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-system-cluster-config">WebGUI - Menu "System / Cluster config"</h1>
+<p>From this menu you can manage the global configuration of the Vulture Cluster. Remind that Vulture is <strong>always</strong> running as a cluster of 1 to any nodes. It allows Vulture to easily scale by adding new nodes whenever needed.</p>
+<p>Nodes are managed from the <a href="../node/">Nodes Config</a> menu.</p>
+<h2 id="general">General</h2>
+<p>Vulture is multi-tenant and you can host and run services that are dedicated to a tenant and isolated from other tenants.
+This is useful, for example, in logs services : You will be able to add special tags and tenant-specific information into the logs.</p>
+<p><code>Internal tenants config</code> : This parameter let you choose the default tenant configuration to apply anywhere in the Vulture configuration when no specific tenant is selected. Tenants are managed from the <a href="../tenant/">Tenants Config</a> menu.</p>
+<p><code>vlt-adm SSH authorized_keys</code> : You can copy / paste the ssh-ed25519 public key of the vlt-adm account into this textarea. This allows you to log in on Vulture via SSH using an SSH key, previously generated via ssh-keygen -t ed25519.</p>
+<p><code>Redis cluster password</code> : This field is used by the local Redis cluster to improve security and may be usefull in case of Redis exposition.</p>
+<h2 id="network-services">Network services</h2>
+<p>From this menu you can configure some global parameters related to network services.</p>
+<p><code>SMTP server</code> : Vulture will use this SMTP server whenever it has to send an email. Emails may be send by the underlying HardenedBSD system (cronjob, audit check, ...) as well as by Vulture for specific purposes (eg: Sending an OTP code via email). You may configure the local postfix service (/usr/local/etc/postfix/main.cf) and choose <strong>127.0.0.1</strong> as SMTP server here if you do not have existing SMTP relays in your organisation.</p>
+<p><code>Allowed sources for SSH connexion</code> : By default Vulture will accept SSH connexion from anywhere (<strong>any</strong> keyword). Here you can specify a whitelist of IP addresses or hostnames and Vulture will block SSH connexion from everywhere except those addreses.</p>
+<p><strong>Be careful not denying yourself</strong> where configuring this options.</p>
+<p><code>Allowed sources for GUI connexion</code> : By default Vulture will accept HTTPS connexion on its Web UI (TCP/8000) from anywhere (<strong>any</strong> keyword). Here you can specify a whitelist of IP addresses or hostnames and Vulture will block HTTP connexion from everywhere except those addreses.</p>
+<p><strong>Be careful not denying yourself</strong> where configuring this options.</p>
+<p><code>Packet Filter Whitelist</code> : Vulture won't filter any network trafic originated from the sources declared here. The corresponding pf rules (/usr/local/etc/pf.conf) is :</p>
+<pre><code>pass in quick from &lt;vulture_whitelist&gt;
+</code></pre>
+<p><code>Packet Filter Blacklist</code> : Vulture will drop any network trafic originated from the sources declared here. The corresponding pf rules (/usr/local/etc/pf.conf) is :</p>
+<pre><code>block in quick from &lt;vulture_blacklist&gt;
+</code></pre>
+<p><strong>Note :</strong> This dropped trafic won't be logged by firewall, to prevent DOS.</p>
+<p><strong>Note :</strong> It can be usefull to whitelist your local IP to prevent blacklisting from Vulture</p>
+<pre><code>sudo pfctl -t vulture_blacklist -T flush; sudo pfctl -t vulture_whitelist -T add &lt;My IP&gt;
+</code></pre>
+<h2 id="rest-api">REST API</h2>
+<p>Vulture is fully manageable via REST API.
+Please have a look at the <a href="../../api/">SWAGGER DOCUMENTATION</a>.</p>
+<p>Here you can defined the expected API Key to access REST Endpoint.
+Be sure to use something <strong>robust</strong> if you change it, by default Vulture will generate a 16 bytes ASCII random key.</p>
+<h2 id="authentication">Authentication</h2>
+<p>By default vulture uses its <strong>internal</strong> MongoDB repository for user authentication.
+You may want to use a corporate LDAP to authenticate users on Vulture GUI, so here you can define the LDAP server to use.</p>
+<p>You can add LDAP configurations from the /authentication/ldap/ menu.</p>
+<h2 id="sso">SSO</h2>
+<p>Here you can define technical parameters related to the SSO features of Vulture, such as cookies and token Names.</p>
+<p><code>Header name for OAuth2 authentication</code> : Defaults to <strong>X-Vlt-Token</strong>. It is the name of the HTTP Header that Vulture will read to get the User OAuth2 access token, when using oauth2 authentication in Vulture for Web application.</p>
+<p><code>Portal cookie name</code> : Defaults to <strong>random value</strong>. It is the name of the main session cookie used by Vulture when it authenticate a user on is Web Portal.</p>
+<p><code>Public token</code> : Defaults to <strong>random value</strong>. The Vulture Web portal, used for user authentication, is available through a specific URL. This URL is not "predictable" as Vulture use this public token to "randomize" it. You way override this random value here.</p>
+<h2 id="logs-settings">Logs settings</h2>
+<p><code>Retention period of internal database logs</code> : Vulture store logs into the Internal MongoDB database. Here you can define the retention period, in seconds. Default is <strong>86400</strong> (1 day).</p>
+<p><code>Logs encryption PEM certificate</code> : Not supported yet.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../stats/" title="Status Page"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../node/" title="Nodes">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../stats/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../node/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

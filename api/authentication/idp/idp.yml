@@ -1,0 +1,585 @@
+list:
+  get:
+    tags:
+      - Authentication
+    summary: List Groups/Users or Search Users
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the Repository
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: object_type
+        required: true
+        schema:
+          type: string
+          enum:
+            - users
+            - groups
+            - search
+      - in: query
+        name: group_name
+        description: "Groupe name to query. Required only if object_type is 'users'"
+        schema:
+          type: string
+      - in: query
+        name: search
+        description: "Search string: Required only if object_type is 'search'"
+        schema:
+          type: string
+
+    responses:
+      200:
+        description: List of groups or users
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+
+user:
+  post:
+    tags:
+      - Authentication
+    summary: Create an user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The identifier of the user
+                required: true
+              is_locked:
+                type: boolean
+                description: Should the account be locked?
+                default: false
+                required: false
+              need_change_password:
+                type: boolean
+                description: Does the user needs to change its password on first connnection?
+                default: false
+                required: false
+              email:
+                type: string
+                description: User email
+                required: true
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              userPassword:
+                type: string
+                description: The password for the created user
+                required: false
+              first_name:
+                type: string
+                description: The first name of the user
+                required: false
+              last_name:
+                type: string
+                description: The last name of the user
+                required: false
+              user_type:
+                type: string
+                description: The type of user to create
+                enum:
+                  - user
+                  - admin
+                  - super_admin
+                required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
+                required: false
+    responses:
+      201:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+
+  put:
+    tags:
+      - Authentication
+    summary: Edit an user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User UID (will be used to find the user to edit)
+                required: true
+              username:
+                type: string
+                description: User Name
+                required: true
+              is_locked:
+                type: boolean
+                description: Should the account be locked?
+                default: false
+                required: false
+              need_change_password:
+                type: boolean
+                description: Does the user needs to change its password on first connnection?
+                default: false
+                required: false
+              email:
+                type: string
+                description: User email
+                required: false
+              mobile:
+                type: string
+                description: User phone number
+                required: false
+              userPassword:
+                type: string
+                description: User password
+                required: false
+              first_name:
+                type: string
+                description: The first name of the user
+                required: false
+              last_name:
+                type: string
+                description: The last name of the user
+                required: false
+              user_type:
+                type: string
+                description: The type of user to create
+                enum:
+                  - user
+                  - admin
+                  - super_admin
+                required: false
+              smartcardid:
+                type: string
+                description: User smart card ID
+                required: false
+    responses:
+      200:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+  delete:
+    tags:
+      - Authentication
+    summary: Delete an user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                required: true
+                description: User ID to delete
+    responses:
+      200:
+        $ref: "../../global/definitions/ok.yml"
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+
+user_action:
+  post:
+    tags:
+      - Authentication
+    summary: Execute an action for a specific user
+    description: >
+      This API allows to execute several actions on a specific account, those actions are:
+        - 'resend_registration' : send a new registration email to the user, allowing them to connect to its applications and update their password
+        - 'reset_password' : send an email to the user with a temporary link to reset its password, be mindful that their current password will remain valid until changed
+        - 'lock' : lock the user, they won't be able to connect or use their valid access tokens anymore. **Currently valid sessions are not invalidated!**
+        - 'unlock' : as opposed to the 'lock' operation, allows to reauthhorize a user, existing and non-expired access tokens will also be re-enabled
+        - 'reset_otp' : if the user loses their OTP code, this action allows to reset the secret and ask the user for a new pairing at next login.
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: action
+        description: Action to execute for user
+        required: true
+        schema:
+          type: string
+          enum:
+            - resend_registration
+            - reset_password
+            - lock
+            - unlock
+            - reset_otp
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User UID (will be used to find the user to edit)
+                required: true
+    responses:
+      200:
+        description: The command succeeded (nothing was done)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      201:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                user_id:
+                  type: string
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+
+tokens:
+  post:
+    tags:
+      - Authentication
+    summary: Create access token for a specific user
+    description: This API allows to create new Oauth2 access token for a specific user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: user
+        description: base 64 URL encoded UID of the user
+        required: true
+        schema:
+          type: string
+          format: b64URL
+      - in: header
+        name: Authorization
+        description: >
+          An existing and valid access token for the user.
+          This token should be issued by the portal and contain the 'sub' in its scopes.
+        required: true
+        schema:
+          type: string
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expire_at:
+                type: integer
+                description: >
+                  UNIX timestamp representing the expiration time of the token.
+                  If not set, will default to now + the default expiration timeout of the requested portal
+                required: false
+    responses:
+      201:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                expire_at:
+                  type: integer
+                  description: the UNIX timestamp from when token loses its validity
+                tokens:
+                  type: string
+                  description: the value of the token (usable as 'Authorization' headers afterwards)
+      401:
+        description: request wasn't properly authenticated
+        content:
+          application/json:
+            schema:
+              type: object
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+
+token_edit:
+  patch:
+    tags:
+      - Authentication
+    summary: Update an access token for a specific user
+    description: This API allows to update/refresh an Oauth2 access token for a specific user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: user
+        description: base 64 URL encoded UID of the user
+        required: true
+        schema:
+          type: string
+          format: b64URL
+      - in: path
+        name: token
+        description: the value of the Oauth2 token
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: header
+        name: Authorization
+        description: >
+          An existing and valid access token for the user.
+          This token should be issued by the portal and contain the 'sub' in its scopes
+        required: true
+        schema:
+          type: string
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expire_at:
+                type: integer
+                description: >
+                  UNIX timestamp representing the expiration time of the token.
+                  If not set, will default to now + the default expiration timeout of the requested portal
+                required: false
+    responses:
+      201:
+        description: The command succeeded
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  enum:
+                    - true
+                    - false
+                expire_at:
+                  type: integer
+                  description: the UNIX timestamp from when token loses its validity
+                tokens:
+                  type: string
+                  description: the value of the token (usable as 'Authorization' headers afterwards)
+      401:
+        description: request wasn't properly authenticated
+        content:
+          application/json:
+            schema:
+              type: object
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      403:
+        ref: "../../global/definitions/error.yml#/403"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"
+  delete:
+    tags:
+      - Authentication
+    summary: Delete an access token for a specific user
+    description: This API allows to delete/invalidate an Oauth2 access token for a specific user
+    parameters:
+      - in: path
+        name: portal
+        description: ID or Name of the Portal
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        description: ID or Name of the repository
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: user
+        description: base 64 URL encoded UID of the user
+        required: true
+        schema:
+          type: string
+          format: b64URL
+      - in: path
+        name: token
+        description: the value of the Oauth2 token
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: header
+        name: Authorization
+        description: >
+          An existing and valid access token for the user.
+          This token should be issued by the portal and contain the 'sub' in its scopes
+        required: true
+        schema:
+          type: string
+    responses:
+      204:
+        $ref: "../../global/definitions/ok.yml"
+      401:
+        description: request wasn't properly authenticated
+        content:
+          application/json:
+            schema:
+              type: object
+      400:
+        $ref: "../../global/definitions/error.yml#/400"
+      403:
+        ref: "../../global/definitions/error.yml#/403"
+      404:
+        $ref: "../../global/definitions/error.yml#/404"
+      500:
+        $ref: "../../global/definitions/error.yml#/500"

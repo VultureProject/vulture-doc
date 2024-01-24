@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/global_config/node/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Nodes - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Nodes";
+        var mkdocs_page_input_path = "global_config/node.md";
+        var mkdocs_page_url = "/doc/global_config/node/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Nodes</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#list-of-nodes">List of nodes</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-node-into-an-existing-cluster">Adding a new node into an existing cluster</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#node-settings">Node Settings</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#network">Network</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#firewall">Firewall</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Global Config</li>
+<li class="breadcrumb-item active">Nodes</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-system-nodes-config">WebGUI - Menu "System / Nodes config"</h1>
+<p>From this menu you can manage the nodes composing your Vulture cluster. Remind that Vulture is <strong>always</strong> running as a cluster of 1 to any nodes. It allows Vulture to easily scale by adding new nodes whenever needed.</p>
+<p>Cluster-wide parameters are managed from the <a href="../cluster/">Cluster Config</a> menu.</p>
+<h2 id="list-of-nodes">List of nodes</h2>
+<p>The table show all the nodes, with their main characteristics. Just <strong>click on the node</strong> to enter into edition mode.</p>
+<p><code>Name</code> : This is the friendly name of the node</p>
+<p><code>Network Interfaces</code> : The list of all the network interfaces available on the Node is displayed here</p>
+<p><code>MongoDB</code> : It indicates the <strong>status</strong> of the node within the mongodb replicaset. State can be <strong>PRIMARY</strong> or <strong>SECONDARY</strong> (or OTHER in case of cluster failure). Click on <strong>Step Down</strong> to force a reelection in the MongoDb Cluster. This operation can be triggered on MongoDB Primary node only.</p>
+<p><code>Redis</code> : It indicates the <strong>status</strong> of the node within the redis cluster. State can be <strong>MASTER</strong> or <strong>SLAVE</strong></p>
+<p><code>Action</code> : Here you can delete / remove a node from the cluster.</p>
+<h2 id="adding-a-new-node-into-an-existing-cluster">Adding a new node into an existing cluster</h2>
+<p>To <strong>add a node</strong>, please install another Vulture server, bootstrap it and run /home/vlt-adm/gui/cluster_join.sh to join the existing cluster. See the <a href="../../overview/deploy/">Deployment Guide</a>.</p>
+<h2 id="node-settings">Node Settings</h2>
+<p><code>Hostname</code> : This is the hostname of the node. <strong>You cannot modify the hostname from here</strong>. Hostname modification must be done at the system level via the admin tool :</p>
+<pre><code>/home/vlt-adm/admin.sh
+</code></pre>
+<p>Indeed, changing the hostname have several consequences :</p>
+<ul>
+<li>System files will be changed on all cluster nodes (/etc/hosts)</li>
+<li>The vultured daemon will be restarted on the modified node</li>
+<li>Node certificate will be re-issued with the new hostname</li>
+<li>Apache will be restarted on the node, for Web UI and Web Portal</li>
+<li>The node name will be updated within the MongoDB replicaset</li>
+<li>Apache will be restarted on all nodes, for Web GUI</li>
+<li>rsyslog configuration will be re-generated on all nodes</li>
+</ul>
+<p><code>Send rsyslog pstats logs to</code> : Here you can select a log backend where to forward the rsyslog "pstats" info. pstats info are related to internal performance counter of the rsyslog process.</p>
+<p>Example :</p>
+<pre><code>&gt; */zroot/rsyslog/var/log/pstats*
+&gt; 2020-11-27T02:01:00.945119+00:00 rsyslog rsyslogd-pstats: { "name": "Internal_Dashboard_internal_pstats", "origin": "core.action", "processed": 58306, "failed": 0, "suspended": 0, "suspended.duration": 0, "resumed": 0 }
+</code></pre>
+<p>You can define additional log forwarders from the <a href="../../applications/logs_forwarder/">Logs Forwarders</a> menu.
+Supported log forwarder are : File, REDIS, SYSLOG (TCP/UDP/RELP), Elasticsearch and MongoDB.</p>
+<h3 id="network">Network</h3>
+<p>From this tab you can modify IP address and network topology for the node, such as routing table, masquerading IPs...</p>
+<p><code>Internet IP Address</code> : When Vulture has to communicate with remote servers, it will be NAT-ed behind this IP Address.</p>
+<p>By default, here are the network connexions that are using this IP address :</p>
+<ul>
+<li>DNS Resolution (From all Jails to any)</li>
+</ul>
+<pre><code>&gt; nat proto udp from { any_jails } to any port 53 -&gt; {{ node.internet_ip }}
+</code></pre>
+<ul>
+<li>HTTP / HTTPS for updates (From all jails to any)</li>
+</ul>
+<pre><code>&gt; nat proto tcp from { any_jails } to any port { 80, 443} -&gt; {{ node.internet_ip }}
+</code></pre>
+<ul>
+<li>HTTP for updates through a proxy (From all jails to proxy)</li>
+</ul>
+<pre><code>&gt; nat proto tcp from { any_jails } to {{proxy_ip}} port {{proxy_port}} -&gt; {{node.internet_ip}}
+</code></pre>
+<p><code>InterCluster IP Address</code> : Inter-cluster network traffic (redis/sentinel, mongodb, rsyslog) is NAT-ed behind this IP address. This IP address is also used by the Web UI and the REST API management endpoint.</p>
+<p><code>Backends outgoing IP Address masquerading</code> : Network traffic from haproxy to a remote TCP or HTTP backend is NAT-ed behind this IP address.</p>
+<p><code>Log forwarders IP Address masquerading</code> : Network traffic from rsyslog to a remote log repository is NAT-ed behind this IP address.</p>
+<p><code>Default router</code> : Define here the default IPv4 network gateway of the system.</p>
+<p><code>Default IPV6 router</code> : Define here the default IPv6 network gateway of the system.</p>
+<p><code>Static network routes</code> : Here you can define the routing table of the node. You have to use the FreeBSD syntax, as the content here will be used into the system file <em>/etc/rc.conf.d/routing</em>. Have a look at <a href="https://www.freebsd.org/doc/handbook/network-routing.html">FreeBSD Gateways and Routes</a> if needed.</p>
+<p><strong>Note :</strong> Vulture allows by default 2 fib (2 routing tables). If needed you can increase the number of routing tables by overriding the <em>net.fibs</em> settings defined in /boot/loader.conf. To to that, override the value in <em>/boot/loader.conf.local</em></p>
+<p>Here is a rather complex example of a Vulture routing table using 2 differents FIB, one per VLAN plus a specific route to access a VPN gateway :</p>
+<pre><code>&gt; static_routes="internal vlan101 vlan102 vpn"
+&gt; route_internal="-fib 0 -net 10.0.0.0/8 10.1.1.1.1"
+&gt; route_vlan101="-fib 0 default 10.1.1.1.1"
+&gt; route_vlan102="-fib 1 default 10.2.2.2"
+&gt; route_vpn="-net 8.9.10.11/32 10.3.3.3"
+</code></pre>
+<h3 id="firewall">Firewall</h3>
+<p>From this tab you can define pf Firewall's internal limits and add custom firewall rules.
+This correspond to the first line of Vulture's PF configuration file (/usr/local/etc/pf.conf) :
+set limit { states {{node.pf_limit_states}}, frags {{node.pf_limit_frags}}, src-nodes {{node.pf_limit_src}} }</p>
+<p>Please remind that Vulture's pf configuration file is generated automaticaly based on Vulture configuration. Any manual change to this file will be lost. The vultured daemon is in charge of managing the pf configuration file.</p>
+<p><code>Max. entries for PF state table</code> : Maximum number of entries in the memory pool used for state table entries (filter rules that specify keep state). Default is 500000.</p>
+<p><code>Max. entries for PF packet reassembly</code> : Maximum number of entries in the memory pool used for packet reassembly (scrub rules). Default is 25000.</p>
+<p><code>Max. entries for PF source tracking</code> : Maximum number of entries in the memory pool used for tracking source IP addresses (generated by the sticky-address and source-track options). Default is 50000.</p>
+<p><code>Custom PF Configuration</code> : Here you can define specific PF rules to be included in the /usr/local/etc/pf.conf file. Any change here is immediately applied by the vultured on the node. pf will be reloaded with the new ruleset. In case of an error, new ruleset won't be used. Also, please check logs to detect any misconfiguration.</p>
+<p>Here is the global structure of pf configuration file :</p>
+<pre><code>&gt; Global PF settings and limits
+&gt; Outgoing NAT Jails masqueraring rules
+&gt; Outgoing NAT Intercluster traffic and Web GUI / REST Endpoint rules
+&gt; Outgoing NAT Rsyslog forwarders rules
+&gt; Outgoing NAT Haproxy backends rules
+&gt; Outgoing NAT Bhyve rules
+&gt; Incoming RDR traffic to local Jails rules
+&gt; Incoming RDR Intercluster traffic and Web GUI / REST Endpoint rules
+&gt; Incoming RDR traffic to haproxy and rsyslog frontends
+&gt; Whitelist / Blacklist / Reputation / Security rules
+&gt; Automatic Filtering rules
+&gt; *CUSTOM PF CONFIGURATION*
+&gt; Incoming traffic to Web UI
+&gt; Incomming Intercluster traffic
+&gt; Incoming traffic on SSH
+&gt; Incoming traffic to haproxy and rsyslog frontends
+</code></pre>
+<p><strong>WARNING</strong> : The Custom PF Configuration is <em>AFTER</em> 'nat' and 'rdr' rules, in the "filter section". So you can't use any 'nat' or 'rdr' directive in the Custom PF Configuration*. Please contact us if you are facing an issue to configure a proper firewall configuration in your environment.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../cluster/" title="Cluster settings"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../tenant/" title="Multi-Tenants">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../cluster/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../tenant/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

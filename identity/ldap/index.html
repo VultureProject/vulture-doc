@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/identity/ldap/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>LDAP - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "LDAP";
+        var mkdocs_page_input_path = "identity/ldap.md";
+        var mkdocs_page_url = "/doc/identity/ldap/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../repository/">The repository concept</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">LDAP</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#connection-settings">Connection settings</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-settings">User settings</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#group-settings">Group settings</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Identity Providers</li>
+<li class="breadcrumb-item active">LDAP</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="ldap-identity-provider">LDAP Identity Provider</h1>
+<p>LDAP is the best IDP choice as it allows to take advantage of all Vulture's feature regarding SSO, SSO Forward and User management APIs.</p>
+<h2 id="connection-settings">Connection settings</h2>
+<p><code>Name</code>: This is a friendly name to refer to the LDAP IDP. It has to be unique</p>
+<p><code>Host</code>: IP Address or hostname (must be resolvable by Vulture) to reach your LDAP directory</p>
+<p><code>Port</code> : Corresponding TCP port to reach your LDAP repository</p>
+<p><code>Protocol</code>: LDAP protocol version to use </p>
+<p><code>Encryption Scheme</code>: Select the appropriate encryption scheme to contact your LDAP directory</p>
+<p><code>Service Account DN</code>: The DN of the service account used by Vulture to contact your LDAP directory. This account <strong>MUST</strong> have write access if you want to take advantage of features such as lock a user, reset it's password, use TOTP, automatically add to a group...</p>
+<p><code>Service account password</code>: The corresponding password</p>
+<p><code>Base DN</code>: The LDAP base DN used to connect to your LDAP directory (ex: DC=myDomain, DC=ORG)</p>
+<h2 id="user-settings">User settings</h2>
+<p>From this tab you will have to configure settings related to user authentication. Basically it consist of defining where are located your users branches within your LDAP directory.</p>
+<p><code>User search scope</code>: The LDAP search scope to use when searching for a user (base, one level or all subtree) in your LDAP directory</p>
+<p><code>User DN</code>: The starting point of your LDAP server to use when searching for users authentication (ex: OU=Users)</p>
+<p><code>User Object classes</code>: The list of LDAP Object Classes (schemas) to assign to new User entries, when created through Vulture (leave defaults unless you know what you do)</p>
+<p><code>User attribute</code>: The LDAP user's identifier. This attribute will be mapped to the Vulture's login on Authentication portal.</p>
+<p><code>User search filter</code>: The LDAP filter to use when searching for a user in your LDAP directory</p>
+<p><code>Account locked filter</code>: The LDAP filter that Vulture should use to detect if a user account is locked or not in your LDAP directory. </p>
+<p>Example: </p>
+<pre><code>(lockoutTime&gt;=1)
+</code></pre>
+<p><code>Need change password filter</code>: The LDAP filter that Vulture should use to detect if a user must change its password. </p>
+<p>Example: </p>
+<pre><code>(pwdLastSet=0)
+</code></pre>
+<p><code>Group attribute</code>: LDAP attribute which contains the user's group list (example: memberOf)</p>
+<p><code>Mobile attribute</code>: LDAP attribute which contains the user's telephone number. This will be used by OTP features</p>
+<p><code>Email attribute</code>: LDAP attribute which contains the user's email address. This will be used by OTP features</p>
+<h2 id="group-settings">Group settings</h2>
+<p>From this tab you will have to configure settings related to user groups. Basically it consist of defining where are located your groups branches within your LDAP directory.</p>
+<p><code>Group search scope</code>: The LDAP search scope to use when searching for a group (base, one level or all subtree) in your LDAP directory</p>
+<p><code>Group DN</code>: The starting point of your LDAP server to use when searching for groups (ex: OU=Groups) in your LDAP directory</p>
+<p><code>Group Object classes</code>: The list of LDAP Object Classes (schemas) to assign to new Group entries, when created through Vulture (leave defaults unless you know what you do)</p>
+<p><code>Group attribute</code>: The LDAP group's identifier</p>
+<p><code>Group search filter</code>: The LDAP filter to use when searching for a group in your LDAP directory</p>
+<p><code>Member attribute</code>: LDAP attribute used to reference a user DN within a LDAP group (example: member)</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../repository/" title="The repository concept"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../kerberos/" title="Kerberos">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../repository/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../kerberos/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

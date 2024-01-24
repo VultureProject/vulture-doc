@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/global_config/network/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Network Interfaces - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Network Interfaces";
+        var mkdocs_page_input_path = "global_config/network.md";
+        var mkdocs_page_url = "/doc/global_config/network/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Network Interfaces</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#cluster-interface-list">Cluster Interface list</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#add-modify-a-network-card">Add / Modify a network card</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Global Config</li>
+<li class="breadcrumb-item active">Network Interfaces</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-network">WebGUI - Menu "Network"</h1>
+<p>Here you can manage all the network interface cards and IP addresses available in the Cluster.</p>
+<p>Behind a single IP address, you may have several nodes / NICs. Indeed, Vulture supports the CARP protocol : it allow you to have a Virtual IP addresses associated with several NICs. Whenever the active NIC became unavailable, another backup CARP NIC will be ellected as active and handle the IP address.</p>
+<p>Thus, a Vulture network interface is defined by :
+* 1 or more NICs (Network Card), that may be hosted on 1 or more nodes
+* A unique IP Address</p>
+<h2 id="cluster-interface-list">Cluster Interface list</h2>
+<p>It displays the list of available network card / IP address within the Vulture cluster. Click on a line to edit the configuration of a given interface and click on <em>Add an entry</em> to create a new one.</p>
+<p><code>Name</code> : This is the friendly name of the network interface.</p>
+<p><code>Type</code> : Vulture considers 2 types of network card.</p>
+<ol>
+<li>
+<p><strong>"System" network interface</strong></p>
+<p>These are the network interfaces configured by default during HBSD install. Vulture detects theses cards using the <strong>/sbin/ifconfig</strong> command and store the corresponding configuration into MongoDB database. Then, vultured will generate the <em>/etc/rc.conf.d/network</em> configuration file for you. DO NOT MODIFY THIS FILE BY HAND, has it will be overwritten by vultured.</p>
+<p>So you cannot add "additional" network configuration in this file.</p>
+<p>If you want to add custom network configuration, use the <em>/usr/local/etc/custom.intf</em> file : Its content will be merged by Vulture in the <strong>/etc/rc.conf.d/network</strong> file.</p>
+<p>For example, if you want to configure an LACP trunk using bge0 and bge1 NIC, you will add the folowing configuration into <strong>/usr/local/etc/custom.intf</strong> :</p>
+<pre><code>&gt; ifconfig_bge0="up"
+&gt; ifconfig_bge1="up"
+&gt; ifconfig_lagg0="up laggproto lacp laggport bge0 laggport bge1"
+</code></pre>
+<p>If you have system card that are not showing up in the Vulture GUI (in case you modified the system configuration for example or if you add additional network card), click on <em>Refresh NIC</em> on the upper right corner to synchronize system configuration with MongoDB configuration.</p>
+</li>
+<li>
+<p><strong>"Alias" network interface</strong></p>
+<p>You may add additional IP address to existing NIC, using the "Add an entry" menu. Whenever you do this, the created network interface will be flagged as "alias".</p>
+<p>The corresponding configuration will be stored in <strong>/etc/rc.conf.d/netaliases</strong>. DO NOT MODIFY THIS FILE BY HAND, has it will be overwritten by vultured.</p>
+</li>
+</ol>
+<p><code>NIC</code> : This shows the Node and the network card attached to the Vulture network interface.</p>
+<p><code>IP Address</code> : This is(are) the IP address(es) associated to the Vulture network interface.</p>
+<p><code>Netmask</code> : This is the corresponding netwask or prefix associated to the IP address of the Vulture network interface.</p>
+<p><code>CARP vhid</code> : For CARP IP addresses, this is the VirtualHost ID. Set vhid=0 (DIsabled) for non-carp ip address.</p>
+<p><code>VLAN</code> : If the Vulture network interface should by tagged in a VLAN, defines the VLANID here. Use vlan=0 to disable VLAN.</p>
+<p><code>Action</code> : Here you can delete a Vulture network interface, only if it is an alias interface.</p>
+<h2 id="add-modify-a-network-card">Add / Modify a network card</h2>
+<p><code>Name</code> : This is the friendly name of the network interface.</p>
+<p><code>Network Interface Cards</code> : Select the NIC to use for the new interface. If you want to create a CARP IP address, you can select multiple NIS here. Then you will have to configure the CARP priority for each NIC within the CARP group.</p>
+<p><code>IP Address</code> : This is the IP address associated to the Vulture network interface.</p>
+<p><code>Netmask</code> : This is the corresponding netwask or prefix associated to the IP address of the Vulture network interface.</p>
+<p><code>CARP vhid</code> : For CARP IP addresses, this is the VirtualHost ID. Set vhid=0 (DIsabled) for non-carp ip address.</p>
+<p><code>Vlan ID</code> : If the Vulture network interface should by tagged in a VLAN, defines the VLANID here. Use vlan=0 to disable VLAN.</p>
+<p><code>Vlan parent device</code> : When using a VLAN for your network interface, you need to associate the parent physical system NIC.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../tenant/" title="Multi-Tenants"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../users/" title="Users">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../tenant/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../users/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/services/listener/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Frontend listeners - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Frontend listeners";
+        var mkdocs_page_input_path = "services/listener.md";
+        var mkdocs_page_url = "/doc/services/listener/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Frontend listeners</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#global-parameters">Global parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#listeners">Listeners</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logs-enrichment">Logs Enrichment</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logs-forwarder">Logs Forwarder</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-configuration">Custom configuration</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-rsyslog-listening-modes">Specific settings for Rsyslog Listening Modes</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-listening-mode-specific-parameters">FILE listening mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#kafka-listening-mode-specific-parameters">KAFKA listening mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#redis-listening-mode-specific-parameters">REDIS listening mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-listening-mode-specific-parameters">Vendor Log API listening mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-forcepoint-specific-parameters">Vendor Log API Forcepoint specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-aws-bucket-specific-parameters">Vendor Log API AWS bucket specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-symantec-specific-parameters">Vendor Log API Symantec specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-akamai-specific-parameters">Vendor Log API Akamai specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-office365-specific-parameters">Vendor Log API Office365 specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-imperva-specific-parameters">Vendor Log API Imperva specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-reachfive-specific-parameters">Vendor Log API ReachFive specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-mongodb-atlas-specific-parameters">Vendor Log API MongoDB (Atlas) specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-defender-atp-specific-parameters">Vendor Log API Defender ATP specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cortex-xdr-specific-parameters">Vendor Log API Cortex XDR specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cybereason-specific-parameters">Vendor Log API Cybereason specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-meraki-specific-parameters">Vendor Log API Cisco Meraki specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-proofpoint-tap-specific-parameters">Vendor Log API Proofpoint TAP specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-sentinelone-specific-parameters">Vendor Log API SentinelOne specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-carbonblack-specific-parameters">Vendor Log API CarbonBlack specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-netskope-specific-parameters">Vendor Log API Netskope specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-rapid7-idr-specific-parameters">Vendor Log API Rapid7 IDR specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-harfanglab-specific-parameters">Vendor Log API HarfangLab specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-vadesecure-specific-parameters">Vendor Log API Vadesecure specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-defender-specific-parameters">Vendor Log API Defender specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-crowdstrike-specific-parameters">Vendor Log API CrowdStrike specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-vadesecure-0365-specific-parameters">Vendor Log API Vadesecure 0365 specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-nozomi-probe-specific-parameters">Vendor Log API Nozomi Probe specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-blackberry-cylance-specific-parameters">Vendor Log API Blackberry Cylance specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-microsoft-sentinel-specific-parameters">Vendor Log API Microsoft Sentinel specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-proofpoint-pod-specific-parameters">Vendor Log API Proofpoint PoD specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-waf-cloudflare-specific-parameters">Vendor Log API WAF Cloudflare specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-google-worspace-alertcenter-specific-parameters">Vendor Log API Google worspace alertcenter specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-sophos-cloud-specific-parameters">Vendor Log API Sophos Cloud specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-trendmicro_worryfree-specific-parameters">Vendor Log API Trendmicro_worryfree specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-safenet-specific-parameters">Vendor Log API Safenet specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-proofpoint-casb-specific-parameters">Vendor Log API Proofpoint CASB specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-proofpoint-trap-specific-parameters">Vendor Log API Proofpoint TRAP specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-waf-cloud-protector-specific-parameters">Vendor Log API WAF Cloud Protector specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-trendmicro-visionone-specific-parameters">Vendor Log API Trendmicro visionone specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-duo-specific-parameters">Vendor Log API Cisco Duo specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-sentinel-one-mobile-specific-parameters">Vendor Log API Sentinel One Mobile specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-csc-domainmanager-specific-parameters">Vendor Log API CSC DomainManager specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-retarus-specific-parameters">Vendor Log API Retarus specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-vectra-specific-parameters">Vendor Log API Vectra specific parameters</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#filebeat-module">Filebeat Module</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filebeat-configuration">Filebeat Configuration</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Services</li>
+<li class="breadcrumb-item active">Frontend listeners</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-services-listener-settings">WebGUI - Menu "Services / Listener settings"</h1>
+<p>From this view you can edit the settings of a specific frontend listener.</p>
+<p>Multiple modes are available when creating a listener :</p>
+<ul>
+<li><strong>TCP</strong> : Create a TCP HAProxy frontend</li>
+<li><strong>HTTP</strong> : Create an HTTP HAProxy frontend</li>
+<li><strong>LOG(Rsyslog)</strong> : Create a TCP (Haproxy-&gt;Rsyslog) or a UDP (Rsyslog) or a Vendor Cloud API frontend LOG Listener</li>
+<li><strong>LOG(Filebeat)</strong> : Create a TCP (Haproxy-&gt;Filebeat) or a UDP (Filebeat) LOG Listener</li>
+</ul>
+<p>Depending on which mode you chose, configuration settings differ.</p>
+<h2 id="global-parameters">Global parameters</h2>
+<p>Some of the following configuration parameters are not used in some specific cases, mentionned for each of them.</p>
+<p><code>Enable listener</code> : You can enable or disable your listener.</p>
+<p><code>Friendly Name</code> : Here you can specify a friendly name for your listener. You cannot have multiple listeners with the same name.</p>
+<p><code>Enable logging</code> : This parameter is implicitly enabled in LOG mode.</p>
+<p>You can enable or disable events forwarding. Mandatory if you want to select a <a href="../../applications/logs_forwarder/">Logs Forwarder</a>.</p>
+<p><code>Rsyslog Listening mode</code> : Here you chose a listening mode for your input :</p>
+<ul>
+<li><strong>UDP</strong> (listen logs with the Rsyslog imudp module)</li>
+<li><strong>TCP</strong> (listen logs with the Rsyslog imtcp module)</li>
+<li><strong>TCP &amp; UDP</strong> (listen logs with Rsyslog imudp and imtcp module)</li>
+<li><strong>RELP</strong> (listen logs with Rsyslog imrelp module)</li>
+<li><strong>FILE</strong> (listen logs with Rsyslog imfile module)</li>
+<li><strong>Vendor Specific API</strong> (retrieve logs from external API events collect) </li>
+<li><strong>KAFKA</strong> (collect logs from a kafka server, with Rsyslog imkafka module)</li>
+<li><strong>REDIS</strong> (collect logs from a redis server, with Rsyslog imhiredis module)</li>
+</ul>
+<p>Depending on which listening mode you chose, configuration settings differs.
+<strong>See below for the specific configuration settings</strong></p>
+<p><code>Input logs type</code> : Here you can select the format of input logs, for example :</p>
+<ul>
+<li><strong>generic_json</strong> (json formatted logs)</li>
+<li><strong>raw_to_json</strong> (no specific format, but convert logs to json)</li>
+</ul>
+<p><code>Parser tag</code>: #Fixme</p>
+<p><code>Tags</code>: #Fixme</p>
+<p><code>Darwin policies</code>: #Fixme</p>
+<p><code>Disable Octet Counting Framing</code> : Here you specify the Rsyslog imtcp option "SupportOctetCountedFraming", this is an advanced option, enable the option only if you know what you are doing.</p>
+<p><code>rate-limiting interval</code>: #Fixme</p>
+<p><code>rate-limiting burst</code>: #Fixme</p>
+<h2 id="listeners">Listeners</h2>
+<p>Listeners are not shown in LOG mode with listening mode Kafka, Redis or File. Indeed, there is no need to accept incoming trafic. Instead, Vulture will initiate a connection to the remote Databroker or read a local File to retrieve logs.</p>
+<p>Here you can configure the listening, by configuring for each row the following parameters :</p>
+<ul>
+<li><strong>Listen address</strong> : Select the IP address you want to listen on</li>
+<li><strong>Port</strong> : Configure the port you want to listen on</li>
+<li><strong>TLS Profile</strong> : Not supported for now in LOG mode, here you can select a <a href="../../global_config/tls/">TLS Profile</a></li>
+<li><strong>Allow from</strong> : "Any" by default, configure a comma separated list of allowed IP addresses to connect from</li>
+<li><strong>Max src</strong> : Configure a max number of source IP addresses allowed to connect</li>
+<li><strong>Max rate</strong> : Configure a max rate</li>
+</ul>
+<p><code>Timeout connect</code> : Configure the allowed connect timeout (in ms) after which HAProxy will end new connection.</p>
+<p><code>Timeout client</code> : Set the maximum inactivity time on the client side.</p>
+<h2 id="logs-enrichment">Logs Enrichment</h2>
+<p><code>Tenants config</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can select a <a href="../../global_config/tenant/">Multi-tenants configuration</a>, that will be used to enrich logs and select enrichment databases.</p>
+<p><code>Enable reputation logging</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can enable or disable logs enrichment with Rsyslog, by configuring parameters below.</p>
+<p><code>Reputation database IPv4</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can select an <a href="../../applications/cti_lookup/">IPv4 MMDB database</a> to enrich logs with source and destination IPv4 addresses informations (ex: reputation).</p>
+<p><code>Reputation database IPv6</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can select an <a href="../../applications/cti_lookup/">IPv6 MMDB database</a> to enrich logs with source and destination IPv6 addresses informations (ex: reputation).</p>
+<p><code>GeoIP database (IPv4)</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can select an <a href="../../applications/cti_lookup/">GeoIP MMDB database</a> to enrich logs with public source and destination IP addresses localization.</p>
+<p><code>Reputation contexts</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>Here you can configure more specificly the enrichment of logs by selecting and configuring 4 fields by row :</p>
+<ul>
+<li><strong>Enabled</strong> : Enable of disable the row</li>
+<li><strong>IOC database</strong> : Select the <a href="../../applications/cti_lookup/">reputation context</a> to use</li>
+<li><strong>Input field name</strong> : Configure the field name to send to database</li>
+<li><strong>Destination field name</strong> : Configure the field name you want to stock the result into</li>
+</ul>
+<h2 id="logs-forwarder">Logs Forwarder</h2>
+<p>This section is useless if you select a mode different of LOG or if you disable logging. You can here select Log forwarder(s).
+If events are correctly parsed, depending on which ruleset is configured, they will be sent to this remote log forwarder.</p>
+<p>See <a href="../../applications/logs_forwarder/">Logs Forwarder</a> to define remote log repositories.</p>
+<p><code>Log condition (advanced)</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
+<p>You can here configure an Rsyslog custom configuration bloc. Only use this parameter if you know what your doing.
+Using this interface you can rename parsed JSON field or add rsyslog's rainer script conditions on the log pipeline.</p>
+<h2 id="custom-configuration">Custom configuration</h2>
+<p>Via this tab, you may declare custom HAProxy directives. These directives will be placed within the [Frontend] section of HAProxy configuration file related to the current Listener.</p>
+<h2 id="specific-settings-for-rsyslog-listening-modes">Specific settings for Rsyslog Listening Modes</h2>
+<h3 id="file-listening-mode-specific-parameters">FILE listening mode specific parameters</h3>
+<p><code>Node</code> : Configure the node on which you want to listen on file (or kafka or redis).</p>
+<p><code>File path</code> : Specify the absolute path of the file to listen on.</p>
+<p><code>Tags</code> : Specify one or multiple comma separated tag(s) to associate on your listener.</p>
+<h3 id="kafka-listening-mode-specific-parameters">KAFKA listening mode specific parameters</h3>
+<p><code>Kafka Brokers</code> : Configure comma separated list of Kafka broker(s) to poll logs from.</p>
+<p><code>Kafka topic</code> : Configure kafka topic to poll logs from.</p>
+<p><code>Kafka consumer group</code> : Optional, configure the kafka consumer group to use to poll logs from.</p>
+<h3 id="redis-listening-mode-specific-parameters">REDIS listening mode specific parameters</h3>
+<p>This listener relies on rsyslog / imhiredis, and has two modes of operation :</p>
+<p><code>Queue Mode, using push/pop</code> : The queue mode will LPOP or RPOP your message from a redis list.</p>
+<p>Following parameters are required :</p>
+<ul>
+<li><strong>Redis consumer mode</strong> : Set mode to "queue" to enable the queue mode</li>
+<li><strong>Redis key</strong> : The key to xPOP on</li>
+<li><strong>Redis server</strong> : The name or IP address of the redis server (Vulture's Internal redis is 127.0.0.3)</li>
+<li><strong>Redis port</strong> : The redis listening port (default is 6379)</li>
+</ul>
+<p>Following parameters are optional :</p>
+<ul>
+<li><strong>Redis password</strong> : If set, the plugin will issue an "AUTH" command before calling xPOP</li>
+<li><strong>Use LPOP</strong> : If set to "on", LPOP will be used instead of default RPOP</li>
+</ul>
+<p>Redis pipelining is used inside the workerthread, with a hardcoded batch size of #10.</p>
+<p>Imhiredis will query Redis every second to see if entries are in the list, if that's the case they will be dequeued continuously by batches of 10 until none remains.</p>
+<p>Due to its balance between polling interval and pipelining and its use of lists, this mode is quite performant and reliable.
+However, due to the 1 second polling frequency, one may consider using the <code>subscribe</code> mode instead if very low latency is required.</p>
+<p><code>Chanel Mode, using pub/sub</code> : The channel mode will SUBSCRIBE to a redis channel.</p>
+<p>The "key" parameter is required and will be used for the subscribe channel.</p>
+<p>Following parameters are required :</p>
+<ul>
+<li><strong>Redis consumer mode</strong> : Set mode to "subscribe" to enable the subscribe mode</li>
+<li><strong>Redis key</strong> : The key to subscribe to (aka the "channel")</li>
+<li><strong>Redis server</strong> : The name or IP address of the redis server</li>
+<li><strong>Redis port</strong> : The redis listening port</li>
+</ul>
+<p>Following parameters are optional :</p>
+<ul>
+<li><strong>password</strong> : If set, the plugin will issue an "AUTH" command before listening to a channel</li>
+<li><strong>uselpop</strong> : Useless in channel mode</li>
+</ul>
+<h3 id="vendor-log-api-listening-mode-specific-parameters">Vendor Log API listening mode specific parameters</h3>
+<p><code>API Parser Type</code> : Here you can chose the technology of events you want to retrieve api events from.</p>
+<p>The following endpoints are supported :</p>
+<ul>
+<li>FORCEPOINT</li>
+<li>AWS BUCKET</li>
+<li>SYMANTEC</li>
+<li>AKAMAI</li>
+<li>OFFICE 365</li>
+<li>IMPERVA</li>
+<li>REACHFIVE</li>
+<li>MONGODB</li>
+<li>DEFENDER ATP</li>
+<li>CORTEX XDR</li>
+<li>CYBEREASON</li>
+<li>CISCO MERAKI</li>
+<li>PROOFPOINT TAP</li>
+<li>SENTINEL ONE</li>
+<li>CARBON BLACK</li>
+<li>NETSKOPE</li>
+<li>RAPID7 IDR</li>
+<li>HARFANGLAB</li>
+<li>VADESECURE</li>
+<li>DEFENDER</li>
+<li>CROWDSTRIKE</li>
+<li>VADESECURE O365</li>
+<li>NOZOMI PROBE</li>
+<li>BLACKBERRY CYLANCE</li>
+<li>MS SENTINEL</li>
+<li>PROOFPOINT POD</li>
+<li>WAF CLOUDFLARE</li>
+<li>GSUITE ALERTCENTER</li>
+<li>SOPHOS CLOUD</li>
+<li>TRENDMICRO WORRYFREE</li>
+<li>SAFENET</li>
+<li>PROOFPOINT CASB</li>
+<li>PROOFPOINT TRAP</li>
+<li>WAF CLOUD PROTECTOR</li>
+<li>TRENDMICRO VISIONONE</li>
+<li>CISCO DUO</li>
+<li>SENTINEL ONE MOBILE</li>
+<li>CSC_DOMAINMANAGER</li>
+<li>RETARUS</li>
+<li>VECTRA</li>
+</ul>
+<p><code>Use proxy</code> : Use proxy for requests (will use System Proxy if no <code>Custom Proxy</code> is configured)</p>
+<p><code>Custom Proxy</code> : Url of the proxy used by the API collector (system proxy if not set)</p>
+<p><code>Verify certificate</code> : Enable the verification of the certificates used by the API endpoint</p>
+<p><code>Custom certificate</code> : Provide a custom certificate previously added in the <a href="../../global_config/pki/">X509 Certificates</a> menu</p>
+<h3 id="vendor-log-api-forcepoint-specific-parameters">Vendor Log API Forcepoint specific parameters</h3>
+<p><code>Forcepoint host</code> : Beginning url of the forcepoint endpoint to retrieve events from. Logs will be collected from {forcepoint_host}/siem/logs.</p>
+<p><code>Forcepoint username</code> : Username to use to authenticate to Forcepoint API.</p>
+<p><code>Forcepoint password</code> : Password to use to authenticate to Forcepoint API.</p>
+<h3 id="vendor-log-api-aws-bucket-specific-parameters">Vendor Log API AWS bucket specific parameters</h3>
+<p><code>AWS Access Key Id</code> : Key ID to use to authenticate on AWS API endpoint.</p>
+<p><code>AWS Secret Access Key</code> : Secret key to use to authenticate on AWS API endpoint.</p>
+<p><code>AWS Bucket Name</code> : Bucket name to retrieve events from.</p>
+<h3 id="vendor-log-api-symantec-specific-parameters">Vendor Log API Symantec specific parameters</h3>
+<p><code>Symantec username</code> : Username to use to authenticate on Symantec API endpoint.</p>
+<p><code>Symantec password</code> : Password to use to authenticate on Symantec API endpoint.</p>
+<h3 id="vendor-log-api-akamai-specific-parameters">Vendor Log API Akamai specific parameters</h3>
+<p><code>Akamai Host</code> : Akamai domaine name to collect events from.</p>
+<p><code>Akamai Client Secret</code> : Client Secret to use to authenticate on Akamai API endpoint.</p>
+<p><code>Akamai Access Token</code> : Access Token to use to authenticate on Akamai API endpoint.</p>
+<p><code>Akamai Client Token</code> : Client Token to use to authenticate on Akamai API endpoint.</p>
+<p><code>Akamai Config ID</code> : Config ID to use to retrieve events from Akamai API endpoint.</p>
+<h3 id="vendor-log-api-office365-specific-parameters">Vendor Log API Office365 specific parameters</h3>
+<p><code>Office365 Tenant ID</code> : Tenant to use to collect events from Office365 API endpoint.</p>
+<p><code>Office365 Client ID</code> : Client ID to use to authenticate on Akamai API endpoint.</p>
+<p><code>Office365 Client Secret</code> : Client secret to use to authenticate on Akamai API endpoint.</p>
+<h3 id="vendor-log-api-imperva-specific-parameters">Vendor Log API Imperva specific parameters</h3>
+<p><code>Imperva Base Url</code> : Base URL to use to collect events from. It should ends with a /.</p>
+<p><code>Imperva Api ID</code> : App ID to use to authenticate on Imperva API endpoint.</p>
+<p><code>Imperva Api Key</code> : Api secret to use to authenticate on Imperva API endpoint.</p>
+<p><code>Imperva Private Key</code> : Private Key to use to decrypt collected events from Imperva API endpoint.</p>
+<h3 id="vendor-log-api-reachfive-specific-parameters">Vendor Log API ReachFive specific parameters</h3>
+<p><code>ReachFive Host</code> : Host name to use to retrieve events from. Ex: reachfive.domain.com.</p>
+<p><code>ReachFive Client ID</code> : Client ID to use to authenticate on ReachFive API endpoint.</p>
+<p><code>ReachFive Client Secret</code> : Client Secret to use to authenticate on ReachFive API endpoint.</p>
+<h3 id="vendor-log-api-mongodb-atlas-specific-parameters">Vendor Log API MongoDB (Atlas) specific parameters</h3>
+<p><code>Mongodb API User</code> : User to use to authenticate on MongoDB API endpoint.</p>
+<p><code>MongoDB API Password</code> : Password to use to authenticate on MongoDB API endpoint.</p>
+<p><code>MongoDB API Group ID</code> : Group ID to use to retrieve events from MongoDB API endpoint.</p>
+<h3 id="vendor-log-api-defender-atp-specific-parameters">Vendor Log API Defender ATP specific parameters</h3>
+<p><code>MDATP API Tenant</code> : Tenant ID to use to retrieve events from Defender ATP API endpoint.</p>
+<p><code>MDATP API App ID</code> : App ID to use to authenticate on Defender ATP API endpoint.</p>
+<p><code>MDATP API Secret</code> : Secret to use to authenticate on Defender ATP API endpoint.</p>
+<h3 id="vendor-log-api-cortex-xdr-specific-parameters">Vendor Log API Cortex XDR specific parameters</h3>
+<p><code>Cortex XDR Host</code> : Host name to use to retrieve events from API endpoint.</p>
+<pre><code>This parameter will be used as : https://api-{cortex_xdr_host}/public_api/v1/
+</code></pre>
+<p><code>Cortex XDR API Key ID</code> : API Key ID to use to authenticate on API endpoint.</p>
+<p><code>Cortex XDR API Key</code> : API Key to use to authenticate on API endpoint.</p>
+<h3 id="vendor-log-api-cybereason-specific-parameters">Vendor Log API Cybereason specific parameters</h3>
+<p><code>Cybereason Host</code> : Base URL (with scheme) to use to retrieve events from Cybereason API endpoint.</p>
+<p><code>Cybereason Username</code> : Username to use to authenticate on Cybereason API endpoint.</p>
+<p><code>Cybereason Password</code> : Password to use to authenticate on Cybereason API endpoint.</p>
+<h3 id="vendor-log-api-cisco-meraki-specific-parameters">Vendor Log API Cisco Meraki specific parameters</h3>
+<p><code>Cisco Meraki API Key</code> : API Key to use to authenticate on Cisco Meraki API endpoint.</p>
+<h3 id="vendor-log-api-proofpoint-tap-specific-parameters">Vendor Log API Proofpoint TAP specific parameters</h3>
+<p><code>Proofpoint TAP Host</code> : Base URL to use to retrieve events from Proofpoint TAP API endpoint.</p>
+<pre><code>Ex: https://tap-api-v2.proofpoint.com
+</code></pre>
+<p><code>Proofpoint TAP Endpoint</code> : Kind of events to retrieve from Proofpoint TAP endpoint :</p>
+<ul>
+<li>all (/all)</li>
+<li>clicks/blocked (/clicks/blocked)</li>
+<li>clicks/permitted (/clicks/permitted)</li>
+<li>messages/blocked (/messages/blocked)</li>
+<li>messages/delivered (/messages/delivered)</li>
+<li>issues (/issues)</li>
+</ul>
+<p><code>Proofpoint TAP Principal</code> : Principal (username) to use to authenticate on Proofpoint API endpoint.</p>
+<p><code>Proofpoint TAP Secret</code> : Secret (password) to use to authenticate on Proofpoint API endpoint.</p>
+<h3 id="vendor-log-api-sentinelone-specific-parameters">Vendor Log API SentinelOne specific parameters</h3>
+<p><code>SentinelOne Host</code> : Hostname (without scheme or path) of the SentinelOne server.</p>
+<p><code>Sentinel One API key</code> : API key used to retrieve logs - as configured in SentinelOne settings.</p>
+<p><code>Sentinel One Account type</code> : Type of account : console or user service.</p>
+<h3 id="vendor-log-api-carbonblack-specific-parameters">Vendor Log API CarbonBlack specific parameters</h3>
+<p><code>CarbonBlack Host</code> : Hostname (without scheme or path) of the CarbonBlack server.</p>
+<p><code>CarbonBlack organisation name</code> : Organisation name.</p>
+<p><code>CarbonBlack API key</code> : API key used to retrieve logs.</p>
+<h3 id="vendor-log-api-netskope-specific-parameters">Vendor Log API Netskope specific parameters</h3>
+<p><code>Netskope Host</code> : Hostname (without scheme or path) of the Netskope server.</p>
+<p><code>Netskope API token used to retrieve events</code> : Netskope API token.</p>
+<h3 id="vendor-log-api-rapid7-idr-specific-parameters">Vendor Log API Rapid7 IDR specific parameters</h3>
+<p><code>rapid7 IDR Host</code> : Hostname (without scheme or path) of the Rapid7 server.</p>
+<p><code>Rapid7 IDR API key</code> : API key used to retrieve logs.</p>
+<h3 id="vendor-log-api-harfanglab-specific-parameters">Vendor Log API HarfangLab specific parameters</h3>
+<p><code>HarfangLab Host</code> : Hostname (without scheme or path) of the HarfangLab server.</p>
+<p><code>HarfangLab API key</code> : API key to use to contact HarfangLab api.</p>
+<h3 id="vendor-log-api-vadesecure-specific-parameters">Vendor Log API Vadesecure specific parameters</h3>
+<p><code>Vadesecure Host</code> : Hostname (without scheme or path) of the Vadesecure server.</p>
+<p><code>Vadesecure login</code> : Login used to fetch the token for the Vadesecure API.</p>
+<p><code>Vadesecure password</code> : Password used to fetch the token for the Vadesecure API.</p>
+<h3 id="vendor-log-api-defender-specific-parameters">Vendor Log API Defender specific parameters</h3>
+<p><code>Defender token endpoint</code> : Complete enpoint address to get an Oauth token before requesting Microsoft's APIs.</p>
+<p><code>Defender OAuth client id</code> : Client id of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.</p>
+<p><code>Defender OAuth client secret</code> : Client secret of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.</p>
+<h3 id="vendor-log-api-crowdstrike-specific-parameters">Vendor Log API CrowdStrike specific parameters</h3>
+<p><code>CrowdStrike Host</code> : Complete enpoint address.</p>
+<p><code>CrowdStrike Username</code> : User's name.</p>
+<p><code>CrowdStrike Client ID</code> : Client ID used for authentication.</p>
+<p><code>CrowdStrike Client's Secret</code> : Client's secret used for authentication.</p>
+<h3 id="vendor-log-api-vadesecure-0365-specific-parameters">Vendor Log API Vadesecure 0365 specific parameters</h3>
+<p><code>Vadesecure O365 Host</code> : FQDN of the API endpoint.</p>
+<p><code>Vadesecure O365 tenant</code> : Tenant.</p>
+<p><code>Vadesecure O365 Client ID</code> : Client ID used for authentication.</p>
+<p><code>Vadesecure O365 Client's Secret</code> : Client's secret used for authentication.</p>
+<h3 id="vendor-log-api-nozomi-probe-specific-parameters">Vendor Log API Nozomi Probe specific parameters</h3>
+<p><code>Nozomi Probe Host</code> : Hostname (without scheme or path) of the Nozomi Probe.</p>
+<p><code>Nozomi Probe User</code> : User to use to contact Nozomi probe api.</p>
+<p><code>Nozomi Probe Password</code> : Password to use to contact Nozomi probe api.</p>
+<h3 id="vendor-log-api-blackberry-cylance-specific-parameters">Vendor Log API Blackberry Cylance specific parameters</h3>
+<p><code>Blackberry Cylance Host</code> : FQDN of the API endpoint.</p>
+<p><code>Blackberry Cylance tenant</code> : Tenant.</p>
+<p><code>Blackberry Cylance Application ID</code> : Client ID used for authentication.</p>
+<p><code>Blackberry Cylance Application's Secret</code> : Client's secret used for authentication.</p>
+<h3 id="vendor-log-api-microsoft-sentinel-specific-parameters">Vendor Log API Microsoft Sentinel specific parameters</h3>
+<p><code>Microsoft Sentinel Tenant ID</code> : Your Microsoft Tenant ID.</p>
+<p><code>Microsoft Sentinel App ID</code> : Microsoft Sentinel Client ID.</p>
+<p><code>Microsoft Sentinel App Secret</code> : Application Secret.</p>
+<p><code>Microsoft Sentinel Subscription ID</code> : Subscription ID.</p>
+<p><code>Microsoft Sentinel Resource Group</code> : Resource Group name.</p>
+<p><code>Microsoft Sentinel Workspace</code> : Workspace name.</p>
+<h3 id="vendor-log-api-proofpoint-pod-specific-parameters">Vendor Log API Proofpoint PoD specific parameters</h3>
+<p><code>Proofpoint PoD URI</code> : Server URI.</p>
+<p><code>Proofpoint PoD Cluster ID</code> : Cluster ID.</p>
+<p><code>Proofpoint PoD Authentication token</code> : Authentication token.</p>
+<h3 id="vendor-log-api-waf-cloudflare-specific-parameters">Vendor Log API WAF Cloudflare specific parameters</h3>
+<p><code>WAF Cloudflare API token</code> : WAF Cloudflare  API token.</p>
+<p><code>WAF Cloudflare zone ID</code> : WAF Cloudflare zone ID.</p>
+<h3 id="vendor-log-api-google-worspace-alertcenter-specific-parameters">Vendor Log API Google worspace alertcenter specific parameters</h3>
+<p><code>Google Alertcenter JSON Conf</code> : Your JSON Conf from Google.</p>
+<p><code>Google Alertcenter Admin email for delegated wrights</code> : Google Alertcenter Admin email.</p>
+<h3 id="vendor-log-api-sophos-cloud-specific-parameters">Vendor Log API Sophos Cloud specific parameters</h3>
+<p><code>Sophos Cloud - Client ID</code> : Client ID.</p>
+<p><code>Sophos Cloud - Client Secret</code> : Client Secret.</p>
+<p><code>Sophos Cloud - Tenant ID</code> : Tenant ID.</p>
+<h3 id="vendor-log-api-trendmicro_worryfree-specific-parameters">Vendor Log API Trendmicro_worryfree specific parameters</h3>
+<p><code>Trendmicro Worryfree access token</code> : Trendmicro Worryfree access token.</p>
+<p><code>Trendmicro Worryfree secret key</code> : Trendmicro Worryfree secret key.</p>
+<p><code>Trendmicro Worryfree server name</code> : Trendmicro Worryfree server name.</p>
+<p><code>Trendmicro Worryfree server port</code> : Trendmicro Worryfree server port.</p>
+<h3 id="vendor-log-api-safenet-specific-parameters">Vendor Log API Safenet specific parameters</h3>
+<p><code>Safenet Tenant Code</code> : Your Safenet Tenant Code.</p>
+<p><code>Safenet API Key</code> : Safenet Token API.</p>
+<h3 id="vendor-log-api-proofpoint-casb-specific-parameters">Vendor Log API Proofpoint CASB specific parameters</h3>
+<p><code>Proofpoint CASB API KEY</code> : Proofpoint CASB API KEY.</p>
+<p><code>Proofpoint CASB Client ID</code> : Proofpoint CASB Client ID.</p>
+<p><code>Proofpoint CASB Client Secret</code> : Proofpoint CASB Client Secret.</p>
+<h3 id="vendor-log-api-proofpoint-trap-specific-parameters">Vendor Log API Proofpoint TRAP specific parameters</h3>
+<p><code>ProofPoint TRAP host</code> : ProofPoint API root url.</p>
+<p><code>ProofPoint TRAP API key</code> : ProofPoint TRAP API key.</p>
+<h3 id="vendor-log-api-waf-cloud-protector-specific-parameters">Vendor Log API WAF Cloud Protector specific parameters</h3>
+<p><code>WAF CloudProtector host</code> : Hostname (without scheme or path) of the CloudProtector server.</p>
+<p><code>WAF CloudProtector public key</code> : base64 encodid public key to contact CloudProtector API.</p>
+<p><code>WAF CloudProtector private key</code> : base64 encodid private key to contact CloudProtector API.</p>
+<p><code>WAF Cloud Protector provider</code> : Provider used to retrieve event from.</p>
+<p><code>WAF Cloud Protector tenant</code> : Tenant used to retrieve event from.</p>
+<p><code>WAF Cloud Protector servers</code> : Servers to for wich to retrieve traffic and alert events.</p>
+<h3 id="vendor-log-api-trendmicro-visionone-specific-parameters">Vendor Log API Trendmicro visionone specific parameters</h3>
+<p><code>Trendmicro visionone token</code> : Trendmicro visionone token.</p>
+<h3 id="vendor-log-api-cisco-duo-specific-parameters">Vendor Log API Cisco Duo specific parameters</h3>
+<p><code>Cisco Duo API hostname</code> : Cisco Duo API hostname.</p>
+<p><code>Cisco Duo API ikey</code> : Cisco Duo API integration key.</p>
+<p><code>Cisco Duo API skey</code> : Cisco Duo API secret key.</p>
+<h3 id="vendor-log-api-sentinel-one-mobile-specific-parameters">Vendor Log API Sentinel One Mobile specific parameters</h3>
+<p><code>Sentinel One Mobile API hostname</code> : Sentinel One Mobile API hostname.</p>
+<p><code>Sentinel One Mobile API ikey</code> : Sentinel One Mobile API integration key.</p>
+<h3 id="vendor-log-api-csc-domainmanager-specific-parameters">Vendor Log API CSC DomainManager specific parameters</h3>
+<p><code>CSC DomainManager API Key</code> : CSC DomainManager API Key.</p>
+<p><code>CSC DomainManager Authorization</code> : CSC DomainManager Authorization HTTP Header token prefixed by Bearer, ex: Bearer xxxx-xxxx-xxxx-xxxx.</p>
+<h3 id="vendor-log-api-retarus-specific-parameters">Vendor Log API Retarus specific parameters</h3>
+<p><code>Retarus token</code> : Retarus token.</p>
+<p><code>Retarus channel</code> : Retarus channel.</p>
+<h3 id="vendor-log-api-vectra-specific-parameters">Vendor Log API Vectra specific parameters</h3>
+<p><code>Vectra url</code> : Vectra url with scheme.</p>
+<p><code>Vectra secret key</code> : Vectra secret key.</p>
+<p><code>Vectra client id</code> : Vectra client id.</p>
+<h2 id="specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</h2>
+<h3 id="filebeat-module">Filebeat Module</h3>
+<p>Fixme</p>
+<h3 id="filebeat-configuration">Filebeat Configuration</h3>
+<p>Fixme</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../../global_config/tls/" title="TLS Profiles"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../ipsec_client/" title="IPSEC Client">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../../global_config/tls/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../ipsec_client/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

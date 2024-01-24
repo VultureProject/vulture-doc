@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/global_config/tls/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>TLS Profiles - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "TLS Profiles";
+        var mkdocs_page_input_path = "global_config/tls.md";
+        var mkdocs_page_url = "/doc/global_config/tls/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">TLS Profiles</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#list-of-tls-profiles">List of TLS Profiles</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tls-profiles">TLS Profiles</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Global Config</li>
+<li class="breadcrumb-item active">TLS Profiles</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-tls-profiles">WebGUI - Menu "TLS Profiles"</h1>
+<p>Whenever you want use TLS in vulture configuration, you will need a "TLS profile".
+TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p>
+<p>From the <strong>"Add an entry"</strong> menu you may create additional TLS profiles.</p>
+<h2 id="list-of-tls-profiles">List of TLS Profiles</h2>
+<p><code>Name</code> : This is the friendly name of the TLS Profile.</p>
+<p><code>Certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
+<p><code>Protocols</code> : Here you can see the activated protocols within the TLS profile. Supported protocols are SSLv3 and TLSv1 (legacy, insecure, do not use !), TLSv1.1, TLSv1.2 and TLSv1.3. Use TLSv1.3 only whenever possible.</p>
+<p><code>Verify Client</code> : When the TLS profile is associated to a TCP/HTTP listener, you may enforce the client to present a valid, trusted, X509 certificate. If verify client is set to "required" : the client MUST present a valid/trusted certificate. If verify client is set to "optional" : the client MAY present a valid/trusted certificate.</p>
+<p><code>Client CA</code> : Whenever the verify client is set to "optional" or "required", here you will see the Friendly name of the <em>X509 CA Certificate</em> that should be trusted.</p>
+<p><code>Action</code> : Here you can <em>delete</em> or <em>clone</em> the TLS profile.</p>
+<h2 id="tls-profiles">TLS Profiles</h2>
+<p>Whenever you want use TLS in vulture configuration, you will need a "TLS profile".
+TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p>
+<p><code>Friendly Name</code> : This is the friendly name of the TLS Profile. Vulture will use this name to refer to the TLS Profile wherever in the Web GUI.</p>
+<p><code>Certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
+<p><code>Browsers compatibility</code> :</p>
+<p>To avoid the pain of selecting complex ciphersuite string, Vulture has packaged ready-to-use TLS ciphers list.</p>
+<ul>
+<li>Advanced (A score) : This is the best choice for security, only TLSv1.3 and TLSv1.2 are allowed, with strong ciphers</li>
+<li>Broad Compatibility (B score) : Same as Advanced, only TLSv1.3 and TLSv1.2 are allowed but allowing the use of less secure ciphers</li>
+<li>Widest Compatibility (C score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with medium ciphers</li>
+<li>Legacy (D score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with low ciphers</li>
+<li>Custom : Here you may choose custom TLS protocols and cipher suite</li>
+</ul>
+<p><code>Advertise protocol list</code> : This allows to configure the HAPROXY TLS ALPN extension and advertises the specified protocol list as supported on top of ALPN.</p>
+<p>The protocol list consists in a list of protocol names, for instance : <em>HTTP1.1 HTTP1.0</em>. ALPN is required to enable HTTP/2 on an HTTP frontend.</p>
+<p>If both HTTP/2 and HTTP/1.1 are expected to be supported, both versions can be advertised, in order of
+preference, like below : <em>HTTP2 HTTP1.1</em></p>
+<p><code>Verify client certificate</code> : When the TLS profile is associated to a TCP/HTTP listener, you may enforce the client to present a valid, trusted, X509 certificate. If verify client is set to "required" : the client MUST present a valid/trusted certificate. If verify client is set to "optional": the client MAY present a valid/trusted certificate.</p>
+<p>If set to "no" : No client certificate are expected / prompted by Vulture.</p>
+<p><code>Client CA</code> : Whenever the verify client is set to "optional" or "required", you have to select here the <em>X509 CA Certificate</em> that should be trusted.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../pki/" title="X509 Certificates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../services/listener/" title="Frontend listeners">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../pki/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../services/listener/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

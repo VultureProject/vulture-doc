@@ -1,0 +1,25 @@
+properties:
+  name:
+    type: string
+  seria:
+    type: number
+  status:
+    type: string
+  cert:
+    type: string
+  key:
+    type: string
+  chain:
+    type: string
+  csr:
+    type: string
+  crl:
+    type: string
+  is_ca:
+    type: boolean
+  is_vulture_ca:
+    type: boolean
+  is_external:
+    type: boolean
+  rev_date:
+    type: string

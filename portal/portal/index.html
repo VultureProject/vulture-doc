@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/portal/portal/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Portal - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Portal";
+        var mkdocs_page_input_path = "portal/portal.md";
+        var mkdocs_page_url = "/doc/portal/portal/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Portal</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to Use</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-portals">Authentication Portals</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#idp-portals">IDP Portals</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#navigating-protected-endpoints">Navigating protected endpoints</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#through-portal-session">Through portal session</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#through-headers">Through Headers</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#main-settings">Main settings</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#otp">OTP</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#disconnect">Disconnect</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#identity-provider">Identity Provider</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oauth2">OAuth2</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sso-forward">SSO Forward</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Authentication Portal</li>
+<li class="breadcrumb-item active">Portal</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="webgui-menu-authentication-portal-portal">WebGUI - Menu "Authentication Portal / Portal"</h1>
+<p>From this view you can manage authentication portals on Vulture. An authentication portal is responsible for user authentication on Web sites protected by Vulture.</p>
+<p>Before creating an authentication portal you need to configure at least one <a href="../../identity/repository/">Authentication repository</a></p>
+<h2 id="how-to-use">How to Use</h2>
+<p>Vulture Portals are divided into 2 different types, those types are explained below.</p>
+<h3 id="authentication-portals">Authentication Portals</h3>
+<p>Authentication portals allow the admin to assign authentication policies to <strong>Workflows</strong>, those policies allow to restrict from a single to multiple endpoints, by associating them to Workflows.<br/>
+Those Portals are purely specific to Vulture and cannot be used outside of them, they simply define authentication rules to apply associated with specific Workflows/endpoints. They allow to define authentication repositories, session durations, access policies and user rights, Single Sign-On and much more.<br/>
+Authenticated sessions are handled between Vulture and Users with a portal cookie, this cookie's name is defined in the <a href="../../global_config/cluster/#sso">Global Cluster's Config</a> and can be changed. The cookie is mapped on the endpoint's <strong>domain</strong>, meaning that several workflows configured on the same domain or subdomain. For example, <em>www.app1.mydomain.com</em>, <em>www.app2.mydomain.com</em>, <em>test.mydomain.com</em> will all have the same portal cookie session with Vulture, mapped on <code>.mydomain.com</code>, . This <em>lax</em> mapping of cookie allows to profit from SSO and cross-Workflow authentication, meaning that a user authenticated through a specific repository allowed by an Authentication Portal A will be able to connect seamlessly to the Authentication Portal B provided the same Repository is also allowed by this Portal : Authentication B will be able to use the global session's cookie to get the User's authentication data and automatically connect them to Workflow B without asking for their credentials again!  </p>
+<p>Authentication Portals are configurable to allow one or more <a href="../../identity/repository/">Authentication Repositories</a>, There are several configuration possibilities:</p>
+<ul>
+<li>Portal allows <strong>one internal Repository</strong> -&gt; an authentication form is available on the Portal, this form will try to authenticate the User directly on the allowed Repository</li>
+<li>Portal allows <strong>more than one internal Repository</strong> -&gt; an authentication form is still available on the Portal, it will try to use the provided User's credentials directly on all the internal Repositories in turn, until it finds one that matches or tries them all without success</li>
+<li>Portal allows <strong>external Repositories</strong> (<a href="../../identity/openid/">OpenID Repositories</a>) -&gt; the Portal's form will include link(s) to redirect the User to the external authentication authorities, the user will be able to connect with them and come back to the Authentication Portal once it's done (provided the external authority allows the Authentication Portal's redirect URI)</li>
+<li><strong>All of the above</strong> -&gt; the Portal's authentication form will include a credentials prompt <strong>and</strong> redirection link(s), the user will be able to choose either method to connect (depending on the repository containing its account) to authenticate</li>
+</ul>
+<h3 id="idp-portals">IDP Portals</h3>
+<p>This kind of Portal is a little bit different, although being named a "Portal", the IDP is not used for the same reasons and with the same configuration.</p>
+<ul>
+<li>IDPs are not <strong>linked to Vulture Workflows</strong></li>
+<li>They are <strong>directly linked</strong> to a <strong>Vulture Listener</strong> and a specific <strong>FQDN</strong></li>
+<li>They are always serving <strong>OpenID Connect APIs</strong> and conform with <strong>OpenID authentication methods</strong></li>
+<li>As they're valid <a href="https://auth0.com/docs/authenticate/protocols/oauth">Oauth2 Authorization Servers</a>, IDP Portals can be used with Vulture, but can also be used with external applications</li>
+<li>They do not use the same session cookie name: its name is generated at random for each created IDP, and can be manually changed on the GUI (through the <em>Session cookie name</em> parameter)</li>
+</ul>
+<p>As you probably understood, IDP Portals define generic Oauth2 Authorization Servers, compatible with OpenID Connect. They can be used alongside Vulture Authentication Portals (<a href="../../identity/openid/">OpenID Connectors</a> will be created for ease of use on Vulture every time a new ID is created) or can be used as regular Authorization Servers with your existing applications and stack.<br/>
+Vulture IDP portals currently provide a subset of Grant Flows usually supported by Oauth2 Authorization Servers:</p>
+<ul>
+<li><a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow">Authorization Code Flow</a>: the most frequently used Grant Type, allows to connect regular server-side web apps</li>
+<li><a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce">Authorization Code Flow with PKCE</a>: a variant of the <code>Authorization Code Flow</code> grant Type, allows to replace the insecure Implicit Grant FLow by securely connecting with client-side applications while keeping User's credentials secure</li>
+<li><a href="https://auth0.com/docs/secure/tokens/refresh-tokens">Refresh Token</a>: allows an application to refresh his access token and extend its session's duration</li>
+</ul>
+<p>Vulture does not currently support other Grant Types (such as <em>Client Credentials</em> or <em>Device Flows</em>), and won't support some of them (<em>Implicit Flow</em>) by choice.<br/>
+Other features not available at the moment include:</p>
+<ul>
+<li><strong>JWT Tokens</strong></li>
+</ul>
+<p>Feel free to <a href="https://github.com/VultureProject/vulture-gui/issues">open issues on our Github</a> if you'd like new features on IDP Portals.</p>
+<h3 id="navigating-protected-endpoints">Navigating protected endpoints</h3>
+<p>When protected by Authentication Portals, Vulture Workflows will check every request made through them to authorize or redirect the client making them. Some behaviours are explained below.</p>
+<h4 id="through-portal-session">Through portal session</h4>
+<p>When authenticated through a regular Portal's Form, a User is authenticated through their <strong>portal session's cookie</strong>. This cookie contains the User's generated scopes and claims (if configured), the repo they authenticated with, their oauth token(s) and technical information on the session.<br/>
+Although the session's timeout can be infinite by activating a parameter (see <a href="#main-settings">Configuration</a> below), activating Oauth2 on the Authentication Portal will generate Bearer tokens, whose timeout cannot be extended. In those cases, you might see two 307 redirections happen at regular intervals while you navigate with your browser: those redirections will allow the Authentication Portal to regenerate a new Bearer Token with your session, and should not impact your regular navigation experience (although slowing down some requests from time to time). If you wish to decrease the amount of those refresh, you can simply increase the validity of the Oauth2 tokens in the <a href="#oauth2">Oauth2 tab</a>, but bear in mind that will also have security implications.<br/>
+When the User is not authenticated, the Authentication Portals will intercept the request and return the authentication form instead. They'll also potentially rewrite the URL to hit the base of the Workflow. For example, when trying to access the workflow with FQDN = <em>app.mydomain.com</em> and base directory <em>/test/</em> on the URL <em>https://app.domain.com/test/user/page</em>, the URL will be rewritten to <em>https://app.domain.com/test/?redirect_url=/test/user/page</em>)</p>
+<h4 id="through-headers">Through Headers</h4>
+<p>Another means to authenticate through restricted Vulture Workflows is to use <strong>headers</strong>. This method is frequently used when there is a need for <strong>stateless requests</strong> made by <strong>client-side applications or scripts</strong> on REST APIs.<br/>
+Vulture currently supports 2 headers: </p>
+<ul>
+<li><code>Authorization</code>: this is the regular Header to pass authentication information, Vulture will check the <strong>Bearer</strong> type tokens with a valid Bearer token provided by any Vulture IDP or Authentication Portal</li>
+<li><code>X-Vlt-Token</code>: this is a Vulture3 legacy header, still available to use on Vulture4 Portals</li>
+</ul>
+<p>When using a header, Vulture will validate the value with all its known bearer tokens (scoped on authorized repositories only), and will either pass the request to the underlying Backend or reject the request with a 401.</p>
+<p><strong>Note</strong>: <em>JWTs are currently not supported by the Vulture Portals, we plan on implementing them in the future</em></p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="main-settings">Main settings</h3>
+<p>From this tab you can manage global properties of the Portal.</p>
+<p><code>Name</code> : A friendly name to refer to the portal. It has to be unique.</p>
+<p><code>Enable Identity Provider</code> : If checked, Vulture will act as an IDP Provider. In this mode, external users and applications may authenticate on Vulture to obtain a <strong>Bearer Token</strong>. Vulture will then be able to control the provided bearer token and let the HTTP request pass. User will have to provide a user and a password that will be verified against the configured <strong>Authentication repository</strong>. In this mode, the Portal is self-sufficient and won't be available in Workflows' associations, you'll have to link your IDP directly with a Listener and a specific FQDN.</p>
+<ul>
+<li><code>FQDN</code> : This is where you define the FQDN of the Identity Provider (only available with this mode). This FQDN is supposed to be resolved by a DNS and to point to the IP Address and Ports defined bellow</li>
+<li><code>Listen IDP on</code> : Here you choose the listener on which Vulture will bind the Identity Provider.</li>
+</ul>
+<p><strong>Note</strong>: Whenever you configure Vulture to act as an Identity Provider, the <strong>OAuth2 provider</strong> is automatically enabled.
+<strong>Note</strong>: ONLY LDAP REPOSITORIES ARE SUPPORTED WITH IDENTITY PROVIDERS</p>
+<p><code>Authentication repositories</code> : Here you associate one or more authentication sources to the authentication portal. You have 2 types of repositories : "internal" and "external" ones.</p>
+<ul>
+<li>Internal repositories will allow the portal to directly check your user/password with the repository and authenticate you if one of them validates your credentials. Those repositories include Internal django repos, LDAP, Kerberos, Radius and the likes.</li>
+<li>External repositories will make the portal redirect you to those repositories (typically IDP providers) and delegate authentication to them. The authentication result will still be checked by the portal after returning to it. You'll have to go to <a href="../../identity/openid/">OpenID Federation</a> to configure them.</li>
+</ul>
+<p><code>Authentication type</code>: Vulture supports 3 authentication prompts to authenticate users:
+ - <strong>HTML Form</strong>: The user will be prompted for a login and a password via the help of an HTML form. You can configure the look and feel of this HTML form via a <a href="../templates/">HTML Template</a> containing your custom images, css, js....
+ - <strong>Basic Authentication</strong>: Vulture will send a 401 HTTP response expecting the client to authenticate via the appropriate "Authorization: basic" HTTP header
+ - <strong>Kerberos Authentication</strong>: Same as basic Authentication, but using the autonegotiate kerberos protocol between the web browser and Vulture. Note that this mode requires specific configuration in your IT environment to work properly.</p>
+<p><code>User's scope</code>: When a user authenticates, Vulture may associate "attributes" to the user and propagate them to the application backend for any useful purpose. </p>
+<ul>
+<li>When Vulture is configured to authenticate users against an <strong>external OpenID provider</strong>, these attributes, also named "scopes" and "claims" are present within the authentication token created by the provider. If you choose the default "Retrieve all claims", Vulture will pass the existing claims in the token. You may choose a custom policy, previously created from the <a href="../../identity/scopes/">User's scope menu</a>. Thanks to this policy, Vulture will ADD/REMOVE/MODIFY the scopes associated to the token.</li>
+<li>When Vulture is configured to authenticate users against an internal repository, the default "Retrieve all claims" won't do anything. You may however use a custom policy to create specific attributes based on user properties, depending on your needs.</li>
+</ul>
+<p><code>Session cookie name</code>: this parameter only appears for IDP portals and allows configuration of a specific session cookie name for every IDP portal, preventing session clashes between different IDPs and Application Portals (which would be detrimental to the use of IDPs, as opposed to Application Portals). Its value is not set by default, but will be assigned a random 8-character value for each new IDP portal if left empty.</p>
+<p><code>Disconnect timeout</code>: Vulture holds a global session with the user, and will destroy it after the defined timeout. The user will have to re-authenticate to access backend applications again. This setting allows to force the user to be disconnected after an arbitraty period of time. Generally you don't want this behaviour, <em>so be sure to enable the next option</em>.</p>
+<p>If <code>Reset timeout after a request</code> is checked, Vulture will reset the timeout counter whenever it receives a request (the user navigates on the endpoint). So the user will never be disconnected as long as it send requests to Vulture. After an inactivity period (no request sent) greater than the configured Disconnect timeout (see above), the user will be disconnected. <em>This is the default behaviour</em>.</p>
+<p><code>Enable captcha</code> : If enabled, Vulture will display a simple Captcha after the authentication process. The user will have to complete the challenge before being able to access backend applications. </p>
+<h3 id="otp">OTP</h3>
+<p>Here you may choose an optional <a href="../../identity/mfa/">MFA &amp; OTP configuration</a> if you want to enable MFA for security enforcement. After the user has succesfully passed the authentication phase, he will have to validate the MFA challenge.</p>
+<h3 id="disconnect">Disconnect</h3>
+<p>When a user authenticates on Vulture, two sessions are created:
+ - A global <code>portal session</code>, associated to the user with Vulture. Thanks to this session, Vulture is able to perform SSO : Vulture will not ask a user to authenticate again on a repository on which he is already authenticated.
+ - An <code>application session</code>, associated to the backend the user wants to access to.</p>
+<p>As an example, if a user has accessed 3 applications, via the same authentication repository, he will have :
+ - 1 portal session
+ - 3 application sessions</p>
+<p>If the user wants to access a 4th application protected by the same authentication repository, Vulture won't ask anything and will let the user access the application.</p>
+<p>If a user disconnects itself from a backend application, the corresponding Vulture's application session won't be destroyed until the configured Timeout. However, you can tell Vulture, via the <code>Disconnect regex</code> regular expression to detect the disconnection from the backend application. <em>The regular expression applies to an HTTP URL</em>. When matched, Vulture will destroy the corresponding application session.</p>
+<p><strong>Note</strong>: When the user disconnects from the backend application, even if the Vulture's session is destroyed, he can still access the application because Vulture will trigger the SSO <strong>thanks to the remaining portal session</strong>. If you want to prevent SSO, please enable <code>Destroy portal session on disconnect</code> (see below). </p>
+<p><code>Display the disconnect message from template</code> : If enabled, Vulture will display an HTML page, defined from the selected <a href="../templates/">HTML Template</a>, after the user's disconnection has been caught by the regex (see above).</p>
+<p><code>Destroy portal session on disconnect</code> : If enabled, Vulture will destroy both the application session and the portal session after a disconection from the application. User will have to re-authenticate completely to access any endpoint they were connected to.</p>
+<h3 id="identity-provider">Identity Provider</h3>
+<p><strong>Note</strong> : When Vulture acts as an Identity provider, it can only map to LDAP authentication repositories!</p>
+<p>When Vulture is configured as an IDP Provider, it also exposes REST APIs to manage users. See <a href="../../api/authentication/idp/idp.yml">Swagger API Documentation</a> for details.</p>
+<p>From this menu, when a user is created on this IDP, it will be automatically added into the group defined in <code>Add users in group (ldap)</code>. Here you just have to define the name of the group (The group's DN must be properly defined in the <a href="../../identity/ldap/">LDAP Repository</a> settings). Vulture will add the group's DN to the "memberOf" attribute of the user.</p>
+<p><code>Update group members (ldap)</code>: If checked, Vulture will also update the group defined before, by adding a new "member" entry that points to the User's DN.</p>
+<h3 id="oauth2">OAuth2</h3>
+<p><code>Enable OAuth2 provider</code> : Enable or disable the Vulture's OAuth2 responder features. </p>
+<p><strong>Note</strong>: 
+ - You <strong>MAY</strong> enable this feature for any authentication portal
+ - The feature <strong>is automatically enabled</strong> if <code>Enable Identity Provider</code> is checked from the main settings (aka. enabled for IDP providers)</p>
+<p><code>Application ID (client_id)</code> : This is the application ID (or client ID) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified.</p>
+<p><code>Secret (client_secret)</code> : This is the application secret (or client secret) defined by Oauth2 specifications. It is automatically generated by the GUI and cannot be modified. This information MUST stay confidential and staya between the IDP and connected external (backend) applications.</p>
+<p><code>Redirect URI(s)</code> : This is an exhaustive list of allowed redirection URIs, this represents the allowed applications' URIs to redirect the authenticated user to once the authentication is finished and validated.</p>
+<p><code>OAuth2 tokens timeout</code> : This is the expiration time of the tokens created and associated with the authentication request. This timeout is static and non-updatable.</p>
+<p><code>Enable OAuth2 refresh token</code> : This option enables the creation of a refresh token which can be used to renew access tokens without reauthentication.</p>
+<p><code>Enable refresh token rotation</code> : This option sends another refresh token after each use of the currently valid refresh token. The predecessor is invalidated and cannot be reused. </p>
+<p><code>History of expired tokens</code> : If this parameter is activated (&gt;1), Vulture will remember the last N refresh tokens and will invalidate all refresh/access tokens if any old refresh token is reused, preventing replay attacks.</p>
+<h3 id="sso-forward">SSO Forward</h3>
+<p>Once a user is authenticated on a Vulture portal, it can access the backend application, but it will sometimes have to manually login on the application by supplying new credentials...</p>
+<p>By enabling <strong>SSO Forward</strong>, Vulture can automatically authenticate the user on the backend application after authenticating with the authentication portal. Indeed, Vulture is able to:
+ - Propagate the credentials provided by the user to the protected application. We call that <strong>Autologon</strong> (same login/password as the ones given to the portal)
+ - Propagate other credentials, previously learned and stored by Vulture. We call that <strong>SSO Learning</strong>
+ - Propagate other information, recovered from scopes and claims created from authentication (see <a href="../../identity/scopes/">User's scopes</a>)</p>
+<p><strong>Note</strong>: When SSO forward is enabled, even if a user disconects from an application, it will automatically be logged as soon as he comes back.</p>
+<p><code>Enable sso forward</code>: Check to enable the SSO Forward feature</p>
+<p><code>Sso forward type</code>:
+  - <strong>HTML Form</strong>: Vulture will send credentials via an HTTP POST request to the backend application
+  - <strong>Basic Authentication</strong>: Vulture will send credentials via an "Authorization: Basic" Header to the backend application
+  - <strong>Kerberos Authentication</strong>:  Vulture will send credentials via an "Authorization: Negotiate" Header to the backend application</p>
+<p><code>Sso forward content type</code>: Define the value of the Content-Type HTTP header sent to the backend application during the SSO forward HTTP request.</p>
+<p><code>Sso forward timeout</code>: The SSO Forward request will fail in timeout after this amount of seconds between the Vulture's request and the response from the backend application.</p>
+<p><code>Sso forward url</code>: The URL of the backend application that will be called by Vulture to send user's credentials. The URL <strong>MUST</strong> starts with "http://" or "https://".</p>
+<p><code>WIZARD autoconfiguration</code>: Once you have defined the login URL, click on the <strong>Wizard button</strong> to configure the SSO Forward. The wizard will call the Forward URL and display all the form fields it has detected within the login page of the application. You need to configure every field needed for the authentication process of the backend application. For every detected field, you must define the type of the field as well as the value that will be sent.</p>
+<p>Here are the supported field types :</p>
+<ul>
+<li><strong>Dynamic Value</strong>: Vulture will send the field with the existing value coming from the backend application (use it for CSRF token for instance) </li>
+<li><strong>OAuth2 Token</strong>: Vulture will send the User's OAuth2 token in the field</li>
+<li><strong>Autologon User</strong>: Vulture will send the login provided by the user on the Authentication portal (only possible when using internal authentication repositories)</li>
+<li><strong>Autologon Password</strong>: Vulture will send the password provided by the user on the Authentication portal (only possible when using internal authentication repositories)</li>
+<li><strong>Custom Text Value</strong>: Vulture will send the custom value you have defined here</li>
+<li><strong>Learning</strong>: The first time the user connects to the application, Vulture will ask for its value - and will store it for future use (TEXT INPUT, unencrypted).</li>
+<li><strong>Learning Secret</strong>: The first time the user connects to the application, Vulture will ask for its value - and will store it for future use (PASSWORD INPUT, ecnrypted).</li>
+<li><strong>Repository attribute</strong>: Will use one of the attributes returned by the internal authentication repository</li>
+<li><strong>Do not send</strong>: The field will be ignored and thus not sent to the backend application</li>
+</ul>
+<p><code>SSO forward status</code>: Either "configured" or "Not configured". It indicates if the wizard has been launched and configured. You can hover over it with the mouse to see current configuration once configured.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../../identity/sso_profiles/" title="SSO Profiles"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../applications/logs_forwarder/" title="Log Forwarders">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../../identity/sso_profiles/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../applications/logs_forwarder/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

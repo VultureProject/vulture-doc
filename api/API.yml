@@ -1,0 +1,101 @@
+openapi: "3.0.0"
+info:
+  title: Vulture 4 API
+  version: "1.0"
+  description: >
+    This document present the available API endpoints to change Vulture configuration.<br>
+    **WARNING: this document is still a work-in-progress, information might be incomplete**
+servers:
+  - url: https://{hostname}:{port}/api/v1
+    variables:
+      hostname:
+        default: 127.0.0.1
+        description: The hostname or IP ofthe Vulture machine
+      port:
+        default: 8000
+        description: The port to use when contacting API (default 8000)
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: CLUSTER-API-KEY
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: AccessControl
+  - name: Authentication
+  - name: Cluster
+  - name: Config
+  - name: NetworkAddress
+  - name: NetworkAddressCards
+  - name: Node
+  - name: PKI
+  - name: Workflow
+
+paths:
+  /darwin/acl/:
+    $ref: "./darwin/acl/acl.yml#/all"
+
+  /darwin/acl/{object_id}:
+    $ref: "./darwin/acl/acl.yml#/one"
+
+  /system/config/:
+    $ref: './system/config/config.yml#/all'
+
+  /system/config/{list_type}/:
+    $ref: './system/config/config.yml#/wlbl'
+
+  /system/node/:
+    $ref: './system/cluster/node.yml#/all'
+
+  # /system/node/{object_id}/:
+  #   $ref: './system/cluster/node.yml#/one'
+
+  /system/netif/:
+    $ref: './system/cluster/network_cards.yml#/all'
+
+  /system/netif/refresh/:
+    $ref: './system/cluster/network_cards.yml#/refresh'
+
+  /system/netaddr/:
+    $ref: './system/cluster/network_address.yml#/all'
+
+  /system/netaddr/{object_id}/:
+    $ref: './system/cluster/network_address.yml#/one'
+
+  # /system/pki/get_ca:
+  #   $ref: './system/pki/pki.yml#/ca'
+
+  # /system/pki/get_cert/:
+  #   $ref: './system/pki/pki.yml#/cert'
+
+  /system/tenants:
+    $ref: './system/tenants/tenants.yml#/all'
+
+  # /system/tenants/{object_id}:
+  #   $ref: './system/tenants/tenants.yml#/one'
+
+  /workflow/:
+    $ref: "./workflow/workflow.yml#/all"
+
+  # /workflow/{object_id}:
+  #   $ref: "./workflow/workflow.yml#/one"
+
+  /authentication/idp/{portal}/repos/{repo}/:
+    $ref: "./authentication/idp/idp.yml#/list"
+
+  /authentication/idp/{portal}/repos/{repo}/users/:
+    $ref: "./authentication/idp/idp.yml#/user"
+
+  /authentication/idp/{portal}/repos/{repo}/users/{action}/:
+    $ref: "./authentication/idp/idp.yml#/user_action"
+
+  /authentication/idp/{portal}/repos/{repo}/users/{user}/tokens/:
+    $ref: "./authentication/idp/idp.yml#/tokens"
+
+  /authentication/idp/{portal}/repos/{repo}/users/{user}/tokens/{token}/:
+    $ref: "./authentication/idp/idp.yml#/token_edit"
