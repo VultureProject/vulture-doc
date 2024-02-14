@@ -194,10 +194,14 @@ Following parameters are optional :
 
  - **Redis password** : If set, the plugin will issue an "AUTH" command before calling XREAD
  - **Redis stream consumer group** : The Consumer Group to use
- - **Redis stream consumer name** : The Consumer Name to use
- - **Redis stream start choice** : The specified starting ID for the stream
- - **Acknowledge processed entries** : Send an acknowledge to Redis after reading
- - **Reclaim pending messages (ms)** : Automatically reclaim pending messages after X milliseconds
+ - **Redis stream consumer name** : The Consumer Name to use (mandatory when **Redis stream consumer group** is set)
+ - **Redis stream start choice** : The specified starting ID for the stream, can be either
+    - "**0-0**": From the beginning
+    - "**$**": New entries
+    - "**>**": Undelivered entries (only applicable to Consumer Groups)
+    - "**xxxxx-yyyyy**": From any index value ()
+ - **Acknowledge processed entries** : Send an acknowledge to Redis after reading (Only applicable to Consumer Groups)
+ - **Reclaim pending messages (ms)** : Automatically reclaim pending messages after X milliseconds (Only applicable to Consumer Groups)
 
 
 ### Vendor Log API listening mode specific parameters
