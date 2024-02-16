@@ -114,7 +114,7 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 *Work in progress*
 
 ## `Kafka` parameters
-This is a specific sectino to describe specific Kafka Log Forwarder configuration options.
+This is a specific section to describe specific Kafka Log Forwarder configuration options.
 
 `Broker`: A list representing the broker(s) to connect to. (example: *['1.2.3.4:9092]*)
 
