@@ -157,6 +157,8 @@ Following parameters are optional :
  - **Redis password** : If set, the plugin will issue an "AUTH" command before calling xPOP
  - **Use LPOP** : If set to "on", LPOP will be used instead of default RPOP
 
+When using the local Redis instance in the Cluster, you can simply select the **Use local redis** button to automatically set the correct parameters to access it. This will include the redirection to the current main Redis node of a cluster and the use of the Cluster password.
+
 Redis pipelining is used inside the workerthread, with a hardcoded batch size of #10.
 
 Imhiredis will query Redis every second to see if entries are in the list, if that's the case they will be dequeued continuously by batches of 10 until none remains.
