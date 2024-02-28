@@ -96,27 +96,174 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 
 
 ## `File` parameters
-*Work in progress*
+This is a section to describe specific File Log Forwarder configuration options.
+
+`Local File path`: Path of the file to write in. Note that the file will be stored inside rsyslog jail (/zroot/rsyslog).
+
+---
+
+`Flush interval` (in seconds): Set the maximum delay to flush buffer to disk.
+
+---
+
+`Asynchronous writing`: Write logs asynchronously.
+
+---
+
+`File(s) retention time` (in days): Specify the time to keep rotated log files before deletion.
+
+---
+
+`Execute rotation every`: The rotation period can be configured here between every day, week, month or year.
+
 
 ## `RELP` parameters
-*Work in progress*
+This is a section to describe specific RELP Log Forwarder configuration options.
+
+`Remote IP`: Set the IP address of the remote server.
+
+---
+
+`Remote TCP port`: Set the port of the remote server.
+
+---
+
+`Enable TLS encryption`: If set to on, the RELP connection will be encrypted using TLS (`Use TLS Certificate or CA` **MUST** be set when this parameter is *on*).
+
+---
+
+`Use TLS Certificate or CA`: X509Certificate object to verify server certificate.
+
 
 ## `Redis` parameters
-*Work in progress*
+This is a section to describe specific Redis Log Forwarder configuration options.
+
+`Remote IP`: Set the IP address of the remote Redis server.
+
+---
+
+`Remote TCP port`: Set the port of the remote Redis server.
+
+---
+
+`Redis insertion mode`:
+
+ - **Queue/list** mode: Insert logs on a [Redis list](https://redis.io/docs/data-types/lists/) using lpush/rpush commands
+ - **Set/keys** mode: Insert logs in a specific [Redis key](https://redis.io/docs/manual/keyspace/) using set/setex commands
+ - **Channel** mode: Insert logs on a specific [Redis channel](https://redis.io/docs/interact/pubsub/) using the publish command
+ - **Stream** mode: Insert logs on a specific [Redis stream](https://redis.io/docs/data-types/streams/) using the xadd command
+
+---
+
+`Key`: The key, list, channel or stream used to insert logs in Redis.
+
+---
+
+`Dynamic key`: If activated, the key name will be dynamically generated from available Rsyslog variables.
+
+---
+
+`Password`: Provide the Redis server password to authenticate with (if unset, the Redis will be assumed to have no authentication).
+
+---
+
+`Use RPUSH`: Use RPUSH instead of LPUSH to insert a new log.
+
+    This is only available for list insertion mode
+
+---
+
+`Expiration of the key (s)`: Use SETEX instead of SET to create keys with an expiration.
+
+    This is only available for key insertion mode
+
+---
+
+`Stream field`: Set the stream's field to use to insert the log in (default to '*msg*').
+
+    This is only available for stream insertion mode
+
+---
+
+`Maximum stream size`: [Cap the stream size](https://redis.io/docs/data-types/streams/#capped-streams) by approximately this number of entries. Oldest stream indexes will be flushed once the value is reached.
+
+    This is only available for stream insertion mode
+
 
 ## `Syslog` parameters
-*Work in progress*
+This is a section to describe specific Syslog Log Forwarder configuration options.
+
+`Remote IP`: IP address on which logs are sent to.
+
+---
+
+`Remote port`: Port on which logs are sent to.
+
+---
+
+`Protocol`: The IP protocol to use (either TCP and UDP).
+
+---
+
+`ZIP level`: [Compression level](https://www.rsyslog.com/doc/configuration/modules/omfwd.html#ziplevel) for messages (from 0 to 9).
+
 
 ## `Elasticsearch/Opensearch` parameters
-*Work in progress*
+This is a section to describe specific Elasticsearch Log Forwarder configuration options.
+
+`Servers list`: Provide a list of servers to send logs to (example: *['1.2.3.4:9200']*, the value should be formatted as a list).
+
+---
+
+`Elasticsearch/OpenSearch 8 compatibility`: Tell Rsyslog to turn on [Elasticsearch/OpenSearch 8 compatibility(https://www.rsyslog.com/doc/configuration/modules/omelasticsearch.html#esversion-major)].
+
+---
+
+`Enable Elasticsearch datastreams support`: Option to allow log insertion into a compatible datastream.
+
+---
+
+`Handle retries on ELS insertion`: Let Rsyslog [handle ELS/OpenSearch specific log insertion failures](https://www.rsyslog.com/doc/configuration/modules/omelasticsearch.html#example-5) with more reliability.
+
+---
+
+`Index Pattern`: Specify an Elastic index where logs are sent (pattern is dynamic and can use [Rsyslog variables](https://www.rsyslog.com/doc/configuration/templates.html#string)).
+
+---
+
+`Username`: If necessary, set the username for authentication.
+
+---
+
+`Password`: If necessary, set the password for authentication.
+
+---
+
+`Use TLS Certificate or CA`: certificate to use when communicating with distant nodes.
+
 
 ## `MongoDB` parameters
-*Work in progress*
+This is a section to describe specific MongoDB Log Forwarder configuration options.
+
+`MongoDB URI`: Uri of the reachable MongoDB target (example: *'mongodb://1.2.3.4:9091/?replicaset=Vulture&ssl=true'*).
+
+---
+
+`Database`: Set the database to use to store collections into.
+
+---
+
+`Collection`: The collection where logs will be inserted.
+
+---
+
+`Use TLS Certificate or CA`: X509Certificate object used to communicate with remote server.
+
 
 ## `Kafka` parameters
-This is a specific sectino to describe specific Kafka Log Forwarder configuration options.
+This is a section to describe specific Kafka Log Forwarder configuration options.
 
-`Broker`: A list representing the broker(s) to connect to. (example: *['1.2.3.4:9092]*)
+`Broker`: A list representing the broker(s) to connect to. (example: *['1.2.3.4:9092']*, the value should be formatted as a list).
 
 ---
 
@@ -133,7 +280,7 @@ This is a specific sectino to describe specific Kafka Log Forwarder configuratio
 
 ---
 
-`Partition to which data is produced`: If set, will use this fixed partition number when inserting new values.
+`Partition to which data is produced`: If set, will use this fixed partition number when inserting new entries.
 
 ---
 
