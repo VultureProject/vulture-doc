@@ -96,25 +96,173 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 
 
 ## `File` parameters
-*Work in progress*
+This is a specific section to describe specific File Log Forwarder configuration options.
+
+`Local File path`: Path of the file to write in. Note that the file will be stored inside rsyslog jail (/zroot/rsyslog).
+
+---
+
+`Flush interval, in seconds`: Set the time to flush rsyslog output queue on disk.
+
+---
+
+`Asynchronous writing`: Write asynchronously logs on disk.
+
+---
+
+`File(s) retention time, in days`: Specify the time to keep log files before deletion.
+
+---
+
+`Execute rotation every`: The rotation period can be configured here between every day, week, month or year.
+
 
 ## `RELP` parameters
-*Work in progress*
+This is a specific section to describe specific RELP Log Forwarder configuration options.
+
+`Remote IP`: Set the IP address of remote server.
+
+---
+
+`Remote TCP port`: Set the port of the remote server.
+
+---
+
+`Enable TLS encryption`: If set to on, the RELP connection will be encrypted by TLS.
+
+---
+
+`Use TLS Certificate or CA`: X509Certificate object to verify server certificate.
+
 
 ## `Redis` parameters
-*Work in progress*
+This is a specific section to describe specific Redis Log Forwarder configuration options.
+
+`Remote IP`: Set the IP address of Remote Redis server.
+
+---
+
+`Remote TCP port`: Set the port of Remote Redis server.
+
+---
+
+`Redis insertion mode`:
+
+ - **Queue/list** mode: Use lpush/rpush during Redis call
+ - **Set/keys** mode: Use set/setex during Redis call
+ - **Channel** mode: Use publish during Redis call
+ - **Stream** mode: Use xadd during Redis call
+
+---
+
+`Key`: The key used to insert logs in Redis.
+
+---
+
+`Dynamic key`: If activated, the key will be generated with variables.
+
+---
+
+`Password`: Provide the Redis server password to authenticate with.
+
+---
+
+`Use RPUSH`: Use RPUSH instead of LPUSH in list mode.
+
+---
+
+`Expiration of the key (s)`: Use SETX instead of SET in key mode with an expiration in seconds.
+
+---
+
+`Index name of the log`: Set the name of the log index in stream mode.
+
+---
+
+`Maximum stream size`: Set a maximum size of a stream to prevent out of range.
+index
+
+---
+
+`Index name of the log`: Set the name of the log index in stream mode.
+
+---
+
+`Maximum stream size`: Set a maximum size of a stream to prevent out of range index.
+
 
 ## `Syslog` parameters
-*Work in progress*
+This is a specific section to describe specific Syslog Log Forwarder configuration options.
+
+`Remote IP`: IP address on which logs are sent to.
+
+---
+
+`Remote port`: Port on which logs are sent to.
+
+---
+
+`Protocol`: The IP protocol to use between TCP and UDP.
+
+---
+
+`ZIP level`: Compression level for messages from 0 to 9.
+
 
 ## `Elasticsearch/Opensearch` parameters
-*Work in progress*
+This is a specific section to describe specific Elasticsearch Log Forwarder configuration options.
+
+`Servers list`: Provide a list of servers to send logs to (example: *['1.2.3.4:9200]*).
+
+---
+
+`Elasticsearch/OpenSearch 8 compatibility`: Tell Rsyslog to turn on Elasticsearch/OpenSearch 8 compatibility.
+
+---
+
+`Enable Elasticsearch datastreams support`: Option to allow log insertion into a compatible datastream.
+
+---
+
+`Handle retries on ELS insertion`: Let Rsyslog handle log insertion into Elasticsearch.
+
+---
+
+`Index Pattern`: Specify an Elastic index where logs are sent.
+
+---
+
+`Username`: If necessary, set the username for authentication.
+
+---
+
+`Password`: If necessary, set the password for authentication.
+
+---
+
+`Use TLS Certificate or CA`: Verify remote certificate with an Authority registered in Vulture.
+
 
 ## `MongoDB` parameters
-*Work in progress*
+This is a specific section to describe specific MongoDB Log Forwarder configuration options.
+
+`MongoDB URI`: Uri of the reachable MongoDB target (example: *mongodb://1.2.3.4:9091/?replicaset=Vulture&ssl=true'*).
+
+---
+
+`Database`: Set the database to use to store collections into.
+
+---
+
+`Collection`: The collection where logs will be inserted.
+
+---
+
+`Use TLS Certificate or CA`: X509Certificate object used to verify remote server certificate.
+
 
 ## `Kafka` parameters
-This is a specific sectino to describe specific Kafka Log Forwarder configuration options.
+This is a specific section to describe specific Kafka Log Forwarder configuration options.
 
 `Broker`: A list representing the broker(s) to connect to. (example: *['1.2.3.4:9092]*)
 
