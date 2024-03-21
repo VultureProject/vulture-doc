@@ -94,6 +94,15 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 
     Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 
+---
+
+`Folder to store queue files to` (default: */var/tmp*): Existing directory (**in the Rsyslog jail**) to write queue spool files to.
+
+    Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+
+!!! warning
+    The folder should be created prior to defining it here, and should be available in the **Rsyslog jail**!
+
 
 ## `File` parameters
 This is a section to describe specific File Log Forwarder configuration options.
