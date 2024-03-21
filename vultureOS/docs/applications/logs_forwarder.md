@@ -38,59 +38,59 @@ When creating a new Log Forwarder, you'll be able to configure the following glo
 
 By clicking the **Advanced** button on the lower right, the user will be able to further configure global (advanced) parameters for each Listener. Those options are better explained on [Rsyslog's documentation](https://www.rsyslog.com/doc/v8-stable/rainerscript/queue_parameters.html#queue-size)
 
-`Size of the queue`: Maximum number of messages allowed in the action queue
+`Size of the queue` (default: *10000*): Maximum number of messages allowed in the action queue
 
 ---
 
-`Size of batch dequeue`: Maximum number of logs to use in a batch operation
+`Size of batch dequeue` (default: *300*): Maximum number of logs to use in a batch operation
 
 ---
 
-`Queue maximum workers`: Maximum number of workers to start for the action
+`Queue maximum workers` (default: *1*): Maximum number of workers to start for the action
 
 ---
 
-`Queue timeout shutdown (ms)`: Number of milliseconds to wait before droping the remaining logs to process on the action (default 10 ms)
+`Queue timeout shutdown (ms)` (default: [*10ms*](https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-timeoutworkerthreadshutdown)): Number of milliseconds to wait before droping the remaining logs to process on the action (default 10 ms)
 
 ---
 
-`Minimum messages to start a new worker`: Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...) (default is queue size / maximum number of workers)
+`Minimum messages to start a new worker` (default: *Size of the queue / Queue maximum workers*): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...) (default is queue size / maximum number of workers)
 
 ---
 
-`Worker inactivity shutdown delay (ms)`: Number of milliseconds to wait before stopping a worker that didn't receive any log to process (default is 60000 ms = 1 min)
+`Worker inactivity shutdown delay (ms)` (default: *60000ms (60s)*): Number of milliseconds to wait before stopping a worker that didn't receive any log to process (default is 60000 ms = 1 min)
 
 ---
 
-`Enable retry on failure`: Detect action failures and keep involved logs in the action queue to "replay" the action at a later time
+`Enable retry on failure` (default: *false*): Detect action failures and keep involved logs in the action queue to "replay" the action at a later time
 
 ---
 
-`Enable disk queue on failure`: Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in action queue (in case of action failures mostly).
+`Enable disk queue on failure` (default: *false*): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in action queue (in case of action failures mostly).
 
     `Enable retry on failure` must be enabled
 
 ---
 
-`High watermark target`: When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.
+`High watermark target` (default: *8000*): When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.
 
     Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 
 ---
 
-`Low watermark target`: When writing to disk is triggered by the `High watermark target`, it will return to in-memory queueing when the amount of logs in it falls back under this value.
+`Low watermark target` (default: *6000*): When writing to disk is triggered by the `High watermark target`, it will return to in-memory queueing when the amount of logs in it falls back under this value.
 
     Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 
 ---
 
-`Max file size of the queue in MB`: Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.
+`Max file size of the queue in MiB` (default: *256MiB*): Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.
 
     Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 
 ---
 
-`Max disk space used by the queue in MB`: Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.
+`Max disk space used by the queue in MiB` (default: *0MiB (unlimited)*): Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.
 
     Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 
