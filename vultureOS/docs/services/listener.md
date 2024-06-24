@@ -589,6 +589,12 @@ The following endpoints are supported :
 
 `Vectra client id` : Vectra client id.
 
+### Vendor Log API Cisco Umbrella specific parameters
+
+`Cisco-Umbrella client id` : Cisco-Umbrella client id.
+
+`Cisco-Umbrella secret key` : Cisco-Umbrella secret key.
+
 ## Specific settings for Filebeat Listening Mode
 
 ### Filebeat Module
