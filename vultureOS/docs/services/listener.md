@@ -595,6 +595,12 @@ The following endpoints are supported :
 
 `Cisco-Umbrella secret key` : Cisco-Umbrella secret key.
 
+### Vendor Log API Gatewatcher alerts specific parameters
+
+`Gatewatcher alerts host` : Hostname (without scheme or path) of the Gatewatcher alerts server.
+
+`Gatewatcher alerts API key` : Gatewatcher alerts API key.
+
 ## Specific settings for Filebeat Listening Mode
 
 ### Filebeat Module
