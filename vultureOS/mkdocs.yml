@@ -5,6 +5,8 @@ extra_css:
 - css/styling.css
 plugins:
     - swagger-ui-tag
+markdown_extensions:
+    - admonition
 nav:
     - Home: index.md
     - Overview:

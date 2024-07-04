@@ -141,7 +141,7 @@ Via this tab, you may declare custom HAProxy directives. These directives will b
 
 ### REDIS listening mode specific parameters
 
-This listener relies on rsyslog / imhiredis, and has two modes of operation :
+This listener relies on rsyslog / imhiredis, and has three modes of operation :
 
 `Queue Mode, using push/pop` : The queue mode will LPOP or RPOP your message from a redis list.
 
@@ -149,13 +149,15 @@ Following parameters are required :
 
  - **Redis consumer mode** : Set mode to "queue" to enable the queue mode
  - **Redis key** : The key to xPOP on
- - **Redis server** : The name or IP address of the redis server (Vulture's Internal redis is 127.0.0.3)
+ - **Redis server** : The name or IP address of the redis server (Vulture's Internal redis load-balancer is 127.0.0.5)
  - **Redis port** : The redis listening port (default is 6379)
 
 Following parameters are optional :
 
  - **Redis password** : If set, the plugin will issue an "AUTH" command before calling xPOP
  - **Use LPOP** : If set to "on", LPOP will be used instead of default RPOP
+
+When using the local Redis instance in the Cluster, you can simply select the **Use local redis** button to automatically set the correct parameters to access it. This will include the redirection to the current main Redis node of a cluster and the use of the Cluster password.
 
 Redis pipelining is used inside the workerthread, with a hardcoded batch size of #10.
 
@@ -164,7 +166,7 @@ Imhiredis will query Redis every second to see if entries are in the list, if th
 Due to its balance between polling interval and pipelining and its use of lists, this mode is quite performant and reliable.
 However, due to the 1 second polling frequency, one may consider using the `subscribe` mode instead if very low latency is required.
 
-`Chanel Mode, using pub/sub` : The channel mode will SUBSCRIBE to a redis channel.
+`Channel Mode, using pub/sub` : The channel mode will SUBSCRIBE to a redis channel.
 
 The "key" parameter is required and will be used for the subscribe channel.
 
@@ -177,8 +179,30 @@ Following parameters are required :
 
 Following parameters are optional :
 
- - **password** : If set, the plugin will issue an "AUTH" command before listening to a channel
- - **uselpop** : Useless in channel mode
+ - **Redis password** : If set, the plugin will issue an "AUTH" command before listening to a channel
+
+`Stream Mode, using xread/xreadgroup` : The stream mode will XREAD or XREADGROUP to a redis stream.
+
+The "key" parameter is required and will be used to query the stream.
+
+Following parameters are required :
+
+ - **Redis consumer mode** : Set mode to "stream" to enable the stream mode
+ - **Redis key** : The key to target the stream
+ - **Redis server** : The name or IP address of the redis server
+ - **Redis port** : The redis listening port
+
+Following parameters are optional :
+
+ - **Redis password** : If set, the plugin will issue an "AUTH" command before calling XREAD
+ - **Redis stream consumer group** : The Consumer Group to use
+ - **Redis stream consumer name** : The Consumer Name to use (mandatory when **Redis stream consumer group** is set)
+ - **Redis stream start choice** : The specified starting ID for the stream, can be either
+    - "**-**": From the beginning
+    - "**$**": New entries
+    - "**>**": Undelivered entries (only applicable to Consumer Groups)
+ - **Acknowledge processed entries** : Send an acknowledge to Redis after reading (Only applicable to Consumer Groups)
+ - **Reclaim pending messages (ms)** : Automatically reclaim pending messages after X milliseconds (Only applicable to Consumer Groups)
 
 
 ### Vendor Log API listening mode specific parameters
@@ -564,6 +588,18 @@ The following endpoints are supported :
 `Vectra secret key` : Vectra secret key.
 
 `Vectra client id` : Vectra client id.
+
+### Vendor Log API Cisco Umbrella specific parameters
+
+`Cisco-Umbrella client id` : Cisco-Umbrella client id.
+
+`Cisco-Umbrella secret key` : Cisco-Umbrella secret key.
+
+### Vendor Log API Gatewatcher alerts specific parameters
+
+`Gatewatcher alerts host` : Hostname (without scheme or path) of the Gatewatcher alerts server.
+
+`Gatewatcher alerts API key` : Gatewatcher alerts API key.
 
 ## Specific settings for Filebeat Listening Mode
 
