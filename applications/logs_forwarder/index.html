@@ -101,7 +101,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Applications</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Log Forwarders</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Log Forwarders</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#global-parameters">Global parameters</a>
 <ul>
@@ -179,54 +179,140 @@
 </code></pre>
 <h3 id="advanced-global-parameters">Advanced global parameters</h3>
 <p>By clicking the <strong>Advanced</strong> button on the lower right, the user will be able to further configure global (advanced) parameters for each Listener. Those options are better explained on <a href="https://www.rsyslog.com/doc/v8-stable/rainerscript/queue_parameters.html#queue-size">Rsyslog's documentation</a></p>
-<p><code>Size of the queue</code>: Maximum number of messages allowed in the action queue</p>
+<p><code>Size of the queue</code> (default: <em>10000</em>): Maximum number of messages allowed in the action queue</p>
 <hr/>
-<p><code>Size of batch dequeue</code>: Maximum number of logs to use in a batch operation</p>
+<p><code>Size of batch dequeue</code> (default: <em>300</em>): Maximum number of logs to use in a batch operation</p>
 <hr/>
-<p><code>Queue maximum workers</code>: Maximum number of workers to start for the action</p>
+<p><code>Queue maximum workers</code> (default: <em>1</em>): Maximum number of workers to start for the action</p>
 <hr/>
-<p><code>Queue timeout shutdown (ms)</code>: Number of milliseconds to wait before droping the remaining logs to process on the action (default 10 ms)</p>
+<p><code>Queue timeout shutdown (ms)</code> (default: <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-timeoutworkerthreadshutdown"><em>10ms</em></a>): Number of milliseconds to wait before droping the remaining logs to process on the action (default 10 ms)</p>
 <hr/>
-<p><code>Minimum messages to start a new worker</code>: Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...) (default is queue size / maximum number of workers)</p>
+<p><code>Minimum messages to start a new worker</code> (default: <em>Size of the queue / Queue maximum workers</em>): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...) (default is queue size / maximum number of workers)</p>
 <hr/>
-<p><code>Worker inactivity shutdown delay (ms)</code>: Number of milliseconds to wait before stopping a worker that didn't receive any log to process (default is 60000 ms = 1 min)</p>
+<p><code>Worker inactivity shutdown delay (ms)</code> (default: <em>60000ms (60s)</em>): Number of milliseconds to wait before stopping a worker that didn't receive any log to process (default is 60000 ms = 1 min)</p>
 <hr/>
-<p><code>Enable retry on failure</code>: Detect action failures and keep involved logs in the action queue to "replay" the action at a later time</p>
+<p><code>Enable retry on failure</code> (default: <em>false</em>): Detect action failures and keep involved logs in the action queue to "replay" the action at a later time</p>
 <hr/>
-<p><code>Enable disk queue on failure</code>: Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in action queue (in case of action failures mostly).</p>
+<p><code>Enable disk queue on failure</code> (default: <em>false</em>): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in action queue (in case of action failures mostly).</p>
 <pre><code>`Enable retry on failure` must be enabled
 </code></pre>
 <hr/>
-<p><code>High watermark target</code>: When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.</p>
+<p><code>High watermark target</code> (default: <em>8000</em>): When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.</p>
 <pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 </code></pre>
 <hr/>
-<p><code>Low watermark target</code>: When writing to disk is triggered by the <code>High watermark target</code>, it will return to in-memory queueing when the amount of logs in it falls back under this value.</p>
+<p><code>Low watermark target</code> (default: <em>6000</em>): When writing to disk is triggered by the <code>High watermark target</code>, it will return to in-memory queueing when the amount of logs in it falls back under this value.</p>
 <pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 </code></pre>
 <hr/>
-<p><code>Max file size of the queue in MB</code>: Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.</p>
+<p><code>Max file size of the queue in MiB</code> (default: <em>256MiB</em>): Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.</p>
 <pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 </code></pre>
 <hr/>
-<p><code>Max disk space used by the queue in MB</code>: Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.</p>
+<p><code>Max disk space used by the queue in MiB</code> (default: <em>0MiB (unlimited)</em>): Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.</p>
 <pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
 </code></pre>
+<hr/>
+<p><code>Folder to store queue files to</code> (default: <em>/var/tmp</em>): Existing directory (<strong>in the Rsyslog jail</strong>) to write queue spool files to.</p>
+<pre><code>Only applies to disk-assisted queues, `Enable disk queue on failure` must be enabled
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The folder should be created prior to defining it here, and should be available in the <strong>Rsyslog jail</strong>!</p>
+</div>
 <h2 id="file-parameters"><code>File</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific File Log Forwarder configuration options.</p>
+<p><code>Local File path</code>: Path of the file to write in. Note that the file will be stored inside rsyslog jail (/zroot/rsyslog).</p>
+<hr/>
+<p><code>Flush interval</code> (in seconds): Set the maximum delay to flush buffer to disk.</p>
+<hr/>
+<p><code>Asynchronous writing</code>: Write logs asynchronously.</p>
+<hr/>
+<p><code>File(s) retention time</code> (in days): Specify the time to keep rotated log files before deletion.</p>
+<hr/>
+<p><code>Execute rotation every</code>: The rotation period can be configured here between every day, week, month or year.</p>
 <h2 id="relp-parameters"><code>RELP</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific RELP Log Forwarder configuration options.</p>
+<p><code>Remote IP</code>: Set the IP address of the remote server.</p>
+<hr/>
+<p><code>Remote TCP port</code>: Set the port of the remote server.</p>
+<hr/>
+<p><code>Enable TLS encryption</code>: If set to on, the RELP connection will be encrypted using TLS (<code>Use TLS Certificate or CA</code> <strong>MUST</strong> be set when this parameter is <em>on</em>).</p>
+<hr/>
+<p><code>Use TLS Certificate or CA</code>: X509Certificate object to verify server certificate.</p>
 <h2 id="redis-parameters"><code>Redis</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific Redis Log Forwarder configuration options.</p>
+<p><code>Remote IP</code>: Set the IP address of the remote Redis server.</p>
+<hr/>
+<p><code>Remote TCP port</code>: Set the port of the remote Redis server.</p>
+<hr/>
+<p><code>Redis insertion mode</code>:</p>
+<ul>
+<li><strong>Queue/list</strong> mode: Insert logs on a <a href="https://redis.io/docs/data-types/lists/">Redis list</a> using lpush/rpush commands</li>
+<li><strong>Set/keys</strong> mode: Insert logs in a specific <a href="https://redis.io/docs/manual/keyspace/">Redis key</a> using set/setex commands</li>
+<li><strong>Channel</strong> mode: Insert logs on a specific <a href="https://redis.io/docs/interact/pubsub/">Redis channel</a> using the publish command</li>
+<li><strong>Stream</strong> mode: Insert logs on a specific <a href="https://redis.io/docs/data-types/streams/">Redis stream</a> using the xadd command</li>
+</ul>
+<hr/>
+<p><code>Key</code>: The key, list, channel or stream used to insert logs in Redis.</p>
+<hr/>
+<p><code>Dynamic key</code>: If activated, the key name will be dynamically generated from available Rsyslog variables.</p>
+<hr/>
+<p><code>Password</code>: Provide the Redis server password to authenticate with (if unset, the Redis will be assumed to have no authentication).</p>
+<hr/>
+<p><code>Use RPUSH</code>: Use RPUSH instead of LPUSH to insert a new log.</p>
+<pre><code>This is only available for list insertion mode
+</code></pre>
+<hr/>
+<p><code>Expiration of the key (s)</code>: Use SETEX instead of SET to create keys with an expiration.</p>
+<pre><code>This is only available for key insertion mode
+</code></pre>
+<hr/>
+<p><code>Stream field</code>: Set the stream's field to use to insert the log in (default to '<em>msg</em>').</p>
+<pre><code>This is only available for stream insertion mode
+</code></pre>
+<hr/>
+<p><code>Maximum stream size</code>: <a href="https://redis.io/docs/data-types/streams/#capped-streams">Cap the stream size</a> by approximately this number of entries. Oldest stream indexes will be flushed once the value is reached.</p>
+<pre><code>This is only available for stream insertion mode
+</code></pre>
 <h2 id="syslog-parameters"><code>Syslog</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific Syslog Log Forwarder configuration options.</p>
+<p><code>Remote IP</code>: IP address on which logs are sent to.</p>
+<hr/>
+<p><code>Remote port</code>: Port on which logs are sent to.</p>
+<hr/>
+<p><code>Protocol</code>: The IP protocol to use (either TCP and UDP).</p>
+<hr/>
+<p><code>ZIP level</code>: <a href="https://www.rsyslog.com/doc/configuration/modules/omfwd.html#ziplevel">Compression level</a> for messages (from 0 to 9).</p>
 <h2 id="elasticsearchopensearch-parameters"><code>Elasticsearch/Opensearch</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific Elasticsearch Log Forwarder configuration options.</p>
+<p><code>Servers list</code>: Provide a list of servers to send logs to (example: <em>['1.2.3.4:9200']</em>, the value should be formatted as a list).</p>
+<hr/>
+<p><code>Elasticsearch/OpenSearch 8 compatibility</code>: Tell Rsyslog to turn on [Elasticsearch/OpenSearch 8 compatibility(https://www.rsyslog.com/doc/configuration/modules/omelasticsearch.html#esversion-major)].</p>
+<hr/>
+<p><code>Enable Elasticsearch datastreams support</code>: Option to allow log insertion into a compatible datastream.</p>
+<hr/>
+<p><code>Handle retries on ELS insertion</code>: Let Rsyslog <a href="https://www.rsyslog.com/doc/configuration/modules/omelasticsearch.html#example-5">handle ELS/OpenSearch specific log insertion failures</a> with more reliability.</p>
+<hr/>
+<p><code>Index Pattern</code>: Specify an Elastic index where logs are sent (pattern is dynamic and can use <a href="https://www.rsyslog.com/doc/configuration/templates.html#string">Rsyslog variables</a>).</p>
+<hr/>
+<p><code>Username</code>: If necessary, set the username for authentication.</p>
+<hr/>
+<p><code>Password</code>: If necessary, set the password for authentication.</p>
+<hr/>
+<p><code>Use TLS Certificate or CA</code>: certificate to use when communicating with distant nodes.</p>
 <h2 id="mongodb-parameters"><code>MongoDB</code> parameters</h2>
-<p><em>Work in progress</em></p>
+<p>This is a section to describe specific MongoDB Log Forwarder configuration options.</p>
+<p><code>MongoDB URI</code>: Uri of the reachable MongoDB target (example: <em>'mongodb://1.2.3.4:9091/?replicaset=Vulture&amp;ssl=true'</em>).</p>
+<hr/>
+<p><code>Database</code>: Set the database to use to store collections into.</p>
+<hr/>
+<p><code>Collection</code>: The collection where logs will be inserted.</p>
+<hr/>
+<p><code>Use TLS Certificate or CA</code>: X509Certificate object used to communicate with remote server.</p>
 <h2 id="kafka-parameters"><code>Kafka</code> parameters</h2>
-<p>This is a specific sectino to describe specific Kafka Log Forwarder configuration options.</p>
-<p><code>Broker</code>: A list representing the broker(s) to connect to. (example: <em>['1.2.3.4:9092]</em>)</p>
+<p>This is a section to describe specific Kafka Log Forwarder configuration options.</p>
+<p><code>Broker</code>: A list representing the broker(s) to connect to. (example: <em>['1.2.3.4:9092']</em>, the value should be formatted as a list).</p>
 <hr/>
 <p><code>Topic</code>: The Kafka Topic to use when inserting new logs.</p>
 <pre><code>When activating `Dynamic Topic`, the value in `Topic` will be processed as an [Rsyslog string template](https://www.rsyslog.com/doc/v8-stable/configuration/templates.html#string).
@@ -236,7 +322,7 @@
 <pre><code>When activating `Dynamic Key`, the value in `Key` will be processed as an [Rsyslog string template](https://www.rsyslog.com/doc/v8-stable/configuration/templates.html#string).
 </code></pre>
 <hr/>
-<p><code>Partition to which data is produced</code>: If set, will use this fixed partition number when inserting new values.</p>
+<p><code>Partition to which data is produced</code>: If set, will use this fixed partition number when inserting new entries.</p>
 <hr/>
 <p><code>Automatic partitioning</code>: If activated, will enable automatic handling of partitions with Kafka.</p>
 <pre><code>Activating this feature will render `Partition to which data is produced` useless, as no manual partition scheming will be possible.

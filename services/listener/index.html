@@ -66,7 +66,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Services</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Frontend listeners</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Frontend listeners</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#global-parameters">Global parameters</a>
 </li>
@@ -167,6 +167,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-retarus-specific-parameters">Vendor Log API Retarus specific parameters</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-vectra-specific-parameters">Vendor Log API Vectra specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-gatewatcher-alerts-specific-parameters">Vendor Log API Gatewatcher alerts specific parameters</a>
 </li>
 </ul>
 </li>
@@ -335,13 +339,13 @@ Using this interface you can rename parsed JSON field or add rsyslog's rainer sc
 <p><code>Kafka topic</code> : Configure kafka topic to poll logs from.</p>
 <p><code>Kafka consumer group</code> : Optional, configure the kafka consumer group to use to poll logs from.</p>
 <h3 id="redis-listening-mode-specific-parameters">REDIS listening mode specific parameters</h3>
-<p>This listener relies on rsyslog / imhiredis, and has two modes of operation :</p>
+<p>This listener relies on rsyslog / imhiredis, and has three modes of operation :</p>
 <p><code>Queue Mode, using push/pop</code> : The queue mode will LPOP or RPOP your message from a redis list.</p>
 <p>Following parameters are required :</p>
 <ul>
 <li><strong>Redis consumer mode</strong> : Set mode to "queue" to enable the queue mode</li>
 <li><strong>Redis key</strong> : The key to xPOP on</li>
-<li><strong>Redis server</strong> : The name or IP address of the redis server (Vulture's Internal redis is 127.0.0.3)</li>
+<li><strong>Redis server</strong> : The name or IP address of the redis server (Vulture's Internal redis load-balancer is 127.0.0.5)</li>
 <li><strong>Redis port</strong> : The redis listening port (default is 6379)</li>
 </ul>
 <p>Following parameters are optional :</p>
@@ -349,11 +353,12 @@ Using this interface you can rename parsed JSON field or add rsyslog's rainer sc
 <li><strong>Redis password</strong> : If set, the plugin will issue an "AUTH" command before calling xPOP</li>
 <li><strong>Use LPOP</strong> : If set to "on", LPOP will be used instead of default RPOP</li>
 </ul>
+<p>When using the local Redis instance in the Cluster, you can simply select the <strong>Use local redis</strong> button to automatically set the correct parameters to access it. This will include the redirection to the current main Redis node of a cluster and the use of the Cluster password.</p>
 <p>Redis pipelining is used inside the workerthread, with a hardcoded batch size of #10.</p>
 <p>Imhiredis will query Redis every second to see if entries are in the list, if that's the case they will be dequeued continuously by batches of 10 until none remains.</p>
 <p>Due to its balance between polling interval and pipelining and its use of lists, this mode is quite performant and reliable.
 However, due to the 1 second polling frequency, one may consider using the <code>subscribe</code> mode instead if very low latency is required.</p>
-<p><code>Chanel Mode, using pub/sub</code> : The channel mode will SUBSCRIBE to a redis channel.</p>
+<p><code>Channel Mode, using pub/sub</code> : The channel mode will SUBSCRIBE to a redis channel.</p>
 <p>The "key" parameter is required and will be used for the subscribe channel.</p>
 <p>Following parameters are required :</p>
 <ul>
@@ -364,8 +369,30 @@ However, due to the 1 second polling frequency, one may consider using the <code
 </ul>
 <p>Following parameters are optional :</p>
 <ul>
-<li><strong>password</strong> : If set, the plugin will issue an "AUTH" command before listening to a channel</li>
-<li><strong>uselpop</strong> : Useless in channel mode</li>
+<li><strong>Redis password</strong> : If set, the plugin will issue an "AUTH" command before listening to a channel</li>
+</ul>
+<p><code>Stream Mode, using xread/xreadgroup</code> : The stream mode will XREAD or XREADGROUP to a redis stream.</p>
+<p>The "key" parameter is required and will be used to query the stream.</p>
+<p>Following parameters are required :</p>
+<ul>
+<li><strong>Redis consumer mode</strong> : Set mode to "stream" to enable the stream mode</li>
+<li><strong>Redis key</strong> : The key to target the stream</li>
+<li><strong>Redis server</strong> : The name or IP address of the redis server</li>
+<li><strong>Redis port</strong> : The redis listening port</li>
+</ul>
+<p>Following parameters are optional :</p>
+<ul>
+<li><strong>Redis password</strong> : If set, the plugin will issue an "AUTH" command before calling XREAD</li>
+<li><strong>Redis stream consumer group</strong> : The Consumer Group to use</li>
+<li><strong>Redis stream consumer name</strong> : The Consumer Name to use (mandatory when <strong>Redis stream consumer group</strong> is set)</li>
+<li><strong>Redis stream start choice</strong> : The specified starting ID for the stream, can be either<ul>
+<li>"<strong>-</strong>": From the beginning</li>
+<li>"<strong>$</strong>": New entries</li>
+<li>"<strong>&gt;</strong>": Undelivered entries (only applicable to Consumer Groups)</li>
+</ul>
+</li>
+<li><strong>Acknowledge processed entries</strong> : Send an acknowledge to Redis after reading (Only applicable to Consumer Groups)</li>
+<li><strong>Reclaim pending messages (ms)</strong> : Automatically reclaim pending messages after X milliseconds (Only applicable to Consumer Groups)</li>
 </ul>
 <h3 id="vendor-log-api-listening-mode-specific-parameters">Vendor Log API listening mode specific parameters</h3>
 <p><code>API Parser Type</code> : Here you can chose the technology of events you want to retrieve api events from.</p>
@@ -587,6 +614,12 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <p><code>Vectra url</code> : Vectra url with scheme.</p>
 <p><code>Vectra secret key</code> : Vectra secret key.</p>
 <p><code>Vectra client id</code> : Vectra client id.</p>
+<h3 id="vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</h3>
+<p><code>Cisco-Umbrella client id</code> : Cisco-Umbrella client id.</p>
+<p><code>Cisco-Umbrella secret key</code> : Cisco-Umbrella secret key.</p>
+<h3 id="vendor-log-api-gatewatcher-alerts-specific-parameters">Vendor Log API Gatewatcher alerts specific parameters</h3>
+<p><code>Gatewatcher alerts host</code> : Hostname (without scheme or path) of the Gatewatcher alerts server.</p>
+<p><code>Gatewatcher alerts API key</code> : Gatewatcher alerts API key.</p>
 <h2 id="specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</h2>
 <h3 id="filebeat-module">Filebeat Module</h3>
 <p>Fixme</p>

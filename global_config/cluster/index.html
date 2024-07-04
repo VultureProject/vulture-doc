@@ -49,7 +49,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
 </li>
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Cluster settings</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Cluster settings</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#general">General</a>
 </li>
@@ -154,7 +154,7 @@
 This is useful, for example, in logs services : You will be able to add special tags and tenant-specific information into the logs.</p>
 <p><code>Internal tenants config</code> : This parameter let you choose the default tenant configuration to apply anywhere in the Vulture configuration when no specific tenant is selected. Tenants are managed from the <a href="../tenant/">Tenants Config</a> menu.</p>
 <p><code>vlt-adm SSH authorized_keys</code> : You can copy / paste the ssh-ed25519 public key of the vlt-adm account into this textarea. This allows you to log in on Vulture via SSH using an SSH key, previously generated via ssh-keygen -t ed25519.</p>
-<p><code>Redis cluster password</code> : This field is used by the local Redis cluster to improve security and may be usefull in case of Redis exposition.</p>
+<p><code>Redis cluster password</code> : This field is used by the local Redis cluster to improve security and may be usefull in case of Redis exposition. The argument sets a global password to the Redis cluster, through the <code>requirepass</code> Redis parameter.</p>
 <h2 id="network-services">Network services</h2>
 <p>From this menu you can configure some global parameters related to network services.</p>
 <p><code>SMTP server</code> : Vulture will use this SMTP server whenever it has to send an email. Emails may be send by the underlying HardenedBSD system (cronjob, audit check, ...) as well as by Vulture for specific purposes (eg: Sending an OTP code via email). You may configure the local postfix service (/usr/local/etc/postfix/main.cf) and choose <strong>127.0.0.1</strong> as SMTP server here if you do not have existing SMTP relays in your organisation.</p>
