@@ -601,6 +601,10 @@ The following endpoints are supported :
 
 `Gatewatcher alerts API key` : Gatewatcher alerts API key.
 
+### Vendor Log API WAF Barracuda specific parameters
+
+`Waf Barracuda token` : Authentication token to use, when connecting to [Barracuda APIs](https://api.waas.barracudanetworks.com/swagger/).
+
 ## Specific settings for Filebeat Listening Mode
 
 ### Filebeat Module
