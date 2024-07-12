@@ -429,6 +429,8 @@ The following endpoints are supported :
 
 ### Vendor Log API CrowdStrike specific parameters
 
+`Get incident logs` : Activate (or deactivate) the fetching of incident logs on the API (/incidents/v1).
+
 `CrowdStrike Host` : Complete enpoint address.
 
 `CrowdStrike Username` : User's name.
