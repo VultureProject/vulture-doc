@@ -8,6 +8,11 @@ Cluster-wide parameters are managed from the [Cluster Config](cluster.md) menu.
 
 The table show all the nodes, with their main characteristics. Just **click on the node** to enter into edition mode.
 
+For each node of the cluster, the status is displayed as follow :
+ - If **green** : node is healthy.
+ - If **orange** : node is in maintenance.
+ - If **red** : node is down or critical services are not running.
+
 `Name` : This is the friendly name of the node
 
 `Network Interfaces` : The list of all the network interfaces available on the Node is displayed here
