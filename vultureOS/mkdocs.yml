@@ -43,3 +43,7 @@ nav:
       - Backend servers: applications/backend.md
     - API:
       - Swagger: api.md
+    - Salt:
+      - Introduction: salt/introduction.md
+      - Schema: salt/schema.md
+      - States examples: salt/states.md
