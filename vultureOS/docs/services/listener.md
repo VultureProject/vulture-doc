@@ -42,17 +42,59 @@ Depending on which listening mode you chose, configuration settings differs.
  - **generic_json** (json formatted logs)
  - **raw_to_json** (no specific format, but convert logs to json)
 
-`Parser tag`: #Fixme
+`Tags`: Tag used by file based parsers ([More infos](https://www.rsyslog.com/doc/configuration/modules/imfile.html#tag))
 
-`Tags`: #Fixme
+`Darwin policies`: Darwin policies to use with the listener (deprecated)
 
-`Darwin policies`: #Fixme
+
+### Advanced global parameters (only for Rsyslog listeners)
+
+By clicking the **Advanced** button on the lower right, the user will be able to further configure global (advanced) parameters for each Listener. Those options are better explained on [Rsyslog's documentation](https://www.rsyslog.com/doc/v8-stable/rainerscript/queue_parameters.html#queue-size)
+
+`Size of mmdblookup cache`: Number of entries of the LFU cache for mmdblookup.
+
+`Type of the queue` (default: *LinkedList*): Set a [queue type](https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-type) for the ruleset between :
+
+ - **LinkedList** (queue with maximal size but dynamic allocation)
+ - **FixedArray** (queue with fixed and preallocated size)
+ - **Direct** (no queueing)
+
+`Size of the queue` (default: *50000*): Maximum number of messages allowed in the action queue.
+
+`Size of batch dequeue` (default: *1024*): Maximum number of logs to use in a batch operation.
+
+`Queue maximum workers` (default: *8*): Maximum number of workers to start for the action.
+
+`Minimum messages to start a new worker` (default: *queue.size/queue.workerthreads*): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...).
+
+`Queue timeout shutdown (ms)` (default: [*1500ms*](https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-timeoutworkerthreadshutdown)): Number of milliseconds to wait before droping the remaining logs to process on the action.
+
+---
+
+`Enable disk queue on failure` (default: *false*): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.
+
+    Following parameters only applie to disk-assisted queues, *Enable disk queue on failure* must be enabled
+
+`High watermark target` (default: *90% of queue size*): When the queue reaches this amount of waiting messages, the queue will begin to spool to disk.
+
+`Low watermark target` (default: *70% of queue size*): When writing to disk is triggered by the `High watermark target`, it will return to in-memory queueing when the amount of logs in it falls back under this value.
+
+`Max file size of the queue in MiB` (default: *16MiB*): Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full.
+
+`Max disk space used by the queue in MiB` (default: *0MiB (unlimited)*): Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that size as logs are always written completely to disk.
+
+`Folder to store queue files to` (default: */var/tmp*): Existing directory (**in the Rsyslog jail**) to write queue spool files to.
+
+!!! warning
+    The folder should be created prior to defining it here, and should be available in the **Rsyslog jail** (/zroot/rsyslog) !
+
+---
 
 `Disable Octet Counting Framing` : Here you specify the Rsyslog imtcp option "SupportOctetCountedFraming", this is an advanced option, enable the option only if you know what you are doing.
 
-`rate-limiting interval`: #Fixme
+`rate-limiting interval` (default: *None*): Specifies the rate-interval in seconds. 0 means no rate-limiting.
 
-`rate-limiting burst`: #Fixme
+`rate-limiting burst` (default: *None*): Specifies the rate-limiting burst in number of messages.
 
 ## Listeners
 
