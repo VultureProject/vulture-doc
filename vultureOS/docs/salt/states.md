@@ -1,8 +1,40 @@
-# States of examples
+# Examples of States
 
 ## Usefull commands
 
-## 
+### On VultureOS
+
+Without salt master:
+```
+salt-call state.apply --local
+```
+
+Apply a specific state:
+```
+salt-call state.apply vulture.frontend_present
+```
+
+Increase verbosity:
+```
+salt-call state.apply -ldebug
+```
+
+Run a dry run:
+```
+salt-call state.apply test=True
+```
+
+### On salt master
+
+```
+salt "<appliance hostname>" cmd.run "salt-call state.apply"
+```
+
+```
+salt --hide-timeout -t5 -C "G@roles:<group name>" cmd.run "cat /etc/resolv.conf"
+```
+
+## Configuration example
 
 state_whitelist_salt_master:
   vulture.whitelist_salt_master:
@@ -29,7 +61,7 @@ state_network_address_present:
         prefix_or_netmask: "255.255.255.0"
         net_int_device:
           - dev: vtnet0
-            node_name: vulture4
+            node_name: vulture
 
 
 state_tlsprofile_present:
@@ -106,7 +138,7 @@ state_forwarder_present:
         confParam: 
           - a=b
           - c=d
-          - e=f=g
+          - e=f=gchoices.OPENIDChoices.JWT_SIGNATURE_TYPE[0]
         partitions_auto: True
 
 
@@ -182,7 +214,7 @@ state_frontend_present:
       - name: Filebeat example
         mode: filebeat
         filebeat_listening_mode: api
-        node: vulture4
+        node: vulture
         listeners:
           - interface_name: System
             ip: 10.0.2.10
@@ -207,7 +239,7 @@ state_frontend_present:
       - name: Redis Input json
         mode: log
         listening_mode: redis
-        node: vulture4
+        node: vulture
         ruleset: "generic_json"
         redis_server: 127.0.0.5
         redis_port: 6379
@@ -316,9 +348,8 @@ state_backend_present:
             mode: net
         enable_tcp_health_check: True
         tcp_health_check_expect_match: rstring
-        tcp_health_check_expect_pattern: ^SSH.*OpenSSH.*
+        tcp_health_check_expect_pattern: ^SSH.\*OpenSSH.\*
         tcp_health_check_interval: 10
-
 
 
 state_ldaprepository_present:
@@ -437,7 +468,6 @@ state_otp_present:
         totp_label: "Double Authentication"
 
 
-
 state_userportal_present:
   vulture.userportal_present:
     - require:
@@ -482,7 +512,6 @@ state_userportal_present:
         enable_sso_forward: false
 
 
-
 state_acl_present:
   vulture.acl_present:
     - data:
@@ -495,7 +524,6 @@ state_acl_present:
               dns: false
               case: false
               pattern: "10.0.2.0/24"
-
 
 
 state_workflow_present:

@@ -20,5 +20,4 @@ A minion needs to send his public key to the master and it returns back an AES k
 
 ## Integration in Vulture
 
-We use Salt mainly for the fast and automated deployement of complex configurations.
-
+We use Salt mainly for the fast and automated deployement of complex configurations. But also to check local files or installed packages.
