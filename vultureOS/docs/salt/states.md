@@ -19,7 +19,7 @@ Increase verbosity:
 salt-call state.apply -ldebug
 ```
 
-Run a dry run:
+Test a state with a dry run:
 ```
 salt-call state.apply test=True
 ```
@@ -36,20 +36,40 @@ salt --hide-timeout -t5 -C "G@roles:<group name>" cmd.run "cat /etc/resolv.conf"
 
 ## Configuration example
 
+Be sure to specify required dependencies in the state.
+
+For example, a workflow needs at least a frontend and a backend so in the workflow state, you have to delcare them in requirements
+``` yaml
+state_workflow_present:
+  vulture.workflow_present:
+    - require:
+      - id: state_frontend_present
+      - id: state_backend_present
+```
+
+### Whitelist
+
+``` yaml
 state_whitelist_salt_master:
   vulture.whitelist_salt_master:
     - name: "Salt Master IP"
     - ip_address: 10.0.2.1
+```
 
+### Network Interface
 
+``` yaml
 state_netif_present:
   vulture.netif_present:
     - data:
       - net_int_device:
         - dev: vtnet0
           node_name: vulture
+```
 
+### Network Address
 
+``` yaml
 state_network_address_present:
   vulture.network_address_present:
     - require:
@@ -62,15 +82,17 @@ state_network_address_present:
         net_int_device:
           - dev: vtnet0
             node_name: vulture
+```
 
+### TLS Profile
 
+``` yaml
 state_tlsprofile_present:
   vulture.tlsprofile_present:
     - data:
       - id: 2
         name: Custom TLS profile
         x509_certificate: vulture
-        compatibility: "broad"
         protocols:
           - tlsv11
           - tlsv12
@@ -81,8 +103,11 @@ state_tlsprofile_present:
           - http/1.1
         verify_client: "none"
         ca_cert: null
+```
 
+### Log Forwarder
 
+``` yaml
 state_forwarder_present:
   vulture.forwarder_present:
     - data:
@@ -135,13 +160,16 @@ state_forwarder_present:
         topicConfParam:
           - test="is a string"
           - test2=ok
-        confParam: 
+        confParam:
           - a=b
           - c=d
           - e=f=gchoices.OPENIDChoices.JWT_SIGNATURE_TYPE[0]
         partitions_auto: True
+```
 
+### Error Templates
 
+``` yaml
 state_error_template_present:
   vulture.error_template_present:
     - data:
@@ -176,7 +204,11 @@ state_error_template_present:
         error_504_mode: display
         error_504_html: "HTTP/1.1 504 Gateway Timeout\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n<html><body><h1>504 Gateway Timeout</h1>\r\n<p>The gateway did not receive a timely response\r\nfrom the upstream server or application.</p>\r\n</body></html>"
         error_504_url: "http://www.example.com/test/"
+```
 
+### Frontend and listener
+
+``` yaml
 state_frontend_present:
   vulture.frontend_present:
     - require:
@@ -281,8 +313,11 @@ state_frontend_present:
           {{mongodb_forwarder}}
           {{kafka_forwarder}}
           {{ELS_forwarder}}{%endraw%}
+```
 
+### Backend
 
+``` yaml
 state_backend_present:
   vulture.backend_present:
     - data:
@@ -350,8 +385,11 @@ state_backend_present:
         tcp_health_check_expect_match: rstring
         tcp_health_check_expect_pattern: ^SSH.\*OpenSSH.\*
         tcp_health_check_interval: 10
+```
 
+### LDAP repository
 
+``` yaml
 state_ldaprepository_present:
   vulture.ldaprepository_present:
     - data:
@@ -390,8 +428,11 @@ state_ldaprepository_present:
             output_attribute: my_attr_1
           - ldap_attribute: CustomAttr2
             output_attribute: my_attr_2
+```
 
+### User Scope
 
+``` yaml
 state_userscope_present:
   vulture.userscope_present:
     - data:
@@ -432,8 +473,11 @@ state_userscope_present:
             action_var_name: iss
             action_var_kind: claim
             action_var: iss
+```
 
+### IDP
 
+``` yaml
 state_gitlab_connector_present:
   vulture.openid_present:
     - require:
@@ -458,16 +502,22 @@ state_gitlab_connector_present:
           -----BEGIN CERTIFICATE-----
           <certificate>
           -----END CERTIFICATE-----
+```
 
+### OTP
 
+``` yaml
 state_otp_present:
   vulture.otp_present:
     - data:
       - name: "Default TOTP"
         otp_type: "totp"
         totp_label: "Double Authentication"
+```
 
+### User Portal
 
+``` yaml
 state_userportal_present:
   vulture.userportal_present:
     - require:
@@ -510,8 +560,11 @@ state_userportal_present:
         enable_disconnect_portal: true
         enable_registration: false
         enable_sso_forward: false
+```
 
+### ACL
 
+``` yaml
 state_acl_present:
   vulture.acl_present:
     - data:
@@ -524,8 +577,11 @@ state_acl_present:
               dns: false
               case: false
               pattern: "10.0.2.0/24"
+```
 
+### Workflow
 
+``` yaml
 state_workflow_present:
   vulture.workflow_present:
     - require:
@@ -577,3 +633,4 @@ state_workflow_present:
       - name: Internal ssh
         frontend: Frontend ssh
         backend: ssh
+```
