@@ -80,9 +80,9 @@ By default, here are the network connexions that are using this IP address :
 
 `InterCluster IP Address` : Inter-cluster network traffic (redis/sentinel, mongodb, rsyslog) is NAT-ed behind this IP address. This IP address is also used by the Web UI and the REST API management endpoint.
 
-`Backends outgoing IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Backends](../../applications/backend), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
+`Backends outgoing IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Backends](../applications/backend.md), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
 
-`Log forwarders IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Log Forwarders](../../applications/logs_forwarder), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
+`Log forwarders IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Log Forwarders](../applications/logs_forwarder.md), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
 
 `Default router` : Define here the default IPv4 network gateway of the system.
 

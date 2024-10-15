@@ -32,7 +32,7 @@ TLS configuration may be use in TCP & HTTP listeners and in HTTP backend.
 
 To avoid the pain of selecting complex ciphersuite string, Vulture has packaged ready-to-use TLS ciphers list.
 
-* Advanced (A score) : This is the best choice for security, only TLSv1.3 and TLSv1.2 are allowed, with strong ciphers
+* Advanced (A score) : This is the best choice for security, only TLSv1.3 is allowed, with strong ciphers
 * Broad Compatibility (B score) : Same as Advanced, only TLSv1.3 and TLSv1.2 are allowed but allowing the use of less secure ciphers
 * Widest Compatibility (C score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with medium ciphers
 * Legacy (D score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with low ciphers
