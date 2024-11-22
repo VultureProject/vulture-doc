@@ -56,6 +56,28 @@ state_whitelist_salt_master:
     - ip_address: 10.0.2.1
 ```
 
+### Node
+
+``` yaml
+state_node_present:
+  vulture.node_present:
+    - require:
+      - id: state_forwarder_present
+    - data:
+      - name: "vulture"
+        static_routes: |-
+          static_routes="net1 net2 net3"
+          route_net1="-net 192.168.0.0/24 192.168.0.1"
+          route_net2="-net 192.168.1.0/24 192.168.1.1"
+          route_net3="-net 192.168.2.0/24 192.168.2.1"
+        pf_custom_param_config: "### Custom global parameters test"
+        pf_custom_rdr_config: |-
+          ### Custom RDR rules
+          nat inet from 127.0.0.5 to any -> (vmx0)
+        pstats_forwarders:
+          - syslog_forwarder
+```
+
 ### Network Interface
 
 ``` yaml

@@ -22,6 +22,28 @@ configure_cluster:
     internal_tenants: Optional[int]
 ```
 
+## Node fields
+
+``` yaml
+node_present:
+    name: str
+    management_ip: Optional[str]
+    internet_ip: Optional[str]
+    backends_outgoing_ip: Optional[str]
+    logom_outgoing_ip: Optional[str]
+    gateway: Optional[str]
+    gateway_ipv6: Optional[str]
+    static_routes: Optional[str]
+    pf_limit_states: Optional[int]
+    pf_limit_frags: Optional[int]
+    pf_limit_src: Optional[int]
+    pf_custom_param_config: Optional[str]
+    pf_custom_nat_config: Optional[str]
+    pf_custom_rdr_config: Optional[str]
+    pf_custom_config: Optional[str]
+    pstats_forwarders: Optional[List[Any]]
+```
+
 ## Network Address fields
 
 ``` yaml
