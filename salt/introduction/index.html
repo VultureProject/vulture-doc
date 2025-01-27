@@ -4,18 +4,18 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/overview/quickstart/" rel="canonical"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/salt/introduction/" rel="canonical"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Quick start - VultureOS Documentation</title>
+<title>Introduction - VultureOS Documentation</title>
 <link href="../../css/theme.css" rel="stylesheet"/>
 <link href="../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <link href="../../css/styling.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Quick start";
-        var mkdocs_page_input_path = "overview/quickstart.md";
-        var mkdocs_page_url = "/doc/overview/quickstart/";
+        var mkdocs_page_name = "Introduction";
+        var mkdocs_page_input_path = "salt/introduction.md";
+        var mkdocs_page_url = "/doc/salt/introduction/";
       </script>
 <!--[if lt IE 9]>
       <script src="../../js/html5shiv.min.js"></script>
@@ -37,28 +37,12 @@
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Overview</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../packaging/">Packaging</a>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../deploy/">Deployment</a>
-</li>
-<li class="toctree-l1 current"><a class="reference internal current" href="#">Quick start</a>
-<ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="#vultures-main-features">Vulture's main features</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#network-firewall">Network firewall</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#tcphttp-load-balancing-and-reverse-proxy">TCP/HTTP Load-balancing and reverse-proxy</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#log-processing">LOG Processing</a>
 <ul>
-<li class="toctree-l3"><a class="reference internal" href="#rsyslog-capabilities">RSYSLOG Capabilities</a>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#filebeat-capabilities">Filebeat Capabilities</a>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
 </li>
-</ul>
-</li>
-</ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Administration</span></p>
@@ -133,12 +117,20 @@
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Salt</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../salt/introduction/">Introduction</a>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Introduction</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#presentation">Presentation</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../salt/schema/">Schema</a>
+<li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../salt/states/">States examples</a>
+<li class="toctree-l2"><a class="reference internal" href="#integration-in-vulture">Integration in Vulture</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../schema/">Schema</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../states/">States examples</a>
 </li>
 </ul>
 </div>
@@ -153,8 +145,8 @@
 <div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
 <ul class="wy-breadcrumbs">
 <li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
-<li class="breadcrumb-item">Overview</li>
-<li class="breadcrumb-item active">Quick start</li>
+<li class="breadcrumb-item">Salt</li>
+<li class="breadcrumb-item active">Introduction</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -162,46 +154,23 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="vulture-quick-start">Vulture - Quick start</h1>
-<h2 id="vultures-main-features">Vulture's main features</h2>
-<p>Vulture is a security device (Cloud / VM / Bare-metal) specialized in :</p>
-<ul>
-<li><strong>Network firewall</strong> : Packet filter, load-balancing and tcp/http reverse-proxy</li>
-<li><strong>Log processing</strong> : Collect, parsing, enrichment, anomaly detection</li>
-<li><strong>Web Authentication portal</strong>: Protect Web applications, authenticate users with Federation and SSO capabilities</li>
-<li><strong>Web Application Firewall</strong>: Work in progress</li>
-</ul>
-<p>It is powered by a custom build of HardenedBSD and can be managed by a unified Web Interface</p>
-<h2 id="network-firewall">Network firewall</h2>
-<p>Incoming and outgoing network trafic pass through the internal BSD Firewall "pf". This is a core feature of VultureOS than cannot be disabled. The firewall is automatically managed : Incoming trafic is blocked by default, except management ports. You do not have to worry about the firewall configuration, because Vulture will automatically open or block the ports whenever you publish a new service.</p>
-<p>Of course you can customize the firewall configuration to fit your needs if needed. See "Custom PF Configuration" in <a href="../../global_config/node/#firewall">Network firewall</a>.</p>
-<h2 id="tcphttp-load-balancing-and-reverse-proxy">TCP/HTTP Load-balancing and reverse-proxy</h2>
-<p>These features are provided by HAProxy, it is one of the most important component of Vulture. Vulture implements the HAProxy concepts of "Frontend" and "Backend" :</p>
-<ul>
-<li>Frontend are the public listerners that will accept incoming trafic</li>
-<li>Backend are the application servers that are "behind" the reverse-proxy</li>
-</ul>
-<p>In Vulture, Frontends are manager through the listeners in <a href="../../services/listener/">Services/Listeners</a>
- - Vulture handles "TCP" and "HTTP" listener, as HAProxy does
- - It also handles special "LOG" listeners : These listeners are able to process log streams, either via RSYSLOG or Filebeat (these components are both embedded into Vulture)</p>
-<p>Thanks to HAProxy, incoming log trafic (except UDP) can be load-balanced between several Vulture devices.</p>
-<h2 id="log-processing">LOG Processing</h2>
-<p>LOG Listeners allow Vulture to accept incoming log stream. Log processing is handle by either Filebeat or RSYSLOG. You don't have to bother with Filebeat or RSYSLOG configuration, as Vulture will manage basic settings for you. Of course you always have the possibility to adapt settings to your specific needs.</p>
-<p>Where you create a "LOG" listener in Vulture, the incoming data flow is : </p>
-<ul>
-<li>PF -&gt; HAPROXY -&gt; RSYSLOG / Filebeat if incoming protocol is TCP</li>
-<li>PF -&gt; RSYSLOG / Filebeat if incoming protocol is UDP</li>
-</ul>
-<p>See <a href="../../services/listener/#specific-settings-for-rsyslog-listening-modes">Available LOG Modes</a></p>
-<h3 id="rsyslog-capabilities">RSYSLOG Capabilities</h3>
-<p>Vulture can process incoming logs with the following protocols: UDP, TCP, TCP&amp;UDP, RELP, FILE, KAFKA, REDIS... </p>
-<p>See available <a href="../../services/listener/#vendor-log-api-listening-mode-specific-parameters">Vendor API Listeners</a></p>
-<h3 id="filebeat-capabilities">Filebeat Capabilities</h3>
+<h1 id="introduction-to-salt">Introduction to Salt</h1>
+<h2 id="presentation">Presentation</h2>
+<p>SaltStack is an OpenSource software written in python and owned by VMware.</p>
+<p>It is used maily to manage configuration and executing remote tasks.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Based on Server-Client communication using a publish-subscribe pattern. It can deploy configurations on a large scale infrastructure through Salt minions (be shure to open ports 4505 and 4506 on the master side).</p>
+<p>Salt minions do their own work. Communication from the Salt master is a lightweight set of instructions. They determine locally if they match the properties when the command is received.</p>
+<p>Each Salt minion already has all of the commands that it needs, so the command can be executed and the results return back to the Salt master.</p>
+<p>The scalability is very impressive with Salt, it is not uncommon to meet users with over 10,000 minions on a single master in production.</p>
+<p>A minion needs to send his public key to the master and it returns back an AES key, encrypted by the minions key.</p>
+<h2 id="integration-in-vulture">Integration in Vulture</h2>
+<p>We use Salt mainly for the fast and automated deployement of complex configurations. But also to check local files or installed packages.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../deploy/" title="Deployment"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../administration/vltadmin/" title="vlt-admin CLI">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../../api/" title="Swagger"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../schema/" title="Schema">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -216,8 +185,8 @@
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../deploy/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../../administration/vltadmin/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../../api/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../schema/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../../js/jquery-3.6.0.min.js"></script>

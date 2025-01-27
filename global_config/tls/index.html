@@ -45,6 +45,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../administration/vltadmin/">vlt-admin CLI</a>
+</li>
+</ul>
 <p class="caption"><span class="caption-text">Global Config</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../stats/">Status Page</a>
@@ -117,6 +122,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Salt</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/introduction/">Introduction</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/schema/">Schema</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/states/">States examples</a>
+</li>
+</ul>
 </div>
 </div>
 </nav>
@@ -157,7 +171,7 @@ TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p
 <p><code>Browsers compatibility</code> :</p>
 <p>To avoid the pain of selecting complex ciphersuite string, Vulture has packaged ready-to-use TLS ciphers list.</p>
 <ul>
-<li>Advanced (A score) : This is the best choice for security, only TLSv1.3 and TLSv1.2 are allowed, with strong ciphers</li>
+<li>Advanced (A score) : This is the best choice for security, only TLSv1.3 is allowed, with strong ciphers</li>
 <li>Broad Compatibility (B score) : Same as Advanced, only TLSv1.3 and TLSv1.2 are allowed but allowing the use of less secure ciphers</li>
 <li>Widest Compatibility (C score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with medium ciphers</li>
 <li>Legacy (D score) : TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3 with low ciphers</li>

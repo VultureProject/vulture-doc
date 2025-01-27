@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/administration/vltadmin/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>vlt-admin CLI - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "vlt-admin CLI";
+        var mkdocs_page_input_path = "administration/vltadmin.md";
+        var mkdocs_page_url = "/doc/administration/vltadmin/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Administration</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="#">vlt-admin CLI</a>
+<ul class="current">
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Salt</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/introduction/">Introduction</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/schema/">Schema</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/states/">States examples</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Administration</li>
+<li class="breadcrumb-item active">vlt-admin CLI</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="vlt-admin-cli">vlt-admin CLI</h1>
+<p>The <code>vlt-admin</code> cli tool is installed through the <strong>vulture-utils</strong> package and is available from any user.</p>
+<p>This tool allows to handle safe and efficient upgrades,as well as system snapshotting and rollbacking.</p>
+<h1 id="sub-commands">sub-commands</h1>
+<p>The <code>vlt-admin</code> CLI possess a list of available sub-commands, each with their own role:</p>
+<ol>
+<li><strong>upgrade-os</strong>: this sub-command allows to handle OS upgrades, as well as jails' base</li>
+<li><strong>upgrade-pkg</strong>: this sub-command allows to handle upgrades of all or specific packages, as well as packages in specific jails</li>
+<li><strong>snapshot</strong>: this sub-command allows to create snapshots of all or specific parts of the system</li>
+<li><strong>restore</strong>: this sub-command allows to use created snapshots (through the <strong>snapshot</strong> sub-command) to rollback all or parts of the system</li>
+</ol>
+<h2 id="upgrading-the-os">Upgrading the OS</h2>
+<p>The <code>upgrade-os</code> is the command that allows to upgrade the base system, the kernel and the jails' base system.</p>
+<p>This command can:</p>
+<ul>
+<li>Upgrade base/kernel of the host</li>
+<li>Upgrade all or some of the jails' base system</li>
+<li>Use Boot Environments to install and validate host's upgrades</li>
+</ul>
+<p>To get a list of possible options and their description, you can run <code>vlt-admin upgrade-os -h</code>.</p>
+<p>Here are some examples of use-cases and their corresponding commands:</p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upgrade host and jail's base system and kernel, in place</td>
+<td><code>vlt-admin upgrade-os all</code></td>
+</tr>
+<tr>
+<td>Upgrade jail's base system, in place</td>
+<td><code>vlt-admin upgrade-os jails</code></td>
+</tr>
+<tr>
+<td>Upgrade the apache jail's base system, in place</td>
+<td><code>vlt-admin upgrade-os apache</code></td>
+</tr>
+<tr>
+<td>Download and install the host's base and kernel, in a Boot Environment, applied on reboot</td>
+<td><code>vlt-admin upgrade-os -b</code></td>
+</tr>
+<tr>
+<td>Install a specific host's kernel and base, in place</td>
+<td><code>vlt-admin upgrade-os -B -V &lt;version&gt;</code></td>
+</tr>
+<tr>
+<td>Download the latest upgrade base + kernel, and keep it in the /var/tmp/upgrade directory</td>
+<td><code>vlt-admin upgrade-os -D -T -t /var/tmp/upgrade</code></td>
+</tr>
+<tr>
+<td>Upgrade host and jail's base system and kernel, using previously downloaded archive in /var/tmp/upgrade</td>
+<td><code>vlt-admin upgrade-os -B -T -t /var/tmp/upgrade</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="upgrading-packages">Upgrading packages</h2>
+<p>The <code>upgrade-pkg</code> is the command that allows to upgrades packages, either on the system and/or in the jails.</p>
+<p>This command can:</p>
+<ul>
+<li>Upgrade all host and jails' packages</li>
+<li>Upgrade all packages in a specific jail</li>
+<li>Upgrade specific packages on the system</li>
+</ul>
+<p>To get a list of possible options and their description, you can run <code>vlt-admin upgrade-pkg -h</code>.</p>
+<p>Here are some examples of use-cases and their corresponding commands:</p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upgrade all installed packages, on the host and in every jail</td>
+<td><code>vlt-admin upgrade-pkg</code></td>
+</tr>
+<tr>
+<td>Upgrade all packages in the haproxy jail, as well as vulture-haproxy</td>
+<td><code>vlt-admin upgrade-pkg haproxy</code></td>
+</tr>
+<tr>
+<td>Upgrade the sudo and vim packages</td>
+<td><code>vlt-admin upgrade-pkg sudo vim</code></td>
+</tr>
+<tr>
+<td>Upgrade all packages in the gui jail, as well as vulture-gui and the vulture-base packages</td>
+<td><code>vlt-admin upgrade-pkg gui base</code></td>
+</tr>
+<tr>
+<td>Only download the latest packages for the rsyslog jail</td>
+<td><code>vlt-admin upgrade-pkg -D rsyslog</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="snapshotting-and-restoring-the-system">Snapshotting and Restoring the system</h2>
+<p>In addition to the Boot Environment feature for OS upgrades, it's also possible to snapshot all or parts of the system.</p>
+<p>These commands use the <strong>ZFS filesystem</strong> and <strong>Boot Environments</strong> to create, rollback and destroy snapshots.</p>
+<p>The snapshotting process is done by the <code>vlt-admin snapshot</code> subcommand, and the following <em>datasets</em> can be snapshotted:</p>
+<ul>
+<li>SYSTEM: This dataset only represents part of the base OS, this is the dataset that is currently mounted on '/'</li>
+<li>JAILS: This represents all datasets making up the base system of every jail ('/' and '/usr/')</li>
+<li>HOME: This represents the /home dataset</li>
+<li>DATABASE: This represents the dataset(s) containing the Vulture's database(s)</li>
+<li>TMPVAR: This represents all datasets containing variable and temporary data</li>
+</ul>
+<p>To snapshot, you simply have to run the <code>vlt-admin snapshot</code> command and specify the flag(s) corresponding to each dataset.</p>
+<p>Each dataset's flag is defined by its first letter in uppercase.
+For example, to snapshot <strong>S</strong>YSTEM, <strong>J</strong>AILS and <strong>D</strong>ATABASE, the command to run would be</p>
+<blockquote>
+<p><code>vlt-admin snapshot -S -J -D</code>.</p>
+</blockquote>
+<p>You can also specify the <code>-A</code> flag to snapshot <strong>ALL</strong> datasets.</p>
+<p>To avoid taking too much disk space with saved snapshots, you can additionally add the <code>-k</code> flag with a positive number 
+to restrict each dataset's number of snapshots to the specified number.
+For example, to run the previous snapshotting command while ensuring only the 3 latest snapshots remain,
+the command to run would be</p>
+<blockquote>
+<p><code>vlt-admin snapshot -S -J -D -k 3</code></p>
+</blockquote>
+<h3 id="the-rollbacking-process">The rollbacking process</h3>
+<p>When snapshots exist, you can list them using the <code>-l</code> flag:</p>
+<blockquote>
+<p><code>vlt-admin snapshot -l</code></p>
+</blockquote>
+<p>You can then use them to rollback all or parts of the datasets, using the same set of flags to select parts to rollback.
+For example, to restore the datasets snapshotted on the previous example to their latest snapshotted state:</p>
+<blockquote>
+<p><code>vlt-admin restore -S -J -D</code></p>
+</blockquote>
+<p>Once datasets' snapshots are triggered for restore, the pending restores can be shown with:</p>
+<blockquote>
+<p><code>vlt-admin restore -l</code></p>
+</blockquote>
+<p><strong>WARNING</strong>: existing snapshots won't be shown using this command, only those triggered for the restoration process will be!</p>
+<p>To execute a restore, some prerequisites are still necessary after triggering:</p>
+<ul>
+<li>the <em>zfs_restore</em> service should be enabled (this is done by default)</li>
+<li>the machine should be <strong>restarted</strong> after the trigger(s)</li>
+</ul>
+<p>When triggering the wrong snapshots, you can simply reset some or all triggers with a single command.
+For example, if the databases' dataset was set but should not, you can simply:</p>
+<blockquote>
+<p><code>vlt-admin restore -D -c</code></p>
+</blockquote>
+<p>By default, the latest snapshot is used for every dataset, but you can select any previous one by specifying it with the '-r' flag.
+For example, when listing existing snapshots with <code>vlt-admin snapshot -l</code>, assuming this reply:</p>
+<pre><code>SYSTEM: VLT_SNAP_2024-07-10T16:42:07
+JAIL:   VLT_SNAP_2024-07-10T16:42:07    VLT_SNAP_2024-07-10T16:19:14
+DB:     VLT_SNAP_2024-07-10T16:42:07
+HOMES:  VLT_SNAP_2024-07-10T16:42:07
+TMPVAR:
+</code></pre>
+<p>The <em>VLT_SNAP_2024-07-10T16:19:14</em> snapshot on JAIL's dataset can be restored using:</p>
+<blockquote>
+<p><code>vlt-admin restore -J -r VLT_SNAP_2024-07-10T16:19:14</code></p>
+</blockquote>
+<p><strong>Warning</strong>: Specifying snapshot names' that don't exist for some datasets will result in a failure!</p>
+<h1 id="use-cases">Use cases</h1>
+<h2 id="safe-os-upgrade">Safe OS upgrade</h2>
+<p>To safely upgrade the host's base and kernel, you can use the Boot Environment feature 
+to install the upgrade in a separate environment and only activate/validate it once the machine is rebooted.</p>
+<p>This setup will prevent changing anything from the currently running system, while still downloading and installing 
+the OS upgrade on the machine.</p>
+<p>To do that, simply run</p>
+<blockquote>
+<p><code>vlt-admin upgrade-os -b</code></p>
+</blockquote>
+<p>This will</p>
+<ol>
+<li>Download the base/kernel upgrade on the machine</li>
+<li>Create a new <a href="https://wiki.freebsd.org/BootEnvironments">Boot Environment</a></li>
+<li>Install the upgrade on it</li>
+<li>Activate the BE for next reboot if everything ran correctly</li>
+</ol>
+<p>By using this method:</p>
+<ul>
+<li>Running system is not changed in any way</li>
+<li>Upgraded system is still downloaded and installed on the machine</li>
+<li>The maintenance window for the machine is limited to a single reboot</li>
+<li>If something went wrong, the old environement can be reset with <a href="https://man.freebsd.org/cgi/man.cgi?bectl(8)">bectl</a></li>
+</ul>
+<p><strong>Important to note</strong>: by doing that, neither jail's base nor packages will be upgraded, 
+read next section.</p>
+<h2 id="safe-jailspackages-upgrades">Safe jails/packages upgrades</h2>
+<p>Using the snapshot/restore capabilities of <em>vlt-admin</em>, jails and packages can also be safely restored 
+to their previous state.</p>
+<p>To do that, it is possible to:</p>
+<ul>
+<li>Snapshot all necessary datasets</li>
+<li>Execute the upgrades</li>
+<li>Validate the upgrade</li>
+<li>If something went wrong, rollback all snapshotted datasets to their previous state</li>
+</ul>
+<p>To do that, simply run:</p>
+<ul>
+<li><code>vlt-admin snapshot -S -J -H -D</code>: to snapshot datasets related to an OS and packages upgrade</li>
+<li><code>vlt-admin upgrade-os jails</code>: to upgrade jails' base system</li>
+<li><code>vlt-admin upgrade-pkg</code>: to upgrade base system and jails' packages</li>
+</ul>
+<p>And to rolback if something went bad:</p>
+<ul>
+<li><code>vlt-admin restore -S -J -H -D</code>: trigger snapshots to restore</li>
+<li><code>reboot</code>: restart the machine to execute restores</li>
+</ul>
+<p><strong>Warning</strong>: Many Vulture package upgrades do change parts of the database, but snapshotting it through filesystem 
+on a clustered environment won't restore the database as the other nodes will hold updated data.
+When doing these steps on a clustered environement, the best thing to do is use mongo tools to dump the database 
+and don't snapshot the databases dataset (thus dropping the <code>-D</code> from previous commands).</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../../overview/quickstart/" title="Quick start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../global_config/stats/" title="Status Page">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../../overview/quickstart/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../global_config/stats/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://www.vultureproject.org/doc/salt/states/" rel="canonical"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>States examples - VultureOS Documentation</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../css/styling.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "States examples";
+        var mkdocs_page_input_path = "salt/states.md";
+        var mkdocs_page_url = "/doc/salt/states/";
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> VultureOS Documentation
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/packaging/">Packaging</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/deploy/">Deployment</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../administration/vltadmin/">vlt-admin CLI</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Global Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/cluster/">Cluster settings</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/node/">Nodes</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tenant/">Multi-Tenants</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/network/">Network Interfaces</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/users/">Users</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/pki/">X509 Certificates</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../global_config/tls/">TLS Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../services/listener/">Frontend listeners</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/ipsec_client/">IPSEC Client</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/vpnssl_client/">VPNSSL Client</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Identity Providers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/repository/">The repository concept</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/ldap/">LDAP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/kerberos/">Kerberos</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/radius/">Radius</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/mfa/">MFA &amp; OTP</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/totp/">Time-based OTP Profiles</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/openid/">OpenID Federation</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/scopes/">User's Scope</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../identity/sso_profiles/">SSO Profiles</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Authentication Portal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../portal/portal/">Portal</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Salt</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/">Introduction</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../schema/">Schema</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">States examples</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#usefull-commands">Usefull commands</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-vultureos">On VultureOS</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#on-salt-master">On salt master</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-example">Configuration example</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#whitelist">Whitelist</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#node">Node</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#network-interface">Network Interface</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#network-address">Network Address</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tls-profile">TLS Profile</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#log-forwarder">Log Forwarder</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-templates">Error Templates</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frontend-and-listener">Frontend and listener</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#backend">Backend</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ldap-repository">LDAP repository</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#user-scope">User Scope</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#idp">IDP</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#otp">OTP</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#user-portal">User Portal</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#acl">ACL</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#workflow">Workflow</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">VultureOS Documentation</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Salt</li>
+<li class="breadcrumb-item active">States examples</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="examples-of-states">Examples of States</h1>
+<h2 id="usefull-commands">Usefull commands</h2>
+<h3 id="on-vultureos">On VultureOS</h3>
+<p>Without salt master:</p>
+<pre><code>salt-call state.apply --local
+</code></pre>
+<p>Apply a specific state:</p>
+<pre><code>salt-call state.apply vulture.frontend_present
+</code></pre>
+<p>Increase verbosity:</p>
+<pre><code>salt-call state.apply -ldebug
+</code></pre>
+<p>Test a state with a dry run:</p>
+<pre><code>salt-call state.apply test=True
+</code></pre>
+<h3 id="on-salt-master">On salt master</h3>
+<pre><code>salt "&lt;appliance hostname&gt;" cmd.run "salt-call state.apply"
+</code></pre>
+<pre><code>salt --hide-timeout -t5 -C "G@roles:&lt;group name&gt;" cmd.run "cat /etc/resolv.conf"
+</code></pre>
+<h2 id="configuration-example">Configuration example</h2>
+<p>Be sure to specify required dependencies in the state.</p>
+<p>For example, a workflow needs at least a frontend and a backend so in the workflow state, you have to delcare them in requirements</p>
+<pre><code class="language-yaml">state_workflow_present:
+  vulture.workflow_present:
+    - require:
+      - id: state_frontend_present
+      - id: state_backend_present
+</code></pre>
+<h3 id="whitelist">Whitelist</h3>
+<pre><code class="language-yaml">state_whitelist_salt_master:
+  vulture.whitelist_salt_master:
+    - name: "Salt Master IP"
+    - ip_address: 10.0.2.1
+</code></pre>
+<h3 id="node">Node</h3>
+<pre><code class="language-yaml">state_node_present:
+  vulture.node_present:
+    - require:
+      - id: state_forwarder_present
+    - data:
+      - name: "vulture"
+        static_routes: |-
+          static_routes="net1 net2 net3"
+          route_net1="-net 192.168.0.0/24 192.168.0.1"
+          route_net2="-net 192.168.1.0/24 192.168.1.1"
+          route_net3="-net 192.168.2.0/24 192.168.2.1"
+        pf_custom_param_config: "### Custom global parameters test"
+        pf_custom_rdr_config: |-
+          ### Custom RDR rules
+          nat inet from 127.0.0.5 to any -&gt; (vmx0)
+        pstats_forwarders:
+          - syslog_forwarder
+</code></pre>
+<h3 id="network-interface">Network Interface</h3>
+<pre><code class="language-yaml">state_netif_present:
+  vulture.netif_present:
+    - data:
+      - net_int_device:
+        - dev: vtnet0
+          node_name: vulture
+</code></pre>
+<h3 id="network-address">Network Address</h3>
+<pre><code class="language-yaml">state_network_address_present:
+  vulture.network_address_present:
+    - require:
+      - id: state_netif_present
+    - data:
+      - name: System
+        type: system
+        ip: 10.0.2.2
+        prefix_or_netmask: "255.255.255.0"
+        net_int_device:
+          - dev: vtnet0
+            node_name: vulture
+</code></pre>
+<h3 id="tls-profile">TLS Profile</h3>
+<pre><code class="language-yaml">state_tlsprofile_present:
+  vulture.tlsprofile_present:
+    - data:
+      - id: 2
+        name: Custom TLS profile
+        x509_certificate: vulture
+        protocols:
+          - tlsv11
+          - tlsv12
+          - tlsv13
+        cipher_suite: "broad"
+        alpn:
+          - h2
+          - http/1.1
+        verify_client: "none"
+        ca_cert: null
+</code></pre>
+<h3 id="log-forwarder">Log Forwarder</h3>
+<pre><code class="language-yaml">state_forwarder_present:
+  vulture.forwarder_present:
+    - data:
+      - forwarder_type: File
+        name: file_forwarder
+        file: /tmp/testing
+        flush_interval: 2
+      - forwarder_type: File
+        name: file_forwarder_raw
+        file: /tmp/raw
+        flush_interval: 2
+        send_as_raw: True
+      - forwarder_type: RELP
+        name: relp_forwarder
+        target: 10.0.2.1
+        port: 2323
+        tls_enabled: True
+      - forwarder_type: Redis
+        name: redis_forwarder
+        target: 127.0.0.5
+        port: 6379
+        key: "%$!techno%-%$!product%"
+        dynamic_key: true
+      - forwarder_type: Syslog
+        name: syslog_forwarder
+        target: 10.0.2.1
+        port: 2424
+        protocol: tcp
+        zip_level: 4
+      - forwarder_type: Elasticsearch
+        name: ELS_forwarder
+        servers: '["http://10.0.2.1:9200"]'
+        es8_compatibility: True
+        data_stream_mode: True
+        index_pattern: "vulture-%$!timestamp:1:10%"
+        enable_retry: True
+        enable_disk_assist: True
+      - forwarder_type: MongoDB
+        name: mongodb_forwarder
+        uristr: "mongodb://10.0.2.10:9091/?replicaset=Vulture&amp;ssl=true"
+        db: vulture
+        collection: logs_mongodb_forwarder
+      - forwarder_type: Kafka
+        name: kafka_forwarder
+        broker: '["10.0.2.1:9092"]'
+        topic: logs
+        dynaTopic: False
+        key: "%$!techno%-%$!product%"
+        dynaKey: True
+        topicConfParam:
+          - test="is a string"
+          - test2=ok
+        confParam:
+          - a=b
+          - c=d
+          - e=f=gchoices.OPENIDChoices.JWT_SIGNATURE_TYPE[0]
+        partitions_auto: True
+</code></pre>
+<h3 id="error-templates">Error Templates</h3>
+<pre><code class="language-yaml">state_error_template_present:
+  vulture.error_template_present:
+    - data:
+      - name: Test_Error_Template
+        error_400_mode: display
+        error_400_html: "HTTP/1.1 400 Bad Request\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;400 Bad requesting&lt;/h1&gt;\r\n&lt;p&gt;Your browser sent an invalid request.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_400_url: "http://www.example.com/test/"
+        error_403_mode: display
+        error_403_html: "HTTP/1.1 403 Forbidden\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;403 Forbidden&lt;/h1&gt;\r\n&lt;p&gt;You don't have permission to access this url on this server.&lt;br/&gt;&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_403_url: "http://www.example.com/test/"
+        error_405_mode: display
+        error_405_html: "HTTP/1.1 405 Method Not Allowed\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;405 Method Not Allowed&lt;/h1&gt;\r\n&lt;p&gt;The requested method is not allowed for that URL.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_405_url: "http://www.example.com/test/"
+        error_408_mode: display
+        error_408_html: "HTTP/1.1 408 Request Timeout\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;408 Request Timeout&lt;/h1&gt;\r\n&lt;p&gt;Server timeout waiting for the HTTP request from the client.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_408_url: "http://www.example.com/test/"
+        error_425_mode: display
+        error_425_html: "HTTP/1.1 425 Too Early\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;425 Too Early&lt;/h1&gt;\r\n&lt;p&gt;.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_425_url: "http://www.example.com/test/"
+        error_429_mode: display
+        error_429_html: "HTTP/1.1 429 Too Many Requests\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;429 Too Many Requests&lt;/h1&gt;\r\n&lt;p&gt;The user has sent too many requests in a given amount of time.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_429_url: "http://www.example.com/test/"
+        error_500_mode: display
+        error_500_html: "HTTP/1.1 500 Internal Server ErrTest_Error_Templateor\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;500 Internal Server Error&lt;/h1&gt;\r\n&lt;p&gt;The server encountered an internal error or\r\nmisconfiguration and was unable to complete\r\nyour request.&lt;/p&gt;\r\n&lt;p&gt;Please contact the server administrator\r\nto inform them of the time this error occurred\r\nand the actions you performed just before this error.&lt;/p&gt;\r\n&lt;p&gt;More information about this error may be available\r\nin the server error log.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_500_url: "http://www.example.com/test/"
+        error_502_mode: display
+        error_502_html: "HTTP/1.1 502 Bad Gateway\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;502 Bad Gateway&lt;/h1&gt;\r\n&lt;p&gt;The proxy server received an invalid response from an upstream server.&lt;br/&gt;&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_502_url: "http://www.example.com/test/"
+        error_503_mode: display
+        error_503_html: "HTTP/1.1 503 Service Unavailable\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;503 Service Unavailable&lt;/h1&gt;\r\n&lt;p&gt;The server is temporarily unable to service your\r\nrequest due to maintenance downtime or capacity\r\nproblems. Please try again later.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_503_url: "http://www.example.com/test/"
+        error_504_mode: display
+        error_504_html: "HTTP/1.1 504 Gateway Timeout\r\nContent-type: text/html\r\nConnection: close\r\n\r\n\r\n&lt;html&gt;&lt;body&gt;&lt;h1&gt;504 Gateway Timeout&lt;/h1&gt;\r\n&lt;p&gt;The gateway did not receive a timely response\r\nfrom the upstream server or application.&lt;/p&gt;\r\n&lt;/body&gt;&lt;/html&gt;"
+        error_504_url: "http://www.example.com/test/"
+</code></pre>
+<h3 id="frontend-and-listener">Frontend and listener</h3>
+<pre><code class="language-yaml">state_frontend_present:
+  vulture.frontend_present:
+    - require:
+      - id: state_network_address_present
+      - id: state_tlsprofile_present
+      - id: state_error_template_present
+    - data:
+      - name: HTTPS
+        mode: http
+        https_redirect: true
+        listeners:
+          - interface_name: System
+            ip: 10.0.2.10
+            port: 443
+            tls_profiles:
+              - Custom TLS profile
+          - interface_name: System
+            ip: 10.0.2.10
+            port: 80
+        enable_logging_reputation: false
+        enable_logging: true
+        error_template: Test_Error_Template
+        log_forwarders:
+          - redis_forwarder
+        log_condition: |
+          {%raw%}{{redis_forwarder}}{%endraw%}
+      - name: Frontend ssh
+        mode: tcp
+        listeners:
+          - interface_name: System
+            ip: 10.0.2.10
+            port: 2222
+        enable_logging_reputation: false
+        enable_logging: false
+      - name: Filebeat example
+        mode: filebeat
+        filebeat_listening_mode: api
+        node: vulture
+        listeners:
+          - interface_name: System
+            ip: 10.0.2.10
+            port: 4444
+        enable_logging_reputation: false
+        enable_logging: true
+        log_forwarders:
+          - file_forwarder
+        log_condition: |
+          {%raw%}{{file_forwarder}}{%endraw%}
+        filebeat_module: "f5"
+        filebeat_config: |
+          - module: f5
+            bigipapm:
+              enabled: true
+              var.input: tcp
+              var.syslog_host: %ip%
+              var.syslog_port: %port%
+        api_parser_use_proxy: true
+        api_parser_custom_proxy: "http://10.0.2.1:3128"
+        ruleset: "generic_json"
+      - name: Redis Input json
+        mode: log
+        listening_mode: redis
+        node: vulture
+        ruleset: "generic_json"
+        redis_server: 127.0.0.5
+        redis_port: 6379
+        redis_mode: queue
+        redis_key: redis_input
+        nb_workers: 2
+        redis_batch_size: 100
+        mmdb_cache_size: 10000
+        enable_logging: true
+        enable_logging_geoip: True
+        logging_geoip_database: "Geolite2 Country"
+        log_forwarders:
+          - file_forwarder
+          - redis_forwarder
+        log_condition: |
+          {%raw%}{{file_forwarder}}
+          {{redis_forwarder}}{%endraw%}
+      - name: Syslog input
+        mode: log
+        listening_mode: tcp
+        ruleset: "raw_to_json"
+        custom_tl_frame_delimiter: 200
+        listeners:
+          - interface_name: System
+            ip: 10.0.2.10
+            port: 7841
+        enable_logging: true
+        enable_logging_geoip: True
+        logging_geoip_database: "Geolite2 City"
+        log_forwarders:
+          - file_forwarder_raw
+          - mongodb_forwarder
+          - kafka_forwarder
+          - ELS_forwarder
+        log_forwarders_parse_failure:
+          - file_forwarder_raw
+        log_condition: |
+          {%raw%}{{file_forwarder_raw}}
+          {{mongodb_forwarder}}
+          {{kafka_forwarder}}
+          {{ELS_forwarder}}{%endraw%}
+</code></pre>
+<h3 id="backend">Backend</h3>
+<pre><code class="language-yaml">state_backend_present:
+  vulture.backend_present:
+    - data:
+      - name: app1
+        mode: http
+        timeout_server: 1000
+        timeout_connect: 1000
+        balancing_mode: roundrobin
+        servers:
+          - port: 8004
+            target: app1.web.lan
+            weight: 1
+            mode: net
+        enable_http_health_check: True
+        http_health_check_expect_match: rstatus
+        http_health_check_expect_pattern: 302
+      - name: app2
+        mode: http
+        timeout_server: 1000
+        timeout_connect: 1000
+        balancing_mode: roundrobin
+        servers:
+          - port: 8006
+            target: app2.web.lan
+            weight: 1
+            mode: net
+      - name: app3
+        mode: http
+        timeout_server: 1000
+        timeout_connect: 1000
+        balancing_mode: roundrobin
+        servers:
+          - port: 8008
+            target: app31.web.lan
+            weight: 1
+            mode: net
+          - port: 8008
+            target: app32.web.lan
+            weight: 1
+            mode: net
+      - name: custom
+        mode: http
+        timeout_server: 1000
+        timeout_connect: 1000
+        balancing_mode: roundrobin
+        servers:
+          - port: 80
+            target: 10.0.2.1
+            weight: 1
+            mode: net
+        enable_http_health_check: True
+        http_health_check_expect_match: rstatus
+        http_health_check_expect_pattern: 200
+      - name: ssh
+        mode: tcp
+        timeout_server: 1000
+        timeout_connect: 1000
+        balancing_mode: roundrobin
+        servers:
+          - port: 22
+            target: 10.0.2.1
+            weight: 1
+            mode: net
+        enable_tcp_health_check: True
+        tcp_health_check_expect_match: rstring
+        tcp_health_check_expect_pattern: ^SSH.\*OpenSSH.\*
+        tcp_health_check_interval: 10
+</code></pre>
+<h3 id="ldap-repository">LDAP repository</h3>
+<pre><code class="language-yaml">state_ldaprepository_present:
+  vulture.ldaprepository_present:
+    - data:
+      - name: LDAP_Main
+        host: 10.0.2.1
+        port: 6389
+        protocol: 3
+        encryption_scheme: none
+        connection_dn: cn=admin,dc=web,dc=lan
+        dn_password: admin
+        base_dn: dc=web,dc=lan
+        user_scope: 2
+        user_dn: ou=users
+        user_attr: uid
+        user_objectclasses:
+          - top
+          - inetOrgPerson
+          - customAuxiliaryClass
+        group_objectclasses:
+          - top
+          - groupOfNames
+          - extensibleObject
+        user_groups_attr: memberOf
+        user_filter: (objectClass=inetOrgPerson)
+        user_account_locked_attr: ""
+        user_change_password_attr: ""
+        user_mobile_attr: mobile
+        user_email_attr: mail
+        group_scope: 2
+        group_dn: ou=Policy
+        group_attr: cn
+        group_filter: (objectClass=groupOfNames)
+        group_member_attr: member
+        custom_attributes:
+          - ldap_attribute: CustomAttr1
+            output_attribute: my_attr_1
+          - ldap_attribute: CustomAttr2
+            output_attribute: my_attr_2
+</code></pre>
+<h3 id="user-scope">User Scope</h3>
+<pre><code class="language-yaml">state_userscope_present:
+  vulture.userscope_present:
+    - data:
+      - name: Gitlab Scopes
+        repo_attributes:
+          - condition_var_kind: always
+            assignator: "="
+            action_var_name: user_type
+            action_var_kind: constant
+            action_var: "user"
+          - condition_var_kind: claim
+            condition_var_name: groups
+            condition_criterion: exists
+            condition_match: ""
+            assignator: +=
+            action_var_name: claim_list
+            action_var_kind: claim
+            action_var: claim_list
+          - condition_var_kind: claim
+            condition_var_name: email
+            condition_criterion: exists
+            condition_match: ""
+            assignator: "="
+            action_var_name: mail
+            action_var_kind: claim
+            action_var: email
+          - condition_var_kind: claim
+            condition_var_name: mobile
+            condition_criterion: exists
+            assignator: "="
+            action_var_name: mobile
+            action_var_kind: claim
+            action_var: mobile
+          - condition_var_kind: claim
+            condition_var_name: iss
+            condition_criterion: exists
+            assignator: "="
+            action_var_name: iss
+            action_var_kind: claim
+            action_var: iss
+</code></pre>
+<h3 id="idp">IDP</h3>
+<pre><code class="language-yaml">state_gitlab_connector_present:
+  vulture.openid_present:
+    - require:
+      - state_userscope_present
+    - data:
+      - name: Gitlab
+        provider: gitlab
+        provider_url: https://gitlab.com
+        client_id: &lt;client_id&gt;
+        client_secret: &lt;client_secret&gt;
+        scopes:
+          - openid
+          - read_user
+          - profile
+          - email
+        use_proxy: false
+        verify_certificate: true
+        user_scope: Gitlab Scopes
+        enable_jwt: True
+        jwt_signature_type: RS256
+        jwt_key: |
+          -----BEGIN CERTIFICATE-----
+          &lt;certificate&gt;
+          -----END CERTIFICATE-----
+</code></pre>
+<h3 id="otp">OTP</h3>
+<pre><code class="language-yaml">state_otp_present:
+  vulture.otp_present:
+    - data:
+      - name: "Default TOTP"
+        otp_type: "totp"
+        totp_label: "Double Authentication"
+</code></pre>
+<h3 id="user-portal">User Portal</h3>
+<pre><code class="language-yaml">state_userportal_present:
+  vulture.userportal_present:
+    - require:
+      - id: state_frontend_present
+      - id: state_userscope_present
+      - id: state_gitlab_connector_present
+    - data:
+      - name: PortalAppsGitlab
+        repositories:
+          - Gitlab
+        auth_type: form
+        auth_timeout: 3600
+        enable_timeout_restart: true
+        disconnect_url: "/disconnect"
+        enable_disconnect_message: true
+        enable_disconnect_portal: true
+        enable_oauth: false
+        enable_sso_forward: false
+      - name: PortalAppsMixed
+        repositories:
+          - Gitlab
+          - LDAP_Main
+        auth_type: form
+        auth_timeout: 3600
+        enable_timeout_restart: true
+        disconnect_url: "/disconnect"
+        enable_disconnect_message: true
+        enable_disconnect_portal: true
+        enable_oauth: false
+        enable_sso_forward: false
+      - name: PortalCustom
+        enable_external: false
+        repositories:
+          - LDAP_Main
+        auth_type: form
+        oauth_timeout: 3600
+        enable_timeout_restart: false
+        disconnect_url: "/disconnect"
+        enable_disconnect_message: true
+        enable_disconnect_portal: true
+        enable_registration: false
+        enable_sso_forward: false
+</code></pre>
+<h3 id="acl">ACL</h3>
+<pre><code class="language-yaml">state_acl_present:
+  vulture.acl_present:
+    - data:
+      - name: "Internal_IP_source"
+        enabled: true
+        or_lines:
+          - lines:
+            - criterion: "src"
+              converter: "ip"
+              dns: false
+              case: false
+              pattern: "10.0.2.0/24"
+</code></pre>
+<h3 id="workflow">Workflow</h3>
+<pre><code class="language-yaml">state_workflow_present:
+  vulture.workflow_present:
+    - require:
+      - id: state_frontend_present
+      - id: state_backend_present
+      - id: state_userportal_present
+      - id: state_acl_present
+    - data:
+      - name: app1
+        frontend: HTTPS
+        authentication: PortalAppsGitlab
+        backend: app1
+        fqdn: app1.web.lan
+        public_dir: /
+      - name: app2
+        frontend: HTTPS
+        authentication: PortalAppsGitlab
+        backend: app2
+        fqdn: app2.web.lan
+        public_dir: /myapp/
+        enable_cors_policy: true
+        cors_allowed_methods:
+          - "GET"
+          - "POST"
+          - "OPTIONS"
+        cors_allowed_origins: "*"
+        cors_allowed_headers: "*"
+        cors_max_age: 3600
+      - name: lb_app
+        frontend: HTTPS
+        authentication: PortalAppsGitlab
+        backend: app3
+        fqdn: app3.web.lan
+        public_dir: /
+        acl_frontend:
+          - name: Internal_IP_source
+            action_satisfy: 200
+            action_not_satisfy: 403
+      - name: admin_app
+        frontend: HTTPS
+        authentication: PortalAppsMixed
+        backend: custom
+        fqdn: admin.web.lan
+        public_dir: /
+        acl_frontend:
+          - name: Internal_IP_source
+            action_satisfy: 200
+            action_not_satisfy: 403
+      - name: Internal ssh
+        frontend: Frontend ssh
+        backend: ssh
+</code></pre>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../schema/" title="Schema"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../schema/" style="color: #fcfcfc">« Previous</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>

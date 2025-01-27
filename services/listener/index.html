@@ -45,6 +45,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/quickstart/">Quick start</a>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../administration/vltadmin/">vlt-admin CLI</a>
+</li>
+</ul>
 <p class="caption"><span class="caption-text">Global Config</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../global_config/stats/">Status Page</a>
@@ -168,9 +173,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-vectra-specific-parameters">Vendor Log API Vectra specific parameters</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</a>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-apex-specific-parameters">Vendor Log API Apex specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-signalsciences-ngwaf-specific-parameters">Vendor Log API SignalSciences NGWAF specific parameters</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-gatewatcher-alerts-specific-parameters">Vendor Log API Gatewatcher alerts specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-waf-barracuda-specific-parameters">Vendor Log API WAF Barracuda specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-beyondtrust-pra-specific-parameters">Vendor Log API Beyondtrust PRA specific parameters</a>
 </li>
 </ul>
 </li>
@@ -227,6 +240,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Salt</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/introduction/">Introduction</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/schema/">Schema</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../salt/states/">States examples</a>
+</li>
+</ul>
 </div>
 </div>
 </nav>
@@ -271,7 +293,7 @@
 <li><strong>TCP &amp; UDP</strong> (listen logs with Rsyslog imudp and imtcp module)</li>
 <li><strong>RELP</strong> (listen logs with Rsyslog imrelp module)</li>
 <li><strong>FILE</strong> (listen logs with Rsyslog imfile module)</li>
-<li><strong>Vendor Specific API</strong> (retrieve logs from external API events collect) </li>
+<li><strong>Vendor Specific API</strong> (retrieve logs from external API events collect)</li>
 <li><strong>KAFKA</strong> (collect logs from a kafka server, with Rsyslog imkafka module)</li>
 <li><strong>REDIS</strong> (collect logs from a redis server, with Rsyslog imhiredis module)</li>
 </ul>
@@ -438,6 +460,12 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <li>CSC_DOMAINMANAGER</li>
 <li>RETARUS</li>
 <li>VECTRA</li>
+<li>APEX</li>
+<li>SIGNALSCIENCES NGWAF</li>
+<li>GATEWATCHER</li>
+<li>CISCO UMBRELLA</li>
+<li>WAF BARRACUDA</li>
+<li>BEYONDTRUST PRA</li>
 </ul>
 <p><code>Use proxy</code> : Use proxy for requests (will use System Proxy if no <code>Custom Proxy</code> is configured)</p>
 <p><code>Custom Proxy</code> : Url of the proxy used by the API collector (system proxy if not set)</p>
@@ -534,6 +562,7 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <p><code>Defender OAuth client id</code> : Client id of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.</p>
 <p><code>Defender OAuth client secret</code> : Client secret of the OAuth endpoint to get an OAuth token before requesting Microsoft's APIs.</p>
 <h3 id="vendor-log-api-crowdstrike-specific-parameters">Vendor Log API CrowdStrike specific parameters</h3>
+<p><code>Get incident logs</code> : Activate (or deactivate) the fetching of incident logs on the API (/incidents/v1).</p>
 <p><code>CrowdStrike Host</code> : Complete enpoint address.</p>
 <p><code>CrowdStrike Username</code> : User's name.</p>
 <p><code>CrowdStrike Client ID</code> : Client ID used for authentication.</p>
@@ -614,12 +643,27 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <p><code>Vectra url</code> : Vectra url with scheme.</p>
 <p><code>Vectra secret key</code> : Vectra secret key.</p>
 <p><code>Vectra client id</code> : Vectra client id.</p>
-<h3 id="vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</h3>
-<p><code>Cisco-Umbrella client id</code> : Cisco-Umbrella client id.</p>
-<p><code>Cisco-Umbrella secret key</code> : Cisco-Umbrella secret key.</p>
+<h3 id="vendor-log-api-apex-specific-parameters">Vendor Log API Apex specific parameters</h3>
+<p><code>Apex server host</code> : Vectra url with scheme.</p>
+<p><code>Apex api key</code> : Vectra secret key.</p>
+<p><code>Apex application id</code> : Vectra client id.</p>
+<h3 id="vendor-log-api-signalsciences-ngwaf-specific-parameters">Vendor Log API SignalSciences NGWAF specific parameters</h3>
+<p><code>SignalSciences NGWAF email</code> : SignalSciences NGWAF email.</p>
+<p><code>SignalSciences NGWAF token</code> : SignalSciences NGWAF token.</p>
+<p><code>SignalSciences NGWAF corporation name</code> : SignalSciences NGWAF corporation name.</p>
+<p><code>SignalSciences NGWAF site name</code> : SignalSciences NGWAF site name.</p>
 <h3 id="vendor-log-api-gatewatcher-alerts-specific-parameters">Vendor Log API Gatewatcher alerts specific parameters</h3>
 <p><code>Gatewatcher alerts host</code> : Hostname (without scheme or path) of the Gatewatcher alerts server.</p>
 <p><code>Gatewatcher alerts API key</code> : Gatewatcher alerts API key.</p>
+<h3 id="vendor-log-api-cisco-umbrella-specific-parameters">Vendor Log API Cisco Umbrella specific parameters</h3>
+<p><code>Cisco-Umbrella client id</code> : Cisco-Umbrella client id.</p>
+<p><code>Cisco-Umbrella secret key</code> : Cisco-Umbrella secret key.</p>
+<h3 id="vendor-log-api-waf-barracuda-specific-parameters">Vendor Log API WAF Barracuda specific parameters</h3>
+<p><code>Waf Barracuda token</code> : Authentication token to use, when connecting to <a href="https://api.waas.barracudanetworks.com/swagger/">Barracuda APIs</a>.</p>
+<h3 id="vendor-log-api-beyondtrust-pra-specific-parameters">Vendor Log API Beyondtrust PRA specific parameters</h3>
+<p><code>Beyondtrust PRA client id</code> : Beyondtrust PRA client id.</p>
+<p><code>Beyondtrust PRA secret</code> : Beyondtrust PRA secret.</p>
+<p><code>Beyondtrust PRA host</code> : Beyondtrust PRA host.</p>
 <h2 id="specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</h2>
 <h3 id="filebeat-module">Filebeat Module</h3>
 <p>Fixme</p>
