@@ -8,6 +8,11 @@ Cluster-wide parameters are managed from the [Cluster Config](cluster.md) menu.
 
 The table show all the nodes, with their main characteristics. Just **click on the node** to enter into edition mode.
 
+For each node of the cluster, the status is displayed as follow :
+ - If **green** : node is healthy.
+ - If **orange** : node is in maintenance.
+ - If **red** : node is down or critical services are not running.
+
 `Name` : This is the friendly name of the node
 
 `Network Interfaces` : The list of all the network interfaces available on the Node is displayed here
@@ -75,15 +80,15 @@ By default, here are the network connexions that are using this IP address :
 
 `InterCluster IP Address` : Inter-cluster network traffic (redis/sentinel, mongodb, rsyslog) is NAT-ed behind this IP address. This IP address is also used by the Web UI and the REST API management endpoint.
 
-`Backends outgoing IP Address masquerading` : Network traffic from haproxy to a remote TCP or HTTP backend is NAT-ed behind this IP address.
+`Backends outgoing IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Backends](../applications/backend.md), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
 
-`Log forwarders IP Address masquerading` : Network traffic from rsyslog to a remote log repository is NAT-ed behind this IP address.
+`Log forwarders IP Address masquerading` : Default IP to use when NAT-ing outgoing flow to external [Log Forwarders](../applications/logs_forwarder.md), will only be used if no specific route was found using internal resolution (DEPRECATION NOTICE: this parameter may become obsolete in the future, please prefer defining routes for your destinations instead).
 
 `Default router` : Define here the default IPv4 network gateway of the system.
 
 `Default IPV6 router` : Define here the default IPv6 network gateway of the system.
 
-`Static network routes` : Here you can define the routing table of the node. You have to use the FreeBSD syntax, as the content here will be used into the system file */etc/rc.conf.d/routing*. Have a look at [FreeBSD Gateways and Routes](https://www.freebsd.org/doc/handbook/network-routing.html) if needed.
+`Static network routes` : Here you can define the routing table of the node. You have to use the FreeBSD syntax, as the content here will be used into the system file */etc/rc.conf*. Have a look at [FreeBSD Gateways and Routes](https://www.freebsd.org/doc/handbook/network-routing.html) if needed.
 
 **Note :** Vulture allows by default 2 fib (2 routing tables). If needed you can increase the number of routing tables by overriding the *net.fibs* settings defined in /boot/loader.conf. To to that, override the value in */boot/loader.conf.local*
 
@@ -91,8 +96,8 @@ Here is a rather complex example of a Vulture routing table using 2 differents F
 
 ```
 > static_routes="internal vlan101 vlan102 vpn"
-> route_internal="-fib 0 -net 10.0.0.0/8 10.1.1.1.1"
-> route_vlan101="-fib 0 default 10.1.1.1.1"
+> route_internal="-fib 0 -net 10.0.0.0/8 10.1.1.1"
+> route_vlan101="-fib 0 default 10.1.1.1"
 > route_vlan102="-fib 1 default 10.2.2.2"
 > route_vpn="-net 8.9.10.11/32 10.3.3.3"
 ```

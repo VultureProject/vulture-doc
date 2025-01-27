@@ -8,7 +8,7 @@ Multiple modes are available when creating a listener :
  - **HTTP** : Create an HTTP HAProxy frontend
  - **LOG(Rsyslog)** : Create a TCP (Haproxy->Rsyslog) or a UDP (Rsyslog) or a Vendor Cloud API frontend LOG Listener
  - **LOG(Filebeat)** : Create a TCP (Haproxy->Filebeat) or a UDP (Filebeat) LOG Listener
- 
+
 Depending on which mode you chose, configuration settings differ.
 
 ## Global parameters
@@ -30,7 +30,7 @@ You can enable or disable events forwarding. Mandatory if you want to select a [
  - **TCP & UDP** (listen logs with Rsyslog imudp and imtcp module)
  - **RELP** (listen logs with Rsyslog imrelp module)
  - **FILE** (listen logs with Rsyslog imfile module)
- - **Vendor Specific API** (retrieve logs from external API events collect) 
+ - **Vendor Specific API** (retrieve logs from external API events collect)
  - **KAFKA** (collect logs from a kafka server, with Rsyslog imkafka module)
  - **REDIS** (collect logs from a redis server, with Rsyslog imhiredis module)
 
@@ -251,6 +251,12 @@ The following endpoints are supported :
  - CSC_DOMAINMANAGER
  - RETARUS
  - VECTRA
+ - APEX
+ - SIGNALSCIENCES NGWAF
+ - GATEWATCHER
+ - CISCO UMBRELLA
+ - WAF BARRACUDA
+ - BEYONDTRUST PRA
 
 `Use proxy` : Use proxy for requests (will use System Proxy if no `Custom Proxy` is configured)
 
@@ -591,11 +597,23 @@ The following endpoints are supported :
 
 `Vectra client id` : Vectra client id.
 
-### Vendor Log API Cisco Umbrella specific parameters
+### Vendor Log API Apex specific parameters
 
-`Cisco-Umbrella client id` : Cisco-Umbrella client id.
+`Apex server host` : Vectra url with scheme.
 
-`Cisco-Umbrella secret key` : Cisco-Umbrella secret key.
+`Apex api key` : Vectra secret key.
+
+`Apex application id` : Vectra client id.
+
+### Vendor Log API SignalSciences NGWAF specific parameters
+
+`SignalSciences NGWAF email` : SignalSciences NGWAF email.
+
+`SignalSciences NGWAF token` : SignalSciences NGWAF token.
+
+`SignalSciences NGWAF corporation name` : SignalSciences NGWAF corporation name.
+
+`SignalSciences NGWAF site name` : SignalSciences NGWAF site name.
 
 ### Vendor Log API Gatewatcher alerts specific parameters
 
@@ -603,9 +621,23 @@ The following endpoints are supported :
 
 `Gatewatcher alerts API key` : Gatewatcher alerts API key.
 
+### Vendor Log API Cisco Umbrella specific parameters
+
+`Cisco-Umbrella client id` : Cisco-Umbrella client id.
+
+`Cisco-Umbrella secret key` : Cisco-Umbrella secret key.
+
 ### Vendor Log API WAF Barracuda specific parameters
 
 `Waf Barracuda token` : Authentication token to use, when connecting to [Barracuda APIs](https://api.waas.barracudanetworks.com/swagger/).
+
+### Vendor Log API Beyondtrust PRA specific parameters
+
+`Beyondtrust PRA client id` : Beyondtrust PRA client id.
+
+`Beyondtrust PRA secret` : Beyondtrust PRA secret.
+
+`Beyondtrust PRA host` : Beyondtrust PRA host.
 
 ## Specific settings for Filebeat Listening Mode
 

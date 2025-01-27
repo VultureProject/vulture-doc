@@ -13,6 +13,8 @@ nav:
       - Packaging: overview/packaging.md
       - Deployment: overview/deploy.md
       - Quick start: overview/quickstart.md
+    - Administration:
+      - vlt-admin CLI: administration/vltadmin.md
     - Global Config: 
       - Status Page: global_config/stats.md
       - Cluster settings: global_config/cluster.md
@@ -43,3 +45,7 @@ nav:
       - Backend servers: applications/backend.md
     - API:
       - Swagger: api.md
+    - Salt:
+      - Introduction: salt/introduction.md
+      - Schema: salt/schema.md
+      - States examples: salt/states.md
