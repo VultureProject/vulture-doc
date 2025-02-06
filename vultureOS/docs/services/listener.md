@@ -131,6 +131,10 @@ Via this tab, you may declare custom HAProxy directives. These directives will b
 
 `Tags` : Specify one or multiple comma separated tag(s) to associate on your listener.
 
+### TCP/UDP listening mode specific parameters
+
+`Healthckeck service` : Don't accept sessions if internal Rsyslog service is not ready
+
 ### KAFKA listening mode specific parameters
 
 `Kafka Brokers` : Configure comma separated list of Kafka broker(s) to poll logs from.
