@@ -74,6 +74,10 @@
 <li class="toctree-l1 current"><a class="reference internal current" href="#">Frontend listeners</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#global-parameters">Global parameters</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-rsyslog-parameters">Advanced Rsyslog parameters</a>
+</li>
+</ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#listeners">Listeners</a>
 </li>
@@ -86,6 +90,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-rsyslog-listening-modes">Specific settings for Rsyslog Listening Modes</a>
 <ul>
 <li class="toctree-l3"><a class="reference internal" href="#file-listening-mode-specific-parameters">FILE listening mode specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tcpudp-listening-mode-specific-parameters">TCP/UDP listening mode specific parameters</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#kafka-listening-mode-specific-parameters">KAFKA listening mode specific parameters</a>
 </li>
@@ -304,12 +310,55 @@
 <li><strong>generic_json</strong> (json formatted logs)</li>
 <li><strong>raw_to_json</strong> (no specific format, but convert logs to json)</li>
 </ul>
-<p><code>Parser tag</code>: #Fixme</p>
-<p><code>Tags</code>: #Fixme</p>
-<p><code>Darwin policies</code>: #Fixme</p>
+<p><code>Tags</code>: Tags used by file based parsers (<a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#tag">More infos</a>)</p>
+<h3 id="advanced-rsyslog-parameters">Advanced Rsyslog parameters</h3>
+<p>By clicking the <strong>Advanced</strong> button on the lower right, the user will be able to further configure global (advanced) parameters for each Listener. Those options are better explained on <a href="https://www.rsyslog.com/doc/v8-stable/rainerscript/queue_parameters.html#queue-size">Rsyslog's documentation</a></p>
+<p><code>Size of mmdblookup cache</code>: Number of entries of the <a href="https://en.wikipedia.org/wiki/Least_frequently_used">LFU cache</a> for mmdblookup.</p>
+<p><code>Type of queue</code> (default: <em>LinkedList</em>): Set a <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-type">queue type</a> for the ruleset, valid values are:</p>
+<ul>
+<li><strong>LinkedList</strong> (queue with maximal size but dynamic allocation)</li>
+<li><strong>FixedArray</strong> (queue with fixed and preallocated size)</li>
+<li><strong>Direct</strong> (no queuing)</li>
+</ul>
+<p><code>Size of the queue</code> (default: <em>50000</em>): Maximum number of messages allowed in the action queue.</p>
+<p><code>Size of batch dequeue</code> (default: <em>1024</em>, must be less than the <em>size of the queue</em>): Maximum number of logs to use in a batch operation.</p>
+<p><code>Queue maximum workers</code> (default: <em>8</em>): Maximum number of workers to start for the action.</p>
+<p><code>Minimum messages to start a new worker</code> (default: <em>queue.size/queue.workerthreads</em>, must be less than the <em>size of the queue</em>): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...).</p>
+<p><code>Throttle input when queue reaches this size (between 1 and 99%)</code> (default: <em>70% of queue size</em>, must be between 1% and 99%, cannot be over the <em>Stop processing input logs when queue reaches this size (between 1 and 99%)</em> parameter below): Light delay mark, starts throttling queue to allow delayable inputs to be slowed, and to allow non-delayable inputs to be processed without losing logs. See <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-lightdelaymark">Rsyslog documentation</a> for more details.</p>
+<p><code>Stop processing input logs when queue reaches this size (between 1 and 99%)</code> (default: <em>98% of queue size</em>, must be between 1% and 99%, cannot be under the <em>Throttle input when queue reaches this size (between 1 and 99%)</em> parameter above): Discard mark, starts discarding logs based on their severity when the queue size percent is reached. See <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-discardmark">Rsyslog documentation</a> for more details.</p>
+<p><code>Queue timeout shutdown (ms)</code> (default: <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-timeoutworkerthreadshutdown"><em>1500ms</em></a>, must be a strictly positive number): Number of milliseconds to wait before droping the remaining logs to process on the action.</p>
+<hr/>
+<p><code>Enable disk queue on failure</code> (default: <em>false</em>): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.</p>
+<pre><code>Following parameters only applies to disk-assisted queues, *Enable disk queue on failure* must be enabled
+</code></pre>
+<ul>
+<li>
+<p><code>Low watermark target</code> (default: <em>70% of queue size</em>, must be between 1% and 99%, cannot be over the <em>High watermark target</em> parameter below): When writing to disk is triggered by the <code>High watermark target</code>, it will return to in-memory queueing when the amount of logs in it falls back under this value.</p>
+</li>
+<li>
+<p><code>High watermark target</code> (default: <em>90% of queue size</em>, must be between 1% and 99%, cannot be under the <em>Low watermark target</em> parameter above): When the queue reaches this amount of messages waiting in queue, Rsyslog will begin to spool on disk.</p>
+</li>
+<li>
+<p><code>Max file size of the queue in MiB</code> (default: <em>16MiB</em>, must be strictly positive): Maximum size of a single disk-assisted queue file, new files will be created to keep storing logs if previous ones become full, as long as total space limit is not reached (see <em>Max disk space used by the queue in MiB</em> parameter below).</p>
+</li>
+<li>
+<p><code>Max disk space used by the queue in MiB</code> (default: <em>0MiB (unlimited)</em>, must be positive or zero (meaning <em>no limit</em>)): Total maximum size for all files storing logs on a disk-assisted queue. Note that the total size may slightly exceed that value as logs are always written completely to disk.</p>
+</li>
+<li>
+<p><code>Update bookkeeping information every Nth entry</code> (default: <em>0 (disabled)</em>, must be positive): Update housekeeping information every Nth message saved on Disk-assisted queue, to ensure better reliability in case of failure. This will decrease queue performances but will ensure logs can be correctly recovered in case of hard failures, the value set will represent the number of messages that <em>could</em> be lost on failures.</p>
+</li>
+<li>
+<p><code>Folder to store queue files to</code> (default: <em>/var/tmp</em>): Existing directory (<strong>in the Rsyslog jail</strong>) to write queue spool files to.</p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The folder should be created prior to defining it here, and should be available in the <strong>Rsyslog jail</strong> (/zroot/rsyslog) !</p>
+</div>
+<hr/>
 <p><code>Disable Octet Counting Framing</code> : Here you specify the Rsyslog imtcp option "SupportOctetCountedFraming", this is an advanced option, enable the option only if you know what you are doing.</p>
-<p><code>rate-limiting interval</code>: #Fixme</p>
-<p><code>rate-limiting burst</code>: #Fixme</p>
+<p><code>rate-limiting interval</code> (default: <em>None</em>): Specifies the rate-limiting interval to take into account to trigger limiting (in seconds).</p>
+<p><code>rate-limiting burst</code> (default: <em>None</em>): Specifies the number of messages to receive during the <em>rate-limiting interval</em>, before triggering rate-limiting.</p>
 <h2 id="listeners">Listeners</h2>
 <p>Listeners are not shown in LOG mode with listening mode Kafka, Redis or File. Indeed, there is no need to accept incoming trafic. Instead, Vulture will initiate a connection to the remote Databroker or read a local File to retrieve logs.</p>
 <p>Here you can configure the listening, by configuring for each row the following parameters :</p>
@@ -356,6 +405,8 @@ Using this interface you can rename parsed JSON field or add rsyslog's rainer sc
 <p><code>Node</code> : Configure the node on which you want to listen on file (or kafka or redis).</p>
 <p><code>File path</code> : Specify the absolute path of the file to listen on.</p>
 <p><code>Tags</code> : Specify one or multiple comma separated tag(s) to associate on your listener.</p>
+<h3 id="tcpudp-listening-mode-specific-parameters">TCP/UDP listening mode specific parameters</h3>
+<p><code>Healthckeck service</code> : Don't accept sessions if internal Rsyslog service is not ready</p>
 <h3 id="kafka-listening-mode-specific-parameters">KAFKA listening mode specific parameters</h3>
 <p><code>Kafka Brokers</code> : Configure comma separated list of Kafka broker(s) to poll logs from.</p>
 <p><code>Kafka topic</code> : Configure kafka topic to poll logs from.</p>

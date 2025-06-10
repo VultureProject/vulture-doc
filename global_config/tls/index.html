@@ -70,7 +70,9 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#list-of-tls-profiles">List of TLS Profiles</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#tls-profiles">TLS Profiles</a>
+<li class="toctree-l2"><a class="reference internal" href="#general-parameters">General parameters</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tls-server-options">TLS Server options</a>
 </li>
 </ul>
 </li>
@@ -158,18 +160,26 @@ TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p
 <p>From the <strong>"Add an entry"</strong> menu you may create additional TLS profiles.</p>
 <h2 id="list-of-tls-profiles">List of TLS Profiles</h2>
 <p><code>Name</code> : This is the friendly name of the TLS Profile.</p>
-<p><code>Certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
+<p><code>My certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
 <p><code>Protocols</code> : Here you can see the activated protocols within the TLS profile. Supported protocols are SSLv3 and TLSv1 (legacy, insecure, do not use !), TLSv1.1, TLSv1.2 and TLSv1.3. Use TLSv1.3 only whenever possible.</p>
-<p><code>Verify Client</code> : When the TLS profile is associated to a TCP/HTTP listener, you may enforce the client to present a valid, trusted, X509 certificate. If verify client is set to "required" : the client MUST present a valid/trusted certificate. If verify client is set to "optional" : the client MAY present a valid/trusted certificate.</p>
-<p><code>Client CA</code> : Whenever the verify client is set to "optional" or "required", here you will see the Friendly name of the <em>X509 CA Certificate</em> that should be trusted.</p>
+<p><code>Verify peer certificate</code> : When the TLS profile is associated to a TCP/HTTP listener, you may enforce the client to present a valid, trusted, X509 certificate.<br/>
+When used in an Elasticsearch forwarder, server's certificate will be verified against the following CA certificate. </p>
+<p><code>Peer's CA certificate</code> : Whenever the verify peer certificate is set to "optional" or "required", here you will see the Friendly name of the <em>X509 CA Certificate</em> that should be trusted.</p>
 <p><code>Action</code> : Here you can <em>delete</em> or <em>clone</em> the TLS profile.</p>
-<h2 id="tls-profiles">TLS Profiles</h2>
+<h2 id="general-parameters">General parameters</h2>
 <p>Whenever you want use TLS in vulture configuration, you will need a "TLS profile".
 TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p>
 <p><code>Friendly Name</code> : This is the friendly name of the TLS Profile. Vulture will use this name to refer to the TLS Profile wherever in the Web GUI.</p>
-<p><code>Certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
-<p><code>Browsers compatibility</code> :</p>
-<p>To avoid the pain of selecting complex ciphersuite string, Vulture has packaged ready-to-use TLS ciphers list.</p>
+<p><code>My certificate</code> : This is the friendly name of the X509 certificate that will be presented when using this TLS profile.</p>
+<p><code>Verify peer certificate</code> : Multiple options are allowed for peer certificate validation.</p>
+<ul>
+<li>"required" : The client MUST present a valid/trusted certificate</li>
+<li>"optional" : The client MAY present a valid/trusted certificate.</li>
+<li>"no" : No client certificate are expected / prompted by Vulture.</li>
+</ul>
+<p><code>Peer's CA certificate</code> : Whenever the verify peer certificate is set to "optional" or "required", here you will see the Friendly name of the <em>X509 CA Certificate</em> that should be trusted.</p>
+<h2 id="tls-server-options">TLS Server options</h2>
+<p><code>Browsers compatibility</code> : To avoid the pain of selecting complex ciphersuite string, Vulture has packaged ready-to-use TLS ciphers list.</p>
 <ul>
 <li>Advanced (A score) : This is the best choice for security, only TLSv1.3 is allowed, with strong ciphers</li>
 <li>Broad Compatibility (B score) : Same as Advanced, only TLSv1.3 and TLSv1.2 are allowed but allowing the use of less secure ciphers</li>
@@ -181,9 +191,6 @@ TLS configuration may be use in TCP &amp; HTTP listeners and in HTTP backend.</p
 <p>The protocol list consists in a list of protocol names, for instance : <em>HTTP1.1 HTTP1.0</em>. ALPN is required to enable HTTP/2 on an HTTP frontend.</p>
 <p>If both HTTP/2 and HTTP/1.1 are expected to be supported, both versions can be advertised, in order of
 preference, like below : <em>HTTP2 HTTP1.1</em></p>
-<p><code>Verify client certificate</code> : When the TLS profile is associated to a TCP/HTTP listener, you may enforce the client to present a valid, trusted, X509 certificate. If verify client is set to "required" : the client MUST present a valid/trusted certificate. If verify client is set to "optional": the client MAY present a valid/trusted certificate.</p>
-<p>If set to "no" : No client certificate are expected / prompted by Vulture.</p>
-<p><code>Client CA</code> : Whenever the verify client is set to "optional" or "required", you have to select here the <em>X509 CA Certificate</em> that should be trusted.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
