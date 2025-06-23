@@ -59,9 +59,9 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 
 `Size of the queue` (default: *50000*): Maximum number of messages allowed in the action queue.
 
-`Size of batch dequeue` (default: *1024*, must be less than the *size of the queue*): Maximum number of logs to use in a batch operation.
+`Size of the batch to dequeue` (default: *1024*, must be less than the *size of the queue*): Maximum number of logs to use in a batch operation.
 
-`Queue maximum workers` (default: *8*): Maximum number of workers to start for the action.
+`Maximum parser workers` (default: *8*): Maximum number of workers to start for the action.
 
 `Minimum messages to start a new worker` (default: *queue.size/queue.workerthreads*, must be less than the *size of the queue*): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...).
 
@@ -73,9 +73,11 @@ By clicking the **Advanced** button on the lower right, the user will be able to
 
 ---
 
-`Enable disk queue on failure` (default: *false*): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.
+`Enable disk queue on high queue usage` (default: *false*): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.
 
     Following parameters only applies to disk-assisted queues, *Enable disk queue on failure* must be enabled
+
+ - `Save remaining queue logs on shutdown` (default: True): Write remaining queue logs to disk on Rsyslog shutdown.
 
  - `Low watermark target` (default: *70% of queue size*, must be between 1% and 99%, cannot be over the *High watermark target* parameter below): When writing to disk is triggered by the `High watermark target`, it will return to in-memory queueing when the amount of logs in it falls back under this value.
 
