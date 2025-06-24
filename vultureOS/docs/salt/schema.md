@@ -130,7 +130,22 @@ frontend_present:
     redis_stream_startID: str in ('$', '-', '>') # New entries, All entries, Undelivered entries
     redis_stream_acknowledge: bool
     redis_stream_reclaim_timeout: NonNegativeInt
+    queue_type: str in ('linkedlist', 'fixedarray', 'direct')
+    queue_size: Optional[PositiveInt]
+    dequeue_batch_size: Optional[PositiveInt]
     nb_workers: int
+    new_worker_minimum_messages: Optional[PositiveInt]
+    light_delay_mark: Optional[PositiveInt] # Percentage of queue_size
+    full_delay_mark: Optional[PositiveInt] # Percentage of queue_size
+    shutdown_timeout: Optional[PositiveInt]
+    enable_disk_assist: bool
+    high_watermark: Optional[PositiveInt] # Percentage of queue_size
+    low_watermark: Optional[PositiveInt] # Percentage of queue_size
+    max_file_size: Optional[PositiveInt]
+    max_disk_space: Optional[PositiveInt]
+    checkpoint_interval: Optional[PositiveInt]
+    spool_directory: str
+    save_on_shutdown: bool
     mmdb_cache_size: int
     redis_batch_size: int
     node: Optional[str]

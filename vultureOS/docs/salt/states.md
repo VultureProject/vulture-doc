@@ -269,6 +269,7 @@ state_frontend_present:
         mode: filebeat
         filebeat_listening_mode: api
         node: vulture
+        redis_password: test
         listeners:
           - interface_name: System
             ip: 10.0.2.10
@@ -297,6 +298,7 @@ state_frontend_present:
         ruleset: "generic_json"
         redis_server: 127.0.0.5
         redis_port: 6379
+        redis_password: test
         redis_mode: queue
         redis_key: redis_input
         nb_workers: 2
@@ -316,6 +318,20 @@ state_frontend_present:
         listening_mode: tcp
         ruleset: "raw_to_json"
         custom_tl_frame_delimiter: 200
+        queue_type: linkedlist
+        queue_size: 50000
+        nb_workers: 4
+        new_worker_minimum_messages: 10000
+        light_delay_mark: 90
+        full_delay_mark: 97
+        shutdown_timeout: 5000
+        enable_disk_assist: true
+        save_on_shutdown: true
+        high_watermark: 80
+        low_watermark: 60
+        max_file_size: 256
+        max_disk_space: 1024
+        spool_directory: /var/tmp
         listeners:
           - interface_name: System
             ip: 10.0.2.10
