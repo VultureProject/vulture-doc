@@ -248,7 +248,7 @@ This is a section to describe specific Elasticsearch Log Forwarder configuration
 
 ---
 
-`Use TLS Certificate or CA`: certificate to use when communicating with distant nodes.
+`Use a TLS Profile`: TLS Profile to use when communicating with distant nodes.
 
 
 ## `MongoDB` parameters
