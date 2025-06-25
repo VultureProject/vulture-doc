@@ -309,6 +309,18 @@ The following endpoints are supported :
  - CISCO UMBRELLA
  - WAF BARRACUDA
  - BEYONDTRUST PRA
+ - LOCKSELF
+ - CISCO-UMBRELLA MANAGED ORGANIZATION
+ - CATONETWORKS
+ - INFOBLOX THREAT DEFENSE
+ - BEYONDTRUST REPORTINGS
+ - VARONIS
+ - ARMIS CENTRIX
+ - PERCEPTION POINT X-RAY
+ - EXTRAHOP
+ - HORNETSECURITY
+ - UBIKA
+ - SENTINEL ONE IDENTITY GRAPH
 
 `Use proxy` : Use proxy for requests (will use System Proxy if no `Custom Proxy` is configured)
 
@@ -690,6 +702,101 @@ The following endpoints are supported :
 `Beyondtrust PRA secret` : Beyondtrust PRA secret.
 
 `Beyondtrust PRA host` : Beyondtrust PRA host.
+
+### Vendor Log API Lockself specific parameters
+
+`Lockself X-Ls-Token` : Lockself X-Ls-Token
+
+`Lockself X-Auth-Token` : Lockself X-Auth-Token
+
+`Lockself Host` : Lockself Host
+
+`Lockself organization id` : Lockself organization id
+
+### Vendor Log API Cisco-Umbrella Managed Organization specific parameters
+
+`Cisco Umbrella API Key` : Cisco Umbrella API Key
+
+`Cisco Umbrella secret` : Cisco Umbrella secret
+
+`Cisco Umbrella customer ids` : Cisco Umbrella customer ids
+
+`Get dns logs` : Get dns logs
+
+`Get proxy logs` : Get proxy logs
+
+### Vendor Log API Catonetworks specific parameters
+
+`Catonetworks API Key` : Catonetworks API Key
+
+`Catonetworks account id` : Catonetworks account id
+
+### Vendor Log API Infoblox Threat Defense specific parameters
+
+`Infoblox Threat Defense Host` : Infoblox Threat Defense Host
+
+`Infoblox Threat Defense Token` : Infoblox Threat Defense Token
+
+### Vendor Log API Beyondtrust Reportings specific parameters
+
+`Beyondtrust Reportings client id` : Beyondtrust Reportings client id
+
+`Beyondtrust Reportings secret` : Beyondtrust Reportings secret
+
+`Beyondtrust Reportings host` : Beyondtrust Reportings host
+
+`Retrieve Beyondtrust Reportings Team logs` : Retrieve Beyondtrust Reportings Team logs
+
+`Retrieve Beyondtrust Reportings AccessSession logs` : Retrieve Beyondtrust Reportings AccessSession logs
+
+`Retrieve Beyondtrust Reportings VaultAccountActivity logs` : Retrieve Beyondtrust Reportings VaultAccountActivity logs
+
+`Retrieve Beyondtrust Reportings SupportSession logs` : Retrieve Beyondtrust Reportings SupportSession logs
+
+### Vendor Log API Varonis specific parameters
+
+`Varonis Host` : Varonis Host
+
+`Varonis API Key` : Varonis API Key
+
+### Vendor Log API Armis centrix specific parameters
+
+`Armis Centrix host` : Armis Centrix host
+
+`Armis Centrix Secret Key` : Armis Centrix Secret Key
+
+`Retrieve Armis Centrix Activity logs` : Retrieve Armis Centrix Activity logs
+
+### Vendor Log API Perception Point X-Ray specific parameters
+
+`Perception Point X Ray host` : Perception Point X Ray host
+
+`Perception Point X Ray API Key` : Perception Point X Ray API Key
+
+### Vendor Log API ExtraHop specific parameters
+
+`Extrahop host` : Extrahop host
+
+`Extrahop id` : Extrahop id
+
+`Extrahop secret` : Extrahop secret
+
+### Vendor Log API Hornetsecurity specific parameters
+
+`Hornetsecurity header's APP-ID` : Hornetsecurity header's APP-ID
+
+`Hornetsecurity access token` : Hornetsecurity access token
+
+### Vendor Log API Ubika specific parameters
+
+`Ubika base refresh token (used to establish first login)` : Ubika base refresh token (used to establish first login)
+
+`Ubika namespaces to fetch` : Ubika namespaces to fetch
+
+### Vendor Log API Sentinel One Identity Graph specific parameters
+
+`Sentinel One Identity Graph Console URL` : Sentinel One Identity Graph Console URL
+`Sentinel One Identity Graph Token` : Sentinel One Identity Graph Token
 
 ## Specific settings for Filebeat Listening Mode
 
