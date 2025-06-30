@@ -111,11 +111,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
-</li>
-</ul>
 <p class="caption"><span class="caption-text">Salt</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/">Introduction</a>
@@ -345,7 +340,22 @@
     redis_stream_startID: str in ('$', '-', '&gt;') # New entries, All entries, Undelivered entries
     redis_stream_acknowledge: bool
     redis_stream_reclaim_timeout: NonNegativeInt
+    queue_type: str in ('linkedlist', 'fixedarray', 'direct')
+    queue_size: Optional[PositiveInt]
+    dequeue_batch_size: Optional[PositiveInt]
     nb_workers: int
+    new_worker_minimum_messages: Optional[PositiveInt]
+    light_delay_mark: Optional[PositiveInt] # Percentage of queue_size
+    full_delay_mark: Optional[PositiveInt] # Percentage of queue_size
+    shutdown_timeout: Optional[PositiveInt]
+    enable_disk_assist: bool
+    high_watermark: Optional[PositiveInt] # Percentage of queue_size
+    low_watermark: Optional[PositiveInt] # Percentage of queue_size
+    max_file_size: Optional[PositiveInt]
+    max_disk_space: Optional[PositiveInt]
+    checkpoint_interval: Optional[PositiveInt]
+    spool_directory: str
+    save_on_shutdown: bool
     mmdb_cache_size: int
     redis_batch_size: int
     node: Optional[str]
@@ -500,6 +510,43 @@
     beyondtrust_pra_client_id: str
     beyondtrust_pra_secret: str
     beyondtrust_pra_host: str
+    lockself_x_ls_token: str
+    lockself_x_auth_token: str
+    lockself_host: str
+    lockself_organization_id: str
+    cisco_umbrella_managed_org_api_key: str
+    cisco_umbrella_managed_org_secret_key: str
+    cisco_umbrella_managed_org_customers_id: list
+    cisco_umbrella_managed_org_get_dns: bool
+    cisco_umbrella_managed_org_get_proxy: bool
+    catonetworks_api_key: str
+    catonetworks_account_id: str
+    catonetworks_marker: str
+    infoblox_threat_defense_host: str
+    infoblox_threat_defense_token: str
+    beyondtrust_reportings_client_id: str
+    beyondtrust_reportings_secret: str
+    beyondtrust_reportings_host: str
+    beyondtrust_reportings_get_team_logs: bool
+    beyondtrust_reportings_get_access_session_logs: bool
+    beyondtrust_reportings_get_vault_account_activity_logs: bool
+    beyondtrust_reportings_get_support_session_logs: bool
+    varonis_host: str
+    varonis_api_key: str
+    armis_centrix_host: str
+    armis_centrix_secretkey: str
+    armis_centrix_get_activity_logs: bool
+    perception_point_x_ray_host: str
+    perception_point_x_ray_token: str
+    extrahop_host: str
+    extrahop_id: str
+    extrahop_secret: str
+    hornetsecurity_app_id: str
+    hornetsecurity_token: str
+    ubika_base_refresh_token: str
+    ubika_namespaces: list
+    sentinel_one_identity_graph_token: str
+    sentinel_one_identity_graph_console_url: str
 </code></pre>
 </details>
 <h2 id="tenant-fields">Tenant fields</h2>

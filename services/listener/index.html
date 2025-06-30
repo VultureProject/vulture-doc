@@ -191,6 +191,30 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-beyondtrust-pra-specific-parameters">Vendor Log API Beyondtrust PRA specific parameters</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-lockself-specific-parameters">Vendor Log API Lockself specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-cisco-umbrella-managed-organization-specific-parameters">Vendor Log API Cisco-Umbrella Managed Organization specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-catonetworks-specific-parameters">Vendor Log API Catonetworks specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-infoblox-threat-defense-specific-parameters">Vendor Log API Infoblox Threat Defense specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-beyondtrust-reportings-specific-parameters">Vendor Log API Beyondtrust Reportings specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-varonis-specific-parameters">Vendor Log API Varonis specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-armis-centrix-specific-parameters">Vendor Log API Armis centrix specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-perception-point-x-ray-specific-parameters">Vendor Log API Perception Point X-Ray specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-extrahop-specific-parameters">Vendor Log API ExtraHop specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-hornetsecurity-specific-parameters">Vendor Log API Hornetsecurity specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-ubika-specific-parameters">Vendor Log API Ubika specific parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-sentinel-one-identity-graph-specific-parameters">Vendor Log API Sentinel One Identity Graph specific parameters</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</a>
@@ -239,11 +263,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../applications/logs_forwarder/">Log Forwarders</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
-</li>
-</ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Salt</span></p>
@@ -321,17 +340,20 @@
 <li><strong>Direct</strong> (no queuing)</li>
 </ul>
 <p><code>Size of the queue</code> (default: <em>50000</em>): Maximum number of messages allowed in the action queue.</p>
-<p><code>Size of batch dequeue</code> (default: <em>1024</em>, must be less than the <em>size of the queue</em>): Maximum number of logs to use in a batch operation.</p>
-<p><code>Queue maximum workers</code> (default: <em>8</em>): Maximum number of workers to start for the action.</p>
+<p><code>Size of the batch to dequeue</code> (default: <em>1024</em>, must be less than the <em>size of the queue</em>): Maximum number of logs to use in a batch operation.</p>
+<p><code>Maximum parser workers</code> (default: <em>8</em>): Maximum number of workers to start for the action.</p>
 <p><code>Minimum messages to start a new worker</code> (default: <em>queue.size/queue.workerthreads</em>, must be less than the <em>size of the queue</em>): Every time this number of logs is reached in the queue size, a new worker will be started (for example, if set to 1000: a new worker will be started at 1000 logs waiting in queue, then 2000, then 3000...).</p>
 <p><code>Throttle input when queue reaches this size (between 1 and 99%)</code> (default: <em>70% of queue size</em>, must be between 1% and 99%, cannot be over the <em>Stop processing input logs when queue reaches this size (between 1 and 99%)</em> parameter below): Light delay mark, starts throttling queue to allow delayable inputs to be slowed, and to allow non-delayable inputs to be processed without losing logs. See <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-lightdelaymark">Rsyslog documentation</a> for more details.</p>
 <p><code>Stop processing input logs when queue reaches this size (between 1 and 99%)</code> (default: <em>98% of queue size</em>, must be between 1% and 99%, cannot be under the <em>Throttle input when queue reaches this size (between 1 and 99%)</em> parameter above): Discard mark, starts discarding logs based on their severity when the queue size percent is reached. See <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-discardmark">Rsyslog documentation</a> for more details.</p>
 <p><code>Queue timeout shutdown (ms)</code> (default: <a href="https://www.rsyslog.com/doc/rainerscript/queue_parameters.html#queue-timeoutworkerthreadshutdown"><em>1500ms</em></a>, must be a strictly positive number): Number of milliseconds to wait before droping the remaining logs to process on the action.</p>
 <hr/>
-<p><code>Enable disk queue on failure</code> (default: <em>false</em>): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.</p>
+<p><code>Enable disk queue on high queue usage</code> (default: <em>false</em>): Use Disk-assisted Rsyslog queues to reliably keep logs on disk when accumulating in ruleset queue.</p>
 <pre><code>Following parameters only applies to disk-assisted queues, *Enable disk queue on failure* must be enabled
 </code></pre>
 <ul>
+<li>
+<p><code>Save remaining queue logs on shutdown</code> (default: True): Write remaining queue logs to disk on Rsyslog shutdown.</p>
+</li>
 <li>
 <p><code>Low watermark target</code> (default: <em>70% of queue size</em>, must be between 1% and 99%, cannot be over the <em>High watermark target</em> parameter below): When writing to disk is triggered by the <code>High watermark target</code>, it will return to in-memory queueing when the amount of logs in it falls back under this value.</p>
 </li>
@@ -517,6 +539,18 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <li>CISCO UMBRELLA</li>
 <li>WAF BARRACUDA</li>
 <li>BEYONDTRUST PRA</li>
+<li>LOCKSELF</li>
+<li>CISCO-UMBRELLA MANAGED ORGANIZATION</li>
+<li>CATONETWORKS</li>
+<li>INFOBLOX THREAT DEFENSE</li>
+<li>BEYONDTRUST REPORTINGS</li>
+<li>VARONIS</li>
+<li>ARMIS CENTRIX</li>
+<li>PERCEPTION POINT X-RAY</li>
+<li>EXTRAHOP</li>
+<li>HORNETSECURITY</li>
+<li>UBIKA</li>
+<li>SENTINEL ONE IDENTITY GRAPH</li>
 </ul>
 <p><code>Use proxy</code> : Use proxy for requests (will use System Proxy if no <code>Custom Proxy</code> is configured)</p>
 <p><code>Custom Proxy</code> : Url of the proxy used by the API collector (system proxy if not set)</p>
@@ -715,6 +749,54 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <p><code>Beyondtrust PRA client id</code> : Beyondtrust PRA client id.</p>
 <p><code>Beyondtrust PRA secret</code> : Beyondtrust PRA secret.</p>
 <p><code>Beyondtrust PRA host</code> : Beyondtrust PRA host.</p>
+<h3 id="vendor-log-api-lockself-specific-parameters">Vendor Log API Lockself specific parameters</h3>
+<p><code>Lockself X-Ls-Token</code> : Lockself X-Ls-Token</p>
+<p><code>Lockself X-Auth-Token</code> : Lockself X-Auth-Token</p>
+<p><code>Lockself Host</code> : Lockself Host</p>
+<p><code>Lockself organization id</code> : Lockself organization id</p>
+<h3 id="vendor-log-api-cisco-umbrella-managed-organization-specific-parameters">Vendor Log API Cisco-Umbrella Managed Organization specific parameters</h3>
+<p><code>Cisco Umbrella API Key</code> : Cisco Umbrella API Key</p>
+<p><code>Cisco Umbrella secret</code> : Cisco Umbrella secret</p>
+<p><code>Cisco Umbrella customer ids</code> : Cisco Umbrella customer ids</p>
+<p><code>Get dns logs</code> : Get dns logs</p>
+<p><code>Get proxy logs</code> : Get proxy logs</p>
+<h3 id="vendor-log-api-catonetworks-specific-parameters">Vendor Log API Catonetworks specific parameters</h3>
+<p><code>Catonetworks API Key</code> : Catonetworks API Key</p>
+<p><code>Catonetworks account id</code> : Catonetworks account id</p>
+<h3 id="vendor-log-api-infoblox-threat-defense-specific-parameters">Vendor Log API Infoblox Threat Defense specific parameters</h3>
+<p><code>Infoblox Threat Defense Host</code> : Infoblox Threat Defense Host</p>
+<p><code>Infoblox Threat Defense Token</code> : Infoblox Threat Defense Token</p>
+<h3 id="vendor-log-api-beyondtrust-reportings-specific-parameters">Vendor Log API Beyondtrust Reportings specific parameters</h3>
+<p><code>Beyondtrust Reportings client id</code> : Beyondtrust Reportings client id</p>
+<p><code>Beyondtrust Reportings secret</code> : Beyondtrust Reportings secret</p>
+<p><code>Beyondtrust Reportings host</code> : Beyondtrust Reportings host</p>
+<p><code>Retrieve Beyondtrust Reportings Team logs</code> : Retrieve Beyondtrust Reportings Team logs</p>
+<p><code>Retrieve Beyondtrust Reportings AccessSession logs</code> : Retrieve Beyondtrust Reportings AccessSession logs</p>
+<p><code>Retrieve Beyondtrust Reportings VaultAccountActivity logs</code> : Retrieve Beyondtrust Reportings VaultAccountActivity logs</p>
+<p><code>Retrieve Beyondtrust Reportings SupportSession logs</code> : Retrieve Beyondtrust Reportings SupportSession logs</p>
+<h3 id="vendor-log-api-varonis-specific-parameters">Vendor Log API Varonis specific parameters</h3>
+<p><code>Varonis Host</code> : Varonis Host</p>
+<p><code>Varonis API Key</code> : Varonis API Key</p>
+<h3 id="vendor-log-api-armis-centrix-specific-parameters">Vendor Log API Armis centrix specific parameters</h3>
+<p><code>Armis Centrix host</code> : Armis Centrix host</p>
+<p><code>Armis Centrix Secret Key</code> : Armis Centrix Secret Key</p>
+<p><code>Retrieve Armis Centrix Activity logs</code> : Retrieve Armis Centrix Activity logs</p>
+<h3 id="vendor-log-api-perception-point-x-ray-specific-parameters">Vendor Log API Perception Point X-Ray specific parameters</h3>
+<p><code>Perception Point X Ray host</code> : Perception Point X Ray host</p>
+<p><code>Perception Point X Ray API Key</code> : Perception Point X Ray API Key</p>
+<h3 id="vendor-log-api-extrahop-specific-parameters">Vendor Log API ExtraHop specific parameters</h3>
+<p><code>Extrahop host</code> : Extrahop host</p>
+<p><code>Extrahop id</code> : Extrahop id</p>
+<p><code>Extrahop secret</code> : Extrahop secret</p>
+<h3 id="vendor-log-api-hornetsecurity-specific-parameters">Vendor Log API Hornetsecurity specific parameters</h3>
+<p><code>Hornetsecurity header's APP-ID</code> : Hornetsecurity header's APP-ID</p>
+<p><code>Hornetsecurity access token</code> : Hornetsecurity access token</p>
+<h3 id="vendor-log-api-ubika-specific-parameters">Vendor Log API Ubika specific parameters</h3>
+<p><code>Ubika base refresh token (used to establish first login)</code> : Ubika base refresh token (used to establish first login)</p>
+<p><code>Ubika namespaces to fetch</code> : Ubika namespaces to fetch</p>
+<h3 id="vendor-log-api-sentinel-one-identity-graph-specific-parameters">Vendor Log API Sentinel One Identity Graph specific parameters</h3>
+<p><code>Sentinel One Identity Graph Console URL</code> : Sentinel One Identity Graph Console URL
+<code>Sentinel One Identity Graph Token</code> : Sentinel One Identity Graph Token</p>
 <h2 id="specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</h2>
 <h3 id="filebeat-module">Filebeat Module</h3>
 <p>Fixme</p>

@@ -125,11 +125,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
-</li>
-</ul>
 <p class="caption"><span class="caption-text">Salt</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../salt/introduction/">Introduction</a>
@@ -187,9 +182,8 @@ This is useful, for example, in logs services : You will be able to add special 
 <pre><code>sudo pfctl -t vulture_blacklist -T flush; sudo pfctl -t vulture_whitelist -T add &lt;My IP&gt;
 </code></pre>
 <h2 id="rest-api">REST API</h2>
-<p>Vulture is fully manageable via REST API.
-Please have a look at the <a href="../../api/">SWAGGER DOCUMENTATION</a>.</p>
-<p>Here you can defined the expected API Key to access REST Endpoint.
+<p>Vulture is fully manageable via REST API.</p>
+<p>Here you can define the expected API Key to access REST Endpoint.
 Be sure to use something <strong>robust</strong> if you change it, by default Vulture will generate a 16 bytes ASCII random key.</p>
 <h2 id="authentication">Authentication</h2>
 <p>By default vulture uses its <strong>internal</strong> MongoDB repository for user authentication.

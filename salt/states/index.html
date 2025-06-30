@@ -111,11 +111,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../applications/backend/">Backend servers</a>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/">Swagger</a>
-</li>
-</ul>
 <p class="caption"><span class="caption-text">Salt</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/">Introduction</a>
@@ -420,6 +415,7 @@
         mode: filebeat
         filebeat_listening_mode: api
         node: vulture
+        redis_password: test
         listeners:
           - interface_name: System
             ip: 10.0.2.10
@@ -448,6 +444,7 @@
         ruleset: "generic_json"
         redis_server: 127.0.0.5
         redis_port: 6379
+        redis_password: test
         redis_mode: queue
         redis_key: redis_input
         nb_workers: 2
@@ -467,6 +464,20 @@
         listening_mode: tcp
         ruleset: "raw_to_json"
         custom_tl_frame_delimiter: 200
+        queue_type: linkedlist
+        queue_size: 50000
+        nb_workers: 4
+        new_worker_minimum_messages: 10000
+        light_delay_mark: 90
+        full_delay_mark: 97
+        shutdown_timeout: 5000
+        enable_disk_assist: true
+        save_on_shutdown: true
+        high_watermark: 80
+        low_watermark: 60
+        max_file_size: 256
+        max_disk_space: 1024
+        spool_directory: /var/tmp
         listeners:
           - interface_name: System
             ip: 10.0.2.10
