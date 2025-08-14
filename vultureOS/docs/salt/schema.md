@@ -408,7 +408,7 @@ forwarder_present:
     rotation_period: str in ("daily", "weekly", "yearly")
 ```
 
-## OmRelp specific fields
+### OmRelp specific fields
 
 ``` yaml
     forwarder_type: RELP
@@ -419,7 +419,7 @@ forwarder_present:
     x509_certificate: Optional[int]
 ```
 
-## OmHiredis specific fields
+### OmHiredis specific fields
 
 ``` yaml
     forwarder_type: Redis
@@ -436,7 +436,7 @@ forwarder_present:
     stream_capacitylimit: Optional[NonNegativeInt]
 ```
 
-## OmFwd specific fields
+### OmFwd specific fields
 
 ``` yaml
     forwarder_type: Syslog
@@ -447,7 +447,7 @@ forwarder_present:
     zip_level: int 0 to 9
 ```
 
-## OmElasticsearch specific fields
+### OmElasticsearch specific fields
 
 ``` yaml
     forwarder_type: Elasticsearch
@@ -462,7 +462,7 @@ forwarder_present:
     x509_certificate: Optional[int]
 ```
 
-## OmMongoDB specific fields
+### OmMongoDB specific fields
 
 ``` yaml
     forwarder_type: MongoDB
@@ -473,7 +473,24 @@ forwarder_present:
     x509_certificate: Optional[int]
 ```
 
-## OmKafka specific fields
+### OmSentinel specific fields
+
+``` yaml
+    forwarder_type: Sentinel
+    tenant_id: str 
+    client_id: str 
+    client_secret: str 
+    dcr: str
+    dce: str 
+    stream_name: str 
+    scope: Optional[str]
+    batch_maxsize: Optional[int]
+    batch_maxbytes: Optional[int]
+    compression_level: Optional[int]
+    tls_profile: Optional[int]
+```
+
+### OmKafka specific fields
 
 ``` yaml
     forwarder_type: Kafka
