@@ -172,6 +172,18 @@ state_forwarder_present:
         uristr: "mongodb://10.0.2.10:9091/?replicaset=Vulture&ssl=true"
         db: vulture
         collection: logs_mongodb_forwarder
+      - forwarder_type: Sentinel
+        name: sentinel_forwarder
+        tenant_id: "47673b71-c5ae-4a2a-8d8a-e86e79f1f967"
+        client_id: "47673b71-c5ae-4a2a-8d8a-e86e79f1f967"
+        client_secret: "s3Cr3t"
+        dcr: "dcr-cbb3586665ebdbc6ebadd796e3ba5bcf"
+        dce: "example-a1b2.westus-1.ingest.monitor.azure.com"
+        stream_name: "stream_CL"
+        scope: "https://monitor.azure.com/.default"
+        batch_maxsize:  10
+        batch_maxbytes: 10485760
+        compression_level: 5
       - forwarder_type: Kafka
         name: kafka_forwarder
         broker: '["10.0.2.1:9092"]'
@@ -342,6 +354,7 @@ state_frontend_present:
         log_forwarders:
           - file_forwarder_raw
           - mongodb_forwarder
+          - sentinel_forwarder
           - kafka_forwarder
           - ELS_forwarder
         log_forwarders_parse_failure:
@@ -349,6 +362,7 @@ state_frontend_present:
         log_condition: |
           {%raw%}{{file_forwarder_raw}}
           {{mongodb_forwarder}}
+          {{sentinel_forwarder}}
           {{kafka_forwarder}}
           {{ELS_forwarder}}{%endraw%}
 ```
