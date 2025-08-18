@@ -473,23 +473,6 @@ forwarder_present:
     x509_certificate: Optional[int]
 ```
 
-### OmSentinel specific fields
-
-``` yaml
-    forwarder_type: Sentinel
-    tenant_id: str 
-    client_id: str 
-    client_secret: str 
-    dcr: str
-    dce: str 
-    stream_name: str 
-    scope: Optional[str]
-    batch_maxsize: Optional[int]
-    batch_maxbytes: Optional[int]
-    compression_level: Optional[int]
-    tls_profile: Optional[int]
-```
-
 ### OmKafka specific fields
 
 ``` yaml
@@ -504,6 +487,23 @@ forwarder_present:
     confParam: list
     partitions_useFixed: Optional[int]
     partitions_auto: Optional[bool]
+```
+
+### OmSentinel specific fields
+
+``` yaml
+    forwarder_type: Sentinel
+    tenant_id: str
+    client_id: str
+    client_secret: str
+    dcr: str
+    dce: str
+    stream_name: str
+    scope: Optional[str]
+    batch_maxsize: Optional[int]
+    batch_maxbytes: Optional[int]
+    compression_level: Optional[int] (between -1 and 9)
+    tls_profile: Optional[str] (name of the profile)
 ```
 
 ## Reputation Context fields

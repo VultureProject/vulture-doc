@@ -12,8 +12,8 @@ Those technologies are:
 - **Syslog protocol**
 - **Elasticsearch/Opensearch**
 - **MongoDB**
-- **Sentinel**
 - **Kafka**
+- **Sentinel**
 
 For each type, you'll be able to configure both global and specific parameters.
 
@@ -270,59 +270,6 @@ This is a section to describe specific MongoDB Log Forwarder configuration optio
 `Use TLS Certificate or CA`: X509Certificate object used to communicate with remote server.
 
 
-## `Sentinel` parameters
-This is a section to describe specific Sentinel Log Forwarder configuration options.
-
-`Tenant ID`: The ID of the tenant to use, will be included in the URI.
-
----
-
-`Client ID`: The client ID for OpenID application authentication.
-
----
-
-`Client Secret`: The client secret for OpenID application authentication.
-
----
-
-`DCR`: The Sentinel Data Collection Rule to use while ingesting data.
-
----
-
-`DCE`: The Sentinel Data Collection Endpoint to use for ingestion.
-
----
-
-`Stream Name`: The Sentinel stream on which to insert the logs.
-
----
-
-`Scope`: The OpenID scope to use. For [Sentinel ingestion API](https://docs.cribl.io/edge/destinations-sentinel/#auth), corresponds to the Azure Environment
-
----
-
-`Batch maxsize`: Controls how many messages should be sent at most in one request.
-
----
-
-`Batch maxbytes`: Defines the maximum size (in bytes) of one request.
-
----
-
-`Compression level`: 
-
-- ***-1**: balance between speed and compression (default) → present as “balanced” value*
-- ***0** : No compression*
-- *...*
-- ***9** : Best compression*
-
-Activates and defines the level of compression of requests.
-
----
-
-`Use a TLS Profile`: TLS Profile to use when communicating with distant nodes.
-
-
 ## `Kafka` parameters
 This is a section to describe specific Kafka Log Forwarder configuration options.
 
@@ -362,3 +309,57 @@ This is a section to describe specific Kafka Log Forwarder configuration options
 `Kafka topic parameters`: A dynamic list of key-value parameters directly provided to the [librdkafka library topic configurations](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md#topic-configuration-properties).
 
     The form will ensure basic key=value formatting, but user should ensure to always provide correct *key=value* format
+
+
+## `Sentinel` parameters
+This is a section to describe specific Sentinel Log Forwarder configuration options.
+
+`Tenant ID`: The ID of the tenant to use (will be used to generate the authentication URIs).
+
+---
+
+`Client ID`: The client ID for OpenID application authentication.
+
+---
+
+`Client Secret`: The client secret for OpenID application authentication.
+
+---
+
+`DCR`: The Sentinel **Data Collection Rule** to use while ingesting data.
+
+---
+
+`DCE`: The Sentinel Data **Collection Endpoint** to use for ingestion.
+
+---
+
+`Stream Name`: The Sentinel stream on which to insert the logs.
+
+---
+
+`Scope`: The OpenID scope to use. For [Sentinel ingestion API](https://docs.cribl.io/edge/destinations-sentinel/#auth), corresponds to the Azure Environment.
+
+---
+
+`Batch max size`: Sets the maximum amount of logs to add in a single batched request.
+
+---
+
+`Batch max bytes`: Sets the maximum size of messages (in bytes) for a single batched request.
+
+---
+
+`Compression level`: 
+
+Activates and defines the level of compression of requests:
+
+- ***balanced**: balance between speed and compression (default)
+- ***0** : No compression*
+- ***1** : Fastest compression*
+- *...*
+- ***9** : Best compression*
+
+---
+
+`Use a TLS Profile`: TLS Profile to use when communicating with distant nodes.
