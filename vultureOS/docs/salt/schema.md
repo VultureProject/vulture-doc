@@ -504,6 +504,8 @@ forwarder_present:
     batch_maxbytes: Optional[int]
     compression_level: Optional[int] (between -1 and 9)
     tls_profile: Optional[str] (name of the profile)
+    use_proxy: Optional[bool]
+    custom_proxy: Optional[str]
 ```
 
 ## Reputation Context fields
