@@ -200,7 +200,7 @@ state_forwarder_present:
         batch_maxbytes: 10485760
         compression_level: 5
         use_proxy: True
-        custom_proxy: http://1.2.3.4:1337
+        custom_proxy: "http://1.2.3.4:1337"
 ```
 
 ### Error Templates
