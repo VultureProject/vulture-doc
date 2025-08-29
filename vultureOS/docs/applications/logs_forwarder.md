@@ -363,3 +363,11 @@ Activates and defines the level of compression of requests:
 ---
 
 `Use a TLS Profile`: TLS Profile to use when communicating with distant nodes.
+
+---
+
+`Use Proxy`: Use a proxy to connect to the OMSentinel APIs
+
+---
+
+`Custom Proxy`: Custom proxy to use (will use system proxy if not set)
