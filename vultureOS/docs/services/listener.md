@@ -165,7 +165,66 @@ See [Logs Forwarder](../applications/logs_forwarder.md) to define remote log rep
 You can here configure an Rsyslog custom configuration bloc. Only use this parameter if you know what your doing.
 Using this interface you can rename parsed JSON field or add rsyslog's rainer script conditions on the log pipeline.
 
-## Custom configuration
+## Custom Rsyslog configuration
+
+!!! warning
+    This functionality is intended for advanced users who need to define custom logic beyond the GUI's built-in options.
+    Use this section if you know what you are doing.
+
+This section allows you to add custom Rsyslog directives directly into the ruleset of your listener's configuration.
+You can add conditional logic not covered by default configuration, rename custom field or debug complex logs.
+
+Each group are independent but each condition in a group are executed in order from first to last.
+
+#### Example of renaming a field unconditionaly
+
+| Condition  | Condition variable | Condition value | Action | Result variable | Result value   |
+| :--------: | :----------------: | :-------------: | :----: | :-------------: | :------------: |
+| Always     |                    |                 | Set    | $.enriched_log  | $.original_log |
+
+Rendered Rsyslog's configuration:
+```
+set $.enriched_log = $.original_log;
+```
+
+#### Complex example of adding a tag depending on IP class and also detecting operating system
+
+| Condition  | Condition variable | Condition value | Action | Result variable | Result value |
+| :--------: | :----------------: | :-------------: | :----: | :-------------: | :----------: |
+| Equals     | $!source!ip        | 127.0.0.1       | Set    | $!custom!tag    | local        |
+| Contains   | $!source!ip        | 192.168.0.      | Set    | $!custom!tag    | internal     |
+| Always     |                    |                 | Set    | $!custom!tag    | external     |
+
+| Condition  | Condition variable | Condition value | Action | Result variable | Result value |
+| :--------: | :----------------: | :-------------: | :----: | :-------------: | :----------: |
+| Contains   | $.hostname         | vulture         | Drop   |                 |              |
+| iEquals    | $.hostname         | freebsd         | Set    | $!system!os     | $.hostname   |
+| Regex      | $.hostname         | ^app\d{0,6}-.*$ | Unset  | $!system!os     |              |
+| Always     |                    |                 | Set    | $!system!os     | unknown      |
+
+Rendered Rsyslog's configuration:
+```
+# Block 1
+if $!source!ip == "127.0.0.1" then { #equals
+    set $!custom!tag = "local";
+} else if $!source!ip contains "192.168.0." then { #contains
+    set $!custom!tag = "internal";
+} else { #always
+    set $!custom!tag = "external";
+}
+# Block 2
+if $.hostname contains "vulture" then { #contains
+    stop
+} else if re_match_i($.hostname, "^freebsd\$") then { #iequals
+    set $!system!os = $.hostname;
+} else if re_match($.hostname, "^app\d{0,6}-.*\$") then { #regex
+    unset $!system!os;
+} else { #always
+    set $!system!os = "unknown";
+}
+```
+
+## Custom HAProxy configuration
 
 Via this tab, you may declare custom HAProxy directives. These directives will be placed within the [Frontend] section of HAProxy configuration file related to the current Listener.
 
