@@ -105,6 +105,7 @@ frontend_present:
     filebeat_config: str
     disable_octet_counting_framing: bool
     custom_tl_frame_delimiter: int
+    custom_actions: List = []
     headers: List[Header]
     custom_haproxy_conf: str
     enable_cache: bool

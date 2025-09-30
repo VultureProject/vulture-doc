@@ -7,6 +7,7 @@ plugins:
     - swagger-ui-tag
 markdown_extensions:
     - admonition
+    - tables
 nav:
     - Home: index.md
     - Overview:

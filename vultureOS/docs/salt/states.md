@@ -367,6 +367,23 @@ state_frontend_present:
           {{sentinel_forwarder}}
           {{kafka_forwarder}}
           {{ELS_forwarder}}{%endraw%}
+        custom_actions:
+          - 
+            - condition: contains
+              condition_variable: $!source!ip
+              condition_value: 192.168.0.
+              action: set
+              result_variable: $!custom!tag
+              result_value: internal
+            - condition: always
+              action: set
+              result_variable: $!custom!tag
+              result_value: external
+          -
+            - condition: always
+              action: set
+              result_variable: $.enriched_log
+              result_value: $.original_log
 ```
 
 ### Backend
