@@ -435,6 +435,7 @@ The following endpoints are supported :
  - HORNETSECURITY
  - UBIKA
  - SENTINEL ONE IDENTITY GRAPH
+ - MESSAGETRACE O365
 
 `Use proxy` : Use proxy for requests (will use System Proxy if no `Custom Proxy` is configured)
 
@@ -911,6 +912,12 @@ The following endpoints are supported :
 
 `Sentinel One Identity Graph Console URL` : Sentinel One Identity Graph Console URL
 `Sentinel One Identity Graph Token` : Sentinel One Identity Graph Token
+
+### Vendor Log API Microsoft MessageTrace O365 specific parameters
+
+`MessageTrace O365 Tenant ID`: The ID of the Microsoft Tenant to get MessageTrace logs from
+`MessageTrace O365 Client ID`: The authorized client ID for authentication
+`MessageTrace O365 Client Secret`: The corresponding client secret for the authorized client
 
 ## Specific settings for Filebeat Listening Mode
 
