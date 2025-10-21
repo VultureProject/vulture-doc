@@ -888,6 +888,12 @@ The following endpoints are supported :
 
 `Perception Point X Ray API Key` : Perception Point X Ray API Key
 
+`Perception Point X Ray Organisation ID` : Perception Point X Ray Organisation ID
+
+`Perception Point X Ray Environment ID` : Perception Point X Ray Environment ID
+
+`Perception Point X Ray Case Types` : Perception Point X Ray list of case types to recover
+
 ### Vendor Log API ExtraHop specific parameters
 
 `Extrahop host` : Extrahop host
