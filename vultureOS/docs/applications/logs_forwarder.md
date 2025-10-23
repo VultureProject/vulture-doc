@@ -177,6 +177,11 @@ This is a section to describe specific Redis Log Forwarder configuration options
 
 ---
 
+`Use a TLS profile`: TLS Profile to use when communicating with distant nodes.
+
+
+---
+
 `Use RPUSH`: Use RPUSH instead of LPUSH to insert a new log.
 
     This is only available for list insertion mode
