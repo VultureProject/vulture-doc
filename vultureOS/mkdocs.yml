@@ -5,6 +5,7 @@ extra_css:
 - css/styling.css
 plugins:
     - swagger-ui-tag
+    - mermaid2
 markdown_extensions:
     - admonition
     - tables
