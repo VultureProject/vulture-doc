@@ -7,7 +7,7 @@ Multiple modes are available when creating a listener :
  - **TCP** : Create a TCP HAProxy frontend
  - **HTTP** : Create an HTTP HAProxy frontend
  - **LOG(Rsyslog)** : Create a TCP (Haproxy->Rsyslog) or a UDP (Rsyslog) or a Vendor Cloud API frontend LOG Listener
- - **LOG(Filebeat)** : Create a TCP (Haproxy->Filebeat) or a UDP (Filebeat) LOG Listener
+ - **LOG(Filebeat)** : Create a Listener using a Filebeat [module](https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-modules) or specific [input](https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options)
 
 Depending on which mode you chose, configuration settings differ.
 
@@ -927,12 +927,62 @@ The following endpoints are supported :
 
 ## Specific settings for Filebeat Listening Mode
 
-### Filebeat Module
+The LOG (Filebeat) mode allows users to use a dedicated filebeat service to fetch logs and pass them to Rsyslog.
 
-Fixme
+The behaviour differs depending on the type of module/input and associated parameters, but can be summarised 
+in the following way:
 
-### Filebeat Configuration
+```mermaid
+flowchart LR
+    L["LOG Source"] -- Send logs (TCP, RELP) --> P{"Firewall"}
+    L -- Send logs (UDP) --> P
+    P -- Send logs (TCP, RELP) --> H("Haproxy")
+    P -- Send logs (TCP, RELP) --> F("Filebeat")
+    H -- Forward logs --> F
+    F -- Fetch logs --> L
+    F -- Process and save logs --> Re["Redis"]
+    Rs("Rsyslog") -- Get logs --> Re
+    Rs -- Send enriched logs --> O["Outputs"]
+```
 
-Fixme
+There are 3 ways to get logs:
+- logs are sent via TCP, handled by haproxy and forwarded to Filebeat
+- logs are sent via UDP, redirected directly to Filebeat
+- logs are directly fetched by filebeat
+
+In all cases, the firewall accepts and authorizes the flows on the configured ports, if any.
+
+Once logs have been received by filebeat and after potential parsing, those logs are stored in the local Redis instance (or another instance if specified).
+Then, rsyslog gets those cached logs, does further parsing/enrichment and uses the configured `Log Forwarder(s)` to forward/save the final logs.
 
 
+### Use a [Filebeat Module](https://www.elastic.co/docs/reference/beats/filebeat/filebeat-modules)
+
+The first use of filebeat is to simply use a [Filebeat Module](https://www.elastic.co/docs/reference/beats/filebeat/filebeat-modules).
+The modules allow to define simple ways to fetch, parse and transform logs from a simple and single configuration.
+
+From the GUI, you'll find a list of supported modules in the drop-down `Filebeat Module` attribute.
+Once a module is selected, its corresponding *example configuration* will be shown in the `Filebeat Configuration` field below:
+that's where the different parameters of the module can be adjusted.
+
+### The specific `Custom Filebeat config` module
+
+If you wish to use a Custom Filebeat configuration with a specific [input](https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options), you can select the specific `Custom Filebeat config` module.
+
+This module allows to select a specific [Filebeat input](https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options)
+to use, the configuration can then be specified in the `Filebeat Configuration`.
+
+> WARNING: the configuration set in `Filebeat Configuration` will be set in the corresponding `filebeat.inputs`'s type object.
+> It's impossible to set other elements (such as outputs) in this part!
+
+### Specifying TCP/UDP Listeners for Filebeat
+
+If the module/input used needs an open port to receive its logs, there are 2 steps to configure it from the GUI:
+
+1. In the `Filebeat Configuration` field, replace the configuration element defining the filebeat listening IP and port to the following elements
+    1. the **IP** must be set to `%ip%`
+    2. the **port** must be set to `%port%`
+2. Once the IP/port attributes are replaced, the `Listeners` tab will be shown and will allow to define the outside ports opened on the appliance
+
+By doing that, the Listeners defined will be the effective IP/port to be opened on the appliance and available to send the logs,
+those flows will then be redirected locally using automatically generated internal ports and local IP to forward to the local Filebeat service.
