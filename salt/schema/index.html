@@ -139,19 +139,21 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#omfile-specific-fields">OmFile specific fields</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#omrelp-specific-fields">OmRelp specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#omhiredis-specific-fields">OmHiredis specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#omfwd-specific-fields">OmFwd specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#omelasticsearch-specific-fields">OmElasticsearch specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ommongodb-specific-fields">OmMongoDB specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#omkafka-specific-fields">OmKafka specific fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#omsentinel-specific-fields">OmSentinel specific fields</a>
+</li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#omrelp-specific-fields">OmRelp specific fields</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#omhiredis-specific-fields">OmHiredis specific fields</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#omfwd-specific-fields">OmFwd specific fields</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#omelasticsearch-specific-fields">OmElasticsearch specific fields</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#ommongodb-specific-fields">OmMongoDB specific fields</a>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#omkafka-specific-fields">OmKafka specific fields</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#reputation-context-fields">Reputation Context fields</a>
 </li>
@@ -315,6 +317,7 @@
     filebeat_config: str
     disable_octet_counting_framing: bool
     custom_tl_frame_delimiter: int
+    custom_actions: List = []
     headers: List[Header]
     custom_haproxy_conf: str
     enable_cache: bool
@@ -600,7 +603,7 @@
     retention_time: int
     rotation_period: str in ("daily", "weekly", "yearly")
 </code></pre>
-<h2 id="omrelp-specific-fields">OmRelp specific fields</h2>
+<h3 id="omrelp-specific-fields">OmRelp specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: RELP
     target: str
     port: int
@@ -608,7 +611,7 @@
     tls_enabled: bool
     x509_certificate: Optional[int]
 </code></pre>
-<h2 id="omhiredis-specific-fields">OmHiredis specific fields</h2>
+<h3 id="omhiredis-specific-fields">OmHiredis specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: Redis
     target: str
     port: int
@@ -622,7 +625,7 @@
     stream_outfield: Optional[str]
     stream_capacitylimit: Optional[NonNegativeInt]
 </code></pre>
-<h2 id="omfwd-specific-fields">OmFwd specific fields</h2>
+<h3 id="omfwd-specific-fields">OmFwd specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: Syslog
     target: str
     port: int
@@ -630,7 +633,7 @@
     protocol: str in ("tcp", "udp")
     zip_level: int 0 to 9
 </code></pre>
-<h2 id="omelasticsearch-specific-fields">OmElasticsearch specific fields</h2>
+<h3 id="omelasticsearch-specific-fields">OmElasticsearch specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: Elasticsearch
     servers: str
     es8_compatibility: bool
@@ -642,7 +645,7 @@
     enabled: bool
     x509_certificate: Optional[int]
 </code></pre>
-<h2 id="ommongodb-specific-fields">OmMongoDB specific fields</h2>
+<h3 id="ommongodb-specific-fields">OmMongoDB specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: MongoDB
     db: str
     collection: str
@@ -650,7 +653,7 @@
     enabled: str
     x509_certificate: Optional[int]
 </code></pre>
-<h2 id="omkafka-specific-fields">OmKafka specific fields</h2>
+<h3 id="omkafka-specific-fields">OmKafka specific fields</h3>
 <pre><code class="language-yaml">    forwarder_type: Kafka
     broker: str
     enabled: bool
@@ -662,6 +665,22 @@
     confParam: list
     partitions_useFixed: Optional[int]
     partitions_auto: Optional[bool]
+</code></pre>
+<h3 id="omsentinel-specific-fields">OmSentinel specific fields</h3>
+<pre><code class="language-yaml">    forwarder_type: Sentinel
+    tenant_id: str
+    client_id: str
+    client_secret: str
+    dcr: str
+    dce: str
+    stream_name: str
+    scope: Optional[str]
+    batch_maxsize: Optional[int]
+    batch_maxbytes: Optional[int]
+    compression_level: Optional[int] (between -1 and 9)
+    tls_profile: Optional[str] (name of the profile)
+    use_proxy: Optional[bool]
+    custom_proxy: Optional[str]
 </code></pre>
 <h2 id="reputation-context-fields">Reputation Context fields</h2>
 <pre><code class="language-yaml">reputation_context_present:

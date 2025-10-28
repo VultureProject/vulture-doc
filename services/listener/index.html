@@ -85,7 +85,27 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#logs-forwarder">Logs Forwarder</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#custom-configuration">Custom configuration</a>
+<li class="toctree-l2"><a class="reference internal" href="#custom-rsyslog-configuration">Custom Rsyslog configuration</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use">How to use</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#groups">Groups</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#condition-lines">Condition lines</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-of-renaming-a-field-unconditionally">Example of renaming a field unconditionally</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#complex-example-of-adding-a-tag-depending-on-ip-class-and-also-detecting-operating-system">Complex example of adding a tag depending on IP class and also detecting operating system</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-haproxy-configuration">Custom HAProxy configuration</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-rsyslog-listening-modes">Specific settings for Rsyslog Listening Modes</a>
 <ul>
@@ -215,13 +235,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-sentinel-one-identity-graph-specific-parameters">Vendor Log API Sentinel One Identity Graph specific parameters</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-log-api-microsoft-messagetrace-o365-specific-parameters">Vendor Log API Microsoft MessageTrace O365 specific parameters</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</a>
 <ul>
-<li class="toctree-l3"><a class="reference internal" href="#filebeat-module">Filebeat Module</a>
+<li class="toctree-l3"><a class="reference internal" href="#use-a-filebeat-module">Use a Filebeat Module</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#filebeat-configuration">Filebeat Configuration</a>
+<li class="toctree-l3"><a class="reference internal" href="#the-specific-custom-filebeat-config-module">The specific Custom Filebeat config module</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-tcpudp-listeners-for-filebeat">Specifying TCP/UDP Listeners for Filebeat</a>
 </li>
 </ul>
 </li>
@@ -302,7 +326,7 @@
 <li><strong>TCP</strong> : Create a TCP HAProxy frontend</li>
 <li><strong>HTTP</strong> : Create an HTTP HAProxy frontend</li>
 <li><strong>LOG(Rsyslog)</strong> : Create a TCP (Haproxy-&gt;Rsyslog) or a UDP (Rsyslog) or a Vendor Cloud API frontend LOG Listener</li>
-<li><strong>LOG(Filebeat)</strong> : Create a TCP (Haproxy-&gt;Filebeat) or a UDP (Filebeat) LOG Listener</li>
+<li><strong>LOG(Filebeat)</strong> : Create a Listener using a Filebeat <a href="https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-modules">module</a> or specific <a href="https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options">input</a></li>
 </ul>
 <p>Depending on which mode you chose, configuration settings differ.</p>
 <h2 id="global-parameters">Global parameters</h2>
@@ -420,7 +444,184 @@ If events are correctly parsed, depending on which ruleset is configured, they w
 <p><code>Log condition (advanced)</code> : This parameter is useless if you select a mode different of LOG or if you disable logging.</p>
 <p>You can here configure an Rsyslog custom configuration bloc. Only use this parameter if you know what your doing.
 Using this interface you can rename parsed JSON field or add rsyslog's rainer script conditions on the log pipeline.</p>
-<h2 id="custom-configuration">Custom configuration</h2>
+<h2 id="custom-rsyslog-configuration">Custom Rsyslog configuration</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This functionality is intended for advanced users who need to define custom logic beyond the GUI's built-in options.
+Use this section if you know what you are doing.</p>
+</div>
+<p>This section allows you to add custom Rsyslog directives directly into the ruleset of your listener's configuration.
+You can add conditional logic not covered by default configuration, rename custom field or debug complex logs.</p>
+<p>Each group are independent but each condition in a group are executed in order from first to last. If a condition in a group matches, the next conditions are <strong>not</strong> executed.</p>
+<h3 id="how-to-use">How to use</h3>
+<h4 id="groups">Groups</h4>
+<p>The first thing to understand is the concept of group: each group holds one or more conditions, to be run sequencially and in order and until one of them matches.</p>
+<p>Each group is <strong>always</strong> executed, in the order defined on GUI or via API/SALT.</p>
+<h4 id="condition-lines">Condition lines</h4>
+<p>Inside each <em>group</em>, there must be at least one <strong>condition</strong> defined: a condition is a matching criterion assorted with an associated action.</p>
+<h5 id="condition">condition</h5>
+<p>In the <code>condition</code> field itself, several criteria are available for selection:</p>
+<ul>
+<li><strong>exists</strong>: the <em>variable</em> exists in the log</li>
+<li><strong>not exists</strong>: the <em>variable</em> does <strong>not</strong> exist in the log</li>
+<li><strong>equals</strong>: the <em>variable</em> matches strictly the <em>value</em></li>
+<li><strong>iequals</strong>: the <em>variable</em> matches the <em>value</em>, without case sensitivity (for example, a <em>value</em> of 'foo' will match if the real content of the variable is 'FOO', 'foO' or 'FOo')</li>
+<li><strong>contains</strong>: the <em>variable</em> contains <em>value</em></li>
+<li><strong>icontains</strong>: the <em>variable</em> contains the <em>value</em>, without case sensitivity (for example, a <em>value</em> of 'bar' will match if the real content of the variable is 'foObar', 'foBARO' or 'barFOo')</li>
+<li><strong>regex</strong>: the <em>variable</em> matches the regex defined in <em>value</em> (this engine uses POSIX ERE, see <a href="https://www.rsyslog.com/doc/rainerscript/functions/rs-re_match.html">Rsyslog documentation</a> for further details)</li>
+<li><strong>iregex</strong>: the <em>variable</em> matches the regex defined in <em>value</em>, without case sensitivity</li>
+<li><strong>always</strong>: this rule is always executed. If used, it <strong>must</strong> be the last line added to a group</li>
+</ul>
+<p>In the Rsyslog generated configuration, each condition line is represented in the same order, each of them is tested anda match executes the corresponding action, <strong>the remaining conditions are not tested nor executed</strong>.</p>
+<h5 id="variablevalue">Variable/Value</h5>
+<p>Those 2 fields are here to complete the preceding condition.
+Their use and requirement depends on the condition used.</p>
+<p><code>variable</code> <strong>must</strong> be in the Rsyslog's <a href="https://www.rsyslog.com/doc/rainerscript/variable_property_types.html">Raisnerscript format</a>.</p>
+<h5 id="action">Action</h5>
+<p>The <code>action</code> to execute when a criterion matches. The possible actions are:</p>
+<ul>
+<li><strong>set</strong>: assign a value to a variable (existing or new)</li>
+<li><strong>unset</strong>: unset/remove a variable</li>
+<li><strong>drop</strong>: drop the log <strong>completely</strong></li>
+</ul>
+<h5 id="result-variablevalue">Result Variable/Value</h5>
+<p>Contrary to the condition variables and values, the result variable/value are here to represent the specific of the <strong>action</strong>.</p>
+<p><code>result variable</code> <strong>must</strong> be in the Rsyslog's <a href="https://www.rsyslog.com/doc/rainerscript/variable_property_types.html">Rainerscript format</a>.</p>
+<p><code>result value</code> can either be any user-provided value, but can also be the result of <strong>another rsyslog variable</strong>: the value will then have to respect the Rsyslog's Rainerscript syntax and start with a '$' (See <a href="https://www.rsyslog.com/doc/rainerscript/variable_property_types.html">Rainerscript format</a>).</p>
+<h3 id="examples">Examples</h3>
+<p>Here are a couple of examples to illustrate how the feature can be used to add complex behaviours.</p>
+<h4 id="example-of-renaming-a-field-unconditionally">Example of renaming a field unconditionally</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Condition</th>
+<th style="text-align: center;">Condition variable</th>
+<th style="text-align: center;">Condition value</th>
+<th style="text-align: center;">Action</th>
+<th style="text-align: center;">Result variable</th>
+<th style="text-align: center;">Result value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Always</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$.enriched_log</td>
+<td style="text-align: center;">$.original_log</td>
+</tr>
+</tbody>
+</table>
+<p>Rendered Rsyslog's configuration:</p>
+<pre><code>set $.enriched_log = $.original_log;
+</code></pre>
+<h4 id="complex-example-of-adding-a-tag-depending-on-ip-class-and-also-detecting-operating-system">Complex example of adding a tag depending on IP class and also detecting operating system</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Condition</th>
+<th style="text-align: center;">Condition variable</th>
+<th style="text-align: center;">Condition value</th>
+<th style="text-align: center;">Action</th>
+<th style="text-align: center;">Result variable</th>
+<th style="text-align: center;">Result value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Equals</td>
+<td style="text-align: center;">$!source!ip</td>
+<td style="text-align: center;">127.0.0.1</td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$!custom!tag</td>
+<td style="text-align: center;">local</td>
+</tr>
+<tr>
+<td style="text-align: center;">Contains</td>
+<td style="text-align: center;">$!source!ip</td>
+<td style="text-align: center;">192.168.0.</td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$!custom!tag</td>
+<td style="text-align: center;">internal</td>
+</tr>
+<tr>
+<td style="text-align: center;">Always</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$!custom!tag</td>
+<td style="text-align: center;">external</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Condition</th>
+<th style="text-align: center;">Condition variable</th>
+<th style="text-align: center;">Condition value</th>
+<th style="text-align: center;">Action</th>
+<th style="text-align: center;">Result variable</th>
+<th style="text-align: center;">Result value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Contains</td>
+<td style="text-align: center;">$.hostname</td>
+<td style="text-align: center;">vulture</td>
+<td style="text-align: center;">Drop</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">iEquals</td>
+<td style="text-align: center;">$.hostname</td>
+<td style="text-align: center;">freebsd</td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$!system!os</td>
+<td style="text-align: center;">$.hostname</td>
+</tr>
+<tr>
+<td style="text-align: center;">Regex</td>
+<td style="text-align: center;">$.hostname</td>
+<td style="text-align: center;">^app\d{0,6}-.*$</td>
+<td style="text-align: center;">Unset</td>
+<td style="text-align: center;">$!system!os</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">Always</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">$!system!os</td>
+<td style="text-align: center;">unknown</td>
+</tr>
+</tbody>
+</table>
+<p>Rendered Rsyslog's configuration:</p>
+<pre><code># Group 1
+if $!source!ip == "127.0.0.1" then { #equals
+    set $!custom!tag = "local";
+} else if $!source!ip contains "192.168.0." then { #contains
+    set $!custom!tag = "internal";
+} else { #always
+    set $!custom!tag = "external";
+}
+# Group 2
+if $.hostname contains "vulture" then { #contains
+    stop
+} else if re_match_i($.hostname, "^freebsd\$") then { #iequals
+    set $!system!os = $.hostname;
+} else if re_match($.hostname, "^app\d{0,6}-.*\$") then { #regex
+    unset $!system!os;
+} else { #always
+    set $!system!os = "unknown";
+}
+</code></pre>
+<h2 id="custom-haproxy-configuration">Custom HAProxy configuration</h2>
 <p>Via this tab, you may declare custom HAProxy directives. These directives will be placed within the [Frontend] section of HAProxy configuration file related to the current Listener.</p>
 <h2 id="specific-settings-for-rsyslog-listening-modes">Specific settings for Rsyslog Listening Modes</h2>
 <h3 id="file-listening-mode-specific-parameters">FILE listening mode specific parameters</h3>
@@ -551,6 +752,7 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <li>HORNETSECURITY</li>
 <li>UBIKA</li>
 <li>SENTINEL ONE IDENTITY GRAPH</li>
+<li>MESSAGETRACE O365</li>
 </ul>
 <p><code>Use proxy</code> : Use proxy for requests (will use System Proxy if no <code>Custom Proxy</code> is configured)</p>
 <p><code>Custom Proxy</code> : Url of the proxy used by the API collector (system proxy if not set)</p>
@@ -784,6 +986,9 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <h3 id="vendor-log-api-perception-point-x-ray-specific-parameters">Vendor Log API Perception Point X-Ray specific parameters</h3>
 <p><code>Perception Point X Ray host</code> : Perception Point X Ray host</p>
 <p><code>Perception Point X Ray API Key</code> : Perception Point X Ray API Key</p>
+<p><code>Perception Point X Ray Organisation ID</code> : Perception Point X Ray Organisation ID</p>
+<p><code>Perception Point X Ray Environment ID</code> : Perception Point X Ray Environment ID</p>
+<p><code>Perception Point X Ray Case Types</code> : Perception Point X Ray list of case types to recover</p>
 <h3 id="vendor-log-api-extrahop-specific-parameters">Vendor Log API ExtraHop specific parameters</h3>
 <p><code>Extrahop host</code> : Extrahop host</p>
 <p><code>Extrahop id</code> : Extrahop id</p>
@@ -797,11 +1002,58 @@ However, due to the 1 second polling frequency, one may consider using the <code
 <h3 id="vendor-log-api-sentinel-one-identity-graph-specific-parameters">Vendor Log API Sentinel One Identity Graph specific parameters</h3>
 <p><code>Sentinel One Identity Graph Console URL</code> : Sentinel One Identity Graph Console URL
 <code>Sentinel One Identity Graph Token</code> : Sentinel One Identity Graph Token</p>
+<h3 id="vendor-log-api-microsoft-messagetrace-o365-specific-parameters">Vendor Log API Microsoft MessageTrace O365 specific parameters</h3>
+<p><code>MessageTrace O365 Tenant ID</code>: The ID of the Microsoft Tenant to get MessageTrace logs from
+<code>MessageTrace O365 Client ID</code>: The authorized client ID for authentication
+<code>MessageTrace O365 Client Secret</code>: The corresponding client secret for the authorized client</p>
 <h2 id="specific-settings-for-filebeat-listening-mode">Specific settings for Filebeat Listening Mode</h2>
-<h3 id="filebeat-module">Filebeat Module</h3>
-<p>Fixme</p>
-<h3 id="filebeat-configuration">Filebeat Configuration</h3>
-<p>Fixme</p>
+<p>The LOG (Filebeat) mode allows users to use a dedicated filebeat service to fetch logs and pass them to Rsyslog.</p>
+<p>The behaviour differs depending on the type of module/input and associated parameters, but can be summarised 
+in the following way:</p>
+<div class="mermaid">flowchart LR
+    L["LOG Source"] -- Send logs (TCP, RELP) --&gt; P{"Firewall"}
+    L -- Send logs (UDP) --&gt; P
+    P -- Send logs (TCP, RELP) --&gt; H("Haproxy")
+    P -- Send logs (TCP, RELP) --&gt; F("Filebeat")
+    H -- Forward logs --&gt; F
+    F -- Fetch logs --&gt; L
+    F -- Process and save logs --&gt; Re["Redis"]
+    Rs("Rsyslog") -- Get logs --&gt; Re
+    Rs -- Send enriched logs --&gt; O["Outputs"]
+</div>
+<p>There are 3 ways to get logs:
+- logs are sent via TCP, handled by haproxy and forwarded to Filebeat
+- logs are sent via UDP, redirected directly to Filebeat
+- logs are directly fetched by filebeat</p>
+<p>In all cases, the firewall accepts and authorizes the flows on the configured ports, if any.</p>
+<p>Once logs have been received by filebeat and after potential parsing, those logs are stored in the local Redis instance (or another instance if specified).
+Then, rsyslog gets those cached logs, does further parsing/enrichment and uses the configured <code>Log Forwarder(s)</code> to forward/save the final logs.</p>
+<h3 id="use-a-filebeat-module">Use a <a href="https://www.elastic.co/docs/reference/beats/filebeat/filebeat-modules">Filebeat Module</a></h3>
+<p>The first use of filebeat is to simply use a <a href="https://www.elastic.co/docs/reference/beats/filebeat/filebeat-modules">Filebeat Module</a>.
+The modules allow to define simple ways to fetch, parse and transform logs from a simple and single configuration.</p>
+<p>From the GUI, you'll find a list of supported modules in the drop-down <code>Filebeat Module</code> attribute.
+Once a module is selected, its corresponding <em>example configuration</em> will be shown in the <code>Filebeat Configuration</code> field below:
+that's where the different parameters of the module can be adjusted.</p>
+<h3 id="the-specific-custom-filebeat-config-module">The specific <code>Custom Filebeat config</code> module</h3>
+<p>If you wish to use a Custom Filebeat configuration with a specific <a href="https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options">input</a>, you can select the specific <code>Custom Filebeat config</code> module.</p>
+<p>This module allows to select a specific <a href="https://www.elastic.co/docs/reference/beats/filebeat/configuration-filebeat-options">Filebeat input</a>
+to use, the configuration can then be specified in the <code>Filebeat Configuration</code>.</p>
+<blockquote>
+<p>WARNING: the configuration set in <code>Filebeat Configuration</code> will be set in the corresponding <code>filebeat.inputs</code>'s type object.
+It's impossible to set other elements (such as outputs) in this part!</p>
+</blockquote>
+<h3 id="specifying-tcpudp-listeners-for-filebeat">Specifying TCP/UDP Listeners for Filebeat</h3>
+<p>If the module/input used needs an open port to receive its logs, there are 2 steps to configure it from the GUI:</p>
+<ol>
+<li>In the <code>Filebeat Configuration</code> field, replace the configuration element defining the filebeat listening IP and port to the following elements<ol>
+<li>the <strong>IP</strong> must be set to <code>%ip%</code></li>
+<li>the <strong>port</strong> must be set to <code>%port%</code></li>
+</ol>
+</li>
+<li>Once the IP/port attributes are replaced, the <code>Listeners</code> tab will be shown and will allow to define the outside ports opened on the appliance</li>
+</ol>
+<p>By doing that, the Listeners defined will be the effective IP/port to be opened on the appliance and available to send the logs,
+those flows will then be redirected locally using automatically generated internal ports and local IP to forward to the local Filebeat service.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
@@ -871,5 +1123,6 @@ However, due to the 1 second polling frequency, one may consider using the <code
                     ticking = true;
                 }
             });
-        </script></body>
+        </script><script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>

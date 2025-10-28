@@ -128,6 +128,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#kafka-parameters">Kafka parameters</a>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#sentinel-parameters">Sentinel parameters</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend servers</a>
@@ -175,6 +177,7 @@
 <li><strong>Elasticsearch/Opensearch</strong></li>
 <li><strong>MongoDB</strong></li>
 <li><strong>Kafka</strong></li>
+<li><strong>Sentinel</strong></li>
 </ul>
 <p>For each type, you'll be able to configure both global and specific parameters.</p>
 <h2 id="global-parameters">Global parameters</h2>
@@ -344,6 +347,41 @@
 <p><code>Kafka topic parameters</code>: A dynamic list of key-value parameters directly provided to the <a href="https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md#topic-configuration-properties">librdkafka library topic configurations</a>.</p>
 <pre><code>The form will ensure basic key=value formatting, but user should ensure to always provide correct *key=value* format
 </code></pre>
+<h2 id="sentinel-parameters"><code>Sentinel</code> parameters</h2>
+<p>This is a section to describe specific Sentinel Log Forwarder configuration options.</p>
+<p><code>Tenant ID</code>: The ID of the tenant to use (will be used to generate the authentication URIs).</p>
+<hr/>
+<p><code>Client ID</code>: The client ID for OpenID application authentication.</p>
+<hr/>
+<p><code>Client Secret</code>: The client secret for OpenID application authentication.</p>
+<hr/>
+<p><code>DCR</code>: The Sentinel <strong>Data Collection Rule</strong> to use while ingesting data.</p>
+<hr/>
+<p><code>DCE</code>: The Sentinel Data <strong>Collection Endpoint</strong> to use for ingestion.</p>
+<hr/>
+<p><code>Stream Name</code>: The Sentinel stream on which to insert the logs.</p>
+<hr/>
+<p><code>Scope</code>: The OpenID scope to use. For <a href="https://docs.cribl.io/edge/destinations-sentinel/#auth">Sentinel ingestion API</a>, corresponds to the Azure Environment.</p>
+<hr/>
+<p><code>Batch max size</code>: Sets the maximum amount of logs to add in a single batched request.</p>
+<hr/>
+<p><code>Batch max bytes</code>: Sets the maximum size of messages (in bytes) for a single batched request.</p>
+<hr/>
+<p><code>Compression level</code>: </p>
+<p>Activates and defines the level of compression of requests:</p>
+<ul>
+<li><strong>*balanced</strong>: balance between speed and compression (default)</li>
+<li><em><strong>0</strong> : No compression</em></li>
+<li><em><strong>1</strong> : Fastest compression</em></li>
+<li><em>...</em></li>
+<li><em><strong>9</strong> : Best compression</em></li>
+</ul>
+<hr/>
+<p><code>Use a TLS Profile</code>: TLS Profile to use when communicating with distant nodes.</p>
+<hr/>
+<p><code>Use Proxy</code>: Use a proxy to connect to the OMSentinel APIs</p>
+<hr/>
+<p><code>Custom Proxy</code>: Custom proxy to use (will use system proxy if not set)</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

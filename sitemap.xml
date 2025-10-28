@@ -2,138 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.vultureproject.org/doc/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/reputation/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/administration/vltadmin/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/applications/backend/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/applications/cti_lookup/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/applications/logs_forwarder/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/cluster/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/network/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/node/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/pki/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/stats/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/tenant/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/tls/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/global_config/users/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/kerberos/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/ldap/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/mfa/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/openid/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/radius/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/repository/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/scopes/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/sso_profiles/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/identity/totp/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/overview/deploy/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/overview/packaging/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/overview/quickstart/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/portal/portal/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/portal/templates/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/salt/introduction/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/salt/schema/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/salt/states/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/services/ipsec_client/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/services/listener/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
          <loc>https://www.vultureproject.org/doc/services/vpnssl_client/</loc>
-         <lastmod>2025-06-30</lastmod>
+         <lastmod>2025-10-28</lastmod>
     </url>
 </urlset>
