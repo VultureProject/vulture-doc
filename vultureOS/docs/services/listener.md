@@ -925,6 +925,12 @@ The following endpoints are supported :
 `MessageTrace O365 Client ID`: The authorized client ID for authentication
 `MessageTrace O365 Client Secret`: The corresponding client secret for the authorized client
 
+### Vendor Log CNAPP WIZ specific parameters
+
+`Cnapp Wiz Client ID`: The Oauth2 client ID to authenticate with the Cnapp Wiz APIs
+`Cnapp Wiz Client Secret`: The Oauth2 client secret to authenticate with the Cnapp Wiz APIs
+`Cnapp Wiz API URL`: The API URL to use to fetch logs (default one should be valid for most use cases)
+
 ## Specific settings for Filebeat Listening Mode
 
 The LOG (Filebeat) mode allows users to use a dedicated filebeat service to fetch logs and pass them to Rsyslog.
