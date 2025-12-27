@@ -321,6 +321,7 @@ Following parameters are required :
 Following parameters are optional :
 
  - **Redis password** : If set, the plugin will issue an "AUTH" command before calling xPOP
+ - **Use a TLS profile** : The plugin supports secure connections using TLS, here you can select a [TLS Profile](../global_config/tls.md)
  - **Use LPOP** : If set to "on", LPOP will be used instead of default RPOP
 
 When using the local Redis instance in the Cluster, you can simply select the **Use local redis** button to automatically set the correct parameters to access it. This will include the redirection to the current main Redis node of a cluster and the use of the Cluster password.
@@ -346,6 +347,7 @@ Following parameters are required :
 Following parameters are optional :
 
  - **Redis password** : If set, the plugin will issue an "AUTH" command before listening to a channel
+ - **Use a TLS profile** : The plugin supports secure connections using TLS, here you can select a [TLS Profile](../global_config/tls.md)
 
 `Stream Mode, using xread/xreadgroup` : The stream mode will XREAD or XREADGROUP to a redis stream.
 
@@ -361,6 +363,7 @@ Following parameters are required :
 Following parameters are optional :
 
  - **Redis password** : If set, the plugin will issue an "AUTH" command before calling XREAD
+ - **Use a TLS profile** : The plugin supports secure connections using TLS, here you can select a [TLS Profile](../global_config/tls.md)
  - **Redis stream consumer group** : The Consumer Group to use
  - **Redis stream consumer name** : The Consumer Name to use (mandatory when **Redis stream consumer group** is set)
  - **Redis stream start choice** : The specified starting ID for the stream, can be either

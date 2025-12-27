@@ -125,6 +125,7 @@ frontend_present:
     redis_port: int
     redis_key: str
     redis_password: str
+    redis_tls_profile: Optional[int]
     redis_use_lpop: bool
     redis_stream_consumerGroup: str
     redis_stream_consumerName: str
@@ -431,6 +432,7 @@ forwarder_present:
     key: str
     dynamic_key: Optional[bool]
     pwd: Optional[str]
+    redis_tls_profile: Optional[int]
     use_rpush: Optional[bool]
     expire_key: Optional[NonNegativeInt]
     stream_outfield: Optional[str]
